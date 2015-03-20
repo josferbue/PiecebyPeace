@@ -1,8 +1,21 @@
+# Laravel
 /bootstrap/compiled.php
 /vendor
+
+# Configuration
+/app/config/local
+/app/config/staging
+/app/config/production
+
+# Composer
 composer.phar
 composer.lock
-.env.*.php
-.env.php
+
+# OS
 .DS_Store
-Thumbs.db
+.idea/
+vagrant
+.vagrant
+
+# Packages
+_ide_helper.php
