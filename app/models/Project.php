@@ -60,7 +60,7 @@ class Project extends Eloquent {
 	 */
 	public function ngo()
 	{
-		return $this->belongsTo('Ngo', 'Ngo_id');
+		return $this->belongsTo('Ngo', 'ngo_id');
 	}
 	public function company()
 	{
