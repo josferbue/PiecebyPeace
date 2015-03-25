@@ -4,8 +4,8 @@ class VolunteerTableSeeder extends Seeder {
 
     public function run()
     {
-       // $user_id = User::first()->id;
         DB::table('volunteer')->delete();
+        DB::table('project_volunteer')->delete();
 
 
         $volunteers = array(
@@ -34,21 +34,30 @@ class VolunteerTableSeeder extends Seeder {
                 'biography' => 'biography2',
 
             ),
-            array(
-                'name'      => 'volunteer3',
-                'email'      => 'volunteer3@example.org',
-                'banned'   => 0,
-                'surname'   => 'surname3',
-                'address'   => 'address3',
-                'city'   => 'Valencia',
-                'zipCode'   => '47889',
-                'country'   => 'España',
-                'biography' => 'biography1',
 
-            ),
         );
 
         DB::table('volunteer')->insert( $volunteers );
+
+
+        $project_volunteer = array(
+            array(
+                'project_id'      => Project::whereNull('company_id')->get()[0]->id,
+                'volunteer_id'      => Volunteer::where('name','=','volunteer1')->first()->id,
+
+
+            ),
+            array(
+                'project_id'      => Project::whereNull('company_id')->get()[1]->id,
+                'volunteer_id'      => Volunteer::where('name','=','volunteer2')->first()->id,
+
+            ),
+
+        );
+
+
+        DB::table('project_volunteer')->insert( $project_volunteer );
+
     }
 
 }

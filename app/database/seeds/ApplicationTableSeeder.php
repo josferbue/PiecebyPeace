@@ -12,18 +12,21 @@ class ApplicationTableSeeder extends Seeder {
                 'moment'      => new DateTime,
                 'comments'      => 'comments1',
                 'result'   => 0,
-                ),
+                'project_id' => Project::whereNull('company_id')->get()[0]->id,
+                'volunteer_id' => Volunteer::whereNull('name' , '=','volunteer2')->first()->id,
+
+
+            ),
 
             array(
                 'moment'      => new DateTime,
                 'comments'      => 'comments2',
                 'result'   => 0,
+                'project_id' => Project::whereNull('company_id')->get()[1]->id,
+                'volunteer_id' => Volunteer::whereNull('name' , '=','volunteer2')->first()->id,
+
             ),
-            array(
-                'moment'      => new DateTime,
-                'comments'      => 'comments3',
-                'result'   => 0,
-            ),
+
         );
 
         DB::table('application')->insert( $applications );

@@ -16,6 +16,9 @@ class CompanyTableSeeder extends Seeder {
                 'description' => 'descripcion',
                 'phone' => '646464646',
                 'active' =>1,
+                'user_id' => User::where('username','=','company1')->first()->id,
+                'project_id' => Project::whereNull('ngo_id')->get()[0]->id,
+
 
             ),
             array(
@@ -26,18 +29,11 @@ class CompanyTableSeeder extends Seeder {
                 'description' => 'descripcion2',
                 'phone' => '622211365',
                 'active' =>1,
+                'user_id' => User::where('username','=','company2')->first()->id,
+                'project_id' => Project::whereNull('ngo_id')->get()[1]->id,
 
             ),
-            array(
-                'name'      => 'company3',
-                'email'      => 'company3@example.org',
-                'banned'   => 1,
-                'sector'   => 'sector3',
-                'description' => 'descripcion3',
-                'phone' => '634417896',
-                'active' =>1,
 
-            ),
         );
 
         DB::table('company')->insert( $companies );
