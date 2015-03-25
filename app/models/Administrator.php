@@ -14,11 +14,6 @@ class Administrator extends Eloquent {
 		return $this->name;
 	}
 
-    public function email()
-    {
-        return $this->email;
-    }
-
     public function banned()
     {
         return $this->banned;

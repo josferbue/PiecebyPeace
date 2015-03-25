@@ -16,10 +16,9 @@ class CreateAdministratorTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->string('email');
-			$table->boolean('banned')->default(False);
+			$table->boolean('banned')->default(false);
 			$table->integer('user_id')->unsigned()->index();
-			$table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
 		});
 	}

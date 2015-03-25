@@ -17,8 +17,7 @@ class CreateVolunteersTable extends Migration {
 				//Actor Abstract
 				$table->increments('id');
 			$table->string('name');
-			$table->string('email');
-			$table->boolean('banned');
+			$table->boolean('banned')->default(false);
 
 
 			//location datatype
@@ -29,11 +28,11 @@ class CreateVolunteersTable extends Migration {
 
 
 			$table->boolean('surname');
-			$table->String('biography')->nullable();
+			$table->String('biography');
 
 
 			$table->integer('user_id')->unsigned()->index();
-			$table->foreign('user_id')->references('id')->on('user');
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
 
 
