@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Database\Migrations\Migration;
 
 class CreateProjectsTable extends Migration {
@@ -24,7 +23,7 @@ class CreateProjectsTable extends Migration {
 			$table->integer('maxVolunteers');
 			$table->date('startDate');
 			$table->date('finishDate');
-			$table->timestamp();
+			$table->timestamps();
 			$table->integer('ngo_id')->unsigned()->index()->nullable();
 			$table->integer('company_id')->unsigned()->index()->nullable();
 			$table->foreign('ngo_id')->references('id')->on('ngo')->onDelete('cascade');

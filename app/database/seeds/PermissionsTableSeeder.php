@@ -8,28 +8,20 @@ class PermissionsTableSeeder extends Seeder {
 
         $permissions = array(
             array( // 1
-                'name'         => 'manage_blogs',
-                'display_name' => 'manage blogs'
+                'name'         => 'manage_all_administrator',
+                'display_name' => 'manage all administrator'
             ),
             array( // 2
-                'name'         => 'manage_posts',
-                'display_name' => 'manage posts'
+                'name'         => 'manage_all_volunteer',
+                'display_name' => 'manage all volunteer'
             ),
             array( // 3
-                'name'         => 'manage_comments',
-                'display_name' => 'manage comments'
+                'name'         => 'manage_all_company',
+                'display_name' => 'manage all company'
             ),
             array( // 4
-                'name'         => 'manage_users',
-                'display_name' => 'manage users'
-            ),
-            array( // 5
-                'name'         => 'manage_roles',
-                'display_name' => 'manage roles'
-            ),
-            array( // 6
-                'name'         => 'post_comment',
-                'display_name' => 'post comment'
+                'name'         => 'manage_all_ngo',
+                'display_name' => 'manage all ngo'
             ),
         );
 
@@ -37,8 +29,10 @@ class PermissionsTableSeeder extends Seeder {
 
         DB::table('permission_role')->delete();
 
-        $role_id_admin = Role::where('name', '=', 'admin')->first()->id;
-        $role_id_comment = Role::where('name', '=', 'comment')->first()->id;
+        $role_id_admin = Role::where('name', '=', 'ADMINISTRATOR')->first()->id;
+        $role_id_volunteer = Role::where('name', '=', 'VOLUNTEER')->first()->id;
+        $role_id_company = Role::where('name', '=', 'COMPANY')->first()->id;
+        $role_id_ngo = Role::where('name', '=', 'NonGovernmentalOrganization')->first()->id;
         $permission_base = (int)DB::table('permissions')->first()->id - 1;
 
         $permissions = array(
@@ -47,28 +41,16 @@ class PermissionsTableSeeder extends Seeder {
                 'permission_id' => $permission_base + 1
             ),
             array(
-                'role_id'       => $role_id_admin,
+                'role_id'       => $role_id_volunteer,
                 'permission_id' => $permission_base + 2
             ),
             array(
-                'role_id'       => $role_id_admin,
+                'role_id'       => $role_id_company,
                 'permission_id' => $permission_base + 3
             ),
             array(
-                'role_id'       => $role_id_admin,
+                'role_id'       => $role_id_ngo,
                 'permission_id' => $permission_base + 4
-            ),
-            array(
-                'role_id'       => $role_id_admin,
-                'permission_id' => $permission_base + 5
-            ),
-            array(
-                'role_id'       => $role_id_admin,
-                'permission_id' => $permission_base + 6
-            ),
-            array(
-                'role_id'       => $role_id_comment,
-                'permission_id' => $permission_base + 6
             ),
         );
 
