@@ -11,7 +11,6 @@ class VolunteersTableSeeder extends Seeder {
         $volunteers = array(
             array(
                 'name'      => 'volunteer1',
-                'email'      => 'volunteer1@example.org',
                 'banned'   => 0,
                 'surname'   => 'surname1',
                 'address'   => 'address1',
@@ -19,12 +18,11 @@ class VolunteersTableSeeder extends Seeder {
                 'zipCode'   => '49999',
                 'country'   => 'España',
                 'biography' => 'biography1',
-
+                'user_id' => User::where('username','=','volunteer1')->first()->id,
 
             ),
             array(
                 'name'      => 'volunteer2',
-                'email'      => 'volunteer2@example.org',
                 'banned'   => 0,
                 'surname'   => 'surname2',
                 'address'   => 'address2',
@@ -32,24 +30,33 @@ class VolunteersTableSeeder extends Seeder {
                 'zipCode'   => '47856',
                 'country'   => 'España',
                 'biography' => 'biography2',
-
+                'user_id' => User::where('username','=','volunteer2')->first()->id,
             ),
 
         );
 
         DB::table('volunteer')->insert( $volunteers );
+        $pros = Project::whereNull('company_id')->get();
 
+        foreach($pros as $pro_fila){
+            $pro_company = $pro_fila;
+        }
+        $pros = Project::whereNull('ngo_id')->get();
+
+        foreach($pros as $pro_fila){
+            $pro_ong = $pro_fila;
+        }
 
         $project_volunteer = array(
             array(
-                'project_id'      => Project::whereNull('company_id')->get()[0]->id,
-                'volunteer_id'      => Volunteer::where('name','=','volunteer1')->first()->id,
+                'project_id'      => (int)$pro_company["id"],
+                'volunteer_id'    => Volunteer::where('name','=','volunteer1')->first()->id,
 
 
             ),
             array(
-                'project_id'      => Project::whereNull('company_id')->get()[1]->id,
-                'volunteer_id'      => Volunteer::where('name','=','volunteer2')->first()->id,
+                'project_id'      => (int)$pro_ong["id"],
+                'volunteer_id'    => Volunteer::where('name','=','volunteer2')->first()->id,
 
             ),
 

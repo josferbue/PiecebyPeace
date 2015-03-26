@@ -15,7 +15,7 @@ class CreateVolunteersTable extends Migration {
 			Schema::create('volunteer', function($table)
 			{
 				//Actor Abstract
-				$table->increments('id');
+			$table->increments('id');
 			$table->string('name');
 			$table->boolean('banned');
 
@@ -32,7 +32,7 @@ class CreateVolunteersTable extends Migration {
 
 
 			$table->integer('user_id')->unsigned()->index();
-			$table->foreign('user_id')->references('id')->on('user');
+			$table->foreign('user_id')->references('id')->on('users');
 
 
 
@@ -57,8 +57,9 @@ class CreateVolunteersTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('volunteer');
 		Schema::drop('project_volunteer');
+		Schema::drop('volunteer');
+
 
 	}
 
