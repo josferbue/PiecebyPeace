@@ -26,7 +26,7 @@ class MessagesTableSeeder extends Seeder {
             # First message
             array(
                 'message_id'      => Message::where('subject','=','Subject 1')->first()->id,
-                'recipient_ngo_id'      => Ngo::where('user_id','=',User::where('username','=','ngo1')->first()->id)->first()->id,
+                'recipient_ngo_id'=> Ngo::where('user_id','=',User::where('username','=','ngo1')->first()->id)->first()->id,
             ),
             array(
                 'message_id'      => Message::where('subject','=','Subject 1')->first()->id,

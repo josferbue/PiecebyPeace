@@ -6,14 +6,24 @@ class ApplicationsTableSeeder extends Seeder {
     {
         DB::table('application')->delete();
 
+        $pros = Project::whereNull('company_id')->get();
+
+        foreach($pros as $pro_fila){
+            $pro_company = $pro_fila;
+        }
+        $pros = Project::whereNull('ngo_id')->get();
+
+        foreach($pros as $pro_fila){
+            $pro_ong = $pro_fila;
+        }
 
         $applications = array(
             array(
                 'moment'      => new DateTime,
                 'comments'      => 'comments1',
                 'result'   => 0,
-                'project_id' => Project::whereNull('company_id')->get()[0]->id,
-                'volunteer_id' => Volunteer::whereNull('name' , '=','volunteer2')->first()->id,
+                'project_id' => (int)$pro_company["id"],
+                'volunteer_id' => Volunteer::where('name' , '=','volunteer1')->first()->id,
 
 
             ),
@@ -22,8 +32,8 @@ class ApplicationsTableSeeder extends Seeder {
                 'moment'      => new DateTime,
                 'comments'      => 'comments2',
                 'result'   => 0,
-                'project_id' => Project::whereNull('company_id')->get()[1]->id,
-                'volunteer_id' => Volunteer::whereNull('name' , '=','volunteer2')->first()->id,
+                'project_id' => (int)$pro_ong["id"],
+                'volunteer_id' => Volunteer::where('name' , '=','volunteer2')->first()->id,
 
             ),
 
