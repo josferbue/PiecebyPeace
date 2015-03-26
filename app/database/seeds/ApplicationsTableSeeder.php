@@ -1,6 +1,6 @@
 <?php
 
-class ApplicationTableSeeder extends Seeder {
+class ApplicationsTableSeeder extends Seeder {
 
     public function run()
     {

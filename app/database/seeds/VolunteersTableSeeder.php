@@ -1,6 +1,6 @@
 <?php
 
-class VolunteerTableSeeder extends Seeder {
+class VolunteersTableSeeder extends Seeder {
 
     public function run()
     {
