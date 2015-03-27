@@ -9,6 +9,8 @@ class NGOsTableSeeder extends Seeder {
 
         $ngos = array(
             array(
+                'name'=>'NGO-1',
+                'banned'=>0,
                 'holderName'      => 'NGO 1',
                 'brandName'      => 'Visa',
                 'number'   => '4532820703718551',
@@ -21,6 +23,8 @@ class NGOsTableSeeder extends Seeder {
                 'user_id' => User::where('username','=','ngo1')->first()->id,
             ),
             array(
+                'name'=>'NGO-2',
+                'banned'=>0,
                 'holderName'      => 'NGO 2',
                 'brandName'      => 'Visa',
                 'number'   => '4916606973228728',

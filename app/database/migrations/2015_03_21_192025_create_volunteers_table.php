@@ -27,7 +27,7 @@ class CreateVolunteersTable extends Migration {
 			$table->string('country');
 
 
-			$table->boolean('surname');
+			$table->string('surname');
 			$table->String('biography')->nullable();
 
 
