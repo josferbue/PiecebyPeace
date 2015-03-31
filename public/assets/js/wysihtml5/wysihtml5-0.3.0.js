@@ -207,7 +207,7 @@ window['rangy'] = (function() {
         }
     }
 
-    // Allow external scripts to initialize this library in case it's loaded after the document has loaded
+    // Allow external js to initialize this library in case it's loaded after the document has loaded
     api.init = init;
 
     // Execute listener immediately if already initialized
@@ -4238,16 +4238,16 @@ wysihtml5.dom.copyAttributes = function(attributesToCopy) {
     }
   };
 };/**
- * Copy a set of styles from one element to another
- * Please note that this only works properly across browsers when the element from which to copy the styles
+ * Copy a set of css from one element to another
+ * Please note that this only works properly across browsers when the element from which to copy the css
  * is in the dom
  *
- * Interesting article on how to copy styles
+ * Interesting article on how to copy css
  *
- * @param {Array} stylesToCopy List of styles which should be copied
+ * @param {Array} stylesToCopy List of css which should be copied
  * @return {Object} Returns an object which offers the "from" method which can be invoked with the element where to
- *    copy the styles from., this again returns an object which provides a method named "to" which can be invoked 
- *    with the element where to copy the styles to (see example)
+ *    copy the css from., this again returns an object which provides a method named "to" which can be invoked
+ *    with the element where to copy the css to (see example)
  *
  * @example
  *    var textarea    = document.querySelector("textarea"),
@@ -5292,7 +5292,7 @@ wysihtml5.dom.replaceWithChildNodes = function(node) {
   
   dom.resolveList = resolveList;
 })(wysihtml5.dom);/**
- * Sandbox for executing javascript, parsing css styles and doing dom operations in a secure way
+ * Sandbox for executing javascript, parsing css css and doing dom operations in a secure way
  *
  * Browser Compatibility:
  *  - Secure in MSIE 6+, but only when the user hasn't made changes to his security level "restricted"
@@ -5302,7 +5302,7 @@ wysihtml5.dom.replaceWithChildNodes = function(node) {
  *    - sandboxing doesn't work correctly with inlined content (src="javascript:'<html>...</html>'")
  *    - sandboxing of physical documents causes that the dom isn't accessible anymore from the outside (iframe.contentWindow, ...)
  *    - setting the "allow-same-origin" flag would fix that, but then still javascript and dom events refuse to fire
- *    - therefore the "allow-scripts" flag is needed, which then would deactivate any security, as the js executed inside the iframe
+ *    - therefore the "allow-js" flag is needed, which then would deactivate any security, as the js executed inside the iframe
  *      can do anything as if the sandbox attribute wasn't set
  *
  * @param {Function} [readyCallback] Method that gets invoked when the sandbox is ready
@@ -5388,8 +5388,8 @@ wysihtml5.dom.replaceWithChildNodes = function(node) {
      *    setting it causes that the iframe's dom can't be accessed from the outside
      *    Therefore we need to set the "allow-same-origin" flag which enables accessing the iframe's dom
      *    But then there's another problem, DOM events (focus, blur, change, keypress, ...) aren't fired.
-     *    In order to make this happen we need to set the "allow-scripts" flag.
-     *    A combination of allow-scripts and allow-same-origin is almost the same as setting no sandbox attribute at all.
+     *    In order to make this happen we need to set the "allow-js" flag.
+     *    A combination of allow-js and allow-same-origin is almost the same as setting no sandbox attribute at all.
      *  - Chrome & Safari, doesn't seem to support sandboxing correctly when the iframe's html is inlined (no physical document)
      *  - IE needs to have the security="restricted" attribute set before the iframe is 
      *    inserted into the dom tree
@@ -5471,7 +5471,7 @@ wysihtml5.dom.replaceWithChildNodes = function(node) {
         // Please note: This isn't hack safe!  
         // It more or less just takes care of basic attacks and prevents accidental theft of sensitive information
         // IE is secure though, which is the most important thing, since IE is the only browser, who
-        // takes over scripts & styles into contentEditable elements when copied from external websites
+        // takes over js & css into contentEditable elements when copied from external websites
         // or applications (Microsoft Word, ...)
         var i, length;
         for (i=0, length=windowProperties.length; i<length; i++) {
@@ -6979,7 +6979,7 @@ wysihtml5.Commands = Base.extend(
     }
   };
 })(wysihtml5);/**
- * document.execCommand("fontSize") will create either inline styles (firefox, chrome) or use font tags
+ * document.execCommand("fontSize") will create either inline css (firefox, chrome) or use font tags
  * which we don't want
  * Instead we set a css class
  */
@@ -7002,7 +7002,7 @@ wysihtml5.Commands = Base.extend(
   };
 })(wysihtml5);
 /**
- * document.execCommand("foreColor") will create either inline styles (firefox, chrome) or use font tags
+ * document.execCommand("foreColor") will create either inline css (firefox, chrome) or use font tags
  * which we don't want
  * Instead we set a css class
  */
@@ -8068,7 +8068,7 @@ wysihtml5.views.View = Base.extend(
       
       dom.addClass(this.element, this.config.composerClassName);
 
-      // Make the editor look like the original textarea, by syncing styles
+      // Make the editor look like the original textarea, by syncing css
       if (this.config.style) {
         this.style();
       }
@@ -8089,7 +8089,7 @@ wysihtml5.views.View = Base.extend(
         dom.simulatePlaceholder(this.parent, this, placeholderText);
       }
       
-      // Make sure that the browser avoids using inline styles whenever possible
+      // Make sure that the browser avoids using inline css whenever possible
       this.commands.exec("styleWithCSS", false);
 
       this._initAutoLinking();
@@ -8200,7 +8200,7 @@ wysihtml5.views.View = Base.extend(
       this.commands.exec("enableObjectResizing", this.config.allowObjectResizing);
       
       if (this.config.allowObjectResizing) {
-         // IE sets inline styles after resizing objects
+         // IE sets inline css after resizing objects
          // The following lines make sure that the width/height css properties
          // are copied over to the width/height attributes
         if (browser.supportsEvent("resizeend")) {
@@ -8354,21 +8354,21 @@ wysihtml5.views.View = Base.extend(
       textareaElement.blur();
     }
   
-    // --------- iframe styles (has to be set before editor styles, otherwise IE9 sets wrong fontFamily on blurStylesHost) ---------
+    // --------- iframe css (has to be set before editor css, otherwise IE9 sets wrong fontFamily on blurStylesHost) ---------
     dom.copyStyles(BOX_FORMATTING).from(textareaElement).to(this.iframe).andTo(this.blurStylesHost);
   
-    // --------- editor styles ---------
+    // --------- editor css ---------
     dom.copyStyles(TEXT_FORMATTING).from(textareaElement).to(this.element).andTo(this.blurStylesHost);
   
     // --------- apply standard rules ---------
     dom.insertCSS(ADDITIONAL_CSS_RULES).into(this.element.ownerDocument);
   
-    // --------- :focus styles ---------
+    // --------- :focus css ---------
     focusWithoutScrolling(textareaElement);
     dom.copyStyles(BOX_FORMATTING).from(textareaElement).to(this.focusStylesHost);
     dom.copyStyles(TEXT_FORMATTING).from(textareaElement).to(this.focusStylesHost);
   
-    // Make sure that we don't change the display style of the iframe when copying styles oblur/onfocus
+    // Make sure that we don't change the display style of the iframe when copying css oblur/onfocus
     // this is needed for when the change_view event is fired where the iframe is hidden and then
     // the blur event fires and re-displays it
     var boxFormattingStyles = wysihtml5.lang.array(BOX_FORMATTING).without(["display"]);
@@ -8385,7 +8385,7 @@ wysihtml5.views.View = Base.extend(
       textareaElement.setAttribute("placeholder", originalPlaceholder);
     }
   
-    // When copying styles, we only get the computed style which is never returned in percent unit
+    // When copying css, we only get the computed style which is never returned in percent unit
     // Therefore we've to recalculate style onresize
     if (!wysihtml5.browser.hasCurrentStyleProperty()) {
       var winObserver = dom.observe(win, "resize", function() {
@@ -8408,7 +8408,7 @@ wysihtml5.views.View = Base.extend(
       });
     }
   
-    // --------- Sync focus/blur styles ---------
+    // --------- Sync focus/blur css ---------
     this.parent.observe("focus:composer", function() {
       dom.copyStyles(boxFormattingStyles) .from(that.focusStylesHost).to(that.iframe);
       dom.copyStyles(TEXT_FORMATTING)     .from(that.focusStylesHost).to(that.element);
@@ -9375,7 +9375,7 @@ wysihtml5.views.Textarea = wysihtml5.views.View.extend(
   var defaultConfig = {
     // Give the editor a name, the name will also be set as class name on the iframe and on the iframe's body 
     name:                 undef,
-    // Whether the editor should look like the textarea (by adopting styles)
+    // Whether the editor should look like the textarea (by adopting css)
     style:                true,
     // Id of the toolbar element, pass falsey value if you don't want any toolbar logic
     toolbar:              undef,

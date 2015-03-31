@@ -57,7 +57,7 @@
 	}
 	</style>
 
-	@yield('styles')
+	@yield(css)
 
 	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
@@ -147,7 +147,7 @@ $('.wysihtml5').wysihtml5();
 $(prettyPrint)
 </script>
 
-    @yield('scripts')
+    @yield(js)
 
 </body>
 

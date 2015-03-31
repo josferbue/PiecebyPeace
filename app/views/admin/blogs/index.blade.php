@@ -36,7 +36,7 @@
 @stop
 
 {{-- Scripts --}}
-@section('scripts')
+@section(js)
 	<script type="text/javascript">
 		var oTable;
 		$(document).ready(function() {
