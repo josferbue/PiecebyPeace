@@ -15,7 +15,7 @@ class CreateCampaignsTable extends Migration {
 			$table->increments('id');
 			$table->string('name');
 			$table->string('description');
-			$table->binary('image');
+			$table->binary('image')->nullable();
 			$table->date('startDate');
 			$table->date('finishDate');
 			$table->integer('visits')->unsigned();
