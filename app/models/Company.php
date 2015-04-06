@@ -3,6 +3,7 @@
 class Company extends Eloquent {
 
 	protected $table = 'company';
+	public $timestamps = false;
     /**
 	 * Get the comment's content.
 	 *

@@ -4,7 +4,7 @@ class Volunteer extends Eloquent
 {
 
     protected $table = 'volunteer';
-
+    public $timestamps = false;
     /**
      * Get the comment's content.
      *

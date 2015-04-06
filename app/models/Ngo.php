@@ -3,6 +3,7 @@
 class Ngo extends Eloquent {
 
 	protected $table = 'ngo';
+	public $timestamps = false;
     /**
 	 * Get the comment's content.
 	 *

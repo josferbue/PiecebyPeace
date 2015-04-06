@@ -26,7 +26,7 @@
 		================================================== -->
         <link rel="stylesheet" href="{{asset('template/bootstrap/css/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{asset('template/bootstrap/css/bootstrap-responsive.min.css')}}">
-		
+
 		<style>
         body {
             padding: 60px 0;
@@ -54,7 +54,7 @@
 			<link href="{{asset('template/carousel/style.css" rel="stylesheet" type="text/css')}}" />
 			<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" type="text/css">
 			<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
-			<link href="http://fonts.googleapis.com/css?family=Palatino+Linotype" rel="stylesheet" type="text/css">
+
 			<link href="http://fonts.googleapis.com/css?family=Abel" rel="stylesheet" type="text/css">
 			<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
 			<link href="{{asset('template/custom.css')}}" rel="stylesheet" type="text/css" />
@@ -95,7 +95,9 @@
 													<li><a href="{{{ URL::to('user/logout') }}}">Logout</a></li>
 												@else
 													<li {{ (Request::is('user/login') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/login') }}}">Login</a></li>
-													<li {{ (Request::is('user/create') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/create') }}}">{{{ Lang::get('site.sign_up') }}}</a></li>
+													<li {{ (Request::is('volunteer/create') ? ' class="active"' : '') }}><a href="{{{ URL::to('volunteer/create') }}}">{{{ Lang::get('site.volunteer') }}}</a></li>
+													<li {{ (Request::is('ngo/create') ? ' class="active"' : '') }}><a href="{{{ URL::to('ngo/create') }}}">{{{ Lang::get('site.ngo') }}}</a></li>
+													<li {{ (Request::is('company/create') ? ' class="active"' : '') }}><a href="{{{ URL::to('company/create') }}}">{{{ Lang::get('site.company') }}}</a></li>
 												@endif
 											</ul>
 										</li>
@@ -111,123 +113,24 @@
 		</div>
 	</div>
 
-	<div id="decorative1" style="position:relative">
+		<!-- Container -->
 		<div class="container">
+			<!-- Notifications -->
+			@include('notifications')
+			<!-- ./ notifications -->
 
-			<div class="divPanel headerArea">
-				<div class="row-fluid">
-					<div class="span12">
-
-						<div id="headerSeparator"></div>
-
-						<div id="divHeaderText" class="page-content">
-							<div id="divHeaderLine1">Your Header Text Here!</div><br />
-							<div id="divHeaderLine2">2nd line header text for calling extra attention to featured content..</div><br />
-							<div id="divHeaderLine3"><a class="btn btn-large btn-primary" href="#">More Info</a></div>
-						</div>
-
-						<div id="headerSeparator2"></div>
-
-					</div>
-				</div>
-
-			</div>
-
+			<!-- Content -->
+			@yield('content')
+			<!-- ./ content -->
 		</div>
-	</div>
+		<!-- ./ container -->
 
-	<div id="contentOuterSeparator"></div>
-
-	<div class="container">
-
-		<div class="divPanel page-content">
-
-			<div class="row-fluid">
-
-				<div class="span12" id="divMain">
-
-					<h1>Welcome</h1>
-
-					<p>Content on this page is for presentation purposes only. Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-						Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					</p>
-
-					<hr style="margin:45px 0 35px" />
-
-					<div class="lead">
-						<h2>Lorem ipsum dolor sit amet.</h2>
-						<h3>Vivamus leo ante, consectetur sit amet vulputate vel, dapibus sit amet lectus.</h3>
-					</div>
-					<br />
-
-					<div class="list_carousel responsive">
-						<ul id="list_photos">
-							<li><img src="{{asset('template/images/carmel.jpg')}}" class="img-polaroid">  </li>
-							<li><img src="{{asset('template/images/rula-sibai-pink-flowers.jpg')}}" class="img-polaroid">  </li>
-							<li><img src="{{asset('template/images/girl-flowers.jpg')}}" class="img-polaroid">  </li>
-							<li><img src="{{asset('template/images/night-city.jpg')}}" class="img-polaroid">  </li>
-							<li><img src="{{asset('template/images/irish-hands.jpg')}}" class="img-polaroid">  </li>
-							<li><img src="{{asset('template/images/Top_view.jpg')}}" class="img-polaroid">  </li>
-							<li><img src="{{asset('template/images/vectorbeastcom-grass-sun.jpg')}}" class="img-polaroid">  </li>
-							<li><img src="{{asset('template/images/sunset-hair.jpg')}}" class="img-polaroid">  </li>
-							<li><img src="{{asset('template/images/stones-hi-res.jpg')}}" class="img-polaroid">  </li>
-							<li><img src="{{asset('template/images/salzburg-x.jpg')}}" class="img-polaroid">  </li>
-						</ul>
-					</div>
-
-					<hr style="margin:45px 0 35px" />
-
-					<div class="lead">
-						<h2>Featured Content.</h2>
-						<h3>Content on this page is for presentation purposes only.</h3>
-					</div>
-					<br />
-
-					<div class="row-fluid">
-						<div class="span8">
-
-							<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
-
-							<p>
-								<img src="{{asset('template/images/spring-is-coming.jpg')}}" class="img-polaroid" style="margin:12px 0px;">
-							</p>
-
-							<p>Content on this page is for presentation purposes only. Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-								Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-							</p>
-
-						</div>
-						<div class="span4 sidebar">
-
-							<div class="sidebox">
-								<h3 class="sidebox-title">Sample Sidebar Content</h3>
-								<p>Lorem Ipsum is simply dummy text of the printing and <a href="#">typesetting industry</a>. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s.</p>
-							</div>
-
-							<br />
-
-							<div class="sidebox">
-								<h3 class="sidebox-title">Sample Sidebar Content</h3>
-								<p>
-								<div class="input-append">
-									<input class="span8" id="inpEmail" size="16" type="text"><button class="btn" type="button">Action</button>
-								</div>
-								</p>
-							</div>
-
-						</div>
-					</div>
-
-				</div>
-
-			</div>
-
-			<div id="footerInnerSeparator"></div>
+		<!-- the following div is needed to make a sticky footer -->
+		<div id="push"></div>
+		<div id="footerInnerSeparator"></div>
 		</div>
+		<!-- ./wrap -->
 
-	</div>
 
 	<div id="footerOuterSeparator"></div>
 
@@ -319,7 +222,7 @@
 
 						<p class="social_bookmarks">
 							<a href="#"><i class="social foundicon-facebook"></i> Facebook</a>
-							<a href=""><i class="social foundicon-twitter"></i> Twitter</a>
+							<a href="#"><i class="social foundicon-twitter"></i> Twitter</a>
 							<a href="#"><i class="social foundicon-pinterest"></i> Pinterest</a>
 							<a href="#"><i class="social foundicon-rss"></i> Rss</a>
 						</p>
@@ -334,36 +237,8 @@
 	</div>
 
 
-
-
-
-
-		<!-- Container -->
-		<div class="container">
-			<!-- Notifications -->
-			@include('notifications')
-			<!-- ./ notifications -->
-
-			<!-- Content -->
-			@yield('content')
-			<!-- ./ content -->
-		</div>
-		<!-- ./ container -->
-
-		<!-- the following div is needed to make a sticky footer -->
-		<div id="push"></div>
-		</div>
-		<!-- ./wrap -->
-
-
-	    <div id="footer">
-	      <div class="container">
-	        <p class="muted credit">Laravel 4 Starter Site on <a href="https://github.com/andrew13/Laravel-4-Bootstrap-Starter-Site">Github</a>.</p>
-	      </div>
-	    </div>
-
-		<!-- Javascripts
-		================================================== -->
+	<!-- Javascripts
+    ================================================== -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
         <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
 		<script src="{{asset('template/jquery.min.js')}}" type="text/javascript"></script>
@@ -373,5 +248,6 @@
 		<script src="{{asset('template/carousel/jquery.carouFredSel-6.2.0-packed.js')}}" type="text/javascript"></script><script type="text/javascript">$('#list_photos').carouFredSel({ responsive: true, width: '100%', scroll: 2, items: {width: 320,visible: {min: 2, max: 6}} });</script>
 
 	@yield("js")
+
 	</body>
 </html>

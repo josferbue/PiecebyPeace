@@ -13,7 +13,10 @@ return array(
 	|
 	*/
 
-	'contact_us' => 'Contáctenos',
-    'sign_up' 	 => 'Regístrese',
+	'contact_us' 	=> 'Contáctenos',
+    'sign_up' 	 	=> 'Regístrese',
+	'volunteer' 	=> 'Registrarse como voluntario',
+	'company' 		=> 'Registrarse como empresa',
+	'ngo' 			=> 'Registrarse como ONG',
 
 );
