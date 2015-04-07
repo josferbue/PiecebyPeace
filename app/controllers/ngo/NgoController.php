@@ -10,6 +10,7 @@ class NgoController extends BaseController
     protected $ngo;
     protected $user;
 
+
     /**
      * Inject the models.
      * @param User $user
@@ -72,10 +73,14 @@ class NgoController extends BaseController
         $this->ngo->number = Input::get("number");
         $this->ngo->expirationMonth = Input::get("expirationMonth");
         $this->ngo->expirationYear = Input::get("expirationYear");
+        $this->ngo->cvv = Input::get("cvv");
         $this->ngo->description = Input::get("description");
         $this->ngo->phone = Input::get("phone");
-        $this->ngo->logo = Input::get("logo");
-        $this->ngo->active = 0;
+
+        $destinationPath = app_path() . '\\logos\\' . $this->user->email;
+
+
+        //Active y Banned no hace falta ponerlos, en la base de datos van por defecto a falso
 
         $password = Input::get('password');
         $passwordConfirmation = Input::get('password_confirmation');
@@ -102,10 +107,24 @@ class NgoController extends BaseController
 
             // Save if valid. Password field will be hashed before save
 
-            $this->user->save();
-            $this->user->attachRole(Role::where('name', '=', 'NonGovernmentalOrganization')->first());
+
+            $this->user->save();//al guardar se generara el id
+            //tenemos que coger el usuario de la base de datos puesto que este aun no tiene el id
+            //$this->usuarioSalvado = (User::where('email', '=', $this->user->email)->first());
             if ($this->user->id) {
+                $this->user->attachRole(Role::where('name', '=', 'NonGovernmentalOrganization')->first());
                 $this->ngo->user_id = $this->user->id;
+
+                //si pasa la validacion se guarda la imagen, si es que han subido alguna
+
+                $logo = Input::file('logo');
+                if ($logo != null) {
+
+                    $filename = $logo->getClientOriginalName();
+                    $logo->move($destinationPath, $filename);
+                    $this->ngo->logo = $destinationPath . "\\" . $filename;
+
+                }
                 $this->ngo->save();
 
                 // Redirect with success message, You may replace "Lang::get(..." for your custom message.
@@ -131,7 +150,8 @@ class NgoController extends BaseController
      * Edits a user
      *
      */
-    public function postEdit($user)
+    public
+    function postEdit($user)
     {
         // Validate the inputs
         $validator = Validator::make(Input::all(), $user->getUpdateRules());
@@ -184,7 +204,8 @@ class NgoController extends BaseController
      * Displays the form for user creation
      *
      */
-    public function getCreate()
+    public
+    function getCreate()
     {
         return View::make('site/ngo/create');
     }
@@ -194,7 +215,8 @@ class NgoController extends BaseController
      * Displays the login form
      *
      */
-    public function getLogin()
+    public
+    function getLogin()
     {
         $user = Auth::user();
         if (!empty($user->id)) {
@@ -208,7 +230,8 @@ class NgoController extends BaseController
      * Attempt to do login
      *
      */
-    public function postLogin()
+    public
+    function postLogin()
     {
         $input = array(
             'email' => Input::get('email'), // May be the username too
@@ -244,7 +267,8 @@ class NgoController extends BaseController
      *
      * @param  string $code
      */
-    public function getConfirm($code)
+    public
+    function getConfirm($code)
     {
         if (Confide::confirm($code)) {
             return Redirect::to('user/login')
@@ -259,7 +283,8 @@ class NgoController extends BaseController
      * Displays the forgot password form
      *
      */
-    public function getForgot()
+    public
+    function getForgot()
     {
         return View::make('site/user/forgot');
     }
@@ -268,7 +293,8 @@ class NgoController extends BaseController
      * Attempt to reset password with given email
      *
      */
-    public function postForgot()
+    public
+    function postForgot()
     {
         if (Confide::forgotPassword(Input::get('email'))) {
             return Redirect::to('user/login')
@@ -284,7 +310,8 @@ class NgoController extends BaseController
      * Shows the change password form with the given token
      *
      */
-    public function getReset($token)
+    public
+    function getReset($token)
     {
 
         return View::make('site/user/reset')
@@ -296,7 +323,8 @@ class NgoController extends BaseController
      * Attempt change password of the user
      *
      */
-    public function postReset()
+    public
+    function postReset()
     {
         $input = array(
             'token' => Input::get('token'),
@@ -319,7 +347,8 @@ class NgoController extends BaseController
      * Log the user out of the application.
      *
      */
-    public function getLogout()
+    public
+    function getLogout()
     {
         Confide::logout();
 
@@ -331,7 +360,8 @@ class NgoController extends BaseController
      * @param $username
      * @return mixed
      */
-    public function getProfile($username)
+    public
+    function getProfile($username)
     {
         $userModel = new User;
         $user = $userModel->getUserByUsername($username);
@@ -344,7 +374,8 @@ class NgoController extends BaseController
         return View::make('site/user/profile', compact('user'));
     }
 
-    public function getSettings()
+    public
+    function getSettings()
     {
         list($user, $redirect) = User::checkAuthAndRedirect('user/settings');
         if ($redirect) {
@@ -361,7 +392,8 @@ class NgoController extends BaseController
      * @param $url3
      * @return string
      */
-    public function processRedirect($url1, $url2, $url3)
+    public
+    function processRedirect($url1, $url2, $url3)
     {
         $redirect = '';
         if (!empty($url1)) {

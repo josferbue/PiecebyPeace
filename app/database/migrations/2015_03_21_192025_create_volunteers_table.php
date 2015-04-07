@@ -17,7 +17,7 @@ class CreateVolunteersTable extends Migration {
 				//Actor Abstract
 			$table->increments('id');
 			$table->string('name');
-			$table->boolean('banned');
+			$table->boolean('banned')->default(false);
 
 
 			//location datatype

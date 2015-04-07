@@ -17,14 +17,14 @@ class CreateCompaniesTable extends Migration {
 			//Actor Abstract
 			$table->increments('id');
 			$table->string('name');
-			$table->boolean('banned');
+			$table->boolean('banned')->default(false);
 
 
 
 			$table->string('sector');
 			$table->string('description');
 			$table->string('phone');
-			$table->binary('logo')->nullable();
+			$table->String('logo')->nullable();
 			$table->boolean('active')->default(false);
 
 

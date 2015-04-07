@@ -91,10 +91,10 @@ class CompanyController extends BaseController {
         // Save if valid. Password field will be hashed before save
 
             $this->user->save();
-            $this->user->attachRole( Role::where('name','=','COMPANY')->first());
             if ( $this->user->id )
             {
-                    $this->company->user_id = $this->user->id;
+                $this->user->attachRole( Role::where('name','=','COMPANY')->first());
+                $this->company->user_id = $this->user->id;
                     $this->company->save();
 
                     // Redirect with success message, You may replace "Lang::get(..." for your custom message.

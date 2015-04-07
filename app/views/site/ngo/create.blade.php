@@ -12,21 +12,25 @@
         <h1>{{{ Lang::get('site.ngo') }}}</h1>
     </div>
     <form method="POST" action="{{{ (Confide::checkAction('NgoController@store')) ?: URL::to('ngo')  }}}"
-          accept-charset="UTF-8">
+          enctype="multipart/form-data" accept-charset="UTF-8">
         <input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
 
         <div class="tab-content">
-            <div class="form-group">
+            <div class="form-group{{{ $errors->has('username') ? 'error' : '' }}}">
                 <label for="username">{{{ Lang::get('confide::confide.username') }}}</label>
                 <input class="form-control" placeholder="{{{ Lang::get('confide::confide.username') }}}" type="text"
                        name="username" id="username" value="{{{ Input::old('username') }}}">
+                {{ $errors->first('username', '<span class="help-block">:message</span>') }}
+
             </div>
-            <div class="form-group">
+            <div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
                 <label for="email">{{{ Lang::get('confide::confide.e_mail') }}}
                     <small>{{ Lang::get('confide::confide.signup.confirmation_required') }}</small>
                 </label>
                 <input class="form-control" placeholder="{{{ Lang::get('confide::confide.e_mail') }}}" type="text"
                        name="email" id="email" value="{{{ Input::old('email') }}}">
+                {{ $errors->first('email', '<span class="help-block">:message</span>') }}
+
             </div>
             <div class="form-group">
                 <label for="password">{{{ Lang::get('confide::confide.password') }}}</label>
@@ -51,7 +55,7 @@
                 {{ $errors->first('holderName', '<span class="help-block">:message</span>') }}
             </div>
             <div class="form-group  {{{ $errors->has('brandName') ? 'error' : '' }}}">
-                <label for="brandName">{{{ Lang::get('ngo/ngo.holderName') }}}</label>
+                <label for="brandName">{{{ Lang::get('ngo/ngo.brandName') }}}</label>
                 <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.brandName') }}}" type="text"
                        name="brandName" id="brandName" value="{{{ Input::old('brandName') }}}">
                 {{ $errors->first('brandName', '<span class="help-block">:message</span>') }}
@@ -92,7 +96,12 @@
                        name="phone" id="phone" value="{{{ Input::old('phone') }}}">
                 {{ $errors->first('phone', '<span class="help-block">:message</span>') }}
             </div>
-            <!--tengo aun que ver como se sube el logo-->
+            <div class="form-group  {{{ $errors->has('logo') ? 'error' : '' }}}">
+                <label for="logo">{{{ Lang::get('ngo/ngo.logo') }}}</label>
+                <input class="form-control" type="file" name="logo" id="logo">
+                {{ $errors->first('logo', '<span class="help-block">:message</span>') }}
+            </div>
+
 
 
 

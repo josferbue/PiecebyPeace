@@ -90,10 +90,10 @@ class VolunteerController extends BaseController {
         // Save if valid. Password field will be hashed before save
 
             $this->user->save();
-            $this->user->attachRole( Role::where('name','=','VOLUNTEER')->first());
             if ( $this->user->id )
             {
-                    $this->volunteer->user_id = $this->user->id;
+                $this->user->attachRole( Role::where('name','=','VOLUNTEER')->first());
+                $this->volunteer->user_id = $this->user->id;
                     $this->volunteer->save();
 
                     // Redirect with success message, You may replace "Lang::get(..." for your custom message.

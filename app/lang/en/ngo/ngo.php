@@ -13,7 +13,7 @@ return array(
     'name'                    				=> 'Name',
     'holderName'                 			=> 'Holder Name',
     'brandName'                				=> 'Brand Name',
-    'number'                     			=> 'Number',
+    'number'                     			=> 'CreditCard Number',
     'expirationMonth'                 		=> 'Expiration Month',
     'expirationYear'             	 		=> 'Expiration Year',
     'cvv'               					=> 'CVV',
