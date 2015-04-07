@@ -92,6 +92,7 @@ Route::post('user/login', 'UserController@postLogin');
 Route::controller('user', 'UserController');
 Route::controller('volunteer', 'VolunteerController');
 Route::controller('ngo', 'NgoController');
+Route::controller('ngo', 'CompanyController');
 
 //:: Application Routes ::
 
