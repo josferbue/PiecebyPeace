@@ -11,17 +11,18 @@
 <div class="page-header">
 	<h1>{{{ Lang::get('site.company') }}}</h1>
 </div>
-<form method="POST" action="{{{ (Confide::checkAction('CompanyController@store')) ?: URL::to('company')  }}}" accept-charset="UTF-8">
+<form method="POST" action="{{{ (Confide::checkAction('CompanyController@store')) ?: URL::to('company')  }}}" enctype="multipart/form-data" accept-charset="UTF-8">
 	<input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
-	{{ Form::open(array('url' => 'company', 'files' => true)) }}
 	<div class="tab-content">
 		<div class="form-group">
 			<label for="username">{{{ Lang::get('confide::confide.username') }}}</label>
 			<input class="form-control" placeholder="{{{ Lang::get('confide::confide.username') }}}" type="text" name="username" id="username" value="{{{ Input::old('username') }}}">
+			{{ $errors->first('username', '<span class="help-block">:message</span>') }}
 		</div>
 		<div class="form-group">
 			<label for="email">{{{ Lang::get('confide::confide.e_mail') }}} <small>{{ Lang::get('confide::confide.signup.confirmation_required') }}</small></label>
 			<input class="form-control" placeholder="{{{ Lang::get('confide::confide.e_mail') }}}" type="text" name="email" id="email" value="{{{ Input::old('email') }}}">
+			{{ $errors->first('email', '<span class="help-block">:message</span>') }}
 		</div>
 		<div class="form-group">
 			<label for="password">{{{ Lang::get('confide::confide.password') }}}</label>
@@ -51,12 +52,15 @@
 			<input class="form-control" placeholder="{{{ Lang::get('company/company.phone') }}}" rows="11" name="phone" id="phone" value="{{{ Input::old('phone') }}}">
 			{{ $errors->first('phone', '<span class="help-block">:message</span>') }}
 		</div>
-
-		<div class="form-group  {{{ $errors->has('phone') ? 'error' : '' }}}">
+		<div class="form-group  {{{ $errors->has('logo') ? 'error' : '' }}}">
 			<label for="logo">{{{ Lang::get('company/company.logo') }}}</label>
-			{{ Form::file('logo') }}
+			<input class="form-control" type="file" name="logo" id="logo">
 			{{ $errors->first('logo', '<span class="help-block">:message</span>') }}
 		</div>
+
+		@foreach($errors->all() as $error)
+			{{  $error }};
+		@endforeach
 
 		@if ( Session::get('error') )
 			<div class="alert alert-error alert-danger">

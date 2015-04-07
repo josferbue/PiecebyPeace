@@ -49,7 +49,6 @@ class CompanyController extends BaseController {
             'sector'        => 'required|min:3',
             'description'   => 'required|min:3',
             'phone'         => 'required|regex:/\d+/',
-            'logo'          => 'required',
         );
 
         // Validate the inputs
@@ -65,8 +64,13 @@ class CompanyController extends BaseController {
         $this->company->description = Input::get("description");
         $this->company->phone = Input::get("phone");
         $this->company->logo = Input::file("logo");
-        $password = Input::get( 'password' );
-        $passwordConfirmation = Input::get( 'password_confirmation' );
+
+        $destinationPath = app_path() . '\\logos\\' . $this->user->email;
+
+        //Active y Banned no hace falta ponerlos, en la base de datos van por defecto a falso
+
+        $password = Input::get('password');
+        $passwordConfirmation = Input::get('password_confirmation');
 
         if(!empty($password)) {
             if($password === $passwordConfirmation) {
@@ -95,7 +99,19 @@ class CompanyController extends BaseController {
             {
                 $this->user->attachRole( Role::where('name','=','COMPANY')->first());
                 $this->company->user_id = $this->user->id;
-                    $this->company->save();
+
+                //si pasa la validacion se guarda la imagen, si es que han subido alguna
+
+                $logo = Input::file('logo');
+                if ($logo != null) {
+
+                    $filename = $logo->getClientOriginalName();
+                    $logo->move($destinationPath, $filename);
+                    $this->company->logo = $destinationPath . "\\" . $filename;
+
+                }
+
+                $this->company->save();
 
                     // Redirect with success message, You may replace "Lang::get(..." for your custom message.
                     return Redirect::to('user/login')
