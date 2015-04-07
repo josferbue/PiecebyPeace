@@ -91,6 +91,7 @@ Route::post('user/login', 'UserController@postLogin');
 # User RESTful Routes (Login, Logout, Register, etc)
 Route::controller('user', 'UserController');
 Route::controller('volunteer', 'VolunteerController');
+Route::controller('ngo', 'NgoController');
 
 //:: Application Routes ::
 
