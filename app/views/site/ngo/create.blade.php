@@ -16,20 +16,19 @@
         <input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
 
         <div class="tab-content">
-            <div class="form-group{{{ $errors->has('username') ? 'error' : '' }}}">
+            <div class="form-group">
                 <label for="username">{{{ Lang::get('confide::confide.username') }}}</label>
                 <input class="form-control" placeholder="{{{ Lang::get('confide::confide.username') }}}" type="text"
                        name="username" id="username" value="{{{ Input::old('username') }}}">
-                {{ $errors->first('username', '<span class="help-block">:message</span>') }}
+
 
             </div>
-            <div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
+            <div class="form-group ">
                 <label for="email">{{{ Lang::get('confide::confide.e_mail') }}}
                     <small>{{ Lang::get('confide::confide.signup.confirmation_required') }}</small>
                 </label>
                 <input class="form-control" placeholder="{{{ Lang::get('confide::confide.e_mail') }}}" type="text"
                        name="email" id="email" value="{{{ Input::old('email') }}}">
-                {{ $errors->first('email', '<span class="help-block">:message</span>') }}
 
             </div>
             <div class="form-group">
@@ -82,7 +81,7 @@
                 <label for="cvv">{{{ Lang::get('ngo/ngo.cvv') }}}</label>
                 <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.cvv') }}}" type="text"
                        name="cvv" id="cvv" value="{{{ Input::old('cvv') }}}">
-                {{ $errors->first('brandName', '<span class="help-block">:message</span>') }}
+                {{ $errors->first('cvv', '<span class="help-block">:message</span>') }}
             </div>
             <div class="form-group  {{{ $errors->has('description') ? 'error' : '' }}}">
                 <label for="description">{{{ Lang::get('ngo/ngo.description') }}}</label>

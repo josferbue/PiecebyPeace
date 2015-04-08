@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 return array(
 
@@ -13,12 +13,12 @@ return array(
 	|
 	*/
 
-	'contact_us' 	=> 'Contact us',
-	'sign_up' 		=> 'Sign up',
-	'volunteer' 	=> 'Register as volunteer',
-	'company' 		=> 'Register as company',
-	'ngo' 			=> 'Register as NGO',
-	'projects' 		=> 'Projects'
+	'title' 	    => 'Volunteering projects',
+	'categories' 	=> 'Select Category',
+	'locations' 	=> 'Select City',
+	'dateFrom' 		=> 'Date From',
+	'dateTo' 		=> 'Date To',
+	'search' 		=> 'Search'
 
 
 );

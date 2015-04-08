@@ -83,6 +83,8 @@
 								<div class="nav-collapse collapse">
 									<ul class="nav nav-pills ddmenu">
 										<li class="dropdown active"><a href="{{{ URL::to('') }}}">Home</a></li>
+										<li class="dropdown"><a href="{{{ URL::to('projects') }}}">{{{ Lang::get('site.projects') }}}</a></li>
+
 										<li class="dropdown"><a href="#">About</a></li>
 										<li class="dropdown">
 											<a href="#" class="dropdown-toggle">Users <b class="caret"></b></a>

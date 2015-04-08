@@ -20,6 +20,7 @@ class CreateProjectsTable extends Migration {
 			$table->string('address');
 			$table->string('city');
 			$table->string('zipCode');
+			$table->string('country');
 			$table->integer('maxVolunteers');
 			$table->date('startDate');
 			$table->date('finishDate');

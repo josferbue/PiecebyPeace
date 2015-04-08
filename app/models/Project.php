@@ -1,17 +1,19 @@
 <?php
 
-class Project extends Eloquent {
+class Project extends Eloquent
+{
 
-	protected $table = 'project';
+    protected $table = 'project';
+
     /**
-	 * Get the comment's content.
-	 *
-	 * @return string
-	 */
-	public function name()
-	{
-		return $this->name;
-	}
+     * Get the comment's content.
+     *
+     * @return string
+     */
+    public function name()
+    {
+        return $this->name;
+    }
 
     public function description()
     {
@@ -23,87 +25,92 @@ class Project extends Eloquent {
         return $this->image;
     }
 
-	public function address()
-	{
-		return $this->address;
-	}
+    public function address()
+    {
+        return $this->address;
+    }
 
 
-	public function city()
-	{
-		return $this->city;
-	}
+    public function city()
+    {
+        return $this->city;
+    }
 
-	public function zipCode()
-	{
-		return $this->zipCode;
-	}
+    public function zipCode()
+    {
+        return $this->zipCode;
+    }
 
-	public function maxVolunteers()
-	{
-		return $this->maxVolunteers;
-	}
+    public function country()
+    {
+        return $this->country;
+    }
 
-	public function startDate()
-	{
-		return $this->date(startDate);
-	}
+    public function maxVolunteers()
+    {
+        return $this->maxVolunteers;
+    }
 
-	public function finishDate()
-	{
-		return $this->date(finishDate);
-	}
+    public function startDate()
+    {
+        return $this->date(startDate);
+    }
 
-	public function date($date=null)
-	{
-		if(is_null($date)) {
-			$date = $this->created_at;
-		}
+    public function finishDate()
+    {
+        return $this->date(finishDate);
+    }
 
-		return String::date($date);
-	}
-	/**
-	 * Returns the date of the blog post creation,
-	 * on a good and more readable format :)
-	 *
-	 * @return string
-	 */
-	public function created_at()
-	{
-		return $this->date($this->created_at);
-	}
+    public function date($date = null)
+    {
+        if (is_null($date)) {
+            $date = $this->created_at;
+        }
 
-	/**
-	 * Returns the date of the blog post last update,
-	 * on a good and more readable format :)
-	 *
-	 * @return string
-	 */
-	public function updated_at()
-	{
-		return $this->date($this->updated_at);
-	}
+        return String::date($date);
+    }
 
-	/**
-	 * Get the comment's author.
-	 *
-	 * @return User
-	 */
-	public function ngo()
-	{
-		return $this->belongsTo('Ngo', 'ngo_id');
-	}
-	public function company()
-	{
-		return $this->belongsTo('Company', 'company_id');
-	}
+    /**
+     * Returns the date of the blog post creation,
+     * on a good and more readable format :)
+     *
+     * @return string
+     */
+    public function created_at()
+    {
+        return $this->date($this->created_at);
+    }
 
-	public function categories()
-	{
-		return $this->belongsToMany('Category', 'project_category');
-	}
+    /**
+     * Returns the date of the blog post last update,
+     * on a good and more readable format :)
+     *
+     * @return string
+     */
+    public function updated_at()
+    {
+        return $this->date($this->updated_at);
+    }
 
+    /**
+     * Get the comment's author.
+     *
+     * @return User
+     */
+    public function ngo()
+    {
+        return $this->belongsTo('Ngo', 'ngo_id');
+    }
 
+    public function company()
+    {
+        return $this->belongsTo('Company', 'company_id');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany('Category', 'project_category');
+    }
 
 
 }

@@ -34,8 +34,7 @@ Route::pattern('token', '[0-9a-z]+');
  *  Admin Routes
  *  ------------------------------------------
  */
-Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
-{
+Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
 
     # Comment Management
     Route::get('comments/{comment}/edit', 'AdminCommentsController@getEdit');
@@ -94,14 +93,18 @@ Route::controller('volunteer', 'VolunteerController');
 Route::controller('ngo', 'NgoController');
 Route::controller('company', 'CompanyController');
 
+//UnauthorizedController
+Route::get('projects', 'ProjectController@getProjects');
+Route::post('projects', 'ProjectController@findProjects');
+
+
 //:: Application Routes ::
 
 # Filter for detect language
-Route::when('contact-us','detectLang');
+Route::when('contact-us', 'detectLang');
 
 # Contact Us Static Page
-Route::get('contact-us', function()
-{
+Route::get('contact-us', function () {
     // Return about us page
     return View::make('site/contact-us');
 });
@@ -111,4 +114,4 @@ Route::get('{postSlug}', 'BlogController@getView');
 Route::post('{postSlug}', 'BlogController@postView');
 
 # Index Page - Last route, no matches
-Route::get('/', array('before' => 'detectLang','uses' => 'BlogController@getIndex'));
+Route::get('/', array('before' => 'detectLang', 'uses' => 'BlogController@getIndex'));

@@ -18,5 +18,7 @@ return array(
 	'volunteer' 	=> 'Registrarse como voluntario',
 	'company' 		=> 'Registrarse como empresa',
 	'ngo' 			=> 'Registrarse como ONG',
+	'projects' 		=> 'Proyectos'
+
 
 );
