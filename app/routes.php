@@ -99,6 +99,12 @@ Route::post('projects', 'ProjectController@findProjects');
 Route::get('project/view/{id}', 'ProjectController@viewProject');
 
 
+
+//Projec volunteer controller
+
+Route::get('project/createVolunteerProject', 'ProjectController@createVolunteerProject');
+Route::post('project/createVolunteerProject', 'ProjectController@saveVolunteerProject');
+
 //:: Application Routes ::
 
 # Filter for detect language

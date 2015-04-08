@@ -77,8 +77,8 @@ class NgoController extends BaseController
         $this->ngo->description = Input::get("description");
         $this->ngo->phone = Input::get("phone");
 
-//        $destinationPath = app_path() . '\\logos\\' . $this->user->email;
-        $destinationPath = '\\app\\logos\\' . $this->user->email;
+
+        $destinationPath = public_path().'/logos/'.$this->user->email;
 
 
         //Active y Banned no hace falta ponerlos, en la base de datos van por defecto a falso
@@ -123,7 +123,7 @@ class NgoController extends BaseController
 
                     $filename = $logo->getClientOriginalName();
                     $logo->move($destinationPath, $filename);
-                    $this->ngo->logo = $destinationPath . "\\" . $filename;
+                    $this->ngo->logo =  '/logos/'.$this->user->email .'/'. $filename;
 
                 }
                 $this->ngo->save();

@@ -13,12 +13,15 @@ return array(
 	|
 	*/
 
-	'contact_us' 	=> 'Contact us',
-	'sign_up' 		=> 'Sign up',
-	'volunteer' 	=> 'Register as volunteer',
-	'company' 		=> 'Register as company',
-	'ngo' 			=> 'Register as NGO',
-	'projects' 		=> 'Projects'
+	'contact_us' 					=> 'Contact us',
+	'sign_up' 						=> 'Sign up',
+	'volunteer' 					=> 'Register as volunteer',
+	'company' 						=> 'Register as company',
+	'ngo' 							=> 'Register as NGO',
+	'projects' 						=> 'Projects',
+	'findVolunteerProjects' 		=> 'Find Volunteer Project',
+	'createVolunteerProjects' 		=> 'Create Volunteer Project'
+
 
 
 );

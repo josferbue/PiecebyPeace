@@ -13,12 +13,16 @@ return array(
 	|
 	*/
 
-	'contact_us' 	=> 'Contáctenos',
-    'sign_up' 	 	=> 'Regístrese',
-	'volunteer' 	=> 'Registrarse como voluntario',
-	'company' 		=> 'Registrarse como empresa',
-	'ngo' 			=> 'Registrarse como ONG',
-	'projects' 		=> 'Proyectos'
+	'contact_us' 					=> 'Contáctenos',
+    'sign_up' 	 					=> 'Regístrese',
+	'volunteer' 					=> 'Registrarse como voluntario',
+	'company' 						=> 'Registrarse como empresa',
+	'ngo' 							=> 'Registrarse como ONG',
+	'projects' 						=> 'Proyectos',
+	'findVolunteerProjects' 		=> 'Proyectos de Voluntariado',
+	'createVolunteerProjects' 		=> 'crear Proyecto de Voluntariado'
+
+
 
 
 );

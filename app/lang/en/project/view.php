@@ -21,7 +21,7 @@ return array(
 	'startDate' 	=> 'Start Date',
 	'finishDate'    =>'Finish Date',
 	'ngo'    		=>'NGO',
-	'notImage'    =>'without Photo',
+	'notImage'    =>'without-Photo',
 	'availableVolunteers'    =>'available Volunteers',
 	'maxVolunteers'    =>'Maximun Volunteers'
 

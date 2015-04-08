@@ -21,7 +21,7 @@ return array(
 	'startDate' 	=> 'Fecha de Inicio',
 	'finishDate'    =>'Fecha de Fin',
 	'ngo'    		=>'ONG',
-	'notImage'    =>'Sin Imagen',
+	'notImage'    =>'Sin-Imagen',
 	'availableVolunteers'    =>'Plazas de voluntarios disponibles',
 	'maxVolunteers'    =>'Número máximo de voluntarios'
 

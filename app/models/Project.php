@@ -107,6 +107,15 @@ class Project extends Eloquent
         return $this->belongsTo('Company', 'company_id');
     }
 
+    public function volunteers()
+    {
+        return $this->belongsToMany('Volunteer', 'project_volunteer');
+    }
+
+    public function applications()
+    {
+        return $this->hashMany('Application', 'application_id');
+    }
     public function categories()
     {
         return $this->belongsToMany('Category', 'project_category');

@@ -61,7 +61,7 @@ class Volunteer extends Eloquent
         return $this->belongsTo('User', 'user_id');
     }
 
-    public function projects()
+    public function cooperates()
     {
         return $this->belongsToMany('Project','project_volunteer','project_id','volunteer_id');
     }

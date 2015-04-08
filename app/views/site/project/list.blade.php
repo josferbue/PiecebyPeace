@@ -87,8 +87,8 @@
 
                 <div class="span3">
                     {{--<div class="thumbnail">--}}
-                    <img src="../{{ $project->image}}" class="img-rounded"
-                         alt={{{ Lang::get('project/list.notImage') }}}/>
+                    <img src="{{ URL::to($project->image)}}" class="img-rounded"
+                         alt="{{Lang::get('project/list.notImage') }}"/>
 
 
                     {{--</div>--}}

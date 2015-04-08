@@ -2,106 +2,93 @@
 
 {{-- Web site Title --}}
 @section('title')
-    {{{ Lang::get('project/view.title') }}} ::
-    @parent
+     {{{ Lang::get('project/view.title') }}} ::
+     @parent
 @stop
 
 {{-- Content --}}
 @section('content')
-    <div class="page-header">
-        <h1>{{{ Lang::get('project/view.title') }}}</h1>
-    </div>
-
-    {{--Comprobamos que existen proyectos y los muestra los proyectos--}}
-    @if ($projects=='nothing')
-        <div class="row">
-            <div class="span3">
-                <h3> {{{ Lang::get('project/list.notFound') }}}</h3>
-            </div>
-        </div>
-
-    @elseif($projects!='')
-        @foreach ($projects as $project)
-
-            <div class="row">
+     <div class="page-header">
+          <h1>{{{ Lang::get('project/view.title') }}}</h1>
+     </div>
 
 
-                <div class="span9">
-                    <div class="caption">
-
-                        <h3>  {{{ Lang::get('project/view.name') }}} </h3>
-
-                        <p>{{$project->name }}</p>
-
-                        <h3>  {{{ Lang::get('project/view.description') }}} </h3>
-
-                        <p>{{$project->description }}</p>
-
-                        <h3>  {{{ Lang::get('project/view.location') }}} </h3>
-
-                        <p>{{$project->addres }}, {{$project->city }}, {{$project->country }}
-                            . {{$project->zipCode }}</p>
-                    </div>
-
-                </div>
-
-                <div class="span3">
-                    {{--<div class="thumbnail">--}}
-                    <img src="../{{ $project->image}}" class="img-rounded"
-                         alt={{{ Lang::get('project/view.notImage') }}}/>
 
 
-                    {{--</div>--}}
-                </div>
+     <div class="row">
 
 
-            </div>
-            <div class="row">
+          <div class="span6">
+               <div class="de">
+
+                    <h3>  {{{ Lang::get('project/view.name') }}} </h3>
+
+                    <p>{{$project->name }}</p>
+
+                    <h3>  {{{ Lang::get('project/view.description') }}} </h3>
+
+                    <p>{{$project->description }}</p>
+               </div>
+
+          </div>
+
+          <div class="span3">
+               <img src="{{ URL::to($project->image)}}" class="img-rounded"
+                    alt="{{{ Lang::get('project/view.notImage') }}}"/>
 
 
-                <div class="span6">
-                    <div class="caption">
+               {{--</div>--}}
+          </div>
 
-                        <h3>  {{{ Lang::get('project/view.name') }}} </h3>
 
-                        <p>{{$project->name }}</p>
+     </div>
+     <div class="row">
 
-                        <h3>  {{{ Lang::get('project/view.description') }}} </h3>
 
-                        <p>{{$project->description }}</p>
+          <div class="span6">
+               <div class="caption">
 
-                        <h3>  {{{ Lang::get('project/view.maxVolunteers') }}} </h3>
+                    <h3>  {{{ Lang::get('project/view.name') }}} </h3>
 
-                        <p>{{$project->maxVolunteers }}</p>
-                        <h3>  {{{ Lang::get('project/view.availableVolunteers') }}} </h3>
+                    <p>{{$project->name }}</p>
 
-                        <p>{{$availableVolunteers}}</p>
+                    <h3>  {{{ Lang::get('project/view.description') }}} </h3>
 
-                        <h3>  {{{ Lang::get('project/view.location') }}} </h3>
+                    <p>{{$project->description }}</p>
 
-                        <p>{{$project->addres }}, {{$project->city }}, {{$project->country }}
-                            . {{$project->zipCode }}</p>
-                    </div>
+                    <h3>  {{{ Lang::get('project/view.maxVolunteers') }}} </h3>
 
-                </div>
-                <div class="span6">
-                    <div class="caption">
+                    <p>{{$project->maxVolunteers }}</p>
 
-                        <h3>  {{{ Lang::get('project/view.startDate') }}} </h3>
+                    <h3>  {{{ Lang::get('project/view.availableVolunteers') }}} </h3>
 
-                        <p>{{$project->startDate }}</p>
+                    <p>{{$availableVolunteers}}</p>
 
-                        <h3>  {{{ Lang::get('project/view.finishDate') }}} </h3>
 
-                        <p>{{$project->finishDate }}</p>
+               </div>
 
-                        <h3>  {{{ Lang::get('project/view.ngo') }}} </h3>
+          </div>
+          <div class="span6">
+               <div class="caption">
+                    <h3>  {{{ Lang::get('project/view.location') }}} </h3>
 
-                        <p>{{$project->ngo->name }}</p>
-                    </div>
+                    <p>{{$project->addres }} {{$project->city }}, {{$project->country }}. {{$project->zipCode }}</p>
 
-                </div>
+                    <h3>  {{{ Lang::get('project/view.startDate') }}} </h3>
 
-        @endforeach
-    @endif
+                    <p>{{$project->startDate }}</p>
+
+                    <h3>  {{{ Lang::get('project/view.finishDate') }}} </h3>
+
+                    <p>{{$project->finishDate }}</p>
+
+                    <h3>  {{{ Lang::get('project/view.ngo') }}} </h3>
+
+                    <p>{{$project->ngo->name }}</p>
+               </div>
+
+          </div>
+     </div>
+
+
 @stop

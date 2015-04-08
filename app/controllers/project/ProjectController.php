@@ -92,8 +92,8 @@ class ProjectController extends BaseController
 
     public function viewProject($id){
 
-        $project=Project::where('id', '=', $id)->get();
-        $volunteers=$project->cooperates;
+        $project=Project::where('id', '=', $id)->first();
+        $volunteers=$project->volunteers;
         $availableVolunteers= $project->maxVolunteers - sizeof($volunteers);
 
         $data = array(
@@ -101,7 +101,7 @@ class ProjectController extends BaseController
             'availableVolunteers' => $availableVolunteers,
             'project' => $project
         );
-        View::make('site/project/view')->with(data);
+       return View::make('site/project/view')->with($data);
 
 
     }

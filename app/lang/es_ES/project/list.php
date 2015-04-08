@@ -20,7 +20,7 @@ return array(
 	'dateTo' 			=> 'Fecha Fin',
 	'search' 		=> 'Buscar',
 	'notFound'    =>'No se ha encontrado ningún proyecto.',
-	'notImage'    =>'Sin Imagen'
+	'notImage'    =>'Sin-Imagen'
 
 
 
