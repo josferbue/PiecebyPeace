@@ -13,14 +13,18 @@ return array(
 	|
 	*/
 
-	'title' 	    => 'Volunteering projects',
-	'categories' 	=> 'Select Category',
-	'locations' 	=> 'Select City',
-	'dateFrom' 		=> 'Date From',
-	'dateTo' 		=> 'Date To',
-	'search' 		=> 'Search',
-	'notFound'    =>'Not found projects.',
-	'notImage'    =>'without Photo'
+	'title' 	    => 'Project Details',
+	'name' 			=> 'Name',
+	'description' 	=> 'Description',
+	'categories' 	=> 'Categories',
+	'location' 		=> 'Location',
+	'startDate' 	=> 'Start Date',
+	'finishDate'    =>'Finish Date',
+	'ngo'    		=>'NGO',
+	'notImage'    =>'without Photo',
+	'availableVolunteers'    =>'available Volunteers',
+	'maxVolunteers'    =>'Maximun Volunteers'
+
 
 
 

@@ -22,6 +22,8 @@ class ProjectTableSeeder extends Seeder {
                 'updated_at'    => new DateTime,
                 'ngo_id'        => (int)DB::table('ngo')->first()->id,
                 'company_id'    => null,
+                'image'        =>'app/logos/alejandro.unisoftware@hotmail.es/2013-12-09-1301.jpg',
+
 
 
             ),
@@ -38,6 +40,7 @@ class ProjectTableSeeder extends Seeder {
                 'created_at'    => new DateTime,
                 'updated_at'    => new DateTime,
                 'ngo_id'        => null,
+                'image'        =>'app/logos/alejandro.unisoftware@hotmail.es/2013-12-09-1301.jpg',
                 'company_id'    => (int)DB::table('company')->first()->id,
 
 

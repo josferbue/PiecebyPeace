@@ -96,6 +96,7 @@ Route::controller('company', 'CompanyController');
 //UnauthorizedController
 Route::get('projects', 'ProjectController@getProjects');
 Route::post('projects', 'ProjectController@findProjects');
+Route::get('project/view/{id}', 'ProjectController@viewProject');
 
 
 //:: Application Routes ::

@@ -8,6 +8,9 @@
  */
 class ProjectController extends BaseController
 {
+    protected $locationVolunteerProjects;
+    protected $categoriesVolunteerProjects;
+
     public function __construct()
     {
         parent::__construct();
@@ -16,28 +19,34 @@ class ProjectController extends BaseController
     Public function getProjects()
     {
         $projects = Project::whereNull('company_id')->get();
-        $categories = Category::all();
+        $categoriesVolunteerProjects = Category::all();
 
         //esto es un mapa que tendra como clave los county y valores las ciudades sin repeticion
-        $locations = array();
+        $locationVolunteerProjects = array();
 
         foreach ($projects as $project) {
             $countryActual = $project->country;
-            if (array_key_exists($countryActual, $locations)) {
+            if (array_key_exists($countryActual, $locationVolunteerProjects)) {
                 //si ya existe la ciudad no la volvemos a poner
-                if (!in_array($project->city, $locations->$countryActual)) {
+                if (!in_array($project->city, $locationVolunteerProjects->$countryActual)) {
                     //con esto no pisamos el value lo añadimos al final
-                    $locations[$countryActual][] = $project->city;
+                    $locationVolunteerProjects[$countryActual][] = $project->city;
                 }
             } else {
-                $locations[$countryActual] [] = $project->city;
+                $locationVolunteerProjects[$countryActual] [] = $project->city;
 
             }
         }
+
+        Session::put('categories', $categoriesVolunteerProjects);
+        Session::put('locations', $locationVolunteerProjects);
+
+
         $data = array(
 
-            'categories' => $categories,
-            'locations' => $locations
+            'categories' => $categoriesVolunteerProjects,
+            'locations' => $locationVolunteerProjects,
+            'projects' => ''
         );
 
         Return View::make('site/project/list')->with($data);
@@ -46,6 +55,8 @@ class ProjectController extends BaseController
 
     Public function findProjects()
     {
+
+
         $startDate = Input::get('startDate');
         $finishDate = Input::get('finishDate');
         $city = Input::get('city');
@@ -54,17 +65,44 @@ class ProjectController extends BaseController
 //        ->where('category', '=', $category)
         $category = Category::where('name', '=', $categoryString)->first();
 
-        $projects = DB::table('project')
-            ->whereNull('company_id')->where('city', '=', $city)->where('startDate', '>', $startDate)
+        $projectsAux = Project::whereNull('company_id')->where('city', '=', $city)->where('startDate', '>', $startDate)
             ->where('finishDate', '<', $finishDate)->get();
-        foreach ($projects as $project) {
-            $categoriesAux=$project->categories;
-            if (in_array($category, $project->categories)) {
-                $res[] = $project;
+
+        $projects = array();
+
+        foreach ($projectsAux as $project) {
+            $categoriesAux = $project->categories;
+            //devuelve un Collection no un array por eso comprobamos de esta forma si esta contenido
+            if ($categoriesAux->contains($category)) {
+                $projects[] = $project;
             }
-
-
         }
-        Return View::make('site/project/list')->with('projects', $res);
+
+        if (empty($projects)) {
+            $projects = 'nothing';
+        }
+        $data = array(
+
+            'categories' => Session::get('categories'),
+            'locations' => Session::get('locations'),
+            'projects' => $projects
+        );
+        Return View::make('site/project/list')->with($data);
+    }
+
+    public function viewProject($id){
+
+        $project=Project::where('id', '=', $id)->get();
+        $volunteers=$project->cooperates;
+        $availableVolunteers= $project->maxVolunteers - sizeof($volunteers);
+
+        $data = array(
+
+            'availableVolunteers' => $availableVolunteers,
+            'project' => $project
+        );
+        View::make('site/project/view')->with(data);
+
+
     }
 }

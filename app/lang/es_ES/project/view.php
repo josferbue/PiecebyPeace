@@ -13,14 +13,20 @@ return array(
 	|
 	*/
 
-	'title' 	    => 'Volunteering projects',
-	'categories' 	=> 'Select Category',
-	'locations' 	=> 'Select City',
-	'dateFrom' 		=> 'Date From',
-	'dateTo' 		=> 'Date To',
-	'search' 		=> 'Search',
-	'notFound'    =>'Not found projects.',
-	'notImage'    =>'without Photo'
+	'title' 	    => 'Detalles del Proyecto',
+	'name' 			=> 'Nombre',
+	'description' 	=> 'Descripción',
+	'categories' 	=> 'Categorias',
+	'location' 		=> 'Localización',
+	'startDate' 	=> 'Fecha de Inicio',
+	'finishDate'    =>'Fecha de Fin',
+	'ngo'    		=>'ONG',
+	'notImage'    =>'Sin Imagen',
+	'availableVolunteers'    =>'Plazas de voluntarios disponibles',
+	'maxVolunteers'    =>'Número máximo de voluntarios'
+
+
+
 
 
 

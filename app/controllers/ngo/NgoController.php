@@ -77,7 +77,8 @@ class NgoController extends BaseController
         $this->ngo->description = Input::get("description");
         $this->ngo->phone = Input::get("phone");
 
-        $destinationPath = app_path() . '\\logos\\' . $this->user->email;
+//        $destinationPath = app_path() . '\\logos\\' . $this->user->email;
+        $destinationPath = '\\app\\logos\\' . $this->user->email;
 
 
         //Active y Banned no hace falta ponerlos, en la base de datos van por defecto a falso

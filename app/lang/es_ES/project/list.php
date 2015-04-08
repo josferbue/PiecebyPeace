@@ -18,7 +18,10 @@ return array(
 	'locations' 	=> 'Seleccione una Ciudad',
 	'dateFrom' 		=> 'Fecha Inicio',
 	'dateTo' 			=> 'Fecha Fin',
-	'search' 		=> 'Buscar'
+	'search' 		=> 'Buscar',
+	'notFound'    =>'No se ha encontrado ningún proyecto.',
+	'notImage'    =>'Sin Imagen'
+
 
 
 );
