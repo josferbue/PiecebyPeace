@@ -3,6 +3,8 @@
 class Campaign extends Eloquent {
 
 	protected $table = 'campaign';
+	public $timestamps = false;
+
     /**
 	 * Get the comment's content.
 	 *

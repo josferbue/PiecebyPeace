@@ -18,11 +18,11 @@ return array(
 	'volunteer' 					=> 'Registrarse como voluntario',
 	'company' 						=> 'Registrarse como empresa',
 	'ngo' 							=> 'Registrarse como ONG',
+
 	'projects' 						=> 'Proyectos',
-	'findVolunteerProjects' 		=> 'Proyectos de Voluntariado',
-	'createVolunteerProjects' 		=> 'crear Proyecto de Voluntariado'
+	'findVolunteerProjects' 		=> 'Proyectos de voluntariado',
+	'createVolunteerProjects' 		=> 'Crear proyecto de voluntariado',
 
-
-
+	'campaigns'						=> 'Campañas',
 
 );

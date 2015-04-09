@@ -65,7 +65,7 @@ class CompanyController extends BaseController {
         $this->company->phone = Input::get("phone");
         $this->company->logo = Input::file("logo");
 
-        $destinationPath = app_path() . '\\logos\\' . $this->user->email;
+        $destinationPath = public_path().'\\logos\\'.$this->user->email;
 
         //Active y Banned no hace falta ponerlos, en la base de datos van por defecto a falso
 

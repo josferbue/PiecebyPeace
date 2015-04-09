@@ -100,10 +100,17 @@ Route::get('project/view/{id}', 'ProjectController@viewProject');
 
 
 
-//Projec volunteer controller
+//Volunteering projects controller
 
 Route::get('project/createVolunteerProject', 'ProjectController@createVolunteerProject');
 Route::post('project/createVolunteerProject', 'ProjectController@saveVolunteerProject');
+
+// Campaigns controller
+Route::get('myCampaigns', 'CampaignController@findCampaignsByCurrentNGO');
+Route::get('campaigns', 'CampaignController@findAllCampaigns');
+Route::get('campaign/create', 'CampaignController@createCampaign');
+Route::post('campaign/create', 'CampaignController@saveCampaign');
+Route::get('campaign/details/{id}', 'CampaignController@campaignDetails');
 
 //:: Application Routes ::
 

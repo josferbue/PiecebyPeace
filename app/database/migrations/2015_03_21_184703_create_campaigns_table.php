@@ -18,7 +18,7 @@ class CreateCampaignsTable extends Migration {
 			$table->binary('image')->nullable();
 			$table->date('startDate');
 			$table->date('finishDate');
-			$table->integer('visits')->unsigned();
+			$table->integer('visits')->unsigned()->default(0);
 			$table->string('link');
 			$table->integer('maxVisits')->unsigned();
 			$table->integer('promotionDuration')->unsigned();
