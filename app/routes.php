@@ -102,8 +102,8 @@ Route::get('project/view/{id}', 'ProjectController@viewProject');
 
 //Projec volunteer controller
 
-Route::get('project/createVolunteerProject', 'ProjectController@createVolunteerProject');
-Route::post('project/createVolunteerProject', 'ProjectController@saveVolunteerProject');
+Route::get('project/createVolunteerProject', 'NgoProjectController@createVolunteerProject');
+Route::post('project/createVolunteerProject', 'NgoProjectController@saveVolunteerProject');
 
 //:: Application Routes ::
 

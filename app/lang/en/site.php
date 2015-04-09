@@ -19,8 +19,8 @@ return array(
 	'company' 						=> 'Register as company',
 	'ngo' 							=> 'Register as NGO',
 	'projects' 						=> 'Projects',
-	'findVolunteerProjects' 		=> 'Find Volunteer Project',
-	'createVolunteerProjects' 		=> 'Create Volunteer Project'
+	'findVolunteerProjects' 		=> 'Find volunteer project',
+	'createVolunteerProjects' 		=> 'Create volunteer project'
 
 
 

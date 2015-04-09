@@ -13,8 +13,9 @@
     </div>
 
     <form method="POST" accept-charset="UTF-8">
-        <input type="hidden" name="_token" value="{{{ csrf_token() }}}"/>
-
+        <!-- CSRF Token -->
+        <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+        <!-- ./ csrf token -->
         <div class="row">
 
 
@@ -50,11 +51,11 @@
 
                 <label for="dateFrom">{{{ Lang::get('project/list.dateFrom') }}}</label>
                 <input type="date" name="startDate" step="1" min="2014-01-01"
-                       value="<?php echo date("Y-m-d");?>">
+                       value="{{ date("Y-m-d")}}">
 
                 <label for="dateTo">{{{ Lang::get('project/list.dateTo') }}}</label>
                 <input type="date" name="finishDate" step="1" min="2014-01-01"
-                       value="<?php echo date("Y-m-d");?>">
+                       value="{{ date("Y-m-d")}}">
 
             </div>
 

@@ -2,125 +2,116 @@
 
 {{-- Web site Title --}}
 @section('title')
-{{{ Lang::get('project/create.title') }}} ::
-@parent
+    {{{ Lang::get('project/create.titleVolunteerProject') }}} ::
+    @parent
 @stop
 
 {{-- Content --}}
 @section('content')
-<div class="page-header">
-    <h1>{{{ Lang::get('project/create.title') }}}</h1>
-</div>
-<form method="POST" action="{{{ (Confide::checkAction('NgoController@store')) ?: URL::to('ngo')  }}}"
-      enctype="multipart/form-data" accept-charset="UTF-8">
-    <input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
+    <div class="page-header">
+        <h1>{{{ Lang::get('project/create.titleVolunteerProject') }}}</h1>
+    </div>
+    <form method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+        <!-- CSRF Token -->
+        <input type="hidden" name="_token" value="{{{ csrf_token() }}}"/>
+        <!-- ./ csrf token -->
+        <div class="row">
+            <div class="span4">
+                <div class="tab-content">
+                    <div class="form-group{{{ $errors->has('name') ? 'error' : '' }}}">
+                    <label for="name">{{{ Lang::get('project/create.name') }}}</label>
+                    <input class="form-control" placeholder="{{{ Lang::get('project/create.name') }}}" type="text"
+                           name="name" id="name" value="{{{ Input::old('name') }}}">
+                    {{ $errors->first('name', '<span class="help-block">:message</span>') }}
 
-    <div class="tab-content">
-        <div class="form-group">
-            <label for="username">{{{ Lang::get('confide::confide.username') }}}</label>
-            <input class="form-control" placeholder="{{{ Lang::get('confide::confide.username') }}}" type="text"
-                   name="username" id="username" value="{{{ Input::old('username') }}}">
-
-
-        </div>
-        <div class="form-group ">
-            <label for="email">{{{ Lang::get('confide::confide.e_mail') }}}
-                <small>{{ Lang::get('confide::confide.signup.confirmation_required') }}</small>
-            </label>
-            <input class="form-control" placeholder="{{{ Lang::get('confide::confide.e_mail') }}}" type="text"
-                   name="email" id="email" value="{{{ Input::old('email') }}}">
-
-        </div>
-        <div class="form-group">
-            <label for="password">{{{ Lang::get('confide::confide.password') }}}</label>
-            <input class="form-control" placeholder="{{{ Lang::get('confide::confide.password') }}}" type="password"
-                   name="password" id="password">
-        </div>
-        <div class="form-group">
-            <label for="password_confirmation">{{{ Lang::get('confide::confide.password_confirmation') }}}</label>
-            <input class="form-control" placeholder="{{{ Lang::get('confide::confide.password_confirmation') }}}"
-                   type="password" name="password_confirmation" id="password_confirmation">
-        </div>
-        <div class="form-group  {{{ $errors->has('name') ? 'error' : '' }}}">
-            <label for="name">{{{ Lang::get('ngo/ngo.name') }}}</label>
-            <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.name') }}}" type="text" name="name"
-                   id="name" value="{{{ Input::old('name') }}}">
-            {{ $errors->first('name', '<span class="help-block">:message</span>') }}
-        </div>
-        <div class="form-group  {{{ $errors->has('holderName') ? 'error' : '' }}}">
-            <label for="holderName">{{{ Lang::get('ngo/ngo.holderName') }}}</label>
-            <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.holderName') }}}" type="text"
-                   name="holderName" id="holderName" value="{{{ Input::old('holderName') }}}">
-            {{ $errors->first('holderName', '<span class="help-block">:message</span>') }}
-        </div>
-        <div class="form-group  {{{ $errors->has('brandName') ? 'error' : '' }}}">
-            <label for="brandName">{{{ Lang::get('ngo/ngo.brandName') }}}</label>
-            <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.brandName') }}}" type="text"
-                   name="brandName" id="brandName" value="{{{ Input::old('brandName') }}}">
-            {{ $errors->first('brandName', '<span class="help-block">:message</span>') }}
-        </div>
-        <div class="form-group  {{{ $errors->has('number') ? 'error' : '' }}}">
-            <label for="number">{{{ Lang::get('ngo/ngo.number') }}}</label>
-            <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.number') }}}" type="text"
-                   name="number" id="number" value="{{{ Input::old('number') }}}">
-            {{ $errors->first('number', '<span class="help-block">:message</span>') }}
-        </div>
-        <div class="form-group  {{{ $errors->has('expirationMonth') ? 'error' : '' }}}">
-            <label for="expirationMonth">{{{ Lang::get('ngo/ngo.expirationMonth') }}}</label>
-            <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.expirationMonth') }}}" type="text"
-                   name="expirationMonth" id="expirationMonth" value="{{{ Input::old('expirationMonth') }}}">
-            {{ $errors->first('expirationMonth', '<span class="help-block">:message</span>') }}
-        </div>
-        <div class="form-group  {{{ $errors->has('expirationYear') ? 'error' : '' }}}">
-            <label for="expirationYear">{{{ Lang::get('ngo/ngo.expirationYear') }}}</label>
-            <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.expirationYear') }}}" type="text"
-                   name="expirationYear" id="expirationYear" value="{{{ Input::old('expirationYear') }}}">
-            {{ $errors->first('expirationYear', '<span class="help-block">:message</span>') }}
-        </div>
-        <div class="form-group  {{{ $errors->has('cvv') ? 'error' : '' }}}">
-            <label for="cvv">{{{ Lang::get('ngo/ngo.cvv') }}}</label>
-            <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.cvv') }}}" type="text"
-                   name="cvv" id="cvv" value="{{{ Input::old('cvv') }}}">
-            {{ $errors->first('cvv', '<span class="help-block">:message</span>') }}
-        </div>
-        <div class="form-group  {{{ $errors->has('description') ? 'error' : '' }}}">
-            <label for="description">{{{ Lang::get('ngo/ngo.description') }}}</label>
-            <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.description') }}}" type="text"
-                   name="description" id="description" value="{{{ Input::old('description') }}}">
-            {{ $errors->first('description', '<span class="help-block">:message</span>') }}
-        </div>
-        <div class="form-group  {{{ $errors->has('phone') ? 'error' : '' }}}">
-            <label for="phone">{{{ Lang::get('ngo/ngo.phone') }}}</label>
-            <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.phone') }}}" type="text"
-                   name="phone" id="phone" value="{{{ Input::old('phone') }}}">
-            {{ $errors->first('phone', '<span class="help-block">:message</span>') }}
-        </div>
-        <div class="form-group  {{{ $errors->has('logo') ? 'error' : '' }}}">
-            <label for="logo">{{{ Lang::get('ngo/ngo.logo') }}}</label>
-            <input class="form-control" type="file" name="logo" id="logo">
-            {{ $errors->first('logo', '<span class="help-block">:message</span>') }}
-        </div>
+                </div>
 
 
+                <div class="form-group  {{{ $errors->has('description') ? 'error' : '' }}}">
+                    <label for="description">{{{ Lang::get('project/create.description')}}}</label>
+                        <textarea class="form-control" placeholder="{{{ Lang::get('project/create.description') }}}"
+                                  rows="6" name="description" id="description"
+                                  value="{{{ Input::old('description') }}}"></textarea>
+                    {{ $errors->first('description', '<span class="help-block">:message</span>') }}
+                </div>
+
+                    <div class="form-group  {{{ $errors->has('maxVolunteers') ? 'error' : '' }}}">
+                    <label for="maxVolunteers">{{{ Lang::get('project/create.maxVolunteers') }}}</label>
+                    <input class="form-control" placeholder="{{{ Lang::get('project/create.maxVolunteers') }}}"
+                           type="text"
+                           name="maxVolunteers" id="maxVolunteers" value="{{{ Input::old('maxVolunteers') }}}">
+                        {{ $errors->first('maxVolunteers', '<span class="help-block">:message</span>') }}
+
+                    </div>
+                <div class="form-group  {{{ $errors->has('image') ? 'error' : '' }}}">
+                    <label for="image">{{{ Lang::get('project/create.image') }}}</label>
+                    <input class="form-control" type="file" name="image" id="image">
+                    {{ $errors->first('image', '<span class="help-block">:message</span>') }}
+                </div>
+                <button type="submit"
+                        class="btn btn-primary">{{{ Lang::get('project/create.save') }}}</button>
+            </div>
+        </div>
+
+        <div class="span4">
+
+            <div class="form-group  {{{ $errors->has('startDate') ? 'error' : '' }}}">
+            <label for="startDate">{{{ Lang::get('project/create.startDate') }}}</label>
+            <input type="date" name="startDate" step="1" min="2014-01-01"
+                   value="{{date("Y-m-d")}}">
+                {{ $errors->first('startDate', '<span class="help-block">:message</span>') }}
+            </div>
+                <div class="form-group  {{{ $errors->has('finishDate') ? 'error' : '' }}}">
+            <label for="finishDate">{{{ Lang::get('project/create.finishDate') }}}</label>
+            <input type="date" name="finishDate" step="1" min="2014-01-01"
+                   value="{{date("Y-m-d")}}">
+                {{ $errors->first('finishDate', '<span class="help-block">:message</span>') }}
+                </div>
+            <div class="form-group">
+
+                <label for="address">{{{ Lang::get('project/create.address') }}}</label>
+                <input class="form-control" placeholder="{{{ Lang::get('project/create.address') }}}"
+                       type="text"
+                       name="address" id="address" value="{{{ Input::old('address') }}}">
+            </div>
+            <div class="form-group  {{{ $errors->has('city') ? 'error' : '' }}}">
+                <label for="city">{{{ Lang::get('project/create.city') }}}</label>
+                <input class="form-control" placeholder="{{{ Lang::get('project/create.city') }}}" type="text"
+                       name="city" id="city" value="{{{ Input::old('city') }}}">
+                {{ $errors->first('city', '<span class="help-block">:message</span>') }}
+
+            </div>
+            <div class="form-group  {{{ $errors->has('zipCode') ? 'error' : '' }}}">
+                <label for="zipCode">{{{ Lang::get('project/create.zipCode') }}}</label>
+                <input class="form-control" placeholder="{{{ Lang::get('project/create.zipCode') }}}"
+                       type="text"
+                       name="zipCode" id="zipCode" value="{{{ Input::old('zipCode') }}}">
+                {{ $errors->first('zipCode', '<span class="help-block">:message</span>') }}
+
+            </div>
+            <div class="form-group  {{{ $errors->has('country') ? 'error' : '' }}}">
+                <label for="country">{{{ Lang::get('project/create.country') }}}</label>
+                <input class="form-control" placeholder="{{{ Lang::get('project/create.country') }}}"
+                       type="text"
+                       name="country" id="country" value="{{{ Input::old('country') }}}">
+                {{ $errors->first('country', '<span class="help-block">:message</span>') }}
+
+            </div>
+
+
+        </div>
+
+        </div>
 
 
         @if ( Session::get('error') )
-        <div class="alert alert-error alert-danger">
-            @if ( is_array(Session::get('error')) )
-            {{ head(Session::get('error')) }}
-            @endif
-        </div>
+            <div class="alert alert-error alert-danger">
+                @if ( is_array(Session::get('error')) )
+                    {{ head(Session::get('error')) }}
+                @endif
+            </div>
         @endif
 
-        @if ( Session::get('notice') )
-        <div class="alert">{{ Session::get('notice') }}</div>
-        @endif
 
-        <div class="form-actions form-group">
-            <button type="submit"
-                    class="btn btn-primary">{{{ Lang::get('confide::confide.signup.submit') }}}</button>
-        </div>
-
-    </div>
-</form>
+    </form>
 @stop

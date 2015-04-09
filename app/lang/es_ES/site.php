@@ -19,8 +19,8 @@ return array(
 	'company' 						=> 'Registrarse como empresa',
 	'ngo' 							=> 'Registrarse como ONG',
 	'projects' 						=> 'Proyectos',
-	'findVolunteerProjects' 		=> 'Proyectos de Voluntariado',
-	'createVolunteerProjects' 		=> 'crear Proyecto de Voluntariado'
+	'findVolunteerProjects' 		=> 'Proyectos de voluntariado',
+	'createVolunteerProjects' 		=> 'Nuevo proyecto de voluntariado'
 
 
 
