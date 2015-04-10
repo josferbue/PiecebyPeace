@@ -84,11 +84,13 @@ class ProjectController extends BaseController
             'locations' => Session::get('locations'),
             'projects' => $projects
         );
+        Input::flash();
         Return View::make('site/project/list')->with($data);
     }
 
     public function viewProject($id)
     {
+        $backUrl=  Session::get('backUrl');
         $user = Auth::user();
         $ngo = Ngo::where('user_id', '=', $user->id)->first();
 
@@ -99,7 +101,8 @@ class ProjectController extends BaseController
         $data = array(
 
             'availableVolunteers' => $availableVolunteers,
-            'project' => $project
+            'project' => $project,
+            'backUrl'=>$backUrl
         );
 
         //si se trata de un ngo y es su proyecto tendra boton para editar

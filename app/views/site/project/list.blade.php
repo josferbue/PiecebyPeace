@@ -25,18 +25,31 @@
                     <select class="selectpicker" name="category">
 
                         @foreach ($categories as $category)
-                            <option value={{ $category->id }}>{{{ $category->name }}}</option>
+                            @if( Input::old('category')==$category->id)
+
+                                <option selected="selected" value={{ $category->id }}>{{{ $category->name }}}</option>
+                            @else
+                                <option value={{ $category->id }}>{{{ $category->name }}}</option>
+
+                            @endif
                         @endforeach
                     </select>
 
                     <label for="locations">{{{ Lang::get('project/list.locations') }}}</label>
 
+
                     <select class="selectpicker" name="city">
+
 
                         @foreach ($locations as $country =>$cities)
                             <optgroup label={{ $country }}>
                                 @foreach ($cities as $city)
-                                    <option>{{ $city }}</option>
+                                    @if( Input::old('city')==$city)
+                                        <option selected="selected">{{ $city }}</option>
+                                    @else
+                                        <option>{{ $city }}</option>
+
+                                    @endif
                                 @endforeach
                             </optgroup>
                         @endforeach
@@ -44,26 +57,40 @@
 
                 </div>
                 <div class="span4">
-                    <label for="dateFrom">{{{ Lang::get('project/list.dateFrom') }}}</label>
+                    <label for="startDate">{{{ Lang::get('project/list.dateFrom') }}}</label>
                     <input type="date" name="startDate" step="1" min="2014-01-01"
-                           value="{{ date("Y-m-d")}}">
+                           value="{{ Input::old('startDate',date("Y-m-d"))}}">
 
-                    <label for="dateTo">{{{ Lang::get('project/list.dateTo') }}}</label>
+                    <label for="finishDate">{{{ Lang::get('project/list.dateTo') }}}</label>
                     <input type="date" name="finishDate" step="1" min="2014-01-01"
-                           value="{{ date("Y-m-d")}}">
+                           value="{{ Input::old('finishDate',date("Y-m-d"))}}">
                 </div>
 
 
             </div>
-            <div class="row">
-                <div class="span6">
 
-                    <button type="submit"
-                            class="btn btn-primary">{{{ Lang::get('project/list.search') }}}</button>
+            <div class="form-actions form-group">
 
-                </div>
+                <button type="submit"
+                        class="btn btn-primary">{{{ Lang::get('project/list.search') }}}</button>
+
+                <input type="button" class="btn btn-primary"
+                       onclick="window.location.href='{{ URL::to('/') }}'"
+
+                       value="{{ Lang::get('project/list.back') }}">
             </div>
+
+
         </form>
+    @else
+        <div class="form-actions form-group">
+
+            <input type="button" class="btn btn-primary"
+                   onclick="window.location.href='{{ URL::to('/') }}'"
+
+                   value="{{ Lang::get('project/list.back') }}">
+        </div>
+
     @endif
 
     {{--Comprobamos que existen proyectos y los muestra los proyectos--}}
@@ -100,6 +127,7 @@
                     <div class="caption">
                         <h3>
                             {{ HTML::link('/project/view/'.$project->id , $project->name) }}
+                            {{Session::put('backUrl', Request::url())}}
                         </h3>
 
                         <p>{{ $project->description}}</p>

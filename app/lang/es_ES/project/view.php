@@ -26,6 +26,8 @@ return array(
 	'maxVolunteers'   		 =>'Número máximo de voluntarios',
 	'edit'    				 =>'Editar el proyecto',
 	'delete'    		   	 =>'Borrar el proyecto',
-	'confirmDelete'   		 =>'¿Está seguro de que desea eliminar el proyecto?'
+	'confirmDelete'   		 =>'¿Está seguro de que desea eliminar el proyecto?',
+	'back'   				 =>'Atrás'
+
 
 );

@@ -28,7 +28,9 @@ return array(
 	'saveCreate'    				=>'Create project',
 	'selectCategories'				=>'Select Categories',
 	'editTitleVolunteerProject'		=> 'Edit Project',
-	'saveEdit'						=> 'Save'
+	'saveEdit'						=> 'Save',
+	'back'   						 =>'Cancel'
+
 
 
 

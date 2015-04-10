@@ -57,13 +57,7 @@
                                value="{{{ Input::old('finishDate', isset($project) ? $project->finishDate : date("Y-m-d")) }}}">
                         {{ $errors->first('finishDate', '<span class="help-block">:message</span>') }}
                     </div>
-                    @if(isset($project))
-                        <button type="submit"
-                                class="btn btn-primary">{{{ Lang::get('project/create.saveEdit') }}}</button>
-                    @else
-                        <button type="submit"
-                                class="btn btn-primary">{{{ Lang::get('project/create.saveCreate') }}}</button>
-                    @endif
+
                 </div>
             </div>
 
@@ -120,6 +114,7 @@
                     </button>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
 
+
                         @foreach( $categories as $category)
 
                             <li><label>
@@ -138,9 +133,24 @@
                                         @endif
 
                                     @else
-                                        <input type="checkbox" name="categories[]"
-                                               value="{{{ $category->id }}}"><font
-                                                color="white">{{{ $category->name }}}</font>
+                                        @if(Input::old('categories')!=null)
+                                            @if(in_array($category->id,Input::old('categories')))
+
+                                                <input type="checkbox" name="categories[]"
+                                                       value="{{{ $category->id }}}" checked>
+                                                <font color="white">{{{ $category->name }}}</font>
+                                            @else
+                                                <input type="checkbox" name="categories[]"
+                                                       value="{{{ $category->id }}}"><font
+                                                        color="white">{{{ $category->name }}}</font>
+                                            @endif
+
+                                        @else
+                                            <input type="checkbox" name="categories[]"
+                                                   value="{{{ $category->id }}}"><font
+                                                    color="white">{{{ $category->name }}}</font>
+                                        @endif
+
                                     @endif
                                 </label>
                             </li>
@@ -158,6 +168,28 @@
                     @endif
                 </div>
             @endif
+        </div>
+
+        <div class="form-actions form-group">
+
+            @if(isset($project))
+                <button type="submit"
+                        class="btn btn-primary">{{{ Lang::get('project/create.saveEdit') }}}</button>
+
+                <input type="button" class="btn btn-primary"
+                       onclick="window.location.href='{{ URL::to('project/view/'.$project->id) }}'"
+
+                       value="{{ Lang::get('project/create.back') }}">
+            @else
+                <button type="submit"
+                        class="btn btn-primary">{{{ Lang::get('project/create.saveCreate') }}}</button>
+                <input type="button" class="btn btn-primary"
+                       onclick="window.location.href='{{ URL::to('/') }}'"
+
+                       value="{{ Lang::get('project/create.back') }}">
+            @endif
+
+
         </div>
     </form>
 @stop

@@ -81,9 +81,10 @@
 
         </div>
     </div>
-    @if(isset($editable))
-        @if($editable)
-            <div class="form-actions form-group">
+    <div class="form-actions form-group">
+        @if(isset($editable))
+            @if($editable)
+
                 <input type="button" class="btn btn-primary"
                        onclick="window.location.href='{{ URL::to('project/editVolunteerProject/'.$project->id) }}'"
                        value="{{ Lang::get('project/view.edit') }}">
@@ -91,13 +92,14 @@
                 <input type="button" class="btn btn-primary"
                        onclick="window.location.href='{{ URL::to('project/deleteVolunteerProject/'.$project->id) }}'"
                        value="{{ Lang::get('project/view.delete') }}">
-
-
-
-            </div>
-
+            @endif
         @endif
-    @endif
+
+        <input type="button" class="btn btn-primary"
+               onclick="window.location.href='{{ URL::to($backUrl) }}'"
+
+               value="{{ Lang::get('project/view.back') }}">
+    </div>
 
 
 

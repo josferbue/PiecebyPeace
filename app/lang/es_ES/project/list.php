@@ -21,7 +21,9 @@ return array(
 	'search' 		=> 'Buscar',
 	'notFound'    =>'No se ha encontrado ningún proyecto.',
 	'notImage'    =>'Sin-Imagen',
-	'ngoEmptyProject'    =>'Aún no tiene proyectos de voluntariado.'
+	'ngoEmptyProject'    =>'Aún no tiene proyectos de voluntariado.',
+	'back'   				 =>'Atrás'
+
 
 
 

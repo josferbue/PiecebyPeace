@@ -26,7 +26,8 @@ return array(
 	'maxVolunteers'   		 =>'Maximun Volunteers',
 	'edit'    				 =>'Edit roject',
 	'delete'    		   	 =>'Delete project',
-	'confirmDelete'   		 =>'Are you sure you want to delete this project?'
+	'confirmDelete'   		 =>'Are you sure you want to delete this project?',
+	'back'   				 =>'Back'
 
 
 );
