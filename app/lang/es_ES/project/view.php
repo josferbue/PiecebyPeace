@@ -13,21 +13,19 @@ return array(
 	|
 	*/
 
-	'title' 	    => 'Detalles del Proyecto',
-	'name' 			=> 'Nombre',
-	'description' 	=> 'Descripción',
-	'categories' 	=> 'Categorias',
-	'location' 		=> 'Localización',
-	'startDate' 	=> 'Fecha de Inicio',
-	'finishDate'    =>'Fecha de Fin',
-	'ngo'    		=>'ONG',
-	'notImage'    =>'Sin-Imagen',
+	'title' 	   		 	 => 'Detalles del Proyecto',
+	'name' 					 => 'Nombre',
+	'description' 			 => 'Descripción',
+	'categories' 			 => 'Categorias',
+	'location' 				 => 'Localización',
+	'startDate' 			 => 'Fecha de Inicio',
+	'finishDate'    	     =>'Fecha de Fin',
+	'ngo'    				 =>'ONG',
+	'notImage'   			 =>'Sin-Imagen',
 	'availableVolunteers'    =>'Plazas de voluntarios disponibles',
-	'maxVolunteers'    =>'Número máximo de voluntarios'
-
-
-
-
-
+	'maxVolunteers'   		 =>'Número máximo de voluntarios',
+	'edit'    				 =>'Editar el proyecto',
+	'delete'    		   	 =>'Borrar el proyecto',
+	'confirmDelete'   		 =>'¿Está seguro de que desea eliminar el proyecto?'
 
 );

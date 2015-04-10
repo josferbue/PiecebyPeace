@@ -20,7 +20,9 @@ return array(
 	'dateTo' 		=> 'Date To',
 	'search' 		=> 'Search',
 	'notFound'    =>'Not found projects.',
-	'notImage'    =>'without-Photo'
+	'notImage'    =>'without-Photo',
+	'ngoEmptyProject'    =>'has not yet volunteer projects.'
+
 
 
 

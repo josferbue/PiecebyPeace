@@ -13,19 +13,20 @@ return array(
 	|
 	*/
 
-	'title' 	    => 'Project Details',
-	'name' 			=> 'Name',
-	'description' 	=> 'Description',
-	'categories' 	=> 'Categories',
-	'location' 		=> 'Location',
-	'startDate' 	=> 'Start Date',
-	'finishDate'    =>'Finish Date',
-	'ngo'    		=>'NGO',
-	'notImage'    =>'without-Photo',
+	'title' 	   			 => 'Project Details',
+	'name' 					 => 'Name',
+	'description' 	  	     => 'Description',
+	'categories' 		     => 'Categories',
+	'location' 				 => 'Location',
+	'startDate' 			 => 'Start Date',
+	'finishDate'   		 	 =>'Finish Date',
+	'ngo'    				 =>'NGO',
+	'notImage'   	 		 =>'without-Photo',
 	'availableVolunteers'    =>'available Volunteers',
-	'maxVolunteers'    =>'Maximun Volunteers'
-
-
+	'maxVolunteers'   		 =>'Maximun Volunteers',
+	'edit'    				 =>'Edit roject',
+	'delete'    		   	 =>'Delete project',
+	'confirmDelete'   		 =>'Are you sure you want to delete this project?'
 
 
 );

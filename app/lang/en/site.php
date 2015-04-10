@@ -18,9 +18,12 @@ return array(
 	'volunteer' 					=> 'Register as volunteer',
 	'company' 						=> 'Register as company',
 	'ngo' 							=> 'Register as NGO',
+
 	'projects' 						=> 'Projects',
 	'findVolunteerProjects' 		=> 'Find volunteering projects',
 	'createVolunteerProjects' 		=> 'Create volunteering project',
+	'myVolunteersProjects' 			=> 'Our volunteer projects',
+
 
 	'campaigns'						=> 'Campaigns',
 );

@@ -114,7 +114,7 @@ class Project extends Eloquent
 
     public function applications()
     {
-        return $this->hashMany('Application', 'application_id');
+        return $this->hasMany('Application');
     }
     public function categories()
     {
