@@ -11,15 +11,15 @@ class UserControllerTest extends BaseControllerTestCase {
     public function testShouldDoLogin()
     {
         $credentials = array(
-            'email'=>'admin@example.org',
-            'password'=>'admin',
+            'email'=>'admin1@piecebypeace.com',
+            'password'=>'administrator1',
             'csrf_token' => Session::getToken()
         );
 
         $this->withInput( $credentials )
             ->requestAction('POST', 'UserController@postLogin');
 
-        $this->assertRedirection( URL::action('BlogController@getIndex') );
+        $this->assertRedirection( URL::to('/') );
     }
 
     public function testShouldNotDoLoginWhenWrong()
@@ -56,8 +56,8 @@ class UserControllerTest extends BaseControllerTestCase {
     public function testLoginShouldRedirectUser()
     {
         $credentials = array(
-            'email'=>'admin@example.org',
-            'password'=>'admin',
+            'email'=>'admin1@piecebypeace.com',
+            'password'=>'administrator1',
             'csrf_token' => Session::getToken()
         );
 
