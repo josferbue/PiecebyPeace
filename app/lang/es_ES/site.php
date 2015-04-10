@@ -22,6 +22,8 @@ return array(
 	'projects' 						=> 'Proyectos',
 	'findVolunteerProjects' 		=> 'Proyectos de voluntariado',
 	'createVolunteerProjects' 		=> 'Crear proyecto de voluntariado',
+	'myVolunteersProjects' 			=> 'Nuestros proyectos de voluntariado',
+
 
 	'campaigns'						=> 'Campañas',
 

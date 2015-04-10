@@ -25,7 +25,12 @@ return array(
 	'city'    						=>'City',
 	'zipCode'    					=>'ZIP code',
 	'country'    					=>'Country',
-	'save'    						=>'Create project'
+	'saveCreate'    				=>'Create project',
+	'selectCategories'				=>'Select Categories',
+	'editTitleVolunteerProject'		=> 'Edit Project',
+	'saveEdit'						=> 'Save'
+
+
 
 
 

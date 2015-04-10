@@ -82,6 +82,8 @@ Entrust::routeNeedsPermission( 'admin/roles*', 'manage_roles', Redirect::to('/ad
 
 // Volunteering projects permissions
 Entrust::routeNeedsRole( 'project/createVolunteerProject*', array('NonGovernmentalOrganization'), Redirect::to('/') );
+Entrust::routeNeedsRole( 'project/myVolunteersProjects*', array('NonGovernmentalOrganization'), Redirect::to('/') );
+Entrust::routeNeedsRole( 'project/editVolunteerProject*', array('NonGovernmentalOrganization'), Redirect::to('/') );
 
 // Campaigns permissions
 Entrust::routeNeedsRole( 'campaign/myCampaigns*', array('NonGovernmentalOrganization'), Redirect::to('/') );
