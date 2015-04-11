@@ -37,6 +37,7 @@ return array(
 
 	'create'				=> 'Crear nueva campaña',
 	'save'					=> 'Guardar campaña',
+	'back'					=> 'Volver',
 
 	'notImage'				=> 'Sin imagen',
 	'notFound'    			=> 'No se han encontrado campañas.',

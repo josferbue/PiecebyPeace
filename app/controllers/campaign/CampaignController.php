@@ -54,7 +54,13 @@ class CampaignController extends BaseController
 
     public function createCampaign()
     {
-        Return View::make('site/campaign/create');
+        $backUrl=  Session::get('backUrl');
+
+        $data = array(
+            'backUrl'=>$backUrl
+        );
+
+        Return View::make('site/campaign/create')->with($data);
     }
 
     public function saveCampaign()

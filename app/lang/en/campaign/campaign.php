@@ -37,6 +37,7 @@ return array(
 
 	'create'				=> 'Create new campaign',
 	'save'					=> 'Save campaign',
+	'back'					=> 'Return',
 
 	'notImage'				=> 'Image not found',
 	'notFound'    			=> 'No campaigns were found.',
