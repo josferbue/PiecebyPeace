@@ -22,7 +22,7 @@ class CreateNGOsTable extends Migration
             $table->integer('expirationMonth')->unsigned();
             $table->integer('expirationYear')->unsigned();
             $table->integer('cvv')->unsigned();
-            $table->string('description');
+            $table->text('description');
             $table->string('phone');
             $table->string('logo')->nullable();
             $table->boolean('active')->default(false);

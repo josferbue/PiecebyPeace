@@ -22,7 +22,7 @@ return array(
 	'notFound'    =>'No se ha encontrado ningún proyecto.',
 	'notImage'    =>'Sin-Imagen',
 	'ngoEmptyProject'    =>'Aún no tiene proyectos de voluntariado.',
-	'back'   				 =>'Atrás'
+	'back'   				 =>'Volver'
 
 
 

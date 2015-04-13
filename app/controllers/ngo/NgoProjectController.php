@@ -22,16 +22,17 @@ class NgoProjectController extends BaseController
         $user = Auth::user();
         $ngo = Ngo::where('user_id', '=', $user->id)->first();
 
-        $projects = Project::where("ngo_id", '=', $ngo->id)->get();
-
-        if (empty($projects)) {
-            $projects = 'nothing';
+        $projects = Project::where("ngo_id", '=', $ngo->id)->paginate(4);
+        $emptyProjects = false;
+        if ($projects->getTotal()==0) {
+            $emptyProjects = true;
         }
 
         $data = array(
 
             'viewNgoMyProjects' => true,
-            'projects' => $projects
+            'projects' => $projects,
+            'emptyProjects' => $emptyProjects
         );
 
         return View::make('site/project/list')->with($data);
@@ -68,7 +69,9 @@ class NgoProjectController extends BaseController
             'maxVolunteers' => 'required|integer|min:0',
             'startDate' => 'required|date|after:"now"',
             'finishDate' => 'required|date|after:startDate',
-            'categories' => 'required|array|min:1'
+            'categories' => 'required|array|min:1',
+            'logo'          => 'image',
+
         );
 
         // Validate the inputs
@@ -102,6 +105,8 @@ class NgoProjectController extends BaseController
                 $image->move($destinationPath, $filename);
                 $this->project->image = '/logos/' . $user->email . '/' . $filename;
 
+            }else{
+                $this->project->image ='/logos/imageNotFound.gif';
             }
 
             // Was the blog post created?
@@ -255,7 +260,9 @@ class NgoProjectController extends BaseController
             'maxVolunteers' => 'required|integer|min:0',
             'startDate' => 'required|date|after:"now"',
             'finishDate' => 'required|date|after:startDate',
-            'categories' => 'required|array|min:1'
+            'categories' => 'required|array|min:1',
+            'logo'          => 'image',
+
         );
 
         // Validate the inputs

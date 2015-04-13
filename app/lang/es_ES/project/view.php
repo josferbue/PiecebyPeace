@@ -22,12 +22,12 @@ return array(
 	'finishDate'    	     =>'Fecha de Fin',
 	'ngo'    				 =>'ONG',
 	'notImage'   			 =>'Sin-Imagen',
-	'availableVolunteers'    =>'Plazas de voluntarios disponibles',
-	'maxVolunteers'   		 =>'Número máximo de voluntarios',
+	'availableVolunteers'    =>'Plazas disponibles',
+	'maxVolunteers'   		 =>'Capacidad de voluntarios',
 	'edit'    				 =>'Editar el proyecto',
 	'delete'    		   	 =>'Borrar el proyecto',
 	'confirmDelete'   		 =>'¿Está seguro de que desea eliminar el proyecto?',
-	'back'   				 =>'Atrás'
+	'back'   				 =>'Volver'
 
 
 );

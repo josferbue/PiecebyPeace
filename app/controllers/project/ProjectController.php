@@ -16,9 +16,9 @@ class ProjectController extends BaseController
         parent::__construct();
     }
 
-    Public function getProjects()
+    Public function getVolunteerProjects()
     {
-        $projects = Project::whereNull('company_id')->get();
+        $projects = Project::whereNull('company_id')->paginate(4);
         $categories = Category::all();
 
         //esto es un mapa que tendra como clave los county y valores las ciudades sin repeticion
@@ -45,64 +45,64 @@ class ProjectController extends BaseController
         $data = array(
             'categories' => $categories,
             'locations' => $locationVolunteerProjects,
-            'projects' => ''
+
         );
 
         Return View::make('site/project/list')->with($data);
 
     }
 
-    Public function findProjects()
+    Public function findVolunteerProjects()
     {
-
 
         $startDate = Input::get('startDate');
         $finishDate = Input::get('finishDate');
         $city = Input::get('city');
-        $categoryId = Input::get('category');
 
-        $category = Category::where('id', '=', $categoryId)->first();
+        $projects = Project::whereNull('company_id')->where('city', '=', $city)->where('startDate', '>', $startDate)
+            ->where('finishDate', '<', $finishDate)->whereHas('categories', function ($q) {
+                $q->where('category_id', 'like', Input::get('category'));
+            })->paginate(4);
 
-        $projectsAux = Project::whereNull('company_id')->where('city', '=', $city)->where('startDate', '>', $startDate)
-            ->where('finishDate', '<', $finishDate)->get();
 
-        $projects = array();
-
-        foreach ($projectsAux as $project) {
-            $categoriesAux = $project->categories;
-            //devuelve un Collection no un array por eso comprobamos de esta forma si esta contenido
-            if ($categoriesAux->contains($category)) {
-                $projects[] = $project;
-            }
+        $emptyProjects = false;
+        if ($projects->getTotal()==0) {
+            $emptyProjects = true;
         }
-
-        if (empty($projects)) {
-            $projects = 'nothing';
-        }
+        //Transformamos el array en un paginator
         $data = array(
             'categories' => Session::get('categories'),
             'locations' => Session::get('locations'),
-            'projects' => $projects
+            'projects' => $projects,
+            'emptyProjects' => $emptyProjects
         );
         Input::flash();
         Return View::make('site/project/list')->with($data);
     }
 
-    public function viewProject($id)
+    public function viewVolunteerProject($id)
     {
-        $backUrl=  Session::get('backUrl');
+        $backUrl = Session::get('backUrl');
         $user = Auth::user();
         $ngo = Ngo::where('user_id', '=', $user->id)->first();
-
         $project = Project::where('id', '=', $id)->first();
         $volunteers = $project->volunteers;
         $availableVolunteers = $project->maxVolunteers - sizeof($volunteers);
-
+        $categories = '';
+        for ($i = 0; $i < sizeof($project->categories); $i++) {
+            $category = $project->categories[$i];
+            if ($i == (sizeof($project->categories) - 1)) {
+                $categories .= $category->name;
+            } else {
+                $categories .= $category->name . ', ';
+            }
+        }
         $data = array(
 
             'availableVolunteers' => $availableVolunteers,
             'project' => $project,
-            'backUrl'=>$backUrl
+            'categories' => $categories,
+            'backUrl' => $backUrl
         );
 
         //si se trata de un ngo y es su proyecto tendra boton para editar
