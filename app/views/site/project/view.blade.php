@@ -2,93 +2,94 @@
 
 {{-- Web site Title --}}
 @section('title')
-     {{{ Lang::get('project/view.title') }}} ::
-     @parent
+    {{{ Lang::get('project/view.title') }}} ::
+    @parent
 @stop
+<LINK href="{{URL::to('template/bootstrap/css/viewProject.css')}}" rel="stylesheet" type="text/css">
 
-{{-- Content --}}
+
 @section('content')
-     <div class="page-header">
-          <h1>{{{ Lang::get('project/view.title') }}}</h1>
-     </div>
 
+    <div class="page-header">
+        <h1>{{{ Lang::get('project/view.title') }}}</h1>
+    </div>
+    <div class="viewProject">
+        <div class="row">
+            <div class="span6">
+                <h7>  {{{ Lang::get('project/view.name') }}} </h7>
+                <p>{{$project->name }}</p>
+                <br>
+                <br>
+                <h7>  {{{ Lang::get('project/view.ngo') }}} </h7>
+                <p>{{$project->ngo->name }}</p>
+            </div>
 
+            <div class="span3">
+                <img src="{{ URL::to($project->image)}}" class="img-rounded"
+                     alt="{{{ Lang::get('project/view.notImage') }}}"/>
+            </div>
+        </div>
+        <br>
 
+        <h7>  {{{ Lang::get('project/view.description') }}} </h7>
+        <p>{{$project->description }}</p>
+        <br> <br>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>{{{ Lang::get('project/view.location') }}}</th>
+                    <th>{{{ Lang::get('project/view.startDate') }}}</th>
+                    <th>{{{ Lang::get('project/view.finishDate') }}}</th>
+                    <th>{{{ Lang::get('project/view.maxVolunteers') }}}</th>
+                    <th>{{{ Lang::get('project/view.availableVolunteers') }}}</th>
+                    <th>{{{ Lang::get('project/view.categories') }}}</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>{{{$project->addres }}} {{{$project->city }}}, {{{$project->country }}}
+                        . {{{$project->zipCode }}}</td>
+                    <td>{{{$project->startDate }}}</td>
+                    <td>{{{$project->finishDate }}}</td>
+                    <td>{{{$project->maxVolunteers }}}</td>
+                    <td>{{{$availableVolunteers}}}</td>
+                    <td>{{{$categories}}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
-     <div class="row">
+    <div class="form-actions form-group">
+        @if(isset($editable))
+            @if($editable)
 
+                <input type="button" class="btn btn-primary"
+                       onclick="window.location.href='{{ URL::to('project/editVolunteerProject/'.$project->id) }}'"
+                       value="{{ Lang::get('project/view.edit') }}">
 
-          <div class="span6">
-               <div class="de">
+                <input type="button" class="btn btn-primary"
+                       onclick="window.location.href='{{ URL::to('project/deleteVolunteerProject/'.$project->id) }}'"
+                       value="{{ Lang::get('project/view.delete') }}">
+            @endif
+        @endif
+        <input type="button" class="btn btn-primary"
+               onclick="window.location.href='{{ URL::to($backUrl) }}'"
 
-                    <h3>  {{{ Lang::get('project/view.name') }}} </h3>
-
-                    <p>{{$project->name }}</p>
-
-                    <h3>  {{{ Lang::get('project/view.description') }}} </h3>
-
-                    <p>{{$project->description }}</p>
-               </div>
-
-          </div>
-
-          <div class="span3">
-               <img src="{{ URL::to($project->image)}}" class="img-rounded"
-                    alt="{{{ Lang::get('project/view.notImage') }}}"/>
-
-
-               {{--</div>--}}
-          </div>
-
-
-     </div>
-     <div class="row">
-
-
-          <div class="span6">
-               <div class="caption">
-
-                    <h3>  {{{ Lang::get('project/view.name') }}} </h3>
-
-                    <p>{{$project->name }}</p>
-
-                    <h3>  {{{ Lang::get('project/view.description') }}} </h3>
-
-                    <p>{{$project->description }}</p>
-
-                    <h3>  {{{ Lang::get('project/view.maxVolunteers') }}} </h3>
-
-                    <p>{{$project->maxVolunteers }}</p>
-
-                    <h3>  {{{ Lang::get('project/view.availableVolunteers') }}} </h3>
-
-                    <p>{{$availableVolunteers}}</p>
-
-
-               </div>
-
-          </div>
-          <div class="span6">
-               <div class="caption">
-                    <h3>  {{{ Lang::get('project/view.location') }}} </h3>
-
-                    <p>{{$project->addres }} {{$project->city }}, {{$project->country }}. {{$project->zipCode }}</p>
-
-                    <h3>  {{{ Lang::get('project/view.startDate') }}} </h3>
-
-                    <p>{{$project->startDate }}</p>
-
-                    <h3>  {{{ Lang::get('project/view.finishDate') }}} </h3>
-
-                    <p>{{$project->finishDate }}</p>
-
-                    <h3>  {{{ Lang::get('project/view.ngo') }}} </h3>
-
-                    <p>{{$project->ngo->name }}</p>
-               </div>
-
-          </div>
-     </div>
-
+               value="{{ Lang::get('project/view.back') }}">
+    </div>
 
 @stop
+@section('page-script')
+
+    <script type="text/javascript">
+        function ConfirmDelete() {
+            var mensaje = confirm({{{ Lang::get('project/view.confirmDelete') }}});
+            if (mensaje) {
+                window.location.href = '{{ URL::to('project/deleteVolunteerProject/'.$project->id) }}'
+            }
+        }
+    </script>
+@stop
+
+
+

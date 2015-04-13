@@ -21,4 +21,6 @@ return array(
     'phone'                 					=> 'Teléfono',
     'logo'                     					=> 'Logo',
 
+    'back'                                      => 'Volver',
+
 );

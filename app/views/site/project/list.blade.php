@@ -12,106 +12,116 @@
         <h1>{{{ Lang::get('project/list.title') }}}</h1>
     </div>
 
-    <form method="POST" accept-charset="UTF-8">
-        <!-- CSRF Token -->
-        <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-        <!-- ./ csrf token -->
-        <div class="row">
+    @if(!isset($viewNgoMyProjects))
+        <form method="GET" accept-charset="UTF-8" action="{{URL::to('projectsFilter')}}">
+            <!-- CSRF Token -->
+            <input type="hidden" name="_token" value="{{{ csrf_token() }}}"/>
+            <!-- ./ csrf token -->
+            <div class="row">
+                <div class="span4">
+                    <label for="categories">{{{ Lang::get('project/list.categories') }}}</label>
+                    <select class="selectpicker" name="category">
 
+                        @foreach ($categories as $category)
+                            @if( Input::old('category')==$category->id)
 
-            <div class="span4">
+                                <option selected="selected" value={{ $category->id }}>{{{ $category->name }}}</option>
+                            @else
+                                <option value={{ $category->id }}>{{{ $category->name }}}</option>
 
+                            @endif
+                        @endforeach
+                    </select>
 
-                <label for="categories">{{{ Lang::get('project/list.categories') }}}</label>
-                <select class="selectpicker" name="category">
+                    <label for="locations">{{{ Lang::get('project/list.locations') }}}</label>
+                    <select class="selectpicker" name="city">
+                        @foreach ($locations as $country =>$cities)
+                            <optgroup label={{ $country }}>
+                                @foreach ($cities as $city)
+                                    @if( Input::old('city')==$city)
+                                        <option selected="selected">{{ $city }}</option>
+                                    @else
+                                        <option>{{ $city }}</option>
 
-                    @foreach ($categories as $category)
-                        <option>{{ $category->name }}</option>
-                    @endforeach
+                                    @endif
+                                @endforeach
+                            </optgroup>
+                        @endforeach
+                    </select>
 
-                </select>
+                </div>
+                <div class="span4">
+                    <label for="startDate">{{{ Lang::get('project/list.dateFrom') }}}</label>
+                    <input type="date" name="startDate" step="1" min="2014-01-01"
+                           value="{{ Input::old('startDate',date("Y-m-d"))}}">
 
-                <label for="categories">{{{ Lang::get('project/list.locations') }}}</label>
-
-                <select class="selectpicker" name="city">
-
-                    @foreach ($locations as $country =>$cities)
-                        <optgroup label={{ $country }}>
-                            @foreach ($cities as $city)
-                                <option>{{ $city }}</option>
-                            @endforeach
-                        </optgroup>
-                    @endforeach
-
-                </select>
-
+                    <label for="finishDate">{{{ Lang::get('project/list.dateTo') }}}</label>
+                    <input type="date" name="finishDate" step="1" min="2014-01-01"
+                           value="{{ Input::old('finishDate',date("Y-m-d"))}}">
+                </div>
             </div>
-            <div class="span4">
 
-
-                <label for="dateFrom">{{{ Lang::get('project/list.dateFrom') }}}</label>
-                <input type="date" name="startDate" step="1" min="2014-01-01"
-                       value="{{ date("Y-m-d")}}">
-
-                <label for="dateTo">{{{ Lang::get('project/list.dateTo') }}}</label>
-                <input type="date" name="finishDate" step="1" min="2014-01-01"
-                       value="{{ date("Y-m-d")}}">
-
-            </div>
-
-
-        </div>
-        <div class="row">
-            <div class="span6">
-
+            <div class="pagination">
                 <button type="submit"
                         class="btn btn-primary">{{{ Lang::get('project/list.search') }}}</button>
 
+                <input type="button" class="btn btn-primary"
+                       onclick="window.location.href='{{ URL::to('/') }}'"
+                       value="{{ Lang::get('project/list.back') }}">
+                <br>
+                {{--comprobamos que exista la variable para los casos de iniciar el filtrado en los que aun no esta--}}
+                @if(isset($projects))
+                    {{ $projects->appends(array('category'=>Input::get('category'),
+                 'city'=>Input::get('city'),'startDate'=>Input::get('startDate'),
+                 'finishDate'=>Input::get('finishDate'),))->links()}}
+                    {{--mostramos los links para paginar--}}
+                @endif
             </div>
+        </form>
+    @else
+        <div class="pagination">
+
+            <input type="button" class="btn btn-primary"
+                   onclick="window.location.href='{{ URL::to('/') }}'"
+                   value="{{ Lang::get('project/list.back') }}">
+            <br>
+            @if(isset($projects))
+                {{ $projects->links()}}
+                {{--mostramos los links para paginar--}}
+            @endif
         </div>
-    </form>
 
-
-
+    @endif
     {{--Comprobamos que existen proyectos y los muestra los proyectos--}}
-    @if ($projects=='nothing')
-        <div class="row">
-            <div class="span3">
+    @if(isset($emptyProjects))
+        @if($emptyProjects)
+            @if(!isset($viewNgoMyProjects))
                 <h3> {{{ Lang::get('project/list.notFound') }}}</h3>
-            </div>
-        </div>
-
-    @elseif($projects!='')
-        @foreach ($projects as $project)
-
-            <div class="row">
-
-                <div class="span3">
-                    {{--<div class="thumbnail">--}}
-                    <img src="{{ URL::to($project->image)}}" class="img-rounded"
-                         alt="{{Lang::get('project/list.notImage') }}"/>
-
-
-                    {{--</div>--}}
-                </div>
-                <div class="span9">
-                    <div class="caption">
-                        <h3>
-                            {{ HTML::link('/project/view/'.$project->id , $project->name) }}
-                        </h3>
-
-                        <p>{{ $project->description}}</p>
-
-                        <p>
-                            {{ $project->city}}, {{ $project->country}}
-                        </p>
+            @elseif($viewNgoMyProjects)
+                <h3> {{{ Lang::get('project/list.ngoEmptyProject') }}}</h3>
+            @endif
+        @elseif(isset($projects))
+            @foreach ($projects as $project)
+                <div class="row">
+                    <div class="span3">
+                        <img src="{{ URL::to($project->image)}}" class="img-rounded"
+                             alt="{{Lang::get('project/list.notImage') }}"/>
                     </div>
+                    <div class="span9">
+                        <div class="caption">
+                            {{--<a href="{{{ URL::to('campaign/details/'.$campaign->id) }}}"><p>{{$campaign->name }}</p></a>--}}
 
+                            <h3> {{ HTML::link('/project/view/'.$project->id , $project->name) }}  </h3>
+
+                            {{Session::put('backUrl', Request::url())}}
+
+                            <p>{{ $project->description}}</p>
+                            <p> {{ $project->city}}, {{ $project->country}} </p>
+                        </div>
+                    </div>
                 </div>
-
-
-            </div>
-            <hr style="color: #0056b2;"/>
-        @endforeach
+                <hr/>
+            @endforeach
+        @endif
     @endif
 @stop

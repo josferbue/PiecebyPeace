@@ -21,15 +21,22 @@ class CampaignController extends BaseController
 
     public function findCampaignsByCurrentNGO()
     {
-        $user = Auth::user();
-        $ngo = Ngo::where('user_id','=',$user->id)->first();
-        $campaigns = $ngo->campaigns;
+        if(Auth::check() && Auth::user()->hasRole('NonGovernmentalOrganization'))
+        {
+            $user = Auth::user();
+            $ngo = Ngo::where('user_id','=',$user->id)->first();
+            $campaigns = $ngo->campaigns;
 
-        $data = array(
-            'campaigns' => $campaigns,
-        );
+            $data = array(
+                'campaigns' => $campaigns,
+            );
 
-        Return View::make('site/campaign/list')->with($data);
+            Return View::make('site/campaign/list')->with($data);
+        }
+        else
+        {
+            Return Redirect::to('/');
+        }
     }
 
     public function campaignDetails($id)
@@ -47,7 +54,13 @@ class CampaignController extends BaseController
 
     public function createCampaign()
     {
-        Return View::make('site/campaign/create');
+        $backUrl=  Session::get('backUrl');
+
+        $data = array(
+            'backUrl'=>$backUrl
+        );
+
+        Return View::make('site/campaign/create')->with($data);
     }
 
     public function saveCampaign()

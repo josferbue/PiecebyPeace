@@ -94,16 +94,23 @@ Route::controller('ngo', 'NgoController');
 Route::controller('company', 'CompanyController');
 
 //UnauthorizedController
-Route::get('projects', 'ProjectController@getProjects');
-Route::post('projects', 'ProjectController@findProjects');
-Route::get('project/view/{id}', 'ProjectController@viewProject');
+Route::get('projects', 'ProjectController@getVolunteerProjects');
+Route::get('projectsFilter', 'ProjectController@findVolunteerProjects');
+Route::get('project/view/{id}', 'ProjectController@viewVolunteerProject');
 
 
 
 //Volunteering projects controller
-
+Route::get('project/myVolunteersProjects', 'NgoProjectController@findMyVolunteersProjects');
 Route::get('project/createVolunteerProject', 'NgoProjectController@createVolunteerProject');
 Route::post('project/createVolunteerProject', 'NgoProjectController@saveVolunteerProject');
+Route::get('project/myVolunteerProjects', 'NgoProjectController@findMyVolunteersProjects');
+Route::get('project/editVolunteerProject/{id}', 'NgoProjectController@editGetVolunteerProject');
+Route::post('project/editVolunteerProject/{id}', 'NgoProjectController@editSaveVolunteerProject');
+Route::get('project/deleteVolunteerProject/{id}', 'NgoProjectController@deleteVolunteerProject');
+
+
+
 
 // Campaigns controller
 Route::get('myCampaigns', 'CampaignController@findCampaignsByCurrentNGO');

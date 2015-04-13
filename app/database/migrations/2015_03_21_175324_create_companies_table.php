@@ -22,7 +22,7 @@ class CreateCompaniesTable extends Migration {
 
 
 			$table->string('sector');
-			$table->string('description');
+			$table->text('description');
 			$table->string('phone');
 			$table->String('logo')->nullable();
 			$table->boolean('active')->default(false);

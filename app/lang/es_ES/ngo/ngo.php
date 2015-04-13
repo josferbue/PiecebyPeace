@@ -21,6 +21,8 @@ return array(
     'phone'               					=> 'Número de Teléfono',
     'logo'               					=> 'Logo',
     'active'               					=> 'Activo',
+    'back'               					=> 'Cancelar',
+
 
 
 

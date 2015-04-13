@@ -21,6 +21,7 @@ return array(
     'phone'               					=> 'Phone',
     'logo'               					=> 'Logo',
     'active'               					=> 'Active',
+    'back'               					=> 'Cancel',
 
 
 

@@ -49,6 +49,7 @@ class CompanyController extends BaseController {
             'sector'        => 'required|min:3',
             'description'   => 'required|min:3',
             'phone'         => 'required|regex:/\d+/',
+            'logo'          => 'required|image',
         );
 
         // Validate the inputs
@@ -195,7 +196,13 @@ class CompanyController extends BaseController {
      */
     public function getCreate()
     {
-        return View::make('site/company/create');
+        $backUrl=  Session::get('backUrl');
+
+        $data = array(
+            'backUrl'=>$backUrl
+        );
+
+        return View::make('site/company/create')->with($data);
     }
 
 

@@ -1,50 +1,48 @@
 <?php
 
-use Mockery as m;
-use Woodling\Woodling;
+use Illuminate\Database\Query\Builder;
 
-class UserTest extends TestCase {
+class UserTest extends TestCase
+{
+
+    public function setUp()
+    {
+        parent::setUp();
+        $this->user = User::where('username', '=', 'administrator1')->first();
+        $this->getUserByUsernameOK = $this->user->getUserByUsername('administrator1');
+        $this->getUserByUsernameFail = $this->user->getUserByUsername('administrator3');
+        $this->admin1Roles = $this->user->currentRoleIds();
+        $this->adminRole = Role::where('id', '=', $this->admin1Roles[0])->first()->name;
+    }
 
     public function testUsername()
     {
-        $user = Woodling::retrieve('UserAdmin');
-        $this->assertEquals( $user->username, 'admin' );
+        $this->assertEquals($this->user->username, 'administrator1');
     }
 
     public function testIsConfirmedByEmail()
     {
-        $user = Woodling::retrieve('UserAdmin');
-        $this->assertEquals( $user->isConfirmed(array('email'=>'admin@example.org')), 1 );
-    }
-
-    public function testIsConfirmedByEmailFail()
-    {
-        $user = Woodling::retrieve('UserAdmin');
-        $this->assertNotEquals( $user->isConfirmed(array('email'=>'non-user@example.org')), true );
-    }
-
-    public function testIsConfirmedByUsername()
-    {
-        $user = Woodling::retrieve('UserAdmin');
-        $this->assertEquals( $user->isConfirmed(array('username'=>'admin')), true );
-    }
-
-    public function testIsConfirmedByUsernameFail()
-    {
-        $user = Woodling::retrieve('UserAdmin');
-        $this->assertNotEquals( $user->isConfirmed(array('username'=>'non-user')), true );
+        $this->assertEquals($this->user->isConfirmed(array('email' => 'admin1@piecebypeace.com')), 1);
     }
 
     public function testGetByUsername()
     {
-        $user = Woodling::retrieve('UserAdmin');
-        $this->assertNotEquals( $user->getUserByUsername('admin'), false );
+        $this->assertNotEquals($this->getUserByUsernameOK, false);
     }
 
     public function testGetByUsernameFail()
     {
-        $user = Woodling::retrieve('UserAdmin');
-        $this->assertEquals( $user->getUserByUsername('non-user'), false );
+        $this->assertEquals($this->user->getUserByUsernameFail, false);
+    }
+
+    public function testUserHasAnyRole()
+    {
+        $this->assertEquals($this->adminRole, 'ADMINISTRATOR');
+    }
+
+    public function testUserHasOnlyOneRole()
+    {
+        $this->assertEquals( count($this->admin1Roles), 1 );
     }
 
 }

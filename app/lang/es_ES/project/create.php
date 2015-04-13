@@ -25,7 +25,13 @@ return array(
 	'city'    						=> 'Ciudad',
 	'zipCode'    					=> 'Código postal',
 	'country'    					=> 'País',
-	'save'    						=> 'Crear proyecto'
+	'saveCreate'    				=> 'Crear proyecto',
+	'selectCategories'				=> 'Seleccione las categorias',
+	'editTitleVolunteerProject'		=> 'Edicción del proyecto',
+	'saveEdit'						=> 'Guardar cambios',
+	'back'   				 		=>'Cancelar'
+
+
 
 
 

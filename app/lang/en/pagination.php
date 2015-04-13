@@ -15,5 +15,7 @@ return array(
 
 	'previous' => '&laquo; Previous',
 	'next'     => 'Next &raquo;',
+	'first'     => '&larr; First ',
+	'last'     => 'Last &rarr;',
 
 );
