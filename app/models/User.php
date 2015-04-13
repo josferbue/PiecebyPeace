@@ -61,7 +61,22 @@ class User extends ConfideUser implements UserInterface, RemindableInterface{
         }
         return $roleIds;
     }
+    public function actor(){
+        $res = null;
+        $role = Role::find(currentRoleIds()[0]);
+        switch($role->name){
+            case "VOLUNTEER":
+                $res = Volunteer::where("user_id","=",$this->id);
+                break;
+            case "NonGovernmentalOrganization":
+                $res = Ngo::where("user_id","=",$this->id);
+                break;
+            case "COMPANY":
+                $res = Company::where("user_id","=",$this->id);
+                break;
 
+        }
+    }
     /**
      * Redirect after auth.
      * If ifValid is set to true it will redirect a logged in user.

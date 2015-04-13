@@ -26,6 +26,7 @@ class CreateNGOsTable extends Migration
             $table->string('phone');
             $table->string('logo')->nullable();
             $table->boolean('active')->default(false);
+            $table->integer('credits')->unsigned()->defautl(0);
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

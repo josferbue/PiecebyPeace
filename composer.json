@@ -10,6 +10,7 @@
         }
     ],
     "require": {
+        "anouar/paypalpayment": "1.*",
         "laravel/framework": "~4.2",
         "zizaco/confide": "~3.2",
         "zizaco/entrust": "~1.2",
