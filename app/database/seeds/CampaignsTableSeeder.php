@@ -10,7 +10,7 @@ class CampaignsTableSeeder extends Seeder {
             array(
                 'name'      => 'Campaign 1',
                 'description'      => 'Description campaign 1',
-                'image'   => null,
+                'image'=> '/logos/imageNotFound.gif',
                 'startDate'   => \Carbon\Carbon::createFromDate(2015,7,23)->toDateTimeString(),
                 'finishDate' => \Carbon\Carbon::createFromDate(2015,8,23)->toDateTimeString(),
                 'visits' => 0,
@@ -22,7 +22,7 @@ class CampaignsTableSeeder extends Seeder {
             array(
                 'name'      => 'Campaign 2',
                 'description'      => 'Description campaign 2',
-                'image'   => null,
+                'image'=> '/logos/imageNotFound.gif',
                 'startDate'   => \Carbon\Carbon::createFromDate(2015,8,23)->toDateTimeString(),
                 'finishDate' => \Carbon\Carbon::createFromDate(2015,9,23)->toDateTimeString(),
                 'visits' => 5,

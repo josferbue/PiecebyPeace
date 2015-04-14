@@ -125,7 +125,16 @@
 											@endif
 										</ul>
 									</li>
+                                    @if (Auth::check())
+                                        @if (Auth::user()->hasRole('NonGovernmentalOrganization'))
+                                            <li class="dropdown"><a href="#" class="dropdown-toggle">{{{ Lang::get('ngo/credits/table.credits') }}}: {{{Auth::user()->actor()->credits}}}<b class="caret"></b></a>
+                                                <ul class="dropdown-menu">
+                                                    <li class="dropdown"><a href="{{{ URL::to('ngo/credits/create') }}}">{{{ Lang::get('ngo/credits/table.title') }}}</a></li>
 
+                                                </ul>
+                                            </li>
+                                        @endif
+                                    @endif
                                     <li class="dropdown"></li>
 
                                     <li class="dropdown"><a href="#">About</a></li>

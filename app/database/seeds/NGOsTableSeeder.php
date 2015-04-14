@@ -20,6 +20,7 @@ class NGOsTableSeeder extends Seeder {
                 'description' => 'NGO1 NGO1 NGO1 NGO1',
                 'phone' => '612345678',
                 'active' => true,
+                'logo'=> '/logos/imageNotFound.gif',
                 'user_id' => User::where('username','=','ngo1')->first()->id,
             ),
             array(
@@ -34,6 +35,7 @@ class NGOsTableSeeder extends Seeder {
                 'description' => 'NGO2 NGO2 NGO2 NGO2',
                 'phone' => '687654321',
                 'active' => true,
+                'logo'=> '/logos/imageNotFound.gif',
                 'user_id' => User::where('username','=','ngo2')->first()->id,
             ),
         );

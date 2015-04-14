@@ -32,9 +32,9 @@
 		<tbody>
 		<tr>
 			<td class="col-md-4">
-				<input class="form-control" type="text"	name="credits" id="credits" onchange="document.getElementById('total').value=parseInt(document.getElementById('credits').value)*0.6;"	value="{{{ Input::old('credits') }}}">
+				<input class="form-control" type="text"	name="credits" id="credits" onchange="document.getElementById('total').value=parseInt(document.getElementById('credits').value)*0.06;"	value="{{{ Input::old('credits') }}}">
 				{{ $errors->first('credits', '<span class="help-block">:message</span>') }}</td>
-			<td class="col-md-2">0.6</td>
+			<td class="col-md-2">0.06</td>
 			<td class="col-md-2"><input class="form-control" readonly="readonly" type="text" name="total" id="total" value="0.0"></td>
 
 		</tr>

@@ -15,6 +15,7 @@ class CompaniesTableSeeder extends Seeder {
                 'description' => 'descripcion',
                 'phone' => '646464646',
                 'active' =>1,
+                'logo'=> '/logos/imageNotFound.gif',
                 'user_id' => User::where('username','=','company1')->first()->id,
 
 
@@ -27,6 +28,7 @@ class CompaniesTableSeeder extends Seeder {
                 'description' => 'descripcion2',
                 'phone' => '622211365',
                 'active' =>1,
+                'logo'=> '/logos/imageNotFound.gif',
                 'user_id' => User::where('username','=','company2')->first()->id,
 
 
