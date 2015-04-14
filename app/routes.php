@@ -71,7 +71,12 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
     Route::controller('/', 'AdminDashboardController');
 });
 
-
+//NGO Functions
+Route::group(array('prefix' => 'ngo', 'before' => 'auth'), function () {
+    Route::get('/credits/create', 'NgoCreditsController@getCreate');
+    Route::post('/credits/create', 'NgoCreditsController@postCreate');
+    Route::get('/executePayment', 'NgoCreditsController@getExecutePayment');
+});
 /** ------------------------------------------
  *  Frontend Routes
  *  ------------------------------------------

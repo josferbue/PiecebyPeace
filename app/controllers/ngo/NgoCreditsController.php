@@ -1,23 +1,27 @@
 <?php
 
-class AdminBlogsController extends AdminController {
+class NgoCreditsController extends BaseController {
 
 
-    /**
-     * Post Model
-     * @var Post
-     */
+    private $_api_context;
 
-    /**
-     * Inject the models.
-     * @param Post $post
-     */
+    private $_ClientId='AQ10YGdwkquqM6DpBspIeagRqOOeGPh4Dz19832jqdbr55laVUJPxXu2BBH6M7Ay2zNbhS6L2m9GhFaj-etMEY';
+    private $_ClientSecret='EKwZnR0aoVXcgl4SkZgaDZeE2tctC6E0na4fEQmmcuFhyZi1l3kaS5NXQXc_IChCIePUVfgiRTPOdIgr';
+
     public function __construct()
     {
-        parent::__construct();
 
+        // setup PayPal api context
+        $payConf = Config::get('paypal');
+        $this->_api_context = Paypalpayment::apiContext($this->_ClientId, $this->_ClientSecret);
+        $this->_api_context->setConfig(array(
+            'mode' => 'sandbox',
+            'http.ConnectionTimeOut' => 30,
+            'log.LogEnabled' => true,
+            'log.FileName' => __DIR__.'/../PayPal.log',
+            'log.LogLevel' => 'FINE'
+        ));
     }
-
 
 	/**
 	 * Show the form for creating a new resource.
@@ -33,7 +37,7 @@ class AdminBlogsController extends AdminController {
 
 
         // Show the page
-        return View::make('site/ong/credits', compact('title'));
+        return View::make('site/ngo/credits', compact('title'));
 	}
 
 	/**
@@ -42,7 +46,8 @@ class AdminBlogsController extends AdminController {
 	 * @return Response
 	 */
 	public function postCreate()
-	{
+    {
+        $title = Lang::get('ngo/credits/table.title');
         // Declare the rules for the form validation
         $rules = array(
             'credits' => 'required|integer|min:0',
@@ -52,8 +57,7 @@ class AdminBlogsController extends AdminController {
         $validator = Validator::make(Input::all(), $rules);
 
         // Check if the form validates with success
-        if ($validator->passes())
-        {
+        if ($validator->passes()) {
             // Create a new blog post
             $user = Auth::user();
 
@@ -61,6 +65,7 @@ class AdminBlogsController extends AdminController {
             // A resource representing a Payer that funds a payment
             // Use the List of `FundingInstrument` and the Payment Method
             // as 'credit_card'
+            $credits = Input::get("credits");
             $payer = Paypalpayment::payer();
             $payer->setPaymentMethod("paypal");
 
@@ -68,28 +73,26 @@ class AdminBlogsController extends AdminController {
             $item1->setName('Credits Piece by Peace')
                 ->setDescription('Credits for campaigns')
                 ->setCurrency('EUR')
-                ->setQuantity(Input::get("credits"))
+                ->setQuantity($credits)
                 ->setTax(0.3)
-                ->setPrice(7.50);
-
-
+                ->setPrice(0.6);
 
 
             $itemList = Paypalpayment::itemList();
-            $itemList->setItems(array($item1,$item2));
+            $itemList->setItems(array($item1));
 
 
             $details = Paypalpayment::details();
-            $details->setShipping("1.2")
-                ->setTax("1.3")
+            $details->setShipping("0")
+                ->setTax($credits * 0.6 * 0.21)
                 //total of items prices
-                ->setSubtotal("17.5");
+                ->setSubtotal($credits * 0.6);
 
             //Payment Amount
             $amount = Paypalpayment::amount();
-            $amount->setCurrency("USD")
+            $amount->setCurrency("EUR")
                 // the total is $17.8 = (16 + 0.6) * 1 ( of quantity) + 1.2 ( of Shipping).
-                ->setTotal("20")
+                ->setTotal(($credits * 0.6 * 0.21) + ($credits * 0.6))
                 ->setDetails($details);
 
             // ### Transaction
@@ -104,6 +107,11 @@ class AdminBlogsController extends AdminController {
                 ->setDescription("Payment description")
                 ->setInvoiceNumber(uniqid());
 
+            $baseUrl = public_path();
+            $redirectUrls = Paypalpayment::redirectUrls();
+            $redirectUrls->setReturnUrl(URL::to('ngo/executePayment'))
+                ->setCancelUrl(URL::to('ngo/executePayment'));
+
             // ### Payment
             // A Payment Resource; create one using
             // the above types and intent as 'sale'
@@ -112,33 +120,39 @@ class AdminBlogsController extends AdminController {
 
             $payment->setIntent("sale")
                 ->setPayer($payer)
+                ->setRedirectUrls($redirectUrls)
                 ->setTransactions(array($transaction));
 
             try {
-                // ### Create Payment
-                // Create a payment by posting to the APIService
-                // using a valid ApiContext
-                // The return object contains the status;
-                $payment->create($this->_apiContext);
-            } catch (\PPConnectionException $ex) {
-                return  "Exception: " . $ex->getMessage() . PHP_EOL;
-                exit(1);
+                $payment->create($this->_api_context);
+            } catch (\PayPal\Exception\PPConnectionException $ex) {
+                if (\Config::get('app.debug')) {
+                    echo "Exception: " . $ex->getMessage() . PHP_EOL;
+                    $err_data = json_decode($ex->getData(), true);
+                    exit;
+                } else {
+                    die('Some error occur, sorry for inconvenient');
+                }
             }
 
-            // Was the blog post created?
-            if($this->post->save())
-            {
-                // Redirect to the new blog post page
-                return Redirect::to('admin/blogs/' . $this->post->id . '/edit')->with('success', Lang::get('admin/blogs/messages.create.success'));
+            foreach($payment->getLinks() as $link) {
+                if($link->getRel() == 'approval_url') {
+                    $redirect_url = $link->getHref();
+                    break;
+                }
             }
 
-            // Redirect to the blog post create page
-            return Redirect::to('admin/blogs/create')->with('error', Lang::get('admin/blogs/messages.create.error'));
+            // add payment ID to session
+            Session::put('paypal_payment_id', $payment->getId());
+
+            if(isset($redirect_url)) {
+                // redirect to paypal
+                return Redirect::away($redirect_url);
+            }
+
+            return View::make('site/ngo/credits', compact('title'))->with('error', 'Unknown error occurred');
         }
-
-        // Form validation failed
-        return Redirect::to('admin/blogs/create')->withInput()->withErrors($validator);
-	}
+    }
 
     /**
      * Display the specified resource.
@@ -146,9 +160,40 @@ class AdminBlogsController extends AdminController {
      * @param $post
      * @return Response
      */
-	public function getShow($post)
+	public function getExecutePayment()
 	{
-        // redirect to the frontend
+
+        // Get the payment ID before session clear
+        $payment_id = Session::get('paypal_payment_id');
+
+        // clear the session payment ID
+        Session::forget('paypal_payment_id');
+
+        if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
+            return Redirect::route('original.route')
+                ->with('error', 'Payment failed');
+        }
+
+        $payment = Paypalpayment::getById($payment_id, $this->_api_context);
+
+        // PaymentExecution object includes information necessary
+        // to execute a PayPal account payment.
+        // The payer_id is added to the request query parameters
+        // when the user is redirected from paypal back to your site
+        $execution = Paypalpayment::paymentExecution;
+        $execution->setPayerId(Input::get('PayerID'));
+
+        //Execute the payment
+        $result = $payment->execute($execution, $this->_api_context);
+
+        //echo '<pre>';print_r($result);echo '</pre>';exit; // DEBUG RESULT, remove it later
+
+        if ($result->getState() == 'approved') { // payment made
+            return Redirect::route('original.route')
+                ->with('success', 'Payment success');
+        }
+        return Redirect::route('original.route')
+            ->with('error', 'Payment failed');
 	}
 
     /**
