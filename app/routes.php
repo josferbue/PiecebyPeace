@@ -76,6 +76,9 @@ Route::group(array('prefix' => 'ngo', 'before' => 'auth'), function () {
     Route::get('/credits/create', 'NgoCreditsController@getCreate');
     Route::post('/credits/create', 'NgoCreditsController@postCreate');
     Route::get('/executePayment', 'NgoCreditsController@getExecutePayment');
+    Route::get('/myCampaigns', 'NgoCampaignController@findCampaignsByCurrentNGO');
+    Route::get('/campaign/create', 'NgoCampaignController@createCampaign');
+    Route::post('/campaign/create', 'NgoCampaignController@saveCampaign');
 });
 /** ------------------------------------------
  *  Frontend Routes
@@ -114,14 +117,8 @@ Route::get('project/editVolunteerProject/{id}', 'NgoProjectController@editGetVol
 Route::post('project/editVolunteerProject/{id}', 'NgoProjectController@editSaveVolunteerProject');
 Route::get('project/deleteVolunteerProject/{id}', 'NgoProjectController@deleteVolunteerProject');
 
-
-
-
 // Campaigns controller
-Route::get('myCampaigns', 'CampaignController@findCampaignsByCurrentNGO');
 Route::get('campaigns', 'CampaignController@findAllCampaigns');
-Route::get('campaign/create', 'CampaignController@createCampaign');
-Route::post('campaign/create', 'CampaignController@saveCampaign');
 Route::get('campaign/details/{id}', 'CampaignController@campaignDetails');
 
 //:: Application Routes ::

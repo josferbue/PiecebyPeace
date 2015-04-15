@@ -12,32 +12,28 @@
         <h1>{{{ Lang::get($campaign->name) }}}</h1>
     </div>
 
-    <div class="span3">
+    <div class="span4">
         <img src="{{ URL::to($campaign->image)}}" class="img-rounded"/>
     </div>
 
-    <div class="row">
+    <div class="clearfix control-group span6">
 
-        <div class="span9">
-            <div class="caption">
+        <h3> {{{ Lang::get('campaign/campaign.name') }}} </h3>
 
-                <h3> {{{ Lang::get('campaign/campaign.name') }}} </h3>
+        <p>{{$campaign->name }}{{{ Lang::get('campaign/campaign.promotorMessage') }}}<b>{{$ngo->name }}</b>{{{ Lang::get('campaign/campaign.dot') }}}</p></a>
 
-                <p>{{$campaign->name }}{{{ Lang::get('campaign/campaign.promotorMessage') }}}<b>{{$ngo->name }}</b>{{{ Lang::get('campaign/campaign.dot') }}}</p></a>
+        <h3> {{{ Lang::get('campaign/campaign.description') }}} </h3>
 
-                <h3> {{{ Lang::get('campaign/campaign.description') }}} </h3>
+        <p>{{$campaign->description }}</p>
 
-                <p>{{$campaign->description }}</p>
+        <h3> {{{ Lang::get('campaign/campaign.period') }}}</h3>
 
-                <h3> {{{ Lang::get('campaign/campaign.period') }}}</h3>
+        <p>{{{ Lang::get('campaign/campaign.periodFirst') }}}{{$campaign->startDate}}{{{ Lang::get('campaign/campaign.periodSecond') }}}{{$campaign->finishDate}}{{{ Lang::get('campaign/campaign.dot') }}}</p>
 
-                <p>{{{ Lang::get('campaign/campaign.periodFirst') }}}{{$campaign->startDate}}{{{ Lang::get('campaign/campaign.periodSecond') }}}{{$campaign->finishDate}}{{{ Lang::get('campaign/campaign.dot') }}}</p>
+        <br>
 
-            </div>
-
-        </div>
+        <input type="button" class="btn btn-info" onclick="window.open('{{{ URL::to($campaign->link) }}}')" value="{{{ Lang::get('campaign/campaign.seeOfficialWebsite') }}}">
 
     </div>
 
-    <input type="button" onclick="window.open('{{{ URL::to($campaign->link) }}}')" value="{{{ Lang::get('campaign/campaign.seeOfficialWebsite') }}}">
 @stop

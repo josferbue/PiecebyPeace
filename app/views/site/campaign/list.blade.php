@@ -13,7 +13,7 @@
     </div>
 
     {{--Comprobamos que existen campañas y las muestra--}}
-    @if ($campaigns=='nothing')
+    @if (!isset($campaigns))
         <div class="row">
             <div class="span3">
                 <h3> {{{ Lang::get('campaign/campaign.notFound') }}}</h3>
@@ -54,5 +54,16 @@
 
     @endforeach
 
-    <input type="button" onclick="window.location.href='{{{ URL::to('campaign/create') }}}'" value="{{{ Lang::get('campaign/campaign.create') }}}">
+    <div class="pagination">
+        <input type="button" class="btn btn-primary" onclick="window.location.href='{{ URL::to('/') }}'" value="{{ Lang::get('campaign/campaign.back') }}">
+        <input type="button" class="btn btn-default" onclick="window.location.href='{{{ URL::to('campaign/create') }}}'" value="{{{ Lang::get('campaign/campaign.create') }}}">
+        <br>
+
+        @if(isset($campaigns))
+            <div class="pull-left">
+                {{ $campaigns->links()}}
+            </div>
+        @endif
+    </div>
+
 @stop

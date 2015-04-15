@@ -117,11 +117,9 @@
 										<a href="#" class="dropdown-toggle">{{{ Lang::get('site.campaigns') }}}<b class="caret"></b></a>
 										<ul class="dropdown-menu">
 											<li class="dropdown"><a href="{{{ URL::to('campaigns') }}}">{{{ Lang::get('campaign/campaign.allCampaigns') }}}</a></li>
-											@if (Auth::check())
-												@if (Auth::user()->hasRole('NonGovernmentalOrganization'))
-													<li class="dropdown"><a href="{{{ URL::to('myCampaigns') }}}">{{{ Lang::get('campaign/campaign.myCampaigns') }}}</a></li>
-													<li class="dropdown"><a href="{{{ URL::to('campaign/create') }}}">{{{ Lang::get('campaign/campaign.create') }}}</a></li>
-												@endif
+											@if (Auth::check() && Auth::user()->hasRole('NonGovernmentalOrganization'))
+                                                <li class="dropdown"><a href="{{{ URL::to('ngo/myCampaigns') }}}">{{{ Lang::get('campaign/campaign.myCampaigns') }}}</a></li>
+                                                <li class="dropdown"><a href="{{{ URL::to('ngo/campaign/create') }}}">{{{ Lang::get('campaign/campaign.create') }}}</a></li>
 											@endif
 										</ul>
 									</li>

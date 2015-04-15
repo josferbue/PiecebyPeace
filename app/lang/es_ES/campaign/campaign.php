@@ -24,7 +24,7 @@ return array(
 	'startDate'				=> 'Fecha de comienzo',
 	'finishDate'			=> 'Fecha de finalización',
 	'link'					=> 'Enlace externo',
-	'maxVisits'				=> 'Tope de visitas',
+	'maxVisits'				=> 'Límite de visitas',
 	'promotionDuration' 	=> 'Duración de la promoción (en días)',
 
 	'details'				=> 'Ver detalles',
