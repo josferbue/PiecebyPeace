@@ -3,7 +3,9 @@
 class Message extends Eloquent {
 
 	protected $table = 'message';
-    /**
+	public $timestamps = false;
+
+	/**
 	 * Get the comment's content.
 	 *
 	 * @return string

@@ -24,7 +24,12 @@ return array(
 	'createVolunteerProjects' 		=> 'Crear proyecto de voluntariado',
 	'myVolunteersProjects' 			=> 'Nuestros proyectos de voluntariado',
 
-
 	'campaigns'						=> 'Campañas',
+
+	'users'							=> 'Usuarios',
+	'findVolunteers'				=> 'Buscar voluntarios',
+	'findCompanies'					=> 'Buscar empresas',
+	'findNGOs'						=> 'Buscar ONGs',
+	'broadcastMessage'				=> 'Enviar mensaje global',
 
 );

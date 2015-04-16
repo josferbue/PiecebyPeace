@@ -15,7 +15,7 @@ class CreateMessagesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('subject');
-			$table->string('textBox');
+			$table->text('textBox');
 			$table->integer('administrator_id')->unsigned()->index()->nullable();
 			$table->foreign('administrator_id')->references('id')->on('administrator')->onDelete('cascade');
 			$table->integer('ngo_id')->unsigned()->index()->nullable();

@@ -35,21 +35,19 @@ Route::pattern('token', '[0-9a-z]+');
  *  ------------------------------------------
  */
 Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
+    # Search users
+    Route::get('/search/searchVolunteers', 'AdminSearchController@searchVolunteers');
+    Route::get('/search/findVolunteers', 'AdminSearchController@findVolunteersWithSimilarUsername');
+    Route::get('/search/searchCompanies', 'AdminSearchController@searchCompanies');
+    Route::get('/search/findCompanies', 'AdminSearchController@findCompaniesWithSimilarUsername');
+    Route::get('/search/searchNGOs', 'AdminSearchController@searchNGOs');
+    Route::get('/search/findNGOs', 'AdminSearchController@findNGOsWithSimilarUsername');
 
-    # Comment Management
-    Route::get('comments/{comment}/edit', 'AdminCommentsController@getEdit');
-    Route::post('comments/{comment}/edit', 'AdminCommentsController@postEdit');
-    Route::get('comments/{comment}/delete', 'AdminCommentsController@getDelete');
-    Route::post('comments/{comment}/delete', 'AdminCommentsController@postDelete');
-    Route::controller('comments', 'AdminCommentsController');
-
-    # Blog Management
-    Route::get('blogs/{post}/show', 'AdminBlogsController@getShow');
-    Route::get('blogs/{post}/edit', 'AdminBlogsController@getEdit');
-    Route::post('blogs/{post}/edit', 'AdminBlogsController@postEdit');
-    Route::get('blogs/{post}/delete', 'AdminBlogsController@getDelete');
-    Route::post('blogs/{post}/delete', 'AdminBlogsController@postDelete');
-    Route::controller('blogs', 'AdminBlogsController');
+    # Send messages
+    Route::get('/message/sendMessage/{id}', 'AdminMessageController@createMessage');
+    Route::post('/message/sendMessage', 'AdminMessageController@sendMessage');
+    Route::get('/message/broadcastMessage', 'AdminMessageController@createGlobalMessage');
+    Route::post('/message/broadcastMessage', 'AdminMessageController@broadcastMessage');
 
     # User Management
     Route::get('users/{user}/show', 'AdminUsersController@getShow');
