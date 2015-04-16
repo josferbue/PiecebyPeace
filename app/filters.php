@@ -76,8 +76,11 @@ Entrust::routeNeedsRole( 'admin*', array('ADMINISTRATOR'), Redirect::to('/') );
 
 // Volunteering projects permissions
 Entrust::routeNeedsRole( 'project/createVolunteerProject*', array('NonGovernmentalOrganization'), Redirect::to('/') );
-Entrust::routeNeedsRole( 'project/myVolunteersProjects*', array('NonGovernmentalOrganization'), Redirect::to('/') );
+Entrust::routeNeedsRole( 'ngo/project/myVolunteersProjects*', array('NonGovernmentalOrganization'), Redirect::to('/') );
 Entrust::routeNeedsRole( 'project/editVolunteerProject*', array('NonGovernmentalOrganization'), Redirect::to('/') );
+Entrust::routeNeedsRole( 'volunteer/project/myVolunteersProjects*', array('VOLUNTEER'), Redirect::to('/') );
+Entrust::routeNeedsRole( 'volunteer/project/myCsrProjects*', array('VOLUNTEER'), Redirect::to('/') );
+Entrust::routeNeedsRole( 'volunteer/message/sendMessage*', array('VOLUNTEER'), Redirect::to('/') );
 
 // Campaigns permissions
 Entrust::routeNeedsRole( 'campaign/myCampaigns*', array('NonGovernmentalOrganization'), Redirect::to('/') );

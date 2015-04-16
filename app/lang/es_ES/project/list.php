@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 return array(
 
@@ -13,7 +13,8 @@ return array(
 	|
 	*/
 
-	'title' 	=> 'Proyectos de Voluntariado',
+	'titleVolunteer' 	=> 'Proyectos de Voluntariado',
+	'titleCsr' 	=> 'Proyectos de Responsabilidad social corporativa',
     'categories' 	 	=> 'Seleccione una Categoría',
 	'locations' 	=> 'Seleccione una Ciudad',
 	'dateFrom' 		=> 'Fecha Inicio',
@@ -22,6 +23,8 @@ return array(
 	'notFound'    =>'No se ha encontrado ningún proyecto.',
 	'notImage'    =>'Sin-Imagen',
 	'ngoEmptyProject'    =>'Aún no tiene proyectos de voluntariado.',
+	'volunteerEmptyProject'    =>'Aún no participa en ningún proyecto de este tipo.',
+	'sendMessage'    =>'Enviar un mensaje',
 	'back'   				 =>'Volver'
 
 

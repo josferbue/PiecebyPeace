@@ -22,7 +22,7 @@ return array(
 	'projects' 						=> 'Projects',
 	'findVolunteerProjects' 		=> 'Find volunteering projects',
 	'createVolunteerProjects' 		=> 'Create volunteering project',
-	'myVolunteersProjects' 			=> 'Our volunteer projects',
+	'myVolunteersProjects' 			=> 'my volunteer projects',
 
 	'campaigns'						=> 'Campaigns',
 
@@ -31,4 +31,11 @@ return array(
 	'findCompanies'					=> 'Search companies',
 	'findNGOs'						=> 'Search NGOs',
 	'broadcastMessage'				=> 'Broadcast message',
+	'myCsrProjects'					=> 'My CSR projects',
+	'messages'						=> 'Messages',
+	'messagesSent'					=> 'Sent messages',
+	'messagesInbox'					=> 'Inbox',
+
+
+
 );

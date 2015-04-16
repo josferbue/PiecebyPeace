@@ -13,7 +13,8 @@ return array(
 	|
 	*/
 
-	'title' 	    => 'Volunteering projects',
+	'titleVolunteer' 	    => 'Volunteering projects',
+	'titleCsrr' 	    => 'Corporate social responsibility projects',
 	'categories' 	=> 'Select Category',
 	'locations' 	=> 'Select City',
 	'dateFrom' 		=> 'Date From',
@@ -21,7 +22,9 @@ return array(
 	'search' 		=> 'Search',
 	'notFound'    =>'Not found projects.',
 	'notImage'    =>'without-Photo',
-	'ngoEmptyProject'    =>'has not yet volunteer projects.',
+	'ngoEmptyProject'    =>'hasn&apos;t got volunteer projects.',
+	'volunteerEmptyProject'    =>'still not cooperates on any project.',
+	'sendMessage'    =>'Send message',
 	'back'   				 =>'Back'
 
 

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 return array(
 
@@ -22,7 +22,7 @@ return array(
 	'projects' 						=> 'Proyectos',
 	'findVolunteerProjects' 		=> 'Proyectos de voluntariado',
 	'createVolunteerProjects' 		=> 'Crear proyecto de voluntariado',
-	'myVolunteersProjects' 			=> 'Nuestros proyectos de voluntariado',
+	'myVolunteersProjects' 			=> 'Mis proyectos de voluntariado',
 
 	'campaigns'						=> 'Campañas',
 
@@ -31,5 +31,9 @@ return array(
 	'findCompanies'					=> 'Buscar empresas',
 	'findNGOs'						=> 'Buscar ONGs',
 	'broadcastMessage'				=> 'Enviar mensaje global',
+	'myCsrProjects'					=> 'Mis proyectos de RSC',
+	'messages'						=> 'Mensajes',
+	'messagesSent'					=> 'Mensajes enviados',
+	'messagesInbox'					=> 'Bandeja de entrada',
 
 );

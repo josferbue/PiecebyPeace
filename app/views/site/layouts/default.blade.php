@@ -98,49 +98,90 @@
                                             <li>
                                                 <a href="{{{ URL::to('projects') }}}">{{{ Lang::get('site.findVolunteerProjects') }}}</a>
                                             </li>
+                                            @if (Auth::check() && Auth::user()->hasRole('VOLUNTEER'))
 
-                                            @if (Auth::check() && Auth::user()->hasRole('NonGovernmentalOrganization'))
-                                                    <li class="dropdown"><a href="{{{ URL::to('project/createVolunteerProject') }}}">{{{ Lang::get('site.createVolunteerProjects') }}}</a></li>
-                                                    <li class="dropdown"><a href="{{{ URL::to('project/myVolunteersProjects') }}}">{{{ Lang::get('site.myVolunteersProjects') }}}</a></li>
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('volunteer/project/myVolunteerProjects') }}}">{{{ Lang::get('site.myVolunteersProjects') }}}</a>
+                                                </li>
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('volunteer/project/myCsrProjects') }}}">{{{ Lang::get('site.myCsrProjects') }}}</a>
+                                                </li>
+
+                                            @elseif (Auth::check() && Auth::user()->hasRole('NonGovernmentalOrganization'))
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('project/createVolunteerProject') }}}">{{{ Lang::get('site.createVolunteerProjects') }}}</a>
+                                                </li>
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('ngo/project/myVolunteersProjects') }}}">{{{ Lang::get('site.myVolunteersProjects') }}}</a>
+                                                </li>
                                             @endif
                                         </ul>
                                     </li>
 
-									<li class="dropdown">
-										<a href="#" class="dropdown-toggle">{{{ Lang::get('site.campaigns') }}}<b class="caret"></b></a>
-										<ul class="dropdown-menu">
-											<li class="dropdown"><a href="{{{ URL::to('campaigns') }}}">{{{ Lang::get('campaign/campaign.allCampaigns') }}}</a></li>
-											@if (Auth::check() && Auth::user()->hasRole('NonGovernmentalOrganization'))
-                                                <li class="dropdown"><a href="{{{ URL::to('ngo/myCampaigns') }}}">{{{ Lang::get('campaign/campaign.myCampaigns') }}}</a></li>
-                                                <li class="dropdown"><a href="{{{ URL::to('ngo/campaign/create') }}}">{{{ Lang::get('campaign/campaign.create') }}}</a></li>
-											@endif
-										</ul>
-									</li>
-                                    @if (Auth::check() && Auth::user()->hasRole('NonGovernmentalOrganization'))
-                                            <li class="dropdown"><a href="#" class="dropdown-toggle">{{{ Lang::get('ngo/credits/table.credits') }}}: {{{Auth::user()->actor()->credits}}}<b class="caret"></b></a>
-                                                <ul class="dropdown-menu">
-                                                    <li class="dropdown"><a href="{{{ URL::to('ngo/credits/create') }}}">{{{ Lang::get('ngo/credits/table.title') }}}</a></li>
-
-                                                </ul>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle">{{{ Lang::get('site.campaigns') }}}<b
+                                                    class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li class="dropdown"><a
+                                                        href="{{{ URL::to('campaigns') }}}">{{{ Lang::get('campaign/campaign.allCampaigns') }}}</a>
                                             </li>
-                                    @endif
-
-                                    @if (Auth::check() && Auth::user()->hasRole('ADMINISTRATOR'))
-                                        <li class="dropdown"><a href="#" class="dropdown-toggle">{{{ Lang::get('site.users') }}}<b class="caret"></b></a>
+                                            @if (Auth::check() && Auth::user()->hasRole('NonGovernmentalOrganization'))
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('ngo/myCampaigns') }}}">{{{ Lang::get('campaign/campaign.myCampaigns') }}}</a>
+                                                </li>
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('ngo/campaign/create') }}}">{{{ Lang::get('campaign/campaign.create') }}}</a>
+                                                </li>
+                                            @endif
+                                        </ul>
+                                    </li>
+                                    @if (Auth::check() && Auth::user()->hasRole('NonGovernmentalOrganization'))
+                                        <li class="dropdown"><a href="#"
+                                                                class="dropdown-toggle">{{{ Lang::get('ngo/credits/table.credits') }}}
+                                                : {{{Auth::user()->actor()->credits}}}<b class="caret"></b></a>
                                             <ul class="dropdown-menu">
-                                                <li class="dropdown"><a href="{{{ URL::to('admin/search/searchVolunteers') }}}">{{{ Lang::get('site.findVolunteers') }}}</a></li>
-                                                <li class="dropdown"><a href="{{{ URL::to('admin/search/searchCompanies') }}}">{{{ Lang::get('site.findCompanies') }}}</a></li>
-                                                <li class="dropdown"><a href="{{{ URL::to('admin/search/searchNGOs') }}}">{{{ Lang::get('site.findNGOs') }}}</a></li>
-                                                <li class="dropdown"><a href="{{{ URL::to('admin/message/broadcastMessage') }}}">{{{ Lang::get('site.broadcastMessage') }}}</a></li>
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('ngo/credits/create') }}}">{{{ Lang::get('ngo/credits/table.title') }}}</a>
+                                                </li>
+
                                             </ul>
                                         </li>
                                     @endif
+
+
+                                    @if (Auth::check() && Auth::user()->hasRole('ADMINISTRATOR'))
+                                        <li class="dropdown"><a href="#"
+                                                                class="dropdown-toggle">{{{ Lang::get('site.users') }}}
+                                                <b class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('admin/search/searchVolunteers') }}}">{{{ Lang::get('site.findVolunteers') }}}</a>
+                                                </li>
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('admin/search/searchCompanies') }}}">{{{ Lang::get('site.findCompanies') }}}</a>
+                                                </li>
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('admin/search/searchNGOs') }}}">{{{ Lang::get('site.findNGOs') }}}</a>
+                                                </li>
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('admin/message/broadcastMessage') }}}">{{{ Lang::get('site.broadcastMessage') }}}</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    @endif
+
 
                                     <li class="dropdown"><a href="#">About</a></li>
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle">Users <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
                                             @if (Auth::check())
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('messages/inbox') }}}">{{{ Lang::get('site.messagesInbox') }}}</a>
+                                                </li>
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('messages/sent') }}}">{{{ Lang::get('site.messagesSent') }}}</a>
+                                                </li>
                                                 @if (Auth::user()->hasRole('admin'))
                                                     <li><a href="{{{ URL::to('admin') }}}">Admin Panel</a></li>
                                                 @endif

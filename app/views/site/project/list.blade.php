@@ -2,14 +2,15 @@
 
 {{-- Web site Title --}}
 @section('title')
-    {{{ Lang::get('project/list.title') }}} ::
+    {{{ Lang::get('project/list.titleVolunteer') }}} ::
     @parent
 @stop
+<LINK href="{{URL::to('template/bootstrap/css/listProject.css')}}" rel="stylesheet" type="text/css">
 
 {{-- Content --}}
 @section('content')
     <div class="page-header">
-        <h1>{{{ Lang::get('project/list.title') }}}</h1>
+        <h1>{{{ Lang::get('project/list.titleVolunteer') }}}</h1>
     </div>
 
     @if(!isset($viewNgoMyProjects))
@@ -101,27 +102,34 @@
                 <h3> {{{ Lang::get('project/list.ngoEmptyProject') }}}</h3>
             @endif
         @elseif(isset($projects))
-            @foreach ($projects as $project)
-                <div class="row">
-                    <div class="span3">
-                        <img src="{{ URL::to($project->image)}}" class="img-rounded"
-                             alt="{{Lang::get('project/list.notImage') }}"/>
-                    </div>
-                    <div class="span9">
-                        <div class="caption">
-                            {{--<a href="{{{ URL::to('campaign/details/'.$campaign->id) }}}"><p>{{$campaign->name }}</p></a>--}}
+            <div class="listProject">
+                @foreach ($projects as $project)
+                    <div class="row">
+                        <div class="span3">
+                            <img src="{{ URL::to($project->image)}}" class="img-rounded"
+                                 alt="{{Lang::get('project/list.notImage') }}"/>
+                        </div>
+                        <div class="span9">
+                            <div class="caption">
+                                {{--<a href="{{{ URL::to('campaign/details/'.$campaign->id) }}}"><p>{{$campaign->name }}</p></a>--}}
 
-                            <h3> {{ HTML::link('/project/view/'.$project->id , $project->name) }}  </h3>
+                                <h3> {{ HTML::link('/project/view/'.$project->id , $project->name) }}  </h3>
 
-                            {{Session::put('backUrl', Request::url())}}
+                                {{Session::put('backUrl', Request::url())}}
 
-                            <p>{{ $project->description}}</p>
-                            <p> {{ $project->city}}, {{ $project->country}} </p>
+                                <p>{{ $project->description}}</p>
+
+                                <p2> {{ $project->city}}, {{ $project->country}} </p2>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <hr/>
-            @endforeach
+                    <br>
+                    <input type="button" class="btn btn-primary"
+                           onclick="window.location.href='{{ URL::to('ngo/message/sendMessage/'.$project->id) }}'"
+                           value="{{ Lang::get('project/list.sendMessage') }}">
+                    <hr/>
+                @endforeach
+            </div>
         @endif
     @endif
 @stop

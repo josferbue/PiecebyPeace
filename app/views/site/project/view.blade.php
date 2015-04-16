@@ -68,7 +68,7 @@
                        value="{{ Lang::get('project/view.edit') }}">
 
                 <input type="button" class="btn btn-primary"
-                       onclick="window.location.href='{{ URL::to('project/deleteVolunteerProject/'.$project->id) }}'"
+                       onclick="ConfirmDelete();"
                        value="{{ Lang::get('project/view.delete') }}">
             @endif
         @endif
@@ -79,11 +79,11 @@
     </div>
 
 @stop
-@section('page-script')
+@section('js')
 
     <script type="text/javascript">
         function ConfirmDelete() {
-            var mensaje = confirm({{{ Lang::get('project/view.confirmDelete') }}});
+            var mensaje = confirm('{{ Lang::get('project/view.confirmDelete') }}');
             if (mensaje) {
                 window.location.href = '{{ URL::to('project/deleteVolunteerProject/'.$project->id) }}'
             }
