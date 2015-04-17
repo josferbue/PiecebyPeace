@@ -11,15 +11,13 @@
 |
 */
 
-App::before(function($request)
-{
-	//
+App::before(function ($request) {
+    //
 });
 
 
-App::after(function($request, $response)
-{
-	//
+App::after(function ($request, $response) {
+    //
 });
 
 /*
@@ -33,17 +31,15 @@ App::after(function($request, $response)
 |
 */
 
-Route::filter('auth', function()
-{
-	if ( Auth::guest() ) // If the user is not logged in
-	{
-        	return Redirect::guest('user/login');
-	}
+Route::filter('auth', function () {
+    if (Auth::guest()) // If the user is not logged in
+    {
+        return Redirect::guest('user/login');
+    }
 });
 
-Route::filter('auth.basic', function()
-{
-	return Auth::basic();
+Route::filter('auth.basic', function () {
+    return Auth::basic();
 });
 
 /*
@@ -57,9 +53,8 @@ Route::filter('auth.basic', function()
 |
 */
 
-Route::filter('guest', function()
-{
-	if (Auth::check()) return Redirect::to('user/login/');
+Route::filter('guest', function () {
+    if (Auth::check()) return Redirect::to('user/login/');
 });
 
 /*
@@ -72,19 +67,18 @@ Route::filter('guest', function()
 */
 
 // Check for role on all admin routes
-Entrust::routeNeedsRole( 'admin*', array('ADMINISTRATOR'), Redirect::to('/') );
+Entrust::routeNeedsRole('admin*', array('ADMINISTRATOR'), Redirect::to('/'));
+Entrust::routeNeedsRole('volunteer*', array('VOLUNTEER'), Redirect::to('/'));
+Entrust::routeNeedsRole('ngo*', array('NonGovernmentalOrganization'), Redirect::to('/'));
 
 // Volunteering projects permissions
-Entrust::routeNeedsRole( 'project/createVolunteerProject*', array('NonGovernmentalOrganization'), Redirect::to('/') );
-Entrust::routeNeedsRole( 'ngo/project/myVolunteersProjects*', array('NonGovernmentalOrganization'), Redirect::to('/') );
-Entrust::routeNeedsRole( 'project/editVolunteerProject*', array('NonGovernmentalOrganization'), Redirect::to('/') );
-Entrust::routeNeedsRole( 'volunteer/project/myVolunteersProjects*', array('VOLUNTEER'), Redirect::to('/') );
-Entrust::routeNeedsRole( 'volunteer/project/myCsrProjects*', array('VOLUNTEER'), Redirect::to('/') );
-Entrust::routeNeedsRole( 'volunteer/message/sendMessage*', array('VOLUNTEER'), Redirect::to('/') );
+Entrust::routeNeedsRole('project/createVolunteerProject*', array('NonGovernmentalOrganization'), Redirect::to('/'));
+Entrust::routeNeedsRole('project/editVolunteerProject*', array('NonGovernmentalOrganization'), Redirect::to('/'));
+
 
 // Campaigns permissions
-Entrust::routeNeedsRole( 'campaign/myCampaigns*', array('NonGovernmentalOrganization'), Redirect::to('/') );
-Entrust::routeNeedsRole( 'campaign/create*', array('NonGovernmentalOrganization'), Redirect::to('/') );
+Entrust::routeNeedsRole('campaign/myCampaigns*', array('NonGovernmentalOrganization'), Redirect::to('/'));
+Entrust::routeNeedsRole('campaign/create*', array('NonGovernmentalOrganization'), Redirect::to('/'));
 
 /*
 |--------------------------------------------------------------------------
@@ -97,12 +91,10 @@ Entrust::routeNeedsRole( 'campaign/create*', array('NonGovernmentalOrganization'
 |
 */
 
-Route::filter('csrf', function()
-{
-	if (Session::getToken() !== Input::get('csrf_token') &&  Session::getToken() !== Input::get('_token'))
-	{
-		throw new Illuminate\Session\TokenMismatchException;
-	}
+Route::filter('csrf', function () {
+    if (Session::getToken() !== Input::get('csrf_token') && Session::getToken() !== Input::get('_token')) {
+        throw new Illuminate\Session\TokenMismatchException;
+    }
 });
 
 /*
@@ -114,15 +106,13 @@ Route::filter('csrf', function()
 |
 */
 
-Route::filter('detectLang',  function($route, $request, $lang = 'auto')
-{
+Route::filter('detectLang', function ($route, $request, $lang = 'auto') {
 
-    if($lang != "auto" && in_array($lang , Config::get('app.available_language')))
-    {
+    if ($lang != "auto" && in_array($lang, Config::get('app.available_language'))) {
         Config::set('app.locale', $lang);
-    }else{
+    } else {
         $browser_lang = !empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? strtok(strip_tags($_SERVER['HTTP_ACCEPT_LANGUAGE']), ',') : '';
-        $browser_lang = substr($browser_lang, 0,2);
+        $browser_lang = substr($browser_lang, 0, 2);
         $userLang = (in_array($browser_lang, Config::get('app.available_language'))) ? $browser_lang : Config::get('app.locale');
         Config::set('app.locale', $userLang);
         App::setLocale($userLang);
