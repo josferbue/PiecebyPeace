@@ -84,7 +84,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
 Route::group(array('prefix' => 'volunteer', 'before' => 'auth'), function () {
 
     Route::get('/project/myVolunteerProjects', 'VolunteerProjectController@findMyVolunteersProjects');
-    Route::get('/project/myCsrProjects', 'CsrProjectController@findMyCsrProjects');
+    Route::get('/project/myCsrProjects', 'VolunteerProjectController@findMyCsrProjects');
 
 
 # list messages
@@ -117,6 +117,13 @@ Route::group(array('prefix' => 'company', 'before' => 'auth'), function () {
     Route::get('/message/sendMessage/{id}', 'CompanyMessageController@createMessage');
     Route::post('/message/sendMessage', 'CompanyMessageController@sendMessage');
 
+    //Csr projects controller
+    Route::get('/project/myCsrProjects', 'CompanyProjectController@findMyCsrProjects');
+    Route::get('/project/createCsrProject', 'CompanyProjectController@createCsrProject');
+    Route::post('/project/createCsrProject', 'CompanyProjectController@saveCsrProject');
+    Route::get('/project/editCsrProject/{id}', 'CompanyProjectController@editGetCsrProject');
+    Route::post('/project/editCsrProject/{id}', 'CompanyProjectController@editSaveCsrProject');
+    Route::get('/project/deleteCsrProject/{id}', 'CompanyProjectController@deleteCsrProject');
 });
 
 
@@ -144,8 +151,11 @@ Route::controller('company', 'CompanyController');
 
 //UnauthorizedController
 Route::get('projects', 'ProjectController@getVolunteerProjects');
+Route::get('projectsCsr', 'ProjectController@getCsrProjects');
 Route::get('projectsFilter', 'ProjectController@findVolunteerProjects');
+Route::get('projectsCsrFilter', 'ProjectController@findCsrProjects');
 Route::get('project/view/{id}', 'ProjectController@viewVolunteerProject');
+Route::get('projectCsr/view/{id}', 'ProjectController@viewCsrProject');
 
 
 //Volunteering projects controller

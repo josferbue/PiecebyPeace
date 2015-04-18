@@ -14,9 +14,9 @@ class VolunteerMessageController extends BaseController
         $project = Project::where('id', '=', $id)->first();
         $action = 'volunteer/message/sendMessage';
         if ($project->ngo_id == null) {
-            $userId=Company::where('id','=',$project->company_id)->first()->user_id;
+            $userId = Company::where('id', '=', $project->company_id)->first()->user_id;
         } else {
-            $userId=Ngo::where('id','=',$project->ngo_id)->first()->user_id;
+            $userId = Ngo::where('id', '=', $project->ngo_id)->first()->user_id;
 
         }
         $data = array(
@@ -58,18 +58,28 @@ class VolunteerMessageController extends BaseController
         if ($validator->passes()) {
             $this->message->subject = Input::get('subject');
             $this->message->textBox = Input::get('textBox');
+            $this->message->from = $volunteer->name . ' ' . $volunteer->surname;
             $this->message->volunteer_id = Volunteer::where('user_id', '=', Auth::id())->first()->id;
+            $this->message->date = date("Y-m-d");
+
 
             $recipientUserCompany = Company::where('user_id', '=', $userId)->first();
             $recipientUserNGO = Ngo::where('user_id', '=', $userId)->first();
 
+            if ($recipientUserCompany) {
+                $this->message->to = $recipientUserCompany->name . ' ' . $recipientUserCompany->surname;
+            } elseif ($recipientUserNGO) {
+                $this->message->to = $recipientUserNGO->name . ' ' . $recipientUserNGO->surname;
+            }
+
             if ($this->message->save()) {
                 if ($this->message->id) {
                     if ($recipientUserCompany) {
-
                         $this->message->recipients_company()->attach($recipientUserCompany);
+
                     } elseif ($recipientUserNGO) {
                         $this->message->recipients_ngo()->attach($recipientUserNGO);
+
                     } else {
                         $this->message->delete();
                         return Redirect::to(Session::get('backUrl'))->with('error', Lang::get('volunteer/messages.createMessage.error'));

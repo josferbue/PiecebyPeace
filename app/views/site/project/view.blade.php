@@ -20,8 +20,13 @@
                 <p>{{$project->name }}</p>
                 <br>
                 <br>
-                <h7>  {{{ Lang::get('project/view.ngo') }}} </h7>
-                <p>{{$project->ngo->name }}</p>
+                @if($project->ngo!=null)
+                    <h7>  {{{ Lang::get('project/view.ngo') }}} </h7>
+                    <p>{{$project->ngo->name }}</p>
+                @elseif($project->company!=null)
+                    <h7>  {{{ Lang::get('project/view.company') }}} </h7>
+                    <p>{{$project->company->name }}</p>
+                @endif
             </div>
 
             <div class="span3">
@@ -34,6 +39,7 @@
         <h7>  {{{ Lang::get('project/view.description') }}} </h7>
         <p>{{$project->description }}</p>
         <br> <br>
+
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -73,6 +79,7 @@
             @endif
         @endif
         <input type="button" class="btn btn-primary"
+
                onclick="window.location.href='{{ URL::to($backUrl) }}'"
 
                value="{{ Lang::get('project/view.back') }}">

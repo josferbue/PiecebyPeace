@@ -13,16 +13,14 @@ return array(
 	|
 	*/
 
-	'sendMessage'					=> 'Enviar mensaje',
-
-	'recipient'						=> 'Destinatario',
-	'subject'						=> 'Asunto',
-	'textBox'						=> 'Cuerpo del mensaje',
-	'volunteer'						=>'Mensaje individual',
-	'broadcast'						=>'Mensaje para todos los voluntarios',
-	'selectVolunteer'				=>'Seleccione un voluntario',
-	'send'							=> 'Enviar',
-	'back'							=> 'Volver',
-
+	'sendMessage'					=> 'Send message',
+	'recipient'						=> 'Recipient',
+	'subject'						=> 'Subject',
+	'textBox'						=> 'Text',
+	'volunteer'						=>'Indiviual message',
+	'broadcast'						=>'Broadcast message',
+	'selectVolunteer'				=>'Select Volunteer',
+	'send'							=> 'Send',
+	'back'							=> 'Back',
 
 );

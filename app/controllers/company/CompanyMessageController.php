@@ -1,6 +1,6 @@
 <?php
 
-class NgoMessageController extends BaseController
+class CompanyMessageController extends BaseController
 {
     public function __construct(Message $message)
     {
@@ -13,7 +13,11 @@ class NgoMessageController extends BaseController
         $backUrl = Session::get('backUrl');
         $project = Project::where('id', '=', $id)->first();
         $volunteers = $project->volunteers;
-        $action = 'ngo/message/sendMessage';
+        if($volunteers->isEmpty()){
+            return Redirect::to(Session::get('backUrl'))->with('error', Lang::get('company/messages.createMessage.errorNohasVolunteeer'));
+
+        }
+        $action = 'company/message/sendMessage';
 
 
         $data = array(
@@ -22,7 +26,7 @@ class NgoMessageController extends BaseController
             'volunteers' => $volunteers,
             'action' => $action,
         );
-        Return View::make('ngo/message/send')->with($data);
+        Return View::make('company/message/send')->with($data);
     }
 
     public function sendMessage()
@@ -40,27 +44,34 @@ class NgoMessageController extends BaseController
 
         // Check if the form validates with success
         if ($validator->passes()) {
-            $project=Project::where('id','=',$projectId);
+            $project = Project::where('id', '=', $projectId)->first();
             $loggingId = Auth::id();
 
-            $ngo = Volunteer::where('user_id', '=', $loggingId)->first();
+            $company = Company::where('user_id', '=', $loggingId)->first();
 
-            if (!$project->ngo_i!=$ngo->id) {
-                return Redirect::to('/')->with('error', Lang::get('ngo/messages.createMessage.errorNotHisProject'));
+            if ($project->company_id != $company->id) {
+                return Redirect::to('/')->with('error', Lang::get('company/messages.createMessage.errorNotHisProject'));
 
             }
 
             $this->message->subject = Input::get('subject');
             $this->message->textBox = Input::get('textBox');
-            $this->message->ngo_id = Ngo::where('user_id', '=', Auth::id())->first()->id;
+            $this->message->from = $company->name . ' ' . $company->surname;
+            $this->message->date = date("Y-m-d");
+
+            $this->message->company_id = $company->id;
 
             $recipientUserVolunteer = null;
             $recipients = null;
             if (Input::get('type') == 'volunteer') {
                 $volunteerId = Input::get('volunteerId');
                 $recipientUserVolunteer = Volunteer::where('id', '=', $volunteerId)->first();
+                $this->message->to = $recipientUserVolunteer->name . ' ' . $recipientUserVolunteer->surname;
+
             } else {
-                $recipients =$project->volunteers;
+                $recipients = $project->volunteers;
+                $this->message->to = '(' . $project->name . ')';
+
             }
 
             if ($this->message->save()) {
@@ -73,16 +84,16 @@ class NgoMessageController extends BaseController
                         }
                     } else {
                         $this->message->delete();
-                        return Redirect::to(Session::get('backUrl'))->with('error', Lang::get('ngo/messages.createMessage.error'));
+                        return Redirect::to(Session::get('backUrl'))->with('error', Lang::get('company/messages.createMessage.error'));
                     }
                 }
 
-                return Redirect::to(Session::get('backUrl'))->with('success', Lang::get('ngo/messages.createMessage.success'));
+                return Redirect::to(Session::get('backUrl'))->with('success', Lang::get('company/messages.createMessage.success'));
             }
-            return Redirect::to(Session::get('backUrl'))->with('error', Lang::get('ngo/messages.createMessage.error'));
+            return Redirect::to(Session::get('backUrl'))->with('error', Lang::get('company/messages.createMessage.error'));
 
         } else {
-            return Redirect::to('ngo/message/sendMessage/' . $projectId)->withInput()->withErrors($validator);
+            return Redirect::to('company/message/sendMessage/' . $projectId)->withInput()->withErrors($validator);
         }
     }
 }

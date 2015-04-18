@@ -1,12 +1,7 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: Alejandro
- * Date: 08/04/2015
- * Time: 19:12
- */
-class NgoProjectController extends BaseController
+
+class CompanyProjectController extends BaseController
 {
 
     protected $project;
@@ -16,13 +11,13 @@ class NgoProjectController extends BaseController
         parent::__construct();
         $this->project = $project;
     }
-    public function findMyVolunteersProjects()
+    public function findMyCsrProjects()
     {
 
-        $user = Auth::user();
-        $ngo = Ngo::where('user_id', '=', $user->id)->first();
 
-        $projects = Project::where("ngo_id", '=', $ngo->id)->paginate(4);
+        $company = Company::where('user_id', '=',  Auth::id())->first();
+
+        $projects = Project::where("company_id", '=', $company->id)->paginate(4);
         $emptyProjects = false;
         if ($projects->getTotal()==0) {
             $emptyProjects = true;
@@ -30,34 +25,34 @@ class NgoProjectController extends BaseController
 
         $data = array(
 
-            'viewNgoMyProjects' => true,
+            'viewCsrMyProjects' => true,
             'projects' => $projects,
             'emptyProjects' => $emptyProjects
         );
 
-        return View::make('site/project/list')->with($data);
+        return View::make('company/project/list')->with($data);
 
 
     }
-    public function createVolunteerProject()
+    public function createCsrProject()
     {
-        $title = Lang::get('project/create.titleCreateVolunteerProject');
+        $title = Lang::get('project/create.titleCreateCsrProject');
         // Show the page
         $categories = Category::all();
-        return View::make('site/project/createProject', compact('categories', 'title'));
+        return View::make('site/project/createProject', compact('categories','title'));
     }
 
 
-    public function saveVolunteerProject()
+    public function saveCsrProject()
     {
         $user = Auth::user();
-        $ngo = Ngo::where('user_id', '=', $user->id)->first();
+        $company = Company::where('user_id', '=', $user->id)->first();
 
-        if (!$ngo->active) {
-            return Redirect::to('/')->with('error', Lang::get('project/messages.createVolunteer.errorNotActive'));
+        if (!$company->active) {
+            return Redirect::to('/')->with('error', Lang::get('project/messages.createCsr.errorNotActive'));
         }
-        if ($ngo->banned) {
-            return Redirect::to('/')->with('error', Lang::get('project/messages.createVolunteer.errorBanned'));
+        if ($company->banned) {
+            return Redirect::to('/')->with('error', Lang::get('project/messages.createCsr.errorBanned'));
         }
         // Declare the rules for the form validation
         $rules = array(
@@ -94,7 +89,7 @@ class NgoProjectController extends BaseController
 
 
             //asignandole el id
-            $this->project->ngo_id = $ngo->id;
+            $this->project->company_id = $company->id;
 
             $destinationPath = public_path() . '/logos/' . $user->email;
 
@@ -118,34 +113,33 @@ class NgoProjectController extends BaseController
                 }
 
                 // Redirect to the new blog post page
-                return Redirect::to('project/myVolunteersProjects')->with('success', Lang::get('project/messages.createVolunteer.success'));
+                return Redirect::to('company/project/myCsrProjects')->with('success', Lang::get('project/messages.createCsr.success'));
             }
 
             // Redirect to the blog post create page
-            return Redirect::to('project/createVolunteerProject')->with('error', Lang::get('project/messages.createVolunteer.error'));
+            return Redirect::to('company/project/createCsrProject')->with('error', Lang::get('project/messages.createCsr.error'));
         }
 
         // Form validation failed
-        return Redirect::to('project/createVolunteerProject')->withInput()->withErrors($validator);
+        return Redirect::to('company/project/createCsrProject')->withInput()->withErrors($validator);
     }
 
 
-    public function editGetVolunteerProject($id)
+    public function editGetCsrProject($id)
     {
         $title = Lang::get('project/create.editTitleProject');
-        $user = Auth::user();
-        $ngo = Ngo::where('user_id', '=', $user->id)->first();
+        $company = Company::where('user_id', '=', Auth::id())->first();
 
         $projectOld = Project::where("id", '=', $id)->first();
 
         //checkeamos que no haya applications pendientes ni voluntarios ya asociados
-        if ($projectOld->ngo_id != $ngo->id) {
-            return Redirect::to('project/view/' . $id)->with('error', Lang::get('project/messages.editVolunteer.errorNotHisProject'));
+        if ($projectOld->company_id != $company->id) {
+            return Redirect::to('projectCsr/view/' . $id)->with('error', Lang::get('project/messages.editCsr.errorNotHisProject'));
 
         }
         $volunteers = $projectOld->volunteers;
         if (sizeof($volunteers) > 0) {
-            return Redirect::to('project/view/' . $id)->with('error', Lang::get('project/messages.editVolunteer.errorWithVolunteer'));
+            return Redirect::to('projectCsr/view/' . $id)->with('error', Lang::get('project/messages.editCsr.errorWithVolunteer'));
         }
 
 
@@ -153,16 +147,16 @@ class NgoProjectController extends BaseController
         if (sizeof($applications) > 0) {
             foreach ($projectOld->applications as $application) {
                 if ($application->result != 2) {//es decir si hay application no contestadas o contestadas positivamente
-                    return Redirect::to('project/view/' . $id)->with('error', Lang::get('project/messages.editVolunteer.errorWithApplications'));
+                    return Redirect::to('projectCsr/view/' . $id)->with('error', Lang::get('project/messages.editCsr.errorWithApplications'));
                 }
             }
         }
 
-        if (!$ngo->active) {
-            return Redirect::to('project/view/' . $id)->with('error', Lang::get('project/messages.editVolunteer.errorNotActive'));
+        if (!$company->active) {
+            return Redirect::to('projectCsr/view/' . $id)->with('error', Lang::get('project/messages.editCsr.errorNotActive'));
         }
-        if ($ngo->banned) {
-            return Redirect::to('project/view/' . $id)->with('error', Lang::get('project/messages.editVolunteer.errorBanned'));
+        if ($company->banned) {
+            return Redirect::to('projectCsr/view/' . $id)->with('error', Lang::get('project/messages.editCsr.errorBanned'));
         }
         $categories = Category::all();
 
@@ -177,78 +171,77 @@ class NgoProjectController extends BaseController
 
     }
 
-    public function deleteVolunteerProject($id)
+    public function deleteCsrProject($id)
     {
 
-        $user = Auth::user();
-        $ngo = Ngo::where('user_id', '=', $user->id)->first();
+        $company = Company::where('user_id', '=', Auth::id())->first();
 
         $projectOld = Project::where("id", '=', $id)->first();
 
         //checkeamos que no haya applications pendientes ni voluntarios ya asociados
-        if ($projectOld->ngo_id != $ngo->id) {
-            return Redirect::to('project/view/' . $id)->with('error', Lang::get('project/messages.deleteVolunteer.errorNotHisProject'));
+        if ($projectOld->company_id != $company->id) {
+            return Redirect::to('projectCsr/view/' . $id)->with('error', Lang::get('project/messages.deleteCsr.errorNotHisProject'));
 
         }
         if (sizeof($projectOld->volunteers) > 0) {
-            return Redirect::to('project/view/' . $id)->with('error', Lang::get('project/messages.deleteVolunteer.errorWithVolunteer'));
+            return Redirect::to('projectCsr/view/' . $id)->with('error', Lang::get('project/messages.deleteCsr.errorWithVolunteer'));
         }
         if (sizeof($projectOld->applications) > 0) {
             foreach ($projectOld->applications as $application) {
                 if ($application->result != 2) {//es decir si hay application no contestadas o contestadas positivamente
-                    return Redirect::to('project/view/' . $id)->with('error', Lang::get('project/messages.deleteVolunteer.errorWithApplications'));
+                    return Redirect::to('projectCsr/view/' . $id)->with('error', Lang::get('project/messages.deleteCsr.errorWithApplications'));
                 }
             }
         }
 
-        if (!$ngo->active) {
-            return Redirect::to('project/view/' . $id)->with('error', Lang::get('project/messages.deleteVolunteer.errorNotActive'));
+        if (!$company->active) {
+            return Redirect::to('projectCsr/view/' . $id)->with('error', Lang::get('project/messages.deleteCsr.errorNotActive'));
         }
-        if ($ngo->banned) {
-            return Redirect::to('project/view/' . $id)->with('error', Lang::get('project/messages.deleteVolunteer.errorBanned'));
+        if ($company->banned) {
+            return Redirect::to('projectCsr/view/' . $id)->with('error', Lang::get('project/messages.deleteCsr.errorBanned'));
         }
 
         if ($projectOld->delete()) {
-              return Redirect::to('project/myVolunteersProjects')->with('success', Lang::get('project/messages.deleteVolunteer.success'));
+              return Redirect::to('company/project/myCsrProjects')->with('success', Lang::get('project/messages.deleteCsr.success'));
 
         }
-        return Redirect::to('project/myVolunteersProjects')->with('error', Lang::get('project/messages.deleteVolunteer.error'));
+        return Redirect::to('company/project/myCsrProjects')->with('error', Lang::get('project/messages.deleteCsr.error'));
 
     }
 
 
 
 
-    public function editSaveVolunteerProject($id)
+    public function editSaveCsrProject($id)
     {
 
 
         $user = Auth::user();
-        $ngo = Ngo::where('user_id', '=', $user->id)->first();
+        $company = Company::where('user_id', '=', $user->id)->first();
 
         $projectOld = Project::where("id", '=', $id)->first();
 
         //checkeamos que no haya applications pendientes ni voluntarios ya asociados
-        if ($projectOld->ngo_id != $ngo->id) {
-            return Redirect::to('project/view/' . $id)->with('error', Lang::get('project/messages.editVolunteer.errorNotHisProject'));
+        if ($projectOld->ngo_id != $company->id) {
+            return Redirect::to('projectCsr/view/' . $id)->with('error', Lang::get('project/messages.editCsr.errorNotHisProject'));
 
         }
         if (sizeof($projectOld->volunteers) > 0) {
-            return Redirect::to('project/view/' . $id)->with('error', Lang::get('project/messages.editVolunteer.errorWithVolunteer'));
+            return Redirect::to('projectCsr/view/' . $id)->with('error', Lang::get('project/messages.editCsr.errorWithVolunteer'));
         }
         if (sizeof($projectOld->applications) > 0) {
             foreach ($projectOld->applications as $application) {
                 if ($application->result != 2) {//es decir si hay application no contestadas o contestadas positivamente
-                    return Redirect::to('project/view/' . $id)->with('error', Lang::get('project/messages.editVolunteer.errorWithApplications'));
+                    return Redirect::to('projectCsr/view/' . $id)->with('error', Lang::get('project/messages.editCsr.errorWithApplications'));
                 }
             }
         }
 
-        if (!$ngo->active) {
-            return Redirect::to('project/view/' . $id)->with('error', Lang::get('project/messages.editVolunteer.errorNotActive'));
+        if (!$company->active) {
+            return Redirect::to('projectCsr/view/' . $id)->with('error', Lang::get('project/messages.editCsr.errorNotActive'));
         }
-        if ($ngo->banned) {
-            return Redirect::to('project/view/' . $id)->with('error', Lang::get('project/messages.editVolunteer.errorBanned'));
+        if ($company->banned) {
+            return Redirect::to('projectCsr/view/' . $id)->with('error', Lang::get('project/messages.editCsr.errorBanned'));
         }
         // Declare the rules for the form validation
         $rules = array(
@@ -303,16 +296,16 @@ class NgoProjectController extends BaseController
                 $categories = Input::get('categories');
                 //se usa sync, ya que este reemplaza todas las relaciones manyToMany por las nuevas, attach las añade a las anteriores
                 $projectOld->categories()->sync($categories);
-                return Redirect::to('project/myVolunteersProjects')->with('success', Lang::get('project/messages.editVolunteer.success'));
+                return Redirect::to('company/project/myCsrProjects')->with('success', Lang::get('project/messages.editCsr.success'));
 
             }
-            return Redirect::to('project/editVolunteerProject/' . $id)->with('error', Lang::get('project/messages.editVolunteer.error'));
+            return Redirect::to('company/project/editCsrProject/' . $id)->with('error', Lang::get('project/messages.editCsr.error'));
 
             // Redirect to the new blog post page
         }
 
 
         // Form validation failed
-        return Redirect::to('project/editVolunteerProject/' . $id)->withInput()->withErrors($validator);
+        return Redirect::to('company/project/editCsrProject/' . $id)->withInput()->withErrors($validator);
     }
 }

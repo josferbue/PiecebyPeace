@@ -13,7 +13,8 @@ return array(
 	|
 	*/
 
-	'titleVolunteerProject' 	    => 'Please, tell us a few things about this new project',
+	'titleCreateVolunteerProject' 	    => 'Please, tell us a few things about this new project',
+	'titleCreateCsrProject' 	    => 'Please, tell us a few things about this new CSR',
 	'name' 							=> 'Project name',
 	'description' 					=> 'Description',
 	'maxVolunteers' 				=> 'Volunteers number',
@@ -27,7 +28,7 @@ return array(
 	'country'    					=>'Country',
 	'saveCreate'    				=>'Create project',
 	'selectCategories'				=>'Select Categories',
-	'editTitleVolunteerProject'		=> 'Edit Project',
+	'editTitleProject'		=> 'Edit Project',
 	'saveEdit'						=> 'Save',
 	'back'   						 =>'Cancel'
 

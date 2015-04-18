@@ -98,6 +98,9 @@
                                             <li>
                                                 <a href="{{{ URL::to('projects') }}}">{{{ Lang::get('site.findVolunteerProjects') }}}</a>
                                             </li>
+                                            <li>
+                                                <a href="{{{ URL::to('projectsCsr') }}}">{{{ Lang::get('site.findCsrProjects') }}}</a>
+                                            </li>
                                             @if (Auth::check() && Auth::user()->hasRole('VOLUNTEER'))
 
                                                 <li class="dropdown"><a
@@ -113,6 +116,13 @@
                                                 </li>
                                                 <li class="dropdown"><a
                                                             href="{{{ URL::to('ngo/project/myVolunteersProjects') }}}">{{{ Lang::get('site.myVolunteersProjects') }}}</a>
+                                                </li>
+                                            @elseif (Auth::check() && Auth::user()->hasRole('COMPANY'))
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('company/project/createCsrProject') }}}">{{{ Lang::get('site.createCsrProject') }}}</a>
+                                                </li>
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('company/project/myCsrProjects') }}}">{{{ Lang::get('site.myCsrProjects') }}}</a>
                                                 </li>
                                             @endif
                                         </ul>

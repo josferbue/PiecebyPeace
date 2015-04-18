@@ -21,6 +21,7 @@ return array(
 	'startDate' 			 => 'Fecha de Inicio',
 	'finishDate'    	     =>'Fecha de Fin',
 	'ngo'    				 =>'ONG',
+	'company'    			 =>'Empresa',
 	'notImage'   			 =>'Sin-Imagen',
 	'availableVolunteers'    =>'Plazas disponibles',
 	'maxVolunteers'   		 =>'Capacidad de voluntarios',

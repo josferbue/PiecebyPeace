@@ -21,8 +21,11 @@ return array(
 
 	'projects' 						=> 'Projects',
 	'findVolunteerProjects' 		=> 'Find volunteering projects',
+	'findCsrProjects' 				=> 'Find CSR projects',
 	'createVolunteerProjects' 		=> 'Create volunteering project',
-	'myVolunteersProjects' 			=> 'my volunteer projects',
+	'myVolunteersProjects' 			=> 'My volunteer projects',
+	'createCsrProject' 				=> 'Create CSR project',
+	'myCsrProjects' 				=> 'My CSR projects',
 
 	'campaigns'						=> 'Campaigns',
 

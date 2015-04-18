@@ -13,6 +13,10 @@ class NgoMessageController extends BaseController
         $backUrl = Session::get('backUrl');
         $project = Project::where('id', '=', $id)->first();
         $volunteers = $project->volunteers;
+        if($volunteers->isEmpty()){
+            return Redirect::to(Session::get('backUrl'))->with('error', Lang::get('ngo/messages.createMessage.errorNohasVolunteeer'));
+
+        }
         $action = 'ngo/message/sendMessage';
 
 
@@ -40,27 +44,33 @@ class NgoMessageController extends BaseController
 
         // Check if the form validates with success
         if ($validator->passes()) {
-            $project=Project::where('id','=',$projectId);
+            $project=Project::where('id','=',$projectId)->first();
             $loggingId = Auth::id();
 
-            $ngo = Volunteer::where('user_id', '=', $loggingId)->first();
-
-            if (!$project->ngo_i!=$ngo->id) {
+            $ngo = Ngo::where('user_id', '=', $loggingId)->first();
+            if ($project->ngo_id!=$ngo->id) {
                 return Redirect::to('/')->with('error', Lang::get('ngo/messages.createMessage.errorNotHisProject'));
 
             }
 
             $this->message->subject = Input::get('subject');
             $this->message->textBox = Input::get('textBox');
-            $this->message->ngo_id = Ngo::where('user_id', '=', Auth::id())->first()->id;
+            $this->message->from = $ngo->name.' '.$ngo->surname;
+            $this->message->date = date("Y-m-d");
+
+            $this->message->ngo_id = $ngo->id;
 
             $recipientUserVolunteer = null;
             $recipients = null;
             if (Input::get('type') == 'volunteer') {
                 $volunteerId = Input::get('volunteerId');
                 $recipientUserVolunteer = Volunteer::where('id', '=', $volunteerId)->first();
+                $this->message->to = $recipientUserVolunteer->name.' '.$recipientUserVolunteer->surname;
+
             } else {
                 $recipients =$project->volunteers;
+                $this->message->to = '('.$project->name.')';
+
             }
 
             if ($this->message->save()) {

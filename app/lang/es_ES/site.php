@@ -20,9 +20,14 @@ return array(
 	'ngo' 							=> 'Registrarse como ONG',
 
 	'projects' 						=> 'Proyectos',
-	'findVolunteerProjects' 		=> 'Proyectos de voluntariado',
+	'findVolunteerProjects' 		=> 'Buscar proyectos de voluntariado',
+	'findCsrProjects' 				=> 'Buscar proyectos de RSC',
 	'createVolunteerProjects' 		=> 'Crear proyecto de voluntariado',
 	'myVolunteersProjects' 			=> 'Mis proyectos de voluntariado',
+	'createCsrProject' 				=> 'Crear proyecto de RSC',
+	'myCsrProjects' 				=> 'Mis proyectos de RSC',
+
+
 
 	'campaigns'						=> 'Campañas',
 

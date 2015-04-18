@@ -13,7 +13,8 @@ return array(
 	|
 	*/
 
-	'titleVolunteerProject' 	    => 'Por favor, hablenos acerca de su nuevo proyecto',
+	'titleCreateVolunteerProject' 	=> 'Por favor, hablenos acerca de su nuevo proyecto',
+	'titleCreateCsrProject' 	    => 'Por favor, hablenos acerca de su nueva RSC',
 	'name' 							=> 'Nombre del proyecto',
 	'description' 					=> 'Descripcion',
 	'maxVolunteers' 				=> 'Número de voluntarios',
@@ -27,7 +28,7 @@ return array(
 	'country'    					=> 'País',
 	'saveCreate'    				=> 'Crear proyecto',
 	'selectCategories'				=> 'Seleccione las categorias',
-	'editTitleVolunteerProject'		=> 'Edicción del proyecto',
+	'editTitleProject'		=> 'Edicción del proyecto',
 	'saveEdit'						=> 'Guardar cambios',
 	'back'   				 		=>'Cancelar'
 

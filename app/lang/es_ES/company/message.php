@@ -14,7 +14,6 @@ return array(
 	*/
 
 	'sendMessage'					=> 'Enviar mensaje',
-
 	'recipient'						=> 'Destinatario',
 	'subject'						=> 'Asunto',
 	'textBox'						=> 'Cuerpo del mensaje',

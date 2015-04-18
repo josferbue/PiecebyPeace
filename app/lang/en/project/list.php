@@ -13,19 +13,20 @@ return array(
 	|
 	*/
 
-	'titleVolunteer' 	    => 'Volunteering projects',
-	'titleCsrr' 	    => 'Corporate social responsibility projects',
-	'categories' 	=> 'Select Category',
-	'locations' 	=> 'Select City',
-	'dateFrom' 		=> 'Date From',
-	'dateTo' 		=> 'Date To',
-	'search' 		=> 'Search',
-	'notFound'    =>'Not found projects.',
-	'notImage'    =>'without-Photo',
-	'ngoEmptyProject'    =>'hasn&apos;t got volunteer projects.',
-	'volunteerEmptyProject'    =>'still not cooperates on any project.',
-	'sendMessage'    =>'Send message',
-	'back'   				 =>'Back'
+	'titleVolunteer' 	    		=> 'Volunteering projects',
+	'titleCsr' 	    				=> 'Corporate social responsibility projects',
+	'categories' 					=> 'Select Category',
+	'locations' 					=> 'Select City',
+	'dateFrom' 						=> 'Date From',
+	'dateTo' 						=> 'Date To',
+	'search' 						=> 'Search',
+	'notFound'   					=>'Not found projects.',
+	'notImage'    					=>'without-Photo',
+	'ngoEmptyProject'    			=>'hasn&apos;t got volunteer projects.',
+	'companyEmptyProject'   		=>'hasn&apos;t got CSR projects.',
+	'volunteerEmptyProject'    		=>'still not cooperates on any project.',
+	'sendMessage'    				=>'Send message',
+	'back'   						=>'Back'
 
 
 
