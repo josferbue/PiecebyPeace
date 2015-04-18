@@ -99,9 +99,21 @@ Route::group(array('prefix' => 'ngo', 'before' => 'auth'), function () {
     Route::get('/campaign/create', 'NgoCampaignController@createCampaign');
     Route::post('/campaign/create', 'NgoCampaignController@saveCampaign');
     # Send messages
-    Route::post('/message/sendMessage', 'NgoMessageController@sendMessage');
     Route::get('/message/sendMessage/{id}', 'NgoMessageController@createMessage');
+    Route::post('/message/sendMessage', 'NgoMessageController@sendMessage');
+
 });
+
+//Company Functions
+Route::group(array('prefix' => 'company', 'before' => 'auth'), function () {
+    # Send messages
+    Route::get('/message/sendMessage/{id}', 'CompanyMessageController@createMessage');
+    Route::post('/message/sendMessage', 'CompanyMessageController@sendMessage');
+
+});
+
+
+
 /** ------------------------------------------
  *  Frontend Routes
  *  ------------------------------------------
