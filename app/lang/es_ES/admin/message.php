@@ -23,6 +23,11 @@ return array(
 	'broadcastMessageCompanies'		=> 'Enviar mensaje a todas las empresas',
 	'broadcastMessageVolunteers'	=> 'Enviar mensaje a todos los voluntarios',
 
+	'adminFromField'						=> 'Piece by Peace - Administración',
+	'adminToFieldBroadcastVolunteers'		=> 'Mensaje global a todos los voluntarios',
+	'adminToFieldBroadcastNGOs'				=> 'Mensaje global a todas las ONGs',
+	'adminToFieldBroadcastCompanies'		=> 'Mensaje global a todas las empresas',
+
 	'send'							=> 'Enviar',
 	'back'							=> 'Volver',
 

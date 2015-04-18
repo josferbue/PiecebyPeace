@@ -37,6 +37,8 @@ class AdminMessageController extends BaseController
         if ($validator->passes()) {
             $this->message->subject = Input::get('subject');
             $this->message->textBox = Input::get('textBox');
+            $this->message->from = Lang::get('admin/message.adminFromField');
+            $this->message->date = new DateTime('now');
             $this->message->administrator_id = Administrator::where('user_id', '=', Auth::id())->first()->id;
 
             $recipientUserVolunteer = Volunteer::where('user_id', '=', Input::get('user_id'))->first();
@@ -49,16 +51,19 @@ class AdminMessageController extends BaseController
                 {
                     if($recipientUserCompany)
                     {
+                        Message::where('id', '=', $this->message->id)->update(array('to' => $recipientUserCompany->name));
                         $this->message->recipients_company()->attach($recipientUserCompany);
                     }
 
                     if($recipientUserVolunteer)
                     {
+                        Message::where('id', '=', $this->message->id)->update(array('to' => $recipientUserVolunteer->name.' '.$recipientUserVolunteer->surname));
                         $this->message->recipients_volunteer()->attach($recipientUserVolunteer);
                     }
 
                     if($recipientUserNGO)
                     {
+                        Message::where('id', '=', $this->message->id)->update(array('to' => $recipientUserNGO->name));
                         $this->message->recipients_ngo()->attach($recipientUserNGO);
                     }
                 }
@@ -101,19 +106,24 @@ class AdminMessageController extends BaseController
         if ($validator->passes()) {
             $this->message->subject = Input::get('subject');
             $this->message->textBox = Input::get('textBox');
+            $this->message->from = Lang::get('admin/message.adminFromField');
+            $this->message->date = new DateTime('now');
             $this->message->administrator_id = Administrator::where('user_id', '=', Auth::id())->first()->id;
             $recipients = null;
 
             if(Input::get('type') == 'NGOs')
             {
+                $this->message->to = Lang::get('admin/message.adminToFieldBroadcastNGOs');
                 $recipients = Ngo::all();
             }
             if(Input::get('type') == 'companies')
             {
+                $this->message->to = Lang::get('admin/message.adminToFieldBroadcastCompanies');
                 $recipients = Company::all();
             }
             if(Input::get('type') == 'volunteers')
             {
+                $this->message->to = Lang::get('admin/message.adminToFieldBroadcastVolunteers');
                 $recipients = Volunteer::all();
             }
 
