@@ -13,19 +13,24 @@ return array(
 	|
 	*/
 
-	'sendMessage'					=> 'Send message',
+	'sendMessage'							=> 'Send message',
 
-	'recipient'						=> 'Recipient',
-	'subject'						=> 'Subject',
-	'textBox'						=> 'Text',
+	'recipient'								=> 'Recipient',
+	'subject'								=> 'Subject',
+	'textBox'								=> 'Text',
 
-	'broadcastMessageNGOs'			=> 'Broadcast message to all NGOs',
-	'broadcastMessageCompanies'		=> 'Broadcast message to all companies',
-	'broadcastMessageVolunteers'	=> 'Broadcast message to all volunteers',
+	'broadcastMessageNGOs'					=> 'Broadcast message to all NGOs',
+	'broadcastMessageCompanies'				=> 'Broadcast message to all companies',
+	'broadcastMessageVolunteers'			=> 'Broadcast message to all volunteers',
 
-	'send'							=> 'Send',
-	'back'							=> 'Back',
+	'send'									=> 'Send',
+	'back'									=> 'Back',
 
-	'successfullySent'				=> 'The message has been successfully sent.'
+	'adminFromField'						=> 'Piece by Peace - Staff',
+	'adminToFieldBroadcastVolunteers'		=> 'Broadcast - All volunteers',
+	'adminToFieldBroadcastNGOs'				=> 'Broadcast - All NGOs',
+	'adminToFieldBroadcastCompanies'		=> 'Broadcast - All companies',
+
+	'successfullySent'						=> 'The message has been successfully sent.'
 
 );
