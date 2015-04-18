@@ -27,6 +27,7 @@ class AdminUsersController extends AdminController {
      * @param Role $role
      * @param Permission $permission
      */
+
     public function __construct(User $user, Role $role, Permission $permission)
     {
         parent::__construct();
@@ -304,4 +305,73 @@ class AdminUsersController extends AdminController {
 
         ->make();
     }
+
+    // Ban and unban users
+
+    public function banUser($id)
+    {
+        $type = Session::get('type');
+
+        if($type == 'companies') {
+            $company = Company::where('user_id', '=', $id)->first();
+            $company->banned = true;
+            $company->save();
+        }
+        if($type == 'volunteers') {
+            $volunteer = Volunteer::where('user_id', '=', $id)->first();
+            $volunteer->banned = true;
+            $volunteer->save();
+        }
+        if($type == 'NGOs') {
+            $ngo = Ngo::where('user_id', '=', $id)->first();
+            $ngo->banned = true;
+            $ngo->save();
+        }
+
+        Return Redirect::to(Session::get('backUrl'))->with('success', Lang::get('admin/ban.successfullyBanned'));
+    }
+
+    public function unbanUser($id)
+    {
+        $type = Session::get('type');
+
+        if($type == 'companies') {
+            $company = Company::where('user_id', '=', $id)->first();
+            $company->banned = false;
+            $company->save();
+        }
+        if($type == 'volunteers') {
+            $volunteer = Volunteer::where('user_id', '=', $id)->first();
+            $volunteer->banned = false;
+            $volunteer->save();
+        }
+        if($type == 'NGOs') {
+            $ngo = Ngo::where('user_id', '=', $id)->first();
+            $ngo->banned = false;
+            $ngo->save();
+        }
+
+        Return Redirect::to(Session::get('backUrl'))->with('success', Lang::get('admin/ban.successfullyUnbanned'));
+    }
+
+    // Account activation (NGO and company)
+
+    public function activateAccount($id)
+    {
+        $type = Session::get('type');
+
+        if($type == 'companies') {
+            $company = Company::where('user_id', '=', $id)->first();
+            $company->active = true;
+            $company->save();
+        }
+        if($type == 'NGOs') {
+            $ngo = Ngo::where('user_id', '=', $id)->first();
+            $ngo->active = true;
+            $ngo->save();
+        }
+
+        Return Redirect::to(Session::get('backUrl'))->with('success', Lang::get('admin/accountActivation.successfullyActivated'));
+    }
+
 }

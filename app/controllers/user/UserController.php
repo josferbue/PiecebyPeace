@@ -179,6 +179,31 @@ class UserController extends BaseController {
         // Check that the user is confirmed.
         if ( Confide::logAttempt( $input, true ) )
         {
+            $company = Company::where('user_id', '=', Auth::id())->first();
+            $volunteer = Volunteer::where('user_id', '=', Auth::id())->first();
+            $ngo = Ngo::where('user_id', '=', Auth::id())->first();
+
+            if($company){
+                $userLogin = $company;
+            }
+            if($volunteer){
+                $userLogin = $volunteer;
+            }
+            if($ngo){
+                $userLogin = $ngo;
+            }
+
+            if($userLogin->banned)
+            {
+                Session::flush();
+                return Redirect::to('user/login')->withInput(Input::except('password'))->with( 'error', Lang::get('login.bannedError') );
+            }
+            if(!$userLogin->active && ($userLogin === $ngo || $userLogin === $company))
+            {
+                Session::flush();
+                return Redirect::to('user/login')->withInput(Input::except('password'))->with( 'error', Lang::get('login.activeError') );
+            }
+
             return Redirect::intended('/');
         }
         else

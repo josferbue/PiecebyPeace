@@ -108,7 +108,7 @@ class CompanyController extends BaseController {
 
                     $filename = $logo->getClientOriginalName();
                     $logo->move($destinationPath, $filename);
-                    $this->company->logo = $destinationPath . "\\" . $filename;
+                    $this->company->logo = '/logos/'.$this->user->email .'/'. $filename;
 
                 }
 

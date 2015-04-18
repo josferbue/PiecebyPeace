@@ -86,10 +86,19 @@
 
             @endif
 
-            <div class="row">
-                <div class="control-group span1">
-                    <input type="button" class="btn btn-info" onclick="window.location.href='{{{ URL::to('admin/message/sendMessage/'.$user->id) }}}'" value="{{{ Lang::get('admin/search.sendMessage') }}}">
-                </div>
+            <div class="pagination">
+                <input type="button" class="btn btn-info" onclick="window.location.href='{{{ URL::to('admin/message/sendMessage/'.$user->id) }}}'" value="{{{ Lang::get('admin/search.sendMessage') }}}">
+
+                @if(!$user->active && ($searchType == 'companies' || $searchType == 'NGOs'))
+                    <input type="button" class="btn btn-primary" onclick="window.location.href='{{{ URL::to('admin/user/activateAccount/'.$user->id) }}}'" value="{{{ Lang::get('admin/accountActivation.activate') }}}">
+                @endif
+
+                @if(!$user->banned)
+                    <input type="button" class="btn btn-danger" onclick="window.location.href='{{{ URL::to('admin/user/ban/'.$user->id) }}}'" value="{{{ Lang::get('admin/ban.banUser') }}}">
+                @else
+                    <input type="button" class="btn btn-primary" onclick="window.location.href='{{{ URL::to('admin/user/unban/'.$user->id) }}}'" value="{{{ Lang::get('admin/ban.unbanUser') }}}">
+                @endif
+
             </div>
 
             <hr>
@@ -103,8 +112,10 @@
                 </div>
             </div>
         @endif
+
+        {{ Session::put('type', $searchType) }}
     @endif
 
-    {{Session::put('backUrl', Request::url())}}
+    {{ Session::put('backUrl', Request::url()) }}
 
 @stop

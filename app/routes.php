@@ -49,6 +49,13 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
     Route::get('/message/broadcastMessage', 'AdminMessageController@createGlobalMessage');
     Route::post('/message/broadcastMessage', 'AdminMessageController@broadcastMessage');
 
+    # Ban and unban users
+    Route::get('/user/ban/{id}', 'AdminUsersController@banUser');
+    Route::get('/user/unban/{id}', 'AdminUsersController@unbanUser');
+
+    # Activate NGOs and companies accounts
+    Route::get('/user/activateAccount/{id}', 'AdminUsersController@activateAccount');
+
     # User Management
     Route::get('users/{user}/show', 'AdminUsersController@getShow');
     Route::get('users/{user}/edit', 'AdminUsersController@getEdit');
