@@ -86,11 +86,6 @@ Route::group(array('prefix' => 'volunteer', 'before' => 'auth'), function () {
     Route::get('/project/myVolunteerProjects', 'VolunteerProjectController@findMyVolunteersProjects');
     Route::get('/project/myCsrProjects', 'VolunteerProjectController@findMyCsrProjects');
 
-
-# list messages
-    Route::get('/messages/inbox', 'VolunteerMessageController@getInbox');
-    Route::get('/messages/send', 'VolunteerMessageController@getSent');
-
 # Send messages
     Route::get('/message/sendMessage/{id}', 'VolunteerMessageController@createMessage');
     Route::post('/message/sendMessage', 'VolunteerMessageController@sendMessage');
@@ -127,7 +122,6 @@ Route::group(array('prefix' => 'company', 'before' => 'auth'), function () {
 });
 
 
-
 /** ------------------------------------------
  *  Frontend Routes
  *  ------------------------------------------
@@ -157,6 +151,10 @@ Route::get('projectsCsrFilter', 'ProjectController@findCsrProjects');
 Route::get('project/view/{id}', 'ProjectController@viewVolunteerProject');
 Route::get('projectCsr/view/{id}', 'ProjectController@viewCsrProject');
 
+# list messages
+Route::get('messages/inbox', 'MessageController@getInbox');
+Route::get('messages/sent', 'MessageController@getSent');
+Route::get('message/view/{id}', 'MessageController@view');
 
 //Volunteering projects controller
 Route::get('project/createVolunteerProject', 'NgoProjectController@createVolunteerProject');
