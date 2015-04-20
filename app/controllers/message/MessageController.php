@@ -55,6 +55,16 @@ class MessageController extends BaseController
             $q->where($this->columDatabase, '=', $this->user->id);
         })->paginate(4);
 
+        $messagesNotRead = Message::whereHas($this->eloquentRecipient, function ($q) {
+            $q->where($this->columDatabase, '=', $this->user->id)->where('read', '=', false);
+        })->get();
+
+        $messagesNotReadId = array();
+        if (!$messagesNotRead->isEmpty()) {
+            foreach ($messagesNotRead as $message) {
+                $messagesNotReadId[] = $message->id;
+            }
+        }
 
         $emptyMessages = false;
         $inbox = true;
@@ -62,7 +72,7 @@ class MessageController extends BaseController
         if ($messages->getTotal() == 0) {
             $emptyMessages = true;
         }
-        return View::make('site/message/list', compact('messages', 'emptyMessages', 'inbox'));
+        return View::make('site/message/list', compact('messages', 'messagesNotReadId', 'emptyMessages', 'inbox'));
 
     }
 
@@ -145,23 +155,27 @@ class MessageController extends BaseController
 
         if ($this->user->id != $idColum) {
             //Si no es enviado, hay que comprobar si es recibido
-            $messageAux = Message::whereHas($this->eloquentRecipient, function ($q) {
-                $q->where($this->columDatabase, '=', $this->user->id)->where('message_id', '=', $this->message->id);
+            $messageAuxNotRead = Message::whereHas($this->eloquentRecipient, function ($q) {
+                $q->where($this->columDatabase, '=', $this->user->id)->where('message_id', '=', $this->message->id)->where('read', '=', false);
             })->first();
-            if ($messageAux == null) {
+            $messageAuxRead = Message::whereHas($this->eloquentRecipient, function ($q) {
+                $q->where($this->columDatabase, '=', $this->user->id)->where('message_id', '=', $this->message->id)->where('read', '=', true);
+            })->first();
+            if ($messageAuxNotRead == null && $messageAuxRead == null) {
                 return Redirect::to('/')->with('error', Lang::get('messages.viewMessage.errorHisMessage'));
             }
         }
 
-        if (!$this->message->read) {
-            $this->message->read = true;
 
-            if ($this->message->save()) {
-                $backUrl=Session::get('backUrl');
-                return View::make('site/message/view')->with('message', $this->message)->with('backUrl', $backUrl);            }
+        if ($messageAuxNotRead != null) {
+            $transaction = DB::table('message_recipient')->where('message_id','=', $messageAuxNotRead->id)->where($this->columDatabase,'=', $this->user->id)->update(array('read' => true));
+            if ($transaction) {
+                $backUrl = Session::get('backUrl');
+                return View::make('site/message/view')->with('message', $this->message)->with('backUrl', $backUrl);
+            }
             return Redirect::to('/')->with('error', Lang::get('messages.viewMessage.error'));
         } else {
-            $backUrl=Session::get('backUrl');
+            $backUrl = Session::get('backUrl');
             return View::make('site/message/view')->with('message', $this->message)->with('backUrl', $backUrl);
         }
     }

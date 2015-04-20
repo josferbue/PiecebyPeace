@@ -34,7 +34,7 @@
                     <li class="dropdown ">
                         <a href="{{URL::to('message/view/'.$message->id)}}" class="list-group-item active">
                             @if($inbox)
-                                 <span class="listMessages">{{{$message->from}}}</span>
+                                <span class="listMessages">{{{$message->from}}}</span>
                             @else
                                 @if(substr($message->to, 0,1)=='(' && substr($message->to, -1)==')')
                                     <span class="listMessages">{{{ Lang::get('message/list.BroadcastAllVolunteers').' '.$message->to }}}</span>
@@ -42,10 +42,12 @@
                                     <span class="listMessages">{{{$message->to}}}</span>
                                 @endif
                             @endif
-                            @if(!$message->read)
-                                <i class="general foundicon-mail icon"></i>
+                            @if(isset ($messagesNotReadId))
+                                @if(in_array($message->id, $messagesNotReadId))
+                                    <i class="general foundicon-mail icon"></i>
+                                @endif
                             @endif
-                                <br> <br>
+                            <br> <br>
                             {{{$message->subject}}}
                         </a>
                     </li>
@@ -54,4 +56,12 @@
             @endforeach
         </div>
     @endif
+    <br><br><br>
+    <div class="form-actions form-group">
+
+        <input type="button" class="btn btn-primary"
+               onclick="window.location.href='{{ URL::to('/') }}'"
+
+               value="{{ Lang::get('message/list.back') }}">
+    </div>
 @stop

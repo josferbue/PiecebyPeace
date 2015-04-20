@@ -19,7 +19,6 @@ class CreateMessagesTable extends Migration {
 			$table->date('date');
 			$table->String('from');
 			$table->String('to');
-			$table->boolean('read')->default(false);
 			$table->integer('administrator_id')->unsigned()->index()->nullable();
 			$table->foreign('administrator_id')->references('id')->on('administrator')->onDelete('cascade');
 			$table->integer('ngo_id')->unsigned()->index()->nullable();
@@ -33,6 +32,7 @@ class CreateMessagesTable extends Migration {
 		Schema::create('message_recipient', function($table)
 		{
 			$table->increments('id');
+			$table->boolean('read')->default(false);
 			$table->integer('message_id')->unsigned()->index();
 			$table->foreign('message_id')->references('id')->on('message')->onDelete('cascade');
 			$table->integer('recipient_administrator_id')->unsigned()->index()->nullable();

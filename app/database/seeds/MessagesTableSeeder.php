@@ -14,7 +14,6 @@ class MessagesTableSeeder extends Seeder
                 'textBox' => 'This is a message 1',
                 'from' => 'Administrator 1',
                 'to' => 'Broadcast volunteers',
-                'read' => true,
                 'date' =>\Carbon\Carbon::createFromDate(2015,8,23)->toDateTimeString(),
                 'administrator_id' => Administrator::where('user_id', '=', User::where('username', '=', 'administrator1')->first()->id)->first()->id,
             ),
@@ -23,7 +22,6 @@ class MessagesTableSeeder extends Seeder
                 'textBox' => 'This is a message 2',
                 'from' => 'Administrator 2',
                 'to' => 'Broadcast ngo\'s',
-                'read' => true,
                 'date' =>\Carbon\Carbon::createFromDate(2015,9,15)->toDateTimeString(),
                 'administrator_id' => Administrator::where('user_id', '=', User::where('username', '=', 'administrator2')->first()->id)->first()->id,
             ),
@@ -32,7 +30,6 @@ class MessagesTableSeeder extends Seeder
                 'textBox' => 'This is a message 3',
                 'from' => 'Administrator 1',
                 'to' => 'Broadcast companies',
-                'read' => true,
                 'date' =>\Carbon\Carbon::createFromDate(2015,11,10)->toDateTimeString(),
                 'administrator_id' => Administrator::where('user_id', '=', User::where('username', '=', 'administrator1')->first()->id)->first()->id,
             ),
@@ -46,10 +43,12 @@ class MessagesTableSeeder extends Seeder
             array(
                 'message_id' => Message::where('subject', '=', 'Subject 1')->first()->id,
                 'recipient_volunteer_id' => Volunteer::where('user_id', '=', User::where('username', '=', 'volunteer1')->first()->id)->first()->id,
+                'read'=>true
             ),
             array(
                 'message_id' => Message::where('subject', '=', 'Subject 1')->first()->id,
                 'recipient_volunteer_id' => Volunteer::where('user_id', '=', User::where('username', '=', 'volunteer2')->first()->id)->first()->id,
+                'read'=>true
             )
         );
         $messages_recipientsNgo = array(
@@ -57,10 +56,12 @@ class MessagesTableSeeder extends Seeder
             array(
                 'message_id' => Message::where('subject', '=', 'Subject 2')->first()->id,
                 'recipient_ngo_id' => Ngo::where('user_id', '=', User::where('username', '=', 'ngo1')->first()->id)->first()->id,
+                'read'=>true
             ),
             array(
                 'message_id' => Message::where('subject', '=', 'Subject 2')->first()->id,
                 'recipient_ngo_id' => Ngo::where('user_id', '=', User::where('username', '=', 'ngo2')->first()->id)->first()->id,
+                'read'=>true
             )
         );
 
@@ -70,12 +71,16 @@ class MessagesTableSeeder extends Seeder
             array(
                 'message_id' => Message::where('subject', '=', 'Subject 3')->first()->id,
                 'recipient_company_id' => Company::where('user_id', '=', User::where('username', '=', 'company1')->first()->id)->first()->id,
+                'read'=>true
             ),
+
             array(
                 'message_id' => Message::where('subject', '=', 'Subject 3')->first()->id,
                 'recipient_company_id' => Company::where('user_id', '=', User::where('username', '=', 'company2')->first()->id)->first()->id,
-            ),
+                'read'=>true
+            )
         );
+
 
 
         DB::table('message_recipient')->insert($messages_recipientsCompany);
