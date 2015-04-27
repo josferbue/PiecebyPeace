@@ -152,7 +152,7 @@ class MessageController extends BaseController
             $this->user = Company::where('user_id', '=', Auth::id())->first();
             $idColum = $this->message->company_id;
         }
-
+        $messageAuxNotRead=null;
         if ($this->user->id != $idColum) {
             //Si no es enviado, hay que comprobar si es recibido
             $messageAuxNotRead = Message::whereHas($this->eloquentRecipient, function ($q) {
