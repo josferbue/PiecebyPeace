@@ -19,7 +19,7 @@ Route::model('user', 'User');
 Route::model('comment', 'Comment');
 Route::model('post', 'Post');
 Route::model('role', 'Role');
-
+Route::model('campaign', 'Campaign');
 /** ------------------------------------------
  *  Route constraint patterns
  *  ------------------------------------------
@@ -28,6 +28,7 @@ Route::pattern('comment', '[0-9]+');
 Route::pattern('post', '[0-9]+');
 Route::pattern('user', '[0-9]+');
 Route::pattern('role', '[0-9]+');
+Route::pattern('campaign', '[0-9]+');
 Route::pattern('token', '[0-9a-z]+');
 
 /** ------------------------------------------
@@ -94,9 +95,17 @@ Route::group(array('prefix' => 'volunteer', 'before' => 'auth'), function () {
 //NGO Functions
 Route::group(array('prefix' => 'ngo', 'before' => 'auth'), function () {
     Route::get('/project/myVolunteersProjects', 'NgoProjectController@findMyVolunteersProjects');
+    //Payment Credits
     Route::get('/credits/create', 'NgoCreditsController@getCreate');
     Route::post('/credits/create', 'NgoCreditsController@postCreate');
     Route::get('/executePayment', 'NgoCreditsController@getExecutePayment');
+
+    //Email Marketing
+
+    Route::post('/sendEmails', 'NgoCampaignController@sendEmails');
+    Route::get('/createEmails/{campaign}', 'NgoCampaignController@createEmails');
+
+
     Route::get('/myCampaigns', 'NgoCampaignController@findCampaignsByCurrentNGO');
     Route::get('/campaign/create', 'NgoCampaignController@createCampaign');
     Route::post('/campaign/create', 'NgoCampaignController@saveCampaign');

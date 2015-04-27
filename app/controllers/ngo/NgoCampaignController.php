@@ -82,5 +82,80 @@ class NgoCampaignController extends BaseController
             return Redirect::to('ngo/campaign/create')->withInput(Input::all())->withErrors($validator);
         }
     }
+    public function sendEmails()
+    {
+        $curl = curl_init('http://10code.ip-zone.com//ccm/admin/api/version/2/&type=json');
+
+        $postData = array(
+            'function' => 'doAuthentication',
+            'username' => '10code',
+            'password' => 'eef6bd5d',
+        );
+
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($postData));
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+
+        $json = curl_exec($curl);
+        $result = json_decode($json);
+
+        if ($result->status == 0) {
+            return Redirect::action('BlogController@getIndex')
+                ->with('error', 'Authentication failure');
+        }
+
+        $camp = Campaign::find(Input::get( 'campaingId' ));
+        $numberEmail = Input::get('numberEmail');
+        $arrayAux = array();
+        foreach(Volunteer::all() as $aux){
+            array_push($arrayAux,$aux);
+        }
+        $volunteers = array_rand($arrayAux,2);
+        $cont= 0;
+        $rcpt = array();
+        foreach($volunteers as $volunteer){
+                array_push($rcpt,array(
+                    'name' => $volunteer->name,
+                    'email' => $volunteer->userAccount->email
+                ));
+
+        }
+
+
+        $postData = array(
+            'function' => 'sendMail',
+            'apiKey' => $result->data,
+            'subject' => $camp->ngo->name,
+            'html' => '<html><head><title>$camp->name</title></head><body><h1>$camp->name</h1>$camp->description  </p> <a herf=$camp->link >Go to link<a/></body></html>',
+            'mailboxFromId' => 1,
+            'mailboxReplyId' => 1,
+            'mailboxReportId' => 1,
+            'packageId' => 2,
+            'emails' => $rcpt
+        );
+
+        $post = http_build_query($postData);
+
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $post);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+
+        $json = curl_exec($curl);
+        $result = json_decode($json);
+
+        if ($result->status == 0) {
+            Redirect::action('BlogController@getIndex')->with('error', 'Sending failure');
+        }
+        return Redirect::action('BlogController@getIndex')
+            ->with('success', 'Email sent successfully');
+    }
+
+    public function createEmails($campaign)
+    {
+
+
+        Return View::make('site/ngo/emails')->with('campaignId',$campaign->id)->with('campaignName',$campaign->name);
+    }
+
 
 }

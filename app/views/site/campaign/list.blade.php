@@ -47,7 +47,12 @@
                 </div>
 
             </div>
+            <div class="span3">
+                {{--<div class="thumbnail">--}}
+                <a href="{{{ URL::to('ngo/createEmails/'.$campaign->id) }}}">{{{ Lang::get('ngo/ngo.sendEmail') }}}</a>
 
+                {{--</div>--}}
+            </div>
         </div>
 
         <hr>

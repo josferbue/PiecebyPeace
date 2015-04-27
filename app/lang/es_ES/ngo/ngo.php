@@ -22,6 +22,10 @@ return array(
     'logo'               					=> 'Logo',
     'active'               					=> 'Activo',
     'back'               					=> 'Cancelar',
+    'campaign'                              => 'Campaña',
+    'numberEmails'                          => 'Número de emails para envias. Un email por credito',
+    'send'                                  => 'Enviar',
+    'sendEmail'                             => 'Enviar emails de marketing',
 
 
 
