@@ -1,15 +1,14 @@
 <?php
 
-class VolunteerMessageController extends BaseController
+class VolunteerApplicationController extends BaseController
 {
-    protected $message;
-    public function __construct(Message $message)
+    public function __construct(Application $application)
     {
         parent::__construct();
         $this->message = $message;
     }
 
-    public function createMessage($id)
+    public function createApplication($id)
     {
         $backUrl = Session::get('backUrl');
         $project = Project::where('id', '=', $id)->first();
@@ -32,7 +31,7 @@ class VolunteerMessageController extends BaseController
         Return View::make('volunteer/message/send')->with($data);
     }
 
-    public function sendMessage()
+    public function saveApplication()
     {
         $loggingId = Auth::id();
         $volunteer = Volunteer::where('user_id', '=', $loggingId)->first();

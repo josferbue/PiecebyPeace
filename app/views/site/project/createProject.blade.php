@@ -189,7 +189,6 @@
                        value="{{ Lang::get('project/create.back') }}">
             @endif
 
-
         </div>
     </form>
 @stop

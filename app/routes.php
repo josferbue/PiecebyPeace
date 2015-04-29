@@ -86,6 +86,9 @@ Route::group(array('prefix' => 'volunteer', 'before' => 'auth'), function () {
 
     Route::get('/project/myVolunteerProjects', 'VolunteerProjectController@findMyVolunteersProjects');
     Route::get('/project/myCsrProjects', 'VolunteerProjectController@findMyCsrProjects');
+    //apply project
+    Route::get('/apply/project/{id}', 'VolunteerApplicationController@createApplication');
+    Route::post('/apply/project/{id}', 'VolunteerApplicationController@saveApplication');
 
 # Send messages
     Route::get('/message/sendMessage/{id}', 'VolunteerMessageController@createMessage');

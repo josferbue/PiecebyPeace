@@ -28,7 +28,8 @@ return array(
 	'edit'    				 =>'Editar el proyecto',
 	'delete'    		   	 =>'Borrar el proyecto',
 	'confirmDelete'   		 =>'¿Está seguro de que desea eliminar el proyecto?',
-	'back'   				 =>'Volver'
+	'back'   				 =>'Volver',
+	'apply'   				 =>'Solicitar plaza'
 
 
 );

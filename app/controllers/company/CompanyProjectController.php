@@ -222,7 +222,7 @@ class CompanyProjectController extends BaseController
         $projectOld = Project::where("id", '=', $id)->first();
 
         //checkeamos que no haya applications pendientes ni voluntarios ya asociados
-        if ($projectOld->ngo_id != $company->id) {
+        if ($projectOld->company_id != $company->id) {
             return Redirect::to('projectCsr/view/' . $id)->with('error', Lang::get('project/messages.editCsr.errorNotHisProject'));
 
         }

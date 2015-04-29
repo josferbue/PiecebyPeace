@@ -68,14 +68,26 @@
     <div class="form-actions form-group">
         @if(isset($editable))
             @if($editable)
-
-                <input type="button" class="btn btn-primary"
-                       onclick="window.location.href='{{ URL::to('project/editVolunteerProject/'.$project->id) }}'"
-                       value="{{ Lang::get('project/view.edit') }}">
+                @if($isCsrProject)
+                    <input type="button" class="btn btn-primary"
+                           onclick="window.location.href='{{ URL::to('company/project/editCsrProject/'.$project->id) }}'"
+                           value="{{ Lang::get('project/view.edit') }}">
+                @else
+                    <input type="button" class="btn btn-primary"
+                           onclick="window.location.href='{{ URL::to('project/editVolunteerProject/'.$project->id) }}'"
+                           value="{{ Lang::get('project/view.edit') }}">
+                @endif
 
                 <input type="button" class="btn btn-primary"
                        onclick="ConfirmDelete();"
                        value="{{ Lang::get('project/view.delete') }}">
+            @endif
+        @endif
+        @if(isset($canApply))
+            @if($canApply)
+                <input type="button" class="btn btn-primary"
+                       onclick="window.location.href='{{ URL::to('volunteer/apply/project/'.$project->id) }}'"
+                       value="{{ Lang::get('project/view.apply') }}">
             @endif
         @endif
         <input type="button" class="btn btn-primary"
@@ -92,7 +104,15 @@
         function ConfirmDelete() {
             var mensaje = confirm('{{ Lang::get('project/view.confirmDelete') }}');
             if (mensaje) {
-                window.location.href = '{{ URL::to('project/deleteVolunteerProject/'.$project->id) }}'
+                @if($isCsrProject)
+                window.location.href = '{{ URL::to('company/project/deleteCsrProject/'.$project->id) }}'
+                @else
+                    window.location.href = '{{ URL::to('project/deleteVolunteerProject/'.$project->id) }}'
+
+                @endif
+
+
+
             }
         }
     </script>
