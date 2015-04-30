@@ -2,53 +2,104 @@
 
 class VolunteerApplicationController extends BaseController
 {
+    protected $application;
+    protected $volunteer;
+    protected $project;
+
     public function __construct(Application $application)
     {
         parent::__construct();
-        $this->message = $message;
+        $this->application = $application;
     }
 
     public function createApplication($id)
     {
-        $backUrl = Session::get('backUrl');
+
         $project = Project::where('id', '=', $id)->first();
-        $action = 'volunteer/message/sendMessage';
-        if ($project->ngo_id == null) {
-            $userId = Company::where('id', '=', $project->company_id)->first()->user_id;
-        } else {
-            $userId = Ngo::where('id', '=', $project->ngo_id)->first()->user_id;
+        if(is_null($project->company_id)){
+            $backUrl = URL::to('project/view/'.$id);
+
+        }else{
+            $backUrl = URL::to('projectCsr/view/'.$id);
 
         }
         $data = array(
-            'userId' => $userId,
             'backUrl' => $backUrl,
             'project' => $project,
-            'sendMessageAction' => $action,
-
-
         );
 
-        Return View::make('volunteer/message/send')->with($data);
+        Return View::make('volunteer/application/create')->with($data);
     }
 
-    public function saveApplication()
+    public function saveApplication($id)
     {
         $loggingId = Auth::id();
-        $volunteer = Volunteer::where('user_id', '=', $loggingId)->first();
+        $this->volunteer = Volunteer::where('user_id', '=', $loggingId)->first();
+        $this->project = Project::where('id', '=', $id)->first();
+        $volunteers = $this->project->volunteers;
+        $availableVolunteers = $this->project->maxVolunteers - sizeof($volunteers);
 
-        $userId = Input::get('userId');
+        if(is_null($this->project->company_id)){
+            $backUrl = URL::to('project/view/'.$id);
 
-        $projectId = Input::get('projectId');
-        $project = Project::where('id', '=', $projectId)->first();
-        $p = $project->volunteers;
-        if (!$project->volunteers->contains($volunteer)) {
-            return Redirect::to('/')->with('error', Lang::get('volunteer/messages.createMessage.errorNotCooperateInProject'));
+        }else{
+            $backUrl = URL::to('projectCsr/view/'.$id);
 
         }
+
+        if (is_null($this->volunteer)) {
+            return Redirect::to($backUrl)->with('error', Lang::get('application/messages.create.errorNotIsVolunteer'));
+        } else {
+
+            //condiciones para añadir solicitud a un proyecto
+
+            if ($volunteers->contains($this->volunteer)) {
+                return Redirect::to($backUrl)->with('error', Lang::get('application/messages.create.errorIsCooperateYet'));
+            }
+            $applyYet=Application::where('volunteer_id','=',$this->volunteer->id)
+                ->where('project_id','=',$this->project->id)->first();
+
+            if(!is_null($applyYet)){
+                return Redirect::to($backUrl)->with('error', Lang::get('application/messages.create.errorIsApplyYet'));
+            }
+
+            if($availableVolunteers <= 0) {
+                return Redirect::to($backUrl)->with('error', Lang::get('application/messages.create.errorNotVolunteerPlaces'));
+            }
+
+            if ($this->project->finishDate <= date("Y-m-d")) {
+                return Redirect::to($backUrl)->with('error', Lang::get('application/messages.create.errorFinishProject'));
+            }
+
+
+            $projectOverlapsDate = Project::where(function ($query) {
+                //intentamos coger los proyectos  para los que el proyecto actual empieza entre su fecha de comienzo y su fecha de fin
+                $query->whereHas('volunteers', function ($q) {
+                    $q->where('volunteer_id', '=', $this->volunteer->id);
+                })
+                    ->where('startDate', '<=', $this->project->startDate)
+                    ->where('finishDate', '>=', $this->project->startDate);
+
+            })->orWhere(function ($query) {
+                //intentamos coger los proyectos  para los que el proyecto actual comienza antes que ellos pero finaliza despues de que comiencen los otros
+                $query->whereHas('volunteers', function ($q) {
+                    $q->where('volunteer_id', '=', $this->volunteer->id);
+                })
+                    ->where('startDate', '>=', $this->project->startDate)
+                    ->where('startDate', '<=', $this->project->finishDate);
+
+            })->get();
+
+
+            if (!$projectOverlapsDate->isEmpty()) {
+                return Redirect::to($backUrl)->with('error', Lang::get('application/messages.create.errorOverlapsDates'));
+            }
+        }
+
+
         // Declare the rules for the form validation
         $rules = array(
-            'subject' => 'required|min:1',
-            'textBox' => 'required|min:1',
+            'subject' => 'string',
         );
 
         // Validate the inputs
@@ -56,43 +107,20 @@ class VolunteerApplicationController extends BaseController
 
         // Check if the form validates with success
         if ($validator->passes()) {
-            $this->message->subject = Input::get('subject');
-            $this->message->textBox = Input::get('textBox');
-            $this->message->from = $volunteer->name . ' ' . $volunteer->surname;
-            $this->message->volunteer_id = Volunteer::where('user_id', '=', Auth::id())->first()->id;
-            $this->message->date = date("Y-m-d");
+            $this->application->moment = date("Y-m-d");
+            $this->application->comments = Input::get('comments');
+            $this->application->result = 0;
+            $this->application->volunteer_id = $this->volunteer->id;
+            $this->application->project_id = $id;
 
-
-            $recipientUserCompany = Company::where('user_id', '=', $userId)->first();
-            $recipientUserNGO = Ngo::where('user_id', '=', $userId)->first();
-
-            if ($recipientUserCompany) {
-                $this->message->to = $recipientUserCompany->name . ' ' . $recipientUserCompany->surname;
-            } elseif ($recipientUserNGO) {
-                $this->message->to = $recipientUserNGO->name . ' ' . $recipientUserNGO->surname;
+            if ($this->application->save()) {
+                return Redirect::to($backUrl)->with('success', Lang::get('application/messages.create.success'));
             }
 
-            if ($this->message->save()) {
-                if ($this->message->id) {
-                    if ($recipientUserCompany) {
-                        $this->message->recipients_company()->attach($recipientUserCompany);
-
-                    } elseif ($recipientUserNGO) {
-                        $this->message->recipients_ngo()->attach($recipientUserNGO);
-
-                    } else {
-                        $this->message->delete();
-                        return Redirect::to(Session::get('backUrl'))->with('error', Lang::get('volunteer/messages.createMessage.error'));
-
-                    }
-                }
-
-                return Redirect::to(Session::get('backUrl'))->with('success', Lang::get('volunteer/messages.createMessage.success'));
-            }
-            return Redirect::to(Session::get('backUrl'))->with('error', Lang::get('volunteer/messages.createMessage.error'));
+            return Redirect::to($backUrl)->with('error', Lang::get('application/messages.create.error'));
 
         } else
-            return Redirect::to('volunteer/message/sendMessage/' . $projectId)->withInput()->withErrors($validator);
+            return Redirect::to('volunteer/application/create/' . $id)->withInput()->withErrors($validator);
 
     }
 }

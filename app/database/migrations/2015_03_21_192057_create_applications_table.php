@@ -16,7 +16,7 @@ class CreateApplicationsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->date('moment');
-			$table->String('comments')->nullable();
+			$table->Text('comments')->nullable();
 			$table->integer('result');
 
 

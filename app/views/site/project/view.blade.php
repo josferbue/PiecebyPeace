@@ -83,12 +83,10 @@
                        value="{{ Lang::get('project/view.delete') }}">
             @endif
         @endif
-        @if(isset($canApply))
-            @if($canApply)
-                <input type="button" class="btn btn-primary"
-                       onclick="window.location.href='{{ URL::to('volunteer/apply/project/'.$project->id) }}'"
-                       value="{{ Lang::get('project/view.apply') }}">
-            @endif
+        @if($canApply)
+            <input type="button" class="btn btn-primary"
+                   onclick="window.location.href='{{ URL::to('volunteer/apply/project/'.$project->id) }}'"
+                   value="{{ Lang::get('project/view.apply') }}">
         @endif
         <input type="button" class="btn btn-primary"
 
@@ -108,11 +106,7 @@
                 window.location.href = '{{ URL::to('company/project/deleteCsrProject/'.$project->id) }}'
                 @else
                     window.location.href = '{{ URL::to('project/deleteVolunteerProject/'.$project->id) }}'
-
                 @endif
-
-
-
             }
         }
     </script>

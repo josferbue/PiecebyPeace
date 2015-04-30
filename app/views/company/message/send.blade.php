@@ -19,12 +19,11 @@
 
         <div class="createMessage">
 
-
             <div class="row ">
                 <div class="span6">
 
                     <br>
-                    <h7>  {{{ Lang::get('company/view.name') }}} </h7>
+                    <h7>  {{{ Lang::get('company/message.nameProject') }}} </h7>
                     <p>{{$project->name }}</p>
 
                 </div>
