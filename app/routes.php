@@ -57,6 +57,11 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
     # Activate NGOs and companies accounts
     Route::get('/user/activateAccount/{id}', 'AdminUsersController@activateAccount');
 
+    # Categories management
+    Route::get('/category/list', 'AdminCategoryController@listCategories');
+    Route::get('/category/delete/{id}', 'AdminCategoryController@delete');
+    Route::post('/category/createAndEdit', 'AdminCategoryController@createAndEdit');
+
     # User Management
     Route::get('users/{user}/show', 'AdminUsersController@getShow');
     Route::get('users/{user}/edit', 'AdminUsersController@getEdit');

@@ -27,6 +27,8 @@ return array(
 	'createCsrProject' 				=> 'Create CSR project',
 	'myCsrProjects' 				=> 'My CSR projects',
 
+	'categories'					=> 'Categories',
+
 	'campaigns'						=> 'Campaigns',
 
 	'users'							=> 'Users',

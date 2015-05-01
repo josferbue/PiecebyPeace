@@ -102,7 +102,13 @@
                                             <li>
                                                 <a href="{{{ URL::to('projectsCsr') }}}">{{{ Lang::get('site.findCsrProjects') }}}</a>
                                             </li>
-                                            @if (Auth::check() && Auth::user()->hasRole('VOLUNTEER'))
+
+                                            @if (Auth::check() && Auth::user()->hasRole('ADMINISTRATOR'))
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('admin/category/list') }}}">{{{ Lang::get('site.categories') }}}</a>
+                                                </li>
+
+                                            @elseif (Auth::check() && Auth::user()->hasRole('VOLUNTEER'))
 
                                                 <li class="dropdown"><a
                                                             href="{{{ URL::to('volunteer/project/myVolunteerProjects') }}}">{{{ Lang::get('site.myVolunteersProjects') }}}</a>
@@ -221,9 +227,6 @@
                                                 <li class="dropdown"><a
                                                             href="{{{ URL::to('admin/search/searchNGOs') }}}">{{{ Lang::get('site.findNGOs') }}}</a>
                                                 </li>
-                                                <li class="dropdown"><a
-                                                            href="{{{ URL::to('admin/message/broadcastMessage') }}}">{{{ Lang::get('site.broadcastMessage') }}}</a>
-                                                </li>
                                             </ul>
                                         </li>
                                     @endif
@@ -240,7 +243,11 @@
                                                 <li class="dropdown"><a
                                                             href="{{{ URL::to('messages/sent') }}}">{{{ Lang::get('site.messagesSent') }}}</a>
                                                 </li>
-                                                @if (Auth::user()->hasRole('admin'))
+                                                @if (Auth::user()->hasRole('ADMINISTRATOR'))
+                                                    <li class="dropdown"><a
+                                                                href="{{{ URL::to('admin/message/broadcastMessage') }}}">{{{ Lang::get('site.broadcastMessage') }}}</a>
+                                                    </li>
+
                                                     <li><a href="{{{ URL::to('admin') }}}">Admin Panel</a></li>
                                                 @endif
                                                 <li><a href="{{{ URL::to('user') }}}">Logged in

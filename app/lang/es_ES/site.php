@@ -27,6 +27,8 @@ return array(
 	'createCsrProject' 				=> 'Crear proyecto de RSC',
 	'myCsrProjects' 				=> 'Mis proyectos de RSC',
 
+	'categories'					=> 'Categorías',
+
 	'campaigns'						=> 'Campañas',
 
 	'users'							=> 'Usuarios',
