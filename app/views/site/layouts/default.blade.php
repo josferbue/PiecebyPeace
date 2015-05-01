@@ -88,7 +88,8 @@
                             </button>
                             <div class="nav-collapse collapse">
                                 <ul class="nav nav-pills ddmenu">
-                                    <li class="dropdown active"><a href="{{{ URL::to('') }}}">Home</a></li>
+                                    {{--<li class="dropdown active"><a href="{{{ URL::to('') }}}">Home</a></li>--}}
+
 
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle">{{{ Lang::get('site.projects') }}} <b
@@ -145,6 +146,53 @@
                                             @endif
                                         </ul>
                                     </li>
+                                    @if (Auth::check() && Auth::user()->hasRole('VOLUNTEER'))
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle">{{{ Lang::get('site.applications') }}}<b
+                                                        class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('volunteer/application/Volunteer') }}}">{{{ Lang::get('site.myVolunteerApplication') }}}</a>
+                                                </li>
+
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('volunteer/application/Csr') }}}">{{{ Lang::get('site.myCsrApplication') }}}</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    @elseif (Auth::check() && Auth::user()->hasRole('NonGovernmentalOrganization'))
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle">{{{ Lang::get('site.applications') }}}<b
+                                                        class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('ngo/application/pending') }}}">{{{ Lang::get('site.pendingApplications') }}}</a>
+                                                </li>
+
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('ngo/application/answered') }}}">{{{ Lang::get('site.answeredApplications') }}}</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                    @elseif (Auth::check() && Auth::user()->hasRole('COMPANY'))
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle">{{{ Lang::get('site.applications') }}}<b
+                                                        class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('company/application/pending') }}}">{{{ Lang::get('site.pendingApplications') }}}</a>
+                                                </li>
+
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('company/application/answered') }}}">{{{ Lang::get('site.answeredApplications') }}}</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+
+
+                                    @endif
                                     @if (Auth::check() && Auth::user()->hasRole('NonGovernmentalOrganization'))
                                         <li class="dropdown"><a href="#"
                                                                 class="dropdown-toggle">{{{ Lang::get('ngo/credits/table.credits') }}}

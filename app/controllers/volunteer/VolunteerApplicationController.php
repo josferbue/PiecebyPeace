@@ -12,15 +12,46 @@ class VolunteerApplicationController extends BaseController
         $this->application = $application;
     }
 
+    public function finMyApplicationsCsr()
+    {
+        $title = Lang::get('application/list.titleCsr');
+
+        $applications = Application::whereHas('project', function ($q) {$q->whereNull('ngo_id');})
+            ->whereHas('volunteer', function ($w) {$w->where('user_id','=',Auth::id());})
+            ->paginate(4);
+
+        $data = array(
+            'title' => $title,
+            'applications' => $applications,
+        );
+        Return View::make('volunteer/application/list')->with($data);
+    }
+
+    public function finMyApplicationsVolunteer()
+    {
+        $title = Lang::get('application/list.titleVolunteer');
+
+        $applications = Application::whereHas('project', function ($q) {$q->whereNull('company_id');})
+            ->whereHas('volunteer', function ($w) {$w->where('user_id','=',Auth::id());})
+            ->paginate(4);
+
+        $data = array(
+            'title' => $title,
+            'applications' => $applications,
+        );
+
+        Return View::make('volunteer/application/list')->with($data);
+    }
+
     public function createApplication($id)
     {
 
         $project = Project::where('id', '=', $id)->first();
-        if(is_null($project->company_id)){
-            $backUrl = URL::to('project/view/'.$id);
+        if (is_null($project->company_id)) {
+            $backUrl = URL::to('project/view/' . $id);
 
-        }else{
-            $backUrl = URL::to('projectCsr/view/'.$id);
+        } else {
+            $backUrl = URL::to('projectCsr/view/' . $id);
 
         }
         $data = array(
@@ -39,11 +70,11 @@ class VolunteerApplicationController extends BaseController
         $volunteers = $this->project->volunteers;
         $availableVolunteers = $this->project->maxVolunteers - sizeof($volunteers);
 
-        if(is_null($this->project->company_id)){
-            $backUrl = URL::to('project/view/'.$id);
+        if (is_null($this->project->company_id)) {
+            $backUrl = URL::to('project/view/' . $id);
 
-        }else{
-            $backUrl = URL::to('projectCsr/view/'.$id);
+        } else {
+            $backUrl = URL::to('projectCsr/view/' . $id);
 
         }
 
@@ -56,14 +87,14 @@ class VolunteerApplicationController extends BaseController
             if ($volunteers->contains($this->volunteer)) {
                 return Redirect::to($backUrl)->with('error', Lang::get('application/messages.create.errorIsCooperateYet'));
             }
-            $applyYet=Application::where('volunteer_id','=',$this->volunteer->id)
-                ->where('project_id','=',$this->project->id)->first();
+            $applyYet = Application::where('volunteer_id', '=', $this->volunteer->id)
+                ->where('project_id', '=', $this->project->id)->first();
 
-            if(!is_null($applyYet)){
+            if (!is_null($applyYet)) {
                 return Redirect::to($backUrl)->with('error', Lang::get('application/messages.create.errorIsApplyYet'));
             }
 
-            if($availableVolunteers <= 0) {
+            if ($availableVolunteers <= 0) {
                 return Redirect::to($backUrl)->with('error', Lang::get('application/messages.create.errorNotVolunteerPlaces'));
             }
 
@@ -96,7 +127,6 @@ class VolunteerApplicationController extends BaseController
             }
         }
 
-
         // Declare the rules for the form validation
         $rules = array(
             'subject' => 'string',
@@ -122,5 +152,49 @@ class VolunteerApplicationController extends BaseController
         } else
             return Redirect::to('volunteer/application/create/' . $id)->withInput()->withErrors($validator);
 
+    }
+
+    public function cancelApplication($id)
+    {
+        $application = Application::where('id', '=', $id)->first();
+
+
+        if (is_null($application->project->ngo_id)) {
+            $backUrl = 'volunteer/application/Csr';
+
+        } else {
+            $backUrl = 'volunteer/application/Volunteer';
+        }
+
+        if ($application->result == 0) {
+            if ($application->delete()) {
+                return Redirect::to($backUrl)->with('success', Lang::get('application/messages.cancel.success'));
+
+            }
+            return Redirect::to($backUrl)->with('error', Lang::get('application/messages.cancel.error'));
+
+        } else {
+
+            return Redirect::to($backUrl)->with('error', Lang::get('application/messages.cancel.errorIsAnswered'));
+        }
+    }
+
+    public function viewApplication($id)
+    {
+        $application = Application::where('id', '=', $id)->first();
+
+
+        if (is_null($application->project->ngo_id)) {
+            $backUrl = 'volunteer/application/Csr';
+
+        } else {
+            $backUrl = 'volunteer/application/Volunteer';
+        }
+
+        $data = array(
+            'backUrl' => $backUrl,
+            'application' => $application,
+        );
+        Return View::make('volunteer/application/view')->with($data);
     }
 }

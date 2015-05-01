@@ -22,9 +22,9 @@ return array(
 	'search' 						=> 'Search',
 	'notFound'   					=>'Not found projects.',
 	'notImage'    					=>'without-Photo',
-	'ngoEmptyProject'    			=>'hasn&apos;t got volunteer projects.',
-	'companyEmptyProject'   		=>'hasn&apos;t got CSR projects.',
-	'volunteerEmptyProject'    		=>'still not cooperates on any project.',
+	'ngoEmptyProject'    			=>'Hasn&apos;t got volunteer projects.',
+	'companyEmptyProject'   		=>'Hasn&apos;t got CSR projects.',
+	'volunteerEmptyProject'    		=>'Still not cooperates on any project.',
 	'sendMessage'    				=>'Send message',
 	'back'   						=>'Back'
 

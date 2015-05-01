@@ -89,6 +89,12 @@ Route::group(array('prefix' => 'volunteer', 'before' => 'auth'), function () {
     //apply project
     Route::get('/apply/project/{id}', 'VolunteerApplicationController@createApplication');
     Route::post('/apply/project/{id}', 'VolunteerApplicationController@saveApplication');
+    Route::get('/application/Csr', 'VolunteerApplicationController@finMyApplicationsCsr');
+    Route::get('/application/Volunteer', 'VolunteerApplicationController@finMyApplicationsVolunteer');
+    Route::get('/application/cancel/{id}', 'VolunteerApplicationController@cancelApplication');
+    Route::get('/application/view/{id}', 'VolunteerApplicationController@viewApplication');
+
+
 
 # Send messages
     Route::get('/message/sendMessage/{id}', 'VolunteerMessageController@createMessage');
@@ -116,6 +122,14 @@ Route::group(array('prefix' => 'ngo', 'before' => 'auth'), function () {
     Route::get('/message/sendMessage/{id}', 'NgoMessageController@createMessage');
     Route::post('/message/sendMessage', 'NgoMessageController@sendMessage');
 
+    #application
+    Route::get('/application/answered', 'NgoApplicationController@findOurAnsweredApplications');
+    Route::get('/application/pending', 'NgoApplicationController@findOurPendingApplications');
+    Route::get('/application/view/{id}', 'NgoApplicationController@viewApplication');
+    Route::get('/application/answer/{id}/{answer}', 'NgoApplicationController@answer');
+
+
+
 });
 
 //Company Functions
@@ -131,6 +145,12 @@ Route::group(array('prefix' => 'company', 'before' => 'auth'), function () {
     Route::get('/project/editCsrProject/{id}', 'CompanyProjectController@editGetCsrProject');
     Route::post('/project/editCsrProject/{id}', 'CompanyProjectController@editSaveCsrProject');
     Route::get('/project/deleteCsrProject/{id}', 'CompanyProjectController@deleteCsrProject');
+
+    #application
+    Route::get('/application/answered', 'CompanyApplicationController@findOurAnsweredApplications');
+    Route::get('/application/pending', 'CompanyApplicationController@findOurPendingApplications');
+    Route::get('/application/view/{id}', 'CompanyApplicationController@viewApplication');
+    Route::get('/application/answer/{id}/{answer}', 'CompanyApplicationController@answer');
 });
 
 

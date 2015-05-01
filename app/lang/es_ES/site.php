@@ -27,8 +27,6 @@ return array(
 	'createCsrProject' 				=> 'Crear proyecto de RSC',
 	'myCsrProjects' 				=> 'Mis proyectos de RSC',
 
-
-
 	'campaigns'						=> 'Campañas',
 
 	'users'							=> 'Usuarios',
@@ -41,4 +39,16 @@ return array(
 	'messagesSent'					=> 'Mensajes enviados',
 	'messagesInbox'					=> 'Bandeja de entrada',
 
+	'myCsrApplication'				=> 'Proyectos RSC',
+	'myVolunteerApplication'		=> 'Proyectos de voluntariado',
+
+	'applications'					=> 'Solicitudes',
+	'pendingApplications'			=> 'Solicitudes pendientes',
+	'answeredApplications'			=> 'Solicitudes contestadas',
+
+
+
+
 );
+
+
