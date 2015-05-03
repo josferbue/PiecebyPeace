@@ -104,33 +104,36 @@ class NgoCampaignController extends BaseController
                 ->with('error', 'Authentication failure');
         }
 
-        $camp = Campaign::find(Input::get( 'campaingId' ));
+        $camp = Campaign::find(Input::get( 'idCampaing' ));
         $numberEmail = Input::get('numberEmail');
         $arrayAux = array();
         foreach(Volunteer::all() as $aux){
-            array_push($arrayAux,$aux);
+            $arrayAux[]=$aux;
         }
         $volunteers = array_rand($arrayAux,2);
         $cont= 0;
         $rcpt = array();
         foreach($volunteers as $volunteer){
-                array_push($rcpt,array(
-                    'name' => $volunteer->name,
-                    'email' => $volunteer->userAccount->email
-                ));
+              $rcpt[] = array(
+                    'name' => $arrayAux[$volunteer]->name,
+                    'email' => $arrayAux[$volunteer]->userAccount->email
+                );
 
         }
-
+        $rcpt[] = array(
+            'name' => 'Prueba',
+            'email' => 'jose1561991@gmail.com'
+        );
 
         $postData = array(
             'function' => 'sendMail',
             'apiKey' => $result->data,
             'subject' => $camp->ngo->name,
-            'html' => '<html><head><title>$camp->name</title></head><body><h1>$camp->name</h1>$camp->description  </p> <a herf=$camp->link >Go to link<a/></body></html>',
+            'html' => '<html><head><title>'.$camp->name.'</title></head><body><h1>'.$camp->name.'</h1>'.$camp->description.' <br> </p> <a herf='.$camp->link.' >Go to link</a></body></html>',
             'mailboxFromId' => 1,
             'mailboxReplyId' => 1,
             'mailboxReportId' => 1,
-            'packageId' => 2,
+            'packageId' => 6,
             'emails' => $rcpt
         );
 
@@ -146,8 +149,10 @@ class NgoCampaignController extends BaseController
         if ($result->status == 0) {
             Redirect::action('BlogController@getIndex')->with('error', 'Sending failure');
         }
-        return Redirect::action('BlogController@getIndex')
-            ->with('success', 'Email sent successfully');
+        else {
+            return Redirect::action('BlogController@getIndex')
+                ->with('success', 'Email sent successfully');
+        }
     }
 
     public function createEmails($campaign)
