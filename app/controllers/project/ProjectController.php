@@ -10,6 +10,8 @@ class ProjectController extends BaseController
 {
     protected $locationVolunteerProjects;
     protected $categoriesVolunteerProjects;
+    protected $project;
+    protected $volunteer;
 
     public function __construct()
     {
@@ -54,6 +56,7 @@ class ProjectController extends BaseController
 
     Public function findVolunteerProjects()
     {
+
         $volunteer = Volunteer::where('user_id', '=', Auth::id())->first();
         $ngo = Ngo::where('user_id', '=', Auth::id())->first();
         //se usara para añadir boton de enviar mensajes
@@ -73,7 +76,7 @@ class ProjectController extends BaseController
 
         $projects = Project::whereNull('company_id')->where('city', '=', $city)->where('startDate', '>', $startDate)
             ->where('finishDate', '<', $finishDate)->whereHas('categories', function ($q) {
-                $q->where('category_id', 'like', Input::get('category'));
+                $q->where('category_id', '=', Input::get('category'));
             })->paginate(4);
 
 
@@ -100,18 +103,24 @@ class ProjectController extends BaseController
     {
         $backUrl = Session::get('backUrl');
         if (strpos($backUrl, 'projectsFilter') !== false) {
-            $backUrl=str_replace('Filter', '', $backUrl);
+            $backUrl = str_replace('Filter', '', $backUrl);
         }
 
         $ngo = Ngo::where('user_id', '=', Auth::id())->first();
+        $this->volunteer = Volunteer::where('user_id', '=', Auth::id())->first();
+        $isCsrProject = false;
 
-        $project = Project::where('id', '=', $id)->first();
-        $volunteers = $project->volunteers;
-        $availableVolunteers = $project->maxVolunteers - sizeof($volunteers);
+        $this->project = Project::where('id', '=', $id)->first();
+        $volunteers = $this->project->volunteers;
+        $availableVolunteers = $this->project->maxVolunteers - sizeof($volunteers);
         $categories = '';
-        for ($i = 0; $i < sizeof($project->categories); $i++) {
-            $category = $project->categories[$i];
-            if ($i == (sizeof($project->categories) - 1)) {
+
+        $canApply = $this->canApplyProject($availableVolunteers,$volunteers);
+
+
+        for ($i = 0; $i < sizeof($this->project->categories); $i++) {
+            $category = $this->project->categories[$i];
+            if ($i == (sizeof($this->project->categories) - 1)) {
                 $categories .= $category->name;
             } else {
                 $categories .= $category->name . ', ';
@@ -121,14 +130,16 @@ class ProjectController extends BaseController
         $data = array(
 
             'availableVolunteers' => $availableVolunteers,
-            'project' => $project,
+            'project' => $this->project,
             'categories' => $categories,
+            'isCsrProject' => $isCsrProject,
+            'canApply' => $canApply,
             'backUrl' => $backUrl
         );
 
         //si se trata de un ngo y es su proyecto tendra boton para editar
         if (!is_null($ngo)) {
-            if ($ngo->id == $project->ngo_id) {
+            if ($ngo->id == $this->project->ngo_id) {
                 $data['editable'] = true;
             }
 
@@ -224,18 +235,24 @@ class ProjectController extends BaseController
     {
         $backUrl = Session::get('backUrl');
         if (strpos($backUrl, 'projectsCsrFilter') !== false) {
-            $backUrl=str_replace('Filter', '', $backUrl);
+            $backUrl = str_replace('Filter', '', $backUrl);
         }
         $company = Company::where('user_id', '=', Auth::id())->first();
-        $project = Project::where('id', '=', $id)->first();
+        $this->volunteer = Volunteer::where('user_id', '=', Auth::id())->first();
+        $this->project = Project::where('id', '=', $id)->first();
 
-        $volunteers = $project->volunteers;
-        $availableVolunteers = $project->maxVolunteers - sizeof($volunteers);
+        $volunteers = $this->project->volunteers;
+        $availableVolunteers = $this->project->maxVolunteers - sizeof($volunteers);
         $categories = '';
+        $isCsrProject = true;
 
-        for ($i = 0; $i < sizeof($project->categories); $i++) {
-            $category = $project->categories[$i];
-            if ($i == (sizeof($project->categories) - 1)) {
+        $canApply = $this->canApplyProject($availableVolunteers,$volunteers);
+
+        for ($i = 0;
+             $i < sizeof($this->project->categories);
+             $i++) {
+            $category = $this->project->categories[$i];
+            if ($i == (sizeof($this->project->categories) - 1)) {
                 $categories .= $category->name;
             } else {
                 $categories .= $category->name . ', ';
@@ -244,14 +261,16 @@ class ProjectController extends BaseController
         $data = array(
 
             'availableVolunteers' => $availableVolunteers,
-            'project' => $project,
+            'project' => $this->project,
             'categories' => $categories,
+            'isCsrProject' => $isCsrProject,
+            'canApply' => $canApply,
             'backUrl' => $backUrl
         );
 
-        //si se trata de un ngo y es su proyecto tendra boton para editar
+//si se trata de un ngo y es su proyecto tendra boton para editar
         if (!is_null($company)) {
-            if ($company->id == $project->company_id) {
+            if ($company->id == $this->project->company_id) {
                 $data['editable'] = true;
             }
 
@@ -259,5 +278,52 @@ class ProjectController extends BaseController
         return View::make('site/project/view')->with($data);
 
 
+    }
+
+    public function canApplyProject($availableVolunteers, $volunteers)
+    {
+        $canApply = true;
+        if (is_null($this->volunteer)) {
+            $canApply = false;
+        } else {
+
+            //condiciones para añadir solicitud a un proyecto
+            $applyYet=Application::where('volunteer_id','=',$this->volunteer->id)
+                ->where('project_id','=',$this->project->id)->first();
+            if(!is_null($applyYet)){
+                $canApply = false;
+            }
+            elseif ($availableVolunteers <= 0) {
+                $canApply = false;
+
+            } elseif ( $volunteers->contains($this->volunteer)) {
+                $canApply = false;
+
+            } elseif ($this->project->finishDate <= date("Y-m-d")) {
+                $canApply = false;
+
+            } else {
+                $projectOverlapsDate = Project::where(function ($query) {
+                    //intentamos coger los proyectos  para los que el proyecto actual empieza entre su fecha de comienzo y su fecha de fin
+                    $query->whereHas('volunteers', function ($q) {
+                        $q->where('volunteer_id', '=', $this->volunteer->id);
+                    })
+                        ->where('startDate', '<=', $this->project->startDate)
+                        ->where('finishDate', '>=', $this->project->startDate);
+
+                })->orWhere(function ($query) {
+                    //intentamos coger los proyectos  para los que el proyecto actual comienza antes que ellos pero finaliza despues de que comiencen los otros
+                    $query->whereHas('volunteers', function ($q) {
+                        $q->where('volunteer_id', '=', $this->volunteer->id);
+                    })
+                        ->where('startDate', '>=', $this->project->startDate)
+                        ->where('startDate', '<=', $this->project->finishDate);
+
+                })->get();
+                if (!$projectOverlapsDate->isEmpty()) {
+                    $canApply = false;
+                }
+            }
+        }return $canApply;
     }
 }

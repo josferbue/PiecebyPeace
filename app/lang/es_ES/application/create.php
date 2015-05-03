@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 return array(
 
@@ -13,16 +13,11 @@ return array(
 	|
 	*/
 
-	'sendMessage'					=> 'Enviar mensaje',
-	'nameProject'					=> 'Nombre del proyecto',
-	'recipient'						=> 'Destinatario',
-	'subject'						=> 'Asunto',
-	'textBox'						=> 'Cuerpo del mensaje',
-	'volunteer'						=>'Mensaje individual',
-	'broadcast'						=>'Mensaje para todos los voluntarios',
-	'selectVolunteer'				=>'Seleccione un voluntario',
-	'send'							=> 'Enviar',
-	'back'							=> 'Volver',
-
+	'title' 						=> 'Solicitud de colaboración',
+	'nameProject' 					=> 'Nombre del proyecto',
+	'comments' 						=> 'Comentarios',
+	'notImage'   					=> 'No hay imagen',
+	'submit'						=> 'Enviar solicitud',
+	'back'   				 		=> 'Cancelar'
 
 );

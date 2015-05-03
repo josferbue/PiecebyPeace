@@ -4,6 +4,7 @@ class Application extends Eloquent
 {
 
     protected $table = 'application';
+    public $timestamps = false;
 
     /**
      * Get the comment's content.

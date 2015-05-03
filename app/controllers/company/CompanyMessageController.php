@@ -2,6 +2,7 @@
 
 class CompanyMessageController extends BaseController
 {
+    protected $message;
     public function __construct(Message $message)
     {
         parent::__construct();

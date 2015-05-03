@@ -27,6 +27,8 @@ return array(
 	'createCsrProject' 				=> 'Create CSR project',
 	'myCsrProjects' 				=> 'My CSR projects',
 
+	'categories'					=> 'Categories',
+
 	'campaigns'						=> 'Campaigns',
 
 	'users'							=> 'Users',
@@ -38,6 +40,15 @@ return array(
 	'messages'						=> 'Messages',
 	'messagesSent'					=> 'Sent messages',
 	'messagesInbox'					=> 'Inbox',
+
+	'myCsrApplication'				=> 'CSR projects',
+	'myVolunteerApplication'		=> 'Volunteer projects',
+
+	'applications'					=> 'Applications',
+	'pendingApplications'			=> 'Pending applications',
+	'answeredApplications'			=> 'Answered applications',
+
+
 
 
 

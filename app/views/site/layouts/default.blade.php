@@ -88,7 +88,8 @@
                             </button>
                             <div class="nav-collapse collapse">
                                 <ul class="nav nav-pills ddmenu">
-                                    <li class="dropdown active"><a href="{{{ URL::to('') }}}">Home</a></li>
+                                    {{--<li class="dropdown active"><a href="{{{ URL::to('') }}}">Home</a></li>--}}
+
 
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle">{{{ Lang::get('site.projects') }}} <b
@@ -101,7 +102,13 @@
                                             <li>
                                                 <a href="{{{ URL::to('projectsCsr') }}}">{{{ Lang::get('site.findCsrProjects') }}}</a>
                                             </li>
-                                            @if (Auth::check() && Auth::user()->hasRole('VOLUNTEER'))
+
+                                            @if (Auth::check() && Auth::user()->hasRole('ADMINISTRATOR'))
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('admin/category/list') }}}">{{{ Lang::get('site.categories') }}}</a>
+                                                </li>
+
+                                            @elseif (Auth::check() && Auth::user()->hasRole('VOLUNTEER'))
 
                                                 <li class="dropdown"><a
                                                             href="{{{ URL::to('volunteer/project/myVolunteerProjects') }}}">{{{ Lang::get('site.myVolunteersProjects') }}}</a>
@@ -145,6 +152,53 @@
                                             @endif
                                         </ul>
                                     </li>
+                                    @if (Auth::check() && Auth::user()->hasRole('VOLUNTEER'))
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle">{{{ Lang::get('site.applications') }}}<b
+                                                        class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('volunteer/application/Volunteer') }}}">{{{ Lang::get('site.myVolunteerApplication') }}}</a>
+                                                </li>
+
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('volunteer/application/Csr') }}}">{{{ Lang::get('site.myCsrApplication') }}}</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    @elseif (Auth::check() && Auth::user()->hasRole('NonGovernmentalOrganization'))
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle">{{{ Lang::get('site.applications') }}}<b
+                                                        class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('ngo/application/pending') }}}">{{{ Lang::get('site.pendingApplications') }}}</a>
+                                                </li>
+
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('ngo/application/answered') }}}">{{{ Lang::get('site.answeredApplications') }}}</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                    @elseif (Auth::check() && Auth::user()->hasRole('COMPANY'))
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle">{{{ Lang::get('site.applications') }}}<b
+                                                        class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('company/application/pending') }}}">{{{ Lang::get('site.pendingApplications') }}}</a>
+                                                </li>
+
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('company/application/answered') }}}">{{{ Lang::get('site.answeredApplications') }}}</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+
+
+                                    @endif
                                     @if (Auth::check() && Auth::user()->hasRole('NonGovernmentalOrganization'))
                                         <li class="dropdown"><a href="#"
                                                                 class="dropdown-toggle">{{{ Lang::get('ngo/credits/table.credits') }}}
@@ -173,9 +227,6 @@
                                                 <li class="dropdown"><a
                                                             href="{{{ URL::to('admin/search/searchNGOs') }}}">{{{ Lang::get('site.findNGOs') }}}</a>
                                                 </li>
-                                                <li class="dropdown"><a
-                                                            href="{{{ URL::to('admin/message/broadcastMessage') }}}">{{{ Lang::get('site.broadcastMessage') }}}</a>
-                                                </li>
                                             </ul>
                                         </li>
                                     @endif
@@ -192,7 +243,11 @@
                                                 <li class="dropdown"><a
                                                             href="{{{ URL::to('messages/sent') }}}">{{{ Lang::get('site.messagesSent') }}}</a>
                                                 </li>
-                                                @if (Auth::user()->hasRole('admin'))
+                                                @if (Auth::user()->hasRole('ADMINISTRATOR'))
+                                                    <li class="dropdown"><a
+                                                                href="{{{ URL::to('admin/message/broadcastMessage') }}}">{{{ Lang::get('site.broadcastMessage') }}}</a>
+                                                    </li>
+
                                                     <li><a href="{{{ URL::to('admin') }}}">Admin Panel</a></li>
                                                 @endif
                                                 <li><a href="{{{ URL::to('user') }}}">Logged in

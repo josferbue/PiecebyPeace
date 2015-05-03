@@ -14,6 +14,7 @@ return array(
 	*/
 
 	'sendMessage'					=> 'Send message',
+	'nameProject'					=> 'Project Name',
 	'recipient'						=> 'Recipient',
 	'subject'						=> 'Subject',
 	'textBox'						=> 'Text',

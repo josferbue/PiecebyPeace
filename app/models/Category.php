@@ -3,7 +3,9 @@
 class Category extends Eloquent {
 
 	protected $table = 'category';
-    /**
+	public $timestamps = false;
+
+	/**
 	 * Get the comment's content.
 	 *
 	 * @return string

@@ -2,6 +2,7 @@
 
 class AdminMessageController extends BaseController
 {
+    protected $message;
     public function __construct(Message $message)
     {
         parent::__construct();

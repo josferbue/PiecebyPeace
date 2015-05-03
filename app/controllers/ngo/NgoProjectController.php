@@ -118,7 +118,7 @@ class NgoProjectController extends BaseController
                 }
 
                 // Redirect to the new blog post page
-                return Redirect::to('project/myVolunteersProjects')->with('success', Lang::get('project/messages.createVolunteer.success'));
+                return Redirect::to('ngo/project/myVolunteersProjects')->with('success', Lang::get('project/messages.createVolunteer.success'));
             }
 
             // Redirect to the blog post create page
