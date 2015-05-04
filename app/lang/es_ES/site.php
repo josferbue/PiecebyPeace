@@ -48,7 +48,13 @@ return array(
 	'pendingApplications'			=> 'Solicitudes pendientes',
 	'answeredApplications'			=> 'Solicitudes contestadas',
 
-
+	'activity'						=> 'Actividad',
+	'activitySeconds'				=> 'Hace :seconds segundos',
+	'activityMinutes'				=> 'Hace :minutes minutos',
+	'activityHours'					=> 'Hace :hours horas',
+	'activityDays'					=> 'Hace :days días',
+	'activityMonths'				=> 'Hace :months meses',
+	'activityYears'					=> 'Hace :years años',
 
 
 );

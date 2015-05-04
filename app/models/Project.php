@@ -92,6 +92,32 @@ class Project extends Eloquent
         return $this->date($this->updated_at);
     }
 
+    function interval_date()
+    {
+        $finish = $this->updated_at->getTimestamp();
+        $init = time();
+        //formateamos las fechas a segundos tipo 1374998435
+        $diferencia = $init - $finish;
+
+        //comprobamos el tiempo que ha pasado en segundos entre las dos fechas
+        //floor devuelve el número entero anterior, si es 5.7 devuelve 5
+        if($diferencia < 60){
+            $tiempo = Lang::get('site.activitySeconds', array('seconds' => floor($diferencia)));
+        }else if($diferencia > 60 && $diferencia < 3600){
+            $tiempo = Lang::get('site.activityMinutes', array('minutes' => floor($diferencia/60)));
+        }else if($diferencia > 3600 && $diferencia < 86400){
+            $tiempo = Lang::get('site.activityHours', array('hours' => floor($diferencia/3600)));
+        }else if($diferencia > 86400 && $diferencia < 2592000){
+            $tiempo = Lang::get('site.activityDays', array('days' => floor($diferencia/86400)));
+        }else if($diferencia > 2592000 && $diferencia < 31104000){
+            $tiempo = Lang::get('site.activityMonths', array('months' => floor($diferencia/2592000)));;
+        }else if($diferencia > 31104000){
+            $tiempo = Lang::get('site.activityYears', array('years' => floor($diferencia/31104000)));;
+        }else{
+            $tiempo = "Error";
+        }
+        return $tiempo;
+    }
     /**
      * Get the comment's author.
      *

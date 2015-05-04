@@ -47,12 +47,14 @@
                 </div>
 
             </div>
+            @if (Auth::check() && Auth::user()->hasRole('NonGovernmentalOrganization'))
             <div class="span3">
                 {{--<div class="thumbnail">--}}
                 <a href="{{{ URL::to('ngo/createEmails/'.$campaign->id) }}}">{{{ Lang::get('ngo/ngo.sendEmail') }}}</a>
 
                 {{--</div>--}}
             </div>
+            @endif
         </div>
 
         <hr>

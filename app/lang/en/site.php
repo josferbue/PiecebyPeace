@@ -47,7 +47,13 @@ return array(
 	'applications'					=> 'Applications',
 	'pendingApplications'			=> 'Pending applications',
 	'answeredApplications'			=> 'Answered applications',
-
+	'activity'						=> 'Activity',
+	'activitySeconds'				=> ':seconds seconds ago',
+	'activityMinutes'				=> ':minutes minutes ago',
+	'activityHours'					=> ':hours hours ago',
+	'activityDays'					=> ':days days ago',
+	'activityMonths'				=> ':months months ago',
+	'activityYears'					=> ':years years ago',
 
 
 
