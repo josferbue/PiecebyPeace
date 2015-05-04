@@ -147,10 +147,10 @@ class NgoCampaignController extends BaseController
         $result = json_decode($json);
 
         if ($result->status == 0) {
-            Redirect::action('BlogController@getIndex')->with('error', 'Sending failure');
+            return Redirect::action('NgoCampaignController@findCampaignsByCurrentNGO')->with('error', 'Sending failure');
         }
         else {
-            return Redirect::action('BlogController@getIndex')
+            return Redirect::action('NgoCampaignController@findCampaignsByCurrentNGO')
                 ->with('success', 'Email sent successfully');
         }
     }
