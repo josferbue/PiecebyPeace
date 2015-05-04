@@ -11,7 +11,7 @@
 <div class="page-header">
 	<h1>{{{ Lang::get('site.company') }}}</h1>
 </div>
-<form method="POST" action="{{{ (Confide::checkAction('CompanyController@store')) ?: URL::to('company')  }}}" enctype="multipart/form-data" accept-charset="UTF-8">
+<form method="POST" action="{{{ (Confide::checkAction('CompanyController@store')) ?: URL::to('userCompany')  }}}" enctype="multipart/form-data" accept-charset="UTF-8">
 	<input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
 
 	<div class="row">

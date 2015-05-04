@@ -95,7 +95,7 @@ class NgoController extends BaseController
                 $this->user->password_confirmation = $passwordConfirmation;
             } else {
                 // Redirect to the new user page
-                return Redirect::to('ngo/create')
+                return Redirect::to('userNgo/create')
                     ->withInput(Input::except('password', 'password_confirmation'))
                     ->with('error', Lang::get('admin/users/messages.password_does_not_match'));
             }
@@ -136,12 +136,12 @@ class NgoController extends BaseController
                 // Get validation errors (see Ardent package)
                 $error = $this->user->errors()->all();
 
-                return Redirect::to('ngo/create')
+                return Redirect::to('userNgo/create')
                     ->withInput(Input::except('password'))
                     ->with('error', $error);
             }
         } else {
-            return Redirect::to('ngo/create')
+            return Redirect::to('userNgo/create')
                 ->withInput(Input::except('password'))
                 ->withErrors($validator);
         }

@@ -11,7 +11,7 @@
 <div class="page-header">
 	<h1>{{{ Lang::get('site.volunteer') }}}</h1>
 </div>
-<form method="POST" action="{{{ (Confide::checkAction('VolunteerController@store')) ?: URL::to('volunteer')  }}}" accept-charset="UTF-8">
+<form method="POST" action="{{{ (Confide::checkAction('VolunteerController@store')) ?: URL::to('userVolunteer')  }}}" accept-charset="UTF-8">
 	<input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
 	<div class="tab-content">
 		<div class="form-group">

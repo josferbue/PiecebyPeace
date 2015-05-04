@@ -26,7 +26,7 @@ class CompanyController extends BaseController {
      */
     public function getIndex()
     {
-        list($user,$redirect) = $this->user->checkAuthAndRedirect('company');
+        list($user,$redirect) = $this->user->checkAuthAndRedirect('userCompany');
         if($redirect){return $redirect;}
         $company = $this->company;
         // Show the page
@@ -82,7 +82,7 @@ class CompanyController extends BaseController {
                 $this->user->password_confirmation = $passwordConfirmation;
             } else {
                 // Redirect to the new user page
-                return Redirect::to('company/create')
+                return Redirect::to('userCompany/create')
                     ->withInput(Input::except('password','password_confirmation'))
                     ->with('error', Lang::get('admin/users/messages.password_does_not_match'));
             }
@@ -124,13 +124,13 @@ class CompanyController extends BaseController {
                 // Get validation errors (see Ardent package)
                 $error = $this->user->errors()->all();
 
-                return Redirect::to('company/create')
+                return Redirect::to('userCompany/create')
                     ->withInput(Input::except('password'))
                     ->with( 'error', $error );
             }
         }
         else{
-            return Redirect::to('company/create')
+            return Redirect::to('userCompany/create')
                 ->withInput(Input::except('password'))
                 ->withErrors($validator);
         }

@@ -176,9 +176,9 @@ Route::post('user/login', 'UserController@postLogin');
 
 # User RESTful Routes (Login, Logout, Register, etc)
 Route::controller('user', 'UserController');
-Route::controller('volunteer', 'VolunteerController');
-Route::controller('ngo', 'NgoController');
-Route::controller('company', 'CompanyController');
+Route::controller('userVolunteer', 'VolunteerController');
+Route::controller('userNgo', 'NgoController');
+Route::controller('userCompany', 'CompanyController');
 
 //UnauthorizedController
 Route::get('projects', 'ProjectController@getVolunteerProjects');
