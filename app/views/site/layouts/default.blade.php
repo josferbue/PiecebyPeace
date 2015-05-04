@@ -257,13 +257,13 @@
                                                 <li {{ (Request::is('user/login') ? ' class="active"' : '') }}><a
                                                             href="{{{ URL::to('user/login') }}}">Login</a></li>
                                                 <li {{ (Request::is('volunteer/create') ? ' class="active"' : '') }}><a
-                                                            href="{{{ URL::to('volunteer/create') }}}">{{{ Lang::get('site.volunteer') }}}</a>
+                                                            href="{{{ URL::to('userVolunteer/create') }}}">{{{ Lang::get('site.volunteer') }}}</a>
                                                 </li>
                                                 <li {{ (Request::is('ngo/create') ? ' class="active"' : '') }}><a
-                                                            href="{{{ URL::to('ngo/create') }}}">{{{ Lang::get('site.ngo') }}}</a>
+                                                            href="{{{ URL::to('userNgo/create') }}}">{{{ Lang::get('site.ngo') }}}</a>
                                                 </li>
                                                 <li {{ (Request::is('company/create') ? ' class="active"' : '') }}><a
-                                                            href="{{{ URL::to('company/create') }}}">{{{ Lang::get('site.company') }}}</a>
+                                                            href="{{{ URL::to('userCompany/create') }}}">{{{ Lang::get('site.company') }}}</a>
                                                 </li>
                                             @endif
                                         </ul>

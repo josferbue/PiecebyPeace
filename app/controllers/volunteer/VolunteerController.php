@@ -26,7 +26,7 @@ class VolunteerController extends BaseController {
      */
     public function getIndex()
     {
-        list($user,$redirect) = $this->user->checkAuthAndRedirect('volunteer');
+        list($user,$redirect) = $this->user->checkAuthAndRedirect('userVolunteer');
         if($redirect){return $redirect;}
         $volunteer = $this->volunteer;
         // Show the page
@@ -76,7 +76,7 @@ class VolunteerController extends BaseController {
                 $this->user->password_confirmation = $passwordConfirmation;
             } else {
                 // Redirect to the new user page
-                return Redirect::to('volunteer/create')
+                return Redirect::to('userVolunteer/create')
                     ->withInput(Input::except('password','password_confirmation'))
                     ->with('error', Lang::get('admin/users/messages.password_does_not_match'));
             }
@@ -106,13 +106,13 @@ class VolunteerController extends BaseController {
                 // Get validation errors (see Ardent package)
                 $error = $this->user->errors()->all();
 
-                return Redirect::to('volunteer/create')
+                return Redirect::to('userVolunteer/create')
                     ->withInput(Input::except('password'))
                     ->with( 'error', $error );
             }
         }
         else{
-            return Redirect::to('volunteer/create')
+            return Redirect::to('userVolunteer/create')
                 ->withInput(Input::except('password'))
                 ->withErrors($validator);
         }

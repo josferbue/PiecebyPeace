@@ -21,7 +21,7 @@ class ApplicationsTableSeeder extends Seeder {
             array(
                 'moment'      => new DateTime,
                 'comments'      => 'comments1',
-                'result'   => 0,
+                'result'   => 2,
                 'project_id' => (int)$pro_company["id"],
                 'volunteer_id' => Volunteer::where('name' , '=','volunteer1')->first()->id,
 
@@ -31,7 +31,7 @@ class ApplicationsTableSeeder extends Seeder {
             array(
                 'moment'      => new DateTime,
                 'comments'      => 'comments2',
-                'result'   => 0,
+                'result'   => 2,
                 'project_id' => (int)$pro_ong["id"],
                 'volunteer_id' => Volunteer::where('name' , '=','volunteer2')->first()->id,
 

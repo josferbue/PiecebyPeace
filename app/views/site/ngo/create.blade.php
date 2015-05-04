@@ -11,7 +11,7 @@
     <div class="page-header">
         <h1>{{{ Lang::get('site.ngo') }}}</h1>
     </div>
-    <form method="POST" action="{{{ (Confide::checkAction('NgoController@store')) ?: URL::to('ngo')  }}}"
+    <form method="POST" action="{{{ (Confide::checkAction('NgoController@store')) ?: URL::to('userNgo')  }}}"
           enctype="multipart/form-data" accept-charset="UTF-8">
         <input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
 
