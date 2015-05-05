@@ -19,8 +19,6 @@ if [ ! -d ${OPENSHIFT_DATA_DIR}storage ]; then
   rm -rf ${OPENSHIFT_DATA_DIR}storage/logs
 fi
 
-# Create symlink to new storage directory location
-ln -sf ${OPENSHIFT_DATA_DIR}storage   ${OPENSHIFT_REPO_DIR}app/storage
 
 # Create a symlink to the new log directory location
 ln -sf ${OPENSHIFT_LOG_DIR}   ${OPENSHIFT_DATA_DIR}storage/logs
