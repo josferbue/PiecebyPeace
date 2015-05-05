@@ -2,7 +2,7 @@
 
 return array(
 
-	'title'		=> 'About Piece by Peace',
+	'title'		=> 'What is Piece by Peace?',
 
 	'text1' 	=> 'Piece by Peace is a web information system whose purpose is to interconnect, in an agile and easy way, NGOs, enterprises and volunteers. Each one of these three entities will have their own functionalities.',
 	'text2' 	=> 'In the first place, NGOs will be able to publish their volunteering projects, pointing out both human and material resources that they need to accomplish each project, plus a description of it. They will also have the chance to broadcast their fundraising and awareness campaigns by using an email-marketing service.',

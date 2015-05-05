@@ -2,7 +2,7 @@
 
 return array(
 
-	'title'		=> 'Sobre Piece by Peace',
+	'title'		=> '¿Qué es Piece by Peace?',
 
 	'text1' 	=> 'Piece by Peace es un sistema de información web cuyo objetivo es interconectar de manera ágil y sencilla a ONGs, empresas y voluntarios. Cada una de estas tres entidades tendrá sus propias funcionalidades en la plataforma.',
 	'text2' 	=> 'En primer lugar, las ONGs podrán publicar sus proyectos de voluntariado, indicando tanto los recursos humanos como materiales que necesitan para llevar a cabo dicho proyecto, además de una descripción del mismo. También tendrán la posibilidad de difundir sus campañas de concienciación y recaudación de fondos utilizando el servicio de email-marketing.',

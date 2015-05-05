@@ -13,11 +13,17 @@ return array(
 	|
 	*/
 
+	'navigation'					=> 'Navegación',
+
 	'contact_us' 					=> 'Contáctenos',
-    'sign_up' 	 					=> 'Regístrese',
+    'sign_up' 	 					=> 'Registro',
+	'login'							=> 'Inicio de sesión',
+	'logout'						=> 'Cerrar sesión',
 	'volunteer' 					=> 'Registrarse como voluntario',
 	'company' 						=> 'Registrarse como empresa',
 	'ngo' 							=> 'Registrarse como ONG',
+
+	'messaging'						=> 'Mensajería',
 
 	'projects' 						=> 'Proyectos',
 	'findVolunteerProjects' 		=> 'Buscar proyectos de voluntariado',

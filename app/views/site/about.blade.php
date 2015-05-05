@@ -5,7 +5,6 @@
     {{{ Lang::get('about.title') }}} ::
     @parent
 @stop
-<LINK href="{{URL::to('template/bootstrap/css/listProject.css')}}" rel="stylesheet" type="text/css">
 
 {{-- Content --}}
 @section('content')
@@ -29,9 +28,7 @@
     </div>
 
     <div class="span5">
-        <p>
-            <img src="../template/images/header.png"
-        </p>
+        <img src="../template/images/header.png"
     </div>
 @stop
 

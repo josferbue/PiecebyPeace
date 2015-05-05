@@ -84,7 +84,7 @@
                         <div class="navbar">
                             <button type="button" class="btn btn-navbar-highlight btn-large btn-primary"
                                     data-toggle="collapse" data-target=".nav-collapse">
-                                NAVIGATION <span class="icon-chevron-down icon-white"></span>
+                                {{{ Lang::get('site.navigation') }}} <span class="icon-chevron-down icon-white"></span>
                             </button>
                             <div class="nav-collapse collapse">
                                 <ul class="nav nav-pills ddmenu">
@@ -231,31 +231,36 @@
                                         </li>
                                     @endif
 
-
-                                    <li class="dropdown"><a href="#">About</a></li>
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle">Users <b class="caret"></b></a>
-                                        <ul class="dropdown-menu">
-                                            @if (Auth::check())
-                                                <li class="dropdown"><a
-                                                            href="{{{ URL::to('messages/inbox') }}}">{{{ Lang::get('site.messagesInbox') }}}</a>
-                                                </li>
-                                                <li class="dropdown"><a
-                                                            href="{{{ URL::to('messages/sent') }}}">{{{ Lang::get('site.messagesSent') }}}</a>
-                                                </li>
-                                                @if (Auth::user()->hasRole('ADMINISTRATOR'))
+                                    @if (Auth::check())
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle">{{{ Lang::get('site.messaging') }}} <b class="caret"></b></a>
+                                            <ul class="dropdown-menu">
                                                     <li class="dropdown"><a
-                                                                href="{{{ URL::to('admin/message/broadcastMessage') }}}">{{{ Lang::get('site.broadcastMessage') }}}</a>
+                                                                href="{{{ URL::to('messages/inbox') }}}">{{{ Lang::get('site.messagesInbox') }}}</a>
                                                     </li>
+                                                    <li class="dropdown"><a
+                                                                href="{{{ URL::to('messages/sent') }}}">{{{ Lang::get('site.messagesSent') }}}</a>
+                                                    </li>
+                                                    @if (Auth::user()->hasRole('ADMINISTRATOR'))
+                                                        <li class="dropdown"><a
+                                                                    href="{{{ URL::to('admin/message/broadcastMessage') }}}">{{{ Lang::get('site.broadcastMessage') }}}</a>
+                                                        </li>
+                                                    @endif
+                                            </ul>
+                                        </li>
 
-                                                    <li><a href="{{{ URL::to('admin') }}}">Admin Panel</a></li>
-                                                @endif
-                                                <li><a href="{{{ URL::to('user') }}}">Logged in
-                                                        as {{{ Auth::user()->username }}}</a></li>
-                                                <li><a href="{{{ URL::to('user/logout') }}}">Logout</a></li>
-                                            @else
-                                                <li {{ (Request::is('user/login') ? ' class="active"' : '') }}><a
-                                                            href="{{{ URL::to('user/login') }}}">Login</a></li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle">{{{ Auth::user()->username }}} <b class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="{{{ URL::to('user/logout') }}}"> {{{ Lang::get('site.logout') }}} </a></li>
+                                            </ul>
+                                        </li>
+                                    @endif
+
+                                @if(!Auth::check())
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle">{{{ Lang::get('site.sign_up') }}} <b class="caret"></b></a>
+                                            <ul class="dropdown-menu">
                                                 <li {{ (Request::is('volunteer/create') ? ' class="active"' : '') }}><a
                                                             href="{{{ URL::to('userVolunteer/create') }}}">{{{ Lang::get('site.volunteer') }}}</a>
                                                 </li>
@@ -265,9 +270,12 @@
                                                 <li {{ (Request::is('company/create') ? ' class="active"' : '') }}><a
                                                             href="{{{ URL::to('userCompany/create') }}}">{{{ Lang::get('site.company') }}}</a>
                                                 </li>
-                                            @endif
-                                        </ul>
-                                    </li>
+                                            </ul>
+                                        </li>
+
+                                        <li {{ (Request::is('user/login') ? ' class="active"' : '') }}><a
+                                                    href="{{{ URL::to('user/login') }}}">{{{ Lang::get('site.login') }}}</a></li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>
