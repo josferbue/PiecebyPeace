@@ -12,9 +12,9 @@
 						<div id="headerSeparator"></div>
 
 						<div id="divHeaderText" class="page-content">
-							<div id="divHeaderLine1">Your Header Text Here!</div><br />
-							<div id="divHeaderLine2">2nd line header text for calling extra attention to featured content..</div><br />
-							<div id="divHeaderLine3"><a class="btn btn-large btn-primary" href="#">More Info</a></div>
+							<div id="divHeaderLine1">{{{ Lang::get('site.headerLine1') }}}</div><br />
+							<div id="divHeaderLine2">{{{ Lang::get('site.headerLine2') }}}</div><br />
+							<div id="divHeaderLine3"><a class="btn btn-large btn-primary" href="#">{{{ Lang::get('site.headerLine3') }}}</a></div>
 						</div>
 
 						<div id="headerSeparator2"></div>
