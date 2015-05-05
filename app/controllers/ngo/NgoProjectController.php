@@ -209,10 +209,10 @@ class NgoProjectController extends BaseController
         }
 
         if ($projectOld->delete()) {
-              return Redirect::to('project/myVolunteersProjects')->with('success', Lang::get('project/messages.deleteVolunteer.success'));
+              return Redirect::to('ngo/project/myVolunteersProjects')->with('success', Lang::get('project/messages.deleteVolunteer.success'));
 
         }
-        return Redirect::to('project/myVolunteersProjects')->with('error', Lang::get('project/messages.deleteVolunteer.error'));
+        return Redirect::to('ngo/project/myVolunteersProjects')->with('error', Lang::get('project/messages.deleteVolunteer.error'));
 
     }
 
@@ -303,7 +303,7 @@ class NgoProjectController extends BaseController
                 $categories = Input::get('categories');
                 //se usa sync, ya que este reemplaza todas las relaciones manyToMany por las nuevas, attach las añade a las anteriores
                 $projectOld->categories()->sync($categories);
-                return Redirect::to('project/myVolunteersProjects')->with('success', Lang::get('project/messages.editVolunteer.success'));
+                return Redirect::to('ngo/project/myVolunteersProjects')->with('success', Lang::get('project/messages.editVolunteer.success'));
 
             }
             return Redirect::to('project/editVolunteerProject/' . $id)->with('error', Lang::get('project/messages.editVolunteer.error'));

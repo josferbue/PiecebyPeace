@@ -22,6 +22,10 @@
                 <h7>  {{{ Lang::get('application/view.nameProject') }}} </h7>
                 <p>{{$application->project->name }}</p>
                 <br>
+
+                <h7>  {{{ Lang::get('application/view.volunteer') }}} </h7>
+                <p>{{$application->volunteer->name.' '.$application->volunteer->surname }}</p>
+                <br>
                 <h7>  {{{ Lang::get('application/view.result') }}} </h7>
                 @if($application->result==0)
                     <p> {{{ Lang::get('application/view.pending') }}}</p>
@@ -32,7 +36,6 @@
                 @else
                     <p>{{{ Lang::get('application/view.accepted') }}}</p>
                 @endif
-
             </div>
 
             <div class="span6">
@@ -40,6 +43,7 @@
                     <img src="{{ URL::to($application->project->image)}}" class="img-rounded"
                          alt="{{Lang::get('application/view.notImage') }}"/>
                 </div>
+
             </div>
         </div>
 

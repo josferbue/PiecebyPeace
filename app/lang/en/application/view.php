@@ -29,5 +29,7 @@ return array(
 	'confirmDelete'					=> 'Are you sure you want to delete this application?',
 	'confirmAccept'					=> 'Are you sure you want to answer this application?',
 	'confirmDeny'					=> 'Are you sure you want to deny this application?',
+	'volunteer'						=> 'Volunteer'
+
 
 );

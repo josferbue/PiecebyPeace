@@ -29,4 +29,5 @@ return array(
 	'confirmDelete'					=> '¿Está seguro de que desea eliminar la solicitud?',
 	'confirmAccept'					=> '¿Está seguro de que desea aceptar la solicitud?',
 	'confirmDeny'					=> '¿Está seguro de que desea denegar la solicitud?',
+	'volunteer'						=> 'Voluntario'
 );
