@@ -32,7 +32,7 @@
 
         <br>
 
-        <input type="button" class="btn btn-info" onclick="window.open('{{{ URL::to($campaign->link) }}}')" value="{{{ Lang::get('campaign/campaign.seeOfficialWebsite') }}}">
+        <input type="button" class="btn btn-info" onclick="window.location.href='{{{ URL::to('campaign/payToClick/'.$campaign->id) }}}'" value="{{{ Lang::get('campaign/campaign.seeOfficialWebsite') }}}">
 
     </div>
 

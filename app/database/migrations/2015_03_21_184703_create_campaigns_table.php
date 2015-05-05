@@ -21,7 +21,7 @@ class CreateCampaignsTable extends Migration {
 			$table->integer('visits')->unsigned()->default(0);
 			$table->string('link');
 			$table->integer('maxVisits')->unsigned();
-			$table->integer('promotionDuration')->unsigned();
+			$table->date('expirationDate');
 			$table->integer('ngo_id')->unsigned()->index();
 			$table->foreign('ngo_id')->references('id')->on('ngo')->onDelete('cascade');
 			});

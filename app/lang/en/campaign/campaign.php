@@ -14,7 +14,7 @@ return array(
 	*/
 
 	'campaigns' 			=> 'Campaigns',
-    'allCampaigns' 			=> 'See all campaigns',
+    'allActiveCampaigns' 	=> 'See all active campaigns',
 	'myCampaigns'			=> 'See my campaigns',
 
 	'title'					=> 'Campaigns',

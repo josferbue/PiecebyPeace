@@ -140,7 +140,7 @@
                                                     class="caret"></b></a>
                                         <ul class="dropdown-menu">
                                             <li class="dropdown"><a
-                                                        href="{{{ URL::to('campaigns') }}}">{{{ Lang::get('campaign/campaign.allCampaigns') }}}</a>
+                                                        href="{{{ URL::to('campaign/findActive') }}}">{{{ Lang::get('campaign/campaign.allActiveCampaigns') }}}</a>
                                             </li>
                                             @if (Auth::check() && Auth::user()->hasRole('NonGovernmentalOrganization'))
                                                 <li class="dropdown"><a

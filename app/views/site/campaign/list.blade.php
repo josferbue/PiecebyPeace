@@ -63,7 +63,9 @@
 
     <div class="pagination">
         <input type="button" class="btn btn-primary" onclick="window.location.href='{{ URL::to('/') }}'" value="{{ Lang::get('campaign/campaign.back') }}">
-        <input type="button" class="btn btn-default" onclick="window.location.href='{{{ URL::to('campaign/create') }}}'" value="{{{ Lang::get('campaign/campaign.create') }}}">
+        @if(Auth::user()->hasRole('NonGovernmentalOrganization'))
+            <input type="button" class="btn btn-default" onclick="window.location.href='{{{ URL::to('ngo/campaign/create') }}}'" value="{{{ Lang::get('campaign/campaign.create') }}}">
+        @endif
         <br>
 
         @if(isset($campaigns))

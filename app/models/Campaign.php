@@ -70,5 +70,10 @@ class Campaign extends Eloquent {
 		return $this->belongsTo('Ngo', 'ngo_id');
 	}
 
+	public function visitors()
+	{
+		return $this->hasMany('Visitor');
+	}
+
 
 }

@@ -16,7 +16,7 @@ class CampaignsTableSeeder extends Seeder {
                 'visits' => 0,
                 'link' => 'http://www.blahblahblah.com',
                 'maxVisits' => 100,
-                'promotionDuration' => 30,
+                'expirationDate' => \Carbon\Carbon::createFromDate(2015,7,30)->toDateTimeString(),
                 'ngo_id' => Ngo::where('user_id','=',User::where('username','=','ngo1')->first()->id)->first()->id,
             ),
             array(
@@ -28,7 +28,7 @@ class CampaignsTableSeeder extends Seeder {
                 'visits' => 5,
                 'link' => 'http://www.blahblahblah2.com',
                 'maxVisits' => 150,
-                'promotionDuration' => 20,
+                'expirationDate' => \Carbon\Carbon::createFromDate(2015,8,30)->toDateTimeString(),
                 'ngo_id' => Ngo::where('user_id','=',User::where('username','=','ngo2')->first()->id)->first()->id,
             ),
         );

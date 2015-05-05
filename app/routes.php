@@ -201,9 +201,9 @@ Route::post('project/editVolunteerProject/{id}', 'NgoProjectController@editSaveV
 Route::get('project/deleteVolunteerProject/{id}', 'NgoProjectController@deleteVolunteerProject');
 
 // Campaigns controller
-Route::get('campaigns', 'CampaignController@findAllCampaigns');
+Route::get('campaign/findActive', 'CampaignController@findAllActiveCampaigns');
 Route::get('campaign/details/{id}', 'CampaignController@campaignDetails');
-
+Route::get('campaign/payToClick/{id}', 'CampaignController@payToClick');
 
 //:: Application Routes ::
 
