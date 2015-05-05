@@ -77,7 +77,7 @@
 
                     <div id="divLogo" class="pull-left">
                         <a href="{{{ URL::to('') }}}" id="divSiteTitle">Piece by peace</a><br/>
-                        <a href="{{{ URL::to('') }}}" id="divTagLine">Eslogan</a>
+                        <a href="{{{ URL::to('') }}}" id="divTagLine">Let's be helpful</a>
                     </div>
 
                     <div id="divMenuRight" class="pull-right">
