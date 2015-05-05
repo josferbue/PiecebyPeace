@@ -9,10 +9,12 @@
             "homepage": "http://www.andrewelkins.com"
         }
     ],
+    "type": "project",
     "require": {
         "laravel/framework": "~4.2",
         "zizaco/confide": "~3.2",
         "zizaco/entrust": "~1.2",
+        "patchwork/utf8": "1.1.*",
         "bllim/datatables": "~1.3",
         "barryvdh/laravel-ide-helper": "1.11.x-dev",
         "anouar/paypalpayment": "1.*"
@@ -42,13 +44,16 @@
             "php artisan clear-compiled"
         ],
         "post-install-cmd": [
+            "php artisan clear-compiled",
             "php artisan optimize"
         ],
         "post-update-cmd": [
+            "php artisan clear-compiled",
             "php artisan optimize"
-        ]
+        ],"post-create-project-cmd": []
     },
     "config": {
         "preferred-install": "dist"
-    }
+    },
+    "minimum-stability": "stable"
 }
