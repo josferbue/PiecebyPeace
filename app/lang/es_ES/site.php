@@ -48,7 +48,7 @@ return array(
 	'pendingApplications'			=> 'Solicitudes pendientes',
 	'answeredApplications'			=> 'Solicitudes contestadas',
 
-	'activity'						=> 'Actividad',
+	'activity'						=> 'Actividad reciente',
 	'activitySeconds'				=> 'Hace :seconds segundos',
 	'activityMinutes'				=> 'Hace :minutes minutos',
 	'activityHours'					=> 'Hace :hours horas',
@@ -59,6 +59,22 @@ return array(
 	'headerLine1'					=> 'Ayudemos a construir un mundo mejor',
 	'headerLine2'					=> 'Una plataforma para interconectar de manera ágil y sencilla a voluntarios, ONGs y empresas',
 	'headerLine3'					=> 'Más información',
+
+	'contact'						=> 'Contacto',
+	'phone'							=> 'Teléfono',
+	'email'							=> 'Email de contacto',
+	'address'						=> 'Dirección física',
+	'physicalAddress'				=> '41020, Sevilla (España)',
+
+	'footerAbout'					=> 'Sobre Piece by Peace',
+	'termsAndConditions'			=> 'Términos y condiciones de uso',
+	'privacyPolicy'					=> 'Política de privacidad',
+	'aboutUs'						=> '¿Qué es Piece by Peace?',
+	'volunteeringProjects'			=> 'Proyectos de voluntariado',
+	'csrProjects'					=> 'Acciones de RSC',
+
+	'footerCopyright'				=> 'Copyright © 2015 Piece by Peace. Todos los derechos reservados.',
+
 );
 
 

@@ -308,22 +308,7 @@
         <div class="divPanel">
 
             <div class="row-fluid">
-                <div class="span3" id="footerArea1">
-
-                    <h3>About Company</h3>
-
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry’s standard dummy text ever since the 1500s.</p>
-
-                    <p>
-                        <a href="#" title="Terms of Use">Terms of Use</a><br/>
-                        <a href="#" title="Privacy Policy">Privacy Policy</a><br/>
-                        <a href="#" title="FAQ">FAQ</a><br/>
-                        <a href="#" title="Sitemap">Sitemap</a>
-                    </p>
-
-                </div>
-                <div class="span3" id="footerArea2">
+                <div class="span5" id="footerArea2">
 
                     <h3>{{{ Lang::get('site.activity') }}}</h3>
 
@@ -336,43 +321,47 @@
 
 
                 </div>
-                <div class="span3" id="footerArea3">
 
-                    <h3>Sample Content</h3>
+                <div class="span4" id="footerArea4">
 
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry’s standard dummy text ever since the 1500s.
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry’s standard dummy text ever since the 1500s.
-                    </p>
-
-                </div>
-                <div class="span3" id="footerArea4">
-
-                    <h3>Get in Touch</h3>
+                    <h3>{{{ Lang::get('site.contact') }}}</h3>
 
                     <ul id="contact-info">
                         <li>
                             <i class="general foundicon-phone icon"></i>
-                            <span class="field">Phone:</span>
+                            <span class="field">{{{ Lang::get('site.phone') }}}:</span>
                             <br/>
-                            (123) 456 7890 / 456 7891
+                            +34 955 32 67 32
                         </li>
                         <li>
                             <i class="general foundicon-mail icon"></i>
-                            <span class="field">Email:</span>
+                            <span class="field">{{{ Lang::get('site.email') }}}:</span>
                             <br/>
-                            <a href="mailto:info@yourdomain.com" title="Email">info@yourdomain.com</a>
+                            <a href="mailto:info@yourdomain.com" title="Email">contact@piecebypeace.es</a>
                         </li>
                         <li>
                             <i class="general foundicon-home icon" style="margin-bottom:50px"></i>
-                            <span class="field">Address:</span>
+                            <span class="field">{{{ Lang::get('site.address') }}}:</span>
                             <br/>
-                            123 Street<br/>
-                            12345 City, State<br/>
-                            Country
+                            Avda. Reina Mercedes s/n, ETSII<br/>
+                            {{{ Lang::get('site.physicalAddress') }}}<br/>
                         </li>
                     </ul>
+
+                </div>
+
+                <div class="span3" id="footerArea1">
+
+                    <h3>{{{ Lang::get('site.footerAbout') }}}</h3>
+
+                    <p>
+                        <a href="{{{ URL::to('about') }}}" title="About">{{{ Lang::get('site.aboutUs') }}}</a><br/>
+                        <a href="#" title="Terms of Use">{{{ Lang::get('site.termsAndConditions') }}}</a><br/>
+                        <a href="#" title="Privacy Policy">{{{ Lang::get('site.privacyPolicy') }}}</a><br/>
+                        <a href="#" title="FAQ">FAQ</a><br/>
+                        <a href="{{{ URL::to('project/futureVolunteeringProjects') }}}" title="V_proyects">{{{ Lang::get('site.volunteeringProjects') }}}</a><br/>
+                        <a href="{{{ URL::to('project/futureCSRProjects') }}}" title="CSR_proyects">{{{ Lang::get('site.csrProjects') }}}</a><br/>
+                    </p>
 
                 </div>
             </div>
@@ -382,14 +371,12 @@
             <div class="row-fluid">
                 <div class="span12">
                     <p class="copyright">
-                        Copyright © 2013 Your Company. All Rights Reserved.
+                        {{{ Lang::get('site.footerCopyright') }}}
                     </p>
 
                     <p class="social_bookmarks">
                         <a href="#"><i class="social foundicon-facebook"></i> Facebook</a>
                         <a href="#"><i class="social foundicon-twitter"></i> Twitter</a>
-                        <a href="#"><i class="social foundicon-pinterest"></i> Pinterest</a>
-                        <a href="#"><i class="social foundicon-rss"></i> Rss</a>
                     </p>
                 </div>
             </div>

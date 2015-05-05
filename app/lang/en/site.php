@@ -47,7 +47,7 @@ return array(
 	'applications'					=> 'Applications',
 	'pendingApplications'			=> 'Pending applications',
 	'answeredApplications'			=> 'Answered applications',
-	'activity'						=> 'Activity',
+	'activity'						=> 'Recent activity',
 	'activitySeconds'				=> ':seconds seconds ago',
 	'activityMinutes'				=> ':minutes minutes ago',
 	'activityHours'					=> ':hours hours ago',
@@ -55,7 +55,19 @@ return array(
 	'activityMonths'				=> ':months months ago',
 	'activityYears'					=> ':years years ago',
 
+	'contact'						=> 'Contact',
+	'phone'							=> 'Phone',
+	'email'							=> 'Email',
+	'address'						=> 'Address',
+	'physicalAddress'				=> '41020, Seville (Spain)',
 
+	'footerAbout'					=> 'About Piece by Peace',
+	'termsAndConditions'			=> 'Terms of use',
+	'privacyPolicy'					=> 'Privacy policy',
+	'aboutUs'						=> "What is Piece by Peace?",
+	'volunteeringProjects'			=> 'Volunteering projects',
+	'csrProjects'					=> 'CSR projects',
 
+	'footerCopyright'				=> 'Copyright © 2015 Piece by Peace. All rights reserved.'
 
 );

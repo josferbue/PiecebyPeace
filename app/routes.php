@@ -199,6 +199,10 @@ Route::post('project/createVolunteerProject', 'NgoProjectController@saveVoluntee
 Route::get('project/editVolunteerProject/{id}', 'NgoProjectController@editGetVolunteerProject');
 Route::post('project/editVolunteerProject/{id}', 'NgoProjectController@editSaveVolunteerProject');
 Route::get('project/deleteVolunteerProject/{id}', 'NgoProjectController@deleteVolunteerProject');
+Route::get('project/futureVolunteeringProjects', 'ProjectController@getFutureVolunteeringProjects');
+
+// CSR projects controller
+Route::get('project/futureCSRProjects', 'ProjectController@getFutureCSRProjects');
 
 // Campaigns controller
 Route::get('campaign/findActive', 'CampaignController@findAllActiveCampaigns');
@@ -209,6 +213,11 @@ Route::get('campaign/payToClick/{id}', 'CampaignController@payToClick');
 
 # Filter for detect language
 Route::when('contact-us', 'detectLang');
+
+# About us
+Route::get('about', function() {
+    return View::make('site/about');
+});
 
 # Contact Us Static Page
 Route::get('contact-us', function () {
