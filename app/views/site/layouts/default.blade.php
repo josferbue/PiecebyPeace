@@ -20,21 +20,11 @@
         @show
                 <!-- Mobile Specific Metas
 		================================================== -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- CSS
         ================================================== -->
         <link rel="stylesheet" href="{{asset('template/bootstrap/css/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{asset('template/bootstrap/css/bootstrap-responsive.min.css')}}">
-
-        <style>
-            body {
-                padding: 60px 0;
-            }
-
-            @section("css")
-
-        </style>
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
@@ -377,14 +367,6 @@
 <script src="{{asset('template/jquery.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('template/default.js')}}" type="text/javascript"></script>
 
-
-<script src="{{asset('template/carousel/jquery.carouFredSel-6.2.0-packed.js')}}" type="text/javascript"></script>
-<script type="text/javascript">$('#list_photos').carouFredSel({
-        responsive: true,
-        width: '100%',
-        scroll: 2,
-        items: {width: 320, visible: {min: 2, max: 6}}
-    });</script>
 
 @yield("js")
 
