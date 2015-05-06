@@ -49,7 +49,7 @@ class NgoCampaignController extends BaseController
             'finishDate'            => 'required|date|after:'.date('Y-m-d'),
             'link'                  => 'required|url',
             'maxVisits'             => 'required|min:0',
-            'promotionDuration'     => 'required|min:1',
+            'expirationDate'        => 'required|date|after:'.Input::get('startDate').'|before:'.Input::get('finishDate'),
         );
 
         // Validate the inputs
@@ -61,7 +61,7 @@ class NgoCampaignController extends BaseController
         $this->campaign->startDate = Input::get( 'startDate' );
         $this->campaign->finishDate = Input::get( 'finishDate' );
         $this->campaign->link = Input::get( 'link' );
-        $this->campaign->promotionDuration = Input::get( 'promotionDuration' );
+        $this->campaign->expirationDate = Input::get( 'expirationDate' );
         $this->campaign->ngo_id = Ngo::where('user_id','=',Auth::id())->first()->id;
 
         $destinationPath = public_path().'/campaigns_images/'.$this->campaign->name;

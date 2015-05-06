@@ -25,7 +25,7 @@ return array(
 	'finishDate'			=> 'Finish date',
 	'link'					=> 'External link',
 	'maxVisits'				=> 'Maximum number of visits',
-	'promotionDuration' 	=> 'Promotion duration (on days)',
+	'expirationDate' 		=> 'Expiration date of this promotion',
 
 	'details'				=> 'See details',
 	'promotorMessage'		=> ', a campaign promoted by ',

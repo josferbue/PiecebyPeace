@@ -62,10 +62,10 @@
 					{{ $errors->first('maxVisits', '<span class="help-block">:message</span>') }}
 				</div>
 
-				<div class="form-group  {{{ $errors->has('promotionDuration') ? 'error' : '' }}}">
-					<label class="control-label" for="promotionDuration">{{{ Lang::get('campaign/campaign.promotionDuration') }}}</label>
-					<input class="form-control" placeholder="{{{ Lang::get('campaign/campaign.promotionDuration') }}}" type="text" name="promotionDuration" id="promotionDuration" value="{{{ Input::old('promotionDuration') }}}">
-					{{ $errors->first('promotionDuration', '<span class="help-block">:message</span>') }}
+				<div class="form-group  {{{ $errors->has('expirationDate') ? 'error' : '' }}}">
+					<label class="control-label" for="expirationDate">{{{ Lang::get('campaign/campaign.expirationDate') }}}</label>
+					<input type="date" name="expirationDate" step="1" min="2014-01-01"
+						   value="<?php echo date("Y-m-d");?>">
 				</div>
 			</div>
 		</div>
