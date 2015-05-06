@@ -63,7 +63,7 @@
 
     <div class="pagination">
         <input type="button" class="btn btn-primary" onclick="window.location.href='{{ URL::to('/') }}'" value="{{ Lang::get('campaign/campaign.back') }}">
-        @if(Auth::user()->hasRole('NonGovernmentalOrganization'))
+        @if(Auth::check() && Auth::user()->hasRole('NonGovernmentalOrganization'))
             <input type="button" class="btn btn-default" onclick="window.location.href='{{{ URL::to('ngo/campaign/create') }}}'" value="{{{ Lang::get('campaign/campaign.create') }}}">
         @endif
         <br>
