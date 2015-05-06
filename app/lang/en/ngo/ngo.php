@@ -11,12 +11,6 @@ return array(
     */
 
     'name'                    				=> 'Name',
-    'holderName'                 			=> 'Holder Name',
-    'brandName'                				=> 'Brand Name',
-    'number'                     			=> 'CreditCard Number',
-    'expirationMonth'                 		=> 'Expiration Month',
-    'expirationYear'             	 		=> 'Expiration Year',
-    'cvv'               					=> 'CVV',
     'description'               			=> 'Description',
     'phone'               					=> 'Phone',
     'logo'               					=> 'Logo',
