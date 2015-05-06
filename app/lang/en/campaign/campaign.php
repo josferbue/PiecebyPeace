@@ -45,5 +45,6 @@ return array(
 	'creationSuccessful'	=> 'Campaign successfully created',
 	'noEnoughCredits'		=> 'You have to buy more credits due to the remaining campaigns could spend all the credits you have right now.',
 	'zeroCredits'			=> 'You do not have credits at this moment. Please, purchase the amount of credits you need and try it again.',
+	'campaignNoLongerAvailable' => 'The details of the specified campaign can not be displayed due to it has expired',
 
 );

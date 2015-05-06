@@ -122,11 +122,11 @@ class NgoProjectController extends BaseController
             }
 
             // Redirect to the blog post create page
-            return Redirect::to('project/createVolunteerProject')->with('error', Lang::get('project/messages.createVolunteer.error'));
+            return Redirect::to('ngo/project/createVolunteerProject')->with('error', Lang::get('project/messages.createVolunteer.error'));
         }
 
         // Form validation failed
-        return Redirect::to('project/createVolunteerProject')->withInput()->withErrors($validator);
+        return Redirect::to('ngo/project/createVolunteerProject')->withInput()->withErrors($validator);
     }
 
 
@@ -306,13 +306,13 @@ class NgoProjectController extends BaseController
                 return Redirect::to('ngo/project/myVolunteersProjects')->with('success', Lang::get('project/messages.editVolunteer.success'));
 
             }
-            return Redirect::to('project/editVolunteerProject/' . $id)->with('error', Lang::get('project/messages.editVolunteer.error'));
+            return Redirect::to('ngo/project/editVolunteerProject/' . $id)->with('error', Lang::get('project/messages.editVolunteer.error'));
 
             // Redirect to the new blog post page
         }
 
 
         // Form validation failed
-        return Redirect::to('project/editVolunteerProject/' . $id)->withInput()->withErrors($validator);
+        return Redirect::to('ngo/project/editVolunteerProject/' . $id)->withInput()->withErrors($validator);
     }
 }

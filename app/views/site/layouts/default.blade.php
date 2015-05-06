@@ -114,7 +114,7 @@
                                                 </li>
                                             @elseif (Auth::check() && Auth::user()->hasRole('NonGovernmentalOrganization'))
                                                 <li class="dropdown"><a
-                                                            href="{{{ URL::to('project/createVolunteerProject') }}}">{{{ Lang::get('site.createVolunteerProjects') }}}</a>
+                                                            href="{{{ URL::to('ngo/project/createVolunteerProject') }}}">{{{ Lang::get('site.createVolunteerProjects') }}}</a>
                                                 </li>
                                                 <li class="dropdown"><a
                                                             href="{{{ URL::to('ngo/project/myVolunteersProjects') }}}">{{{ Lang::get('site.myVolunteersProjects') }}}</a>

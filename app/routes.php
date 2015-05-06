@@ -133,7 +133,12 @@ Route::group(array('prefix' => 'ngo', 'before' => 'auth'), function () {
     Route::get('/application/view/{id}', 'NgoApplicationController@viewApplication');
     Route::get('/application/answer/{id}/{answer}', 'NgoApplicationController@answer');
 
-
+    //Volunteering projects controller
+    Route::get('/project/createVolunteerProject', 'NgoProjectController@createVolunteerProject');
+    Route::post('/project/createVolunteerProject', 'NgoProjectController@saveVolunteerProject');
+    Route::get('/project/editVolunteerProject/{id}', 'NgoProjectController@editGetVolunteerProject');
+    Route::post('/project/editVolunteerProject/{id}', 'NgoProjectController@editSaveVolunteerProject');
+    Route::get('/project/deleteVolunteerProject/{id}', 'NgoProjectController@deleteVolunteerProject');
 
 });
 
@@ -194,11 +199,6 @@ Route::get('messages/sent', 'MessageController@getSent');
 Route::get('message/view/{id}', 'MessageController@view');
 
 //Volunteering projects controller
-Route::get('project/createVolunteerProject', 'NgoProjectController@createVolunteerProject');
-Route::post('project/createVolunteerProject', 'NgoProjectController@saveVolunteerProject');
-Route::get('project/editVolunteerProject/{id}', 'NgoProjectController@editGetVolunteerProject');
-Route::post('project/editVolunteerProject/{id}', 'NgoProjectController@editSaveVolunteerProject');
-Route::get('project/deleteVolunteerProject/{id}', 'NgoProjectController@deleteVolunteerProject');
 Route::get('project/futureVolunteeringProjects', 'ProjectController@getFutureVolunteeringProjects');
 
 // CSR projects controller
