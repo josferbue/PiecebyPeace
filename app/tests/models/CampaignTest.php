@@ -37,7 +37,7 @@ class CampaignTest extends TestCase {
     public function testImage()
     {
         $campaign = $this->campaign;
-        $this->assertNull( $campaign->image );
+        $this->assertNotNull( $campaign->image );
     }
 
     public function testStartDate()

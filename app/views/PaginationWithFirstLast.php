@@ -1,68 +1,65 @@
-
 <?php
-class PaginationWithFirstLast extends \Illuminate\Pagination\BootstrapPresenter
-{
+if (!class_exists("PaginationWithFirstLast")) {
 
-    public function render()
+
+
+    class PaginationWithFirstLast extends \Illuminate\Pagination\BootstrapPresenter
     {
 
-        if ($this->lastPage < 6) {
-            $content = $this->getPageRange(1, $this->lastPage);
-        } else {
-            $content = $this->getPageSlider();
-        }
-
-        return $this->getFirst().$this->getPrevious().$content.$this->getNext().$this->getLast();
-    }
-
-    protected function getPageSlider()
-    {
-        $window = 2;
-
-        if ($this->currentPage <= $window)
+        public function render()
         {
-            $ending = $this->getFinish();
 
-            return $this->getPageRange(1, $window + 2).$ending;
+            if ($this->lastPage < 6) {
+                $content = $this->getPageRange(1, $this->lastPage);
+            } else {
+                $content = $this->getPageSlider();
+            }
+
+            return $this->getFirst() . $this->getPrevious() . $content . $this->getNext() . $this->getLast();
         }
 
-       elseif ($this->currentPage >= $this->lastPage - $window)
+        protected function getPageSlider()
         {
-            $start = $this->lastPage - ($window +1);
+            $window = 2;
 
-            $content = $this->getPageRange($start, $this->lastPage);
+            if ($this->currentPage <= $window) {
+                $ending = $this->getFinish();
 
-            return $this->getStart().$content;
+                return $this->getPageRange(1, $window + 2) . $ending;
+            } elseif ($this->currentPage >= $this->lastPage - $window) {
+                $start = $this->lastPage - ($window + 1);
+
+                $content = $this->getPageRange($start, $this->lastPage);
+
+                return $this->getStart() . $content;
+            } else {
+                $content = $this->getAdjacentRange();
+
+                return $this->getStart() . $content . $this->getFinish();
+            }
         }
 
-        else
+
+        public function getFirst()
         {
-            $content = $this->getAdjacentRange();
-
-            return $this->getStart().$content.$this->getFinish();
+            $text = Lang::get('pagination.first');
+            if ($this->currentPage <= 1) {
+                return '<li class="disabled"><span>' . $text . '</span></li>';
+            } else {
+                $url = $this->paginator->getUrl(1);
+                return '<li><a href="' . $url . '">' . $text . '</a></li>';
+            }
         }
-    }
 
-
-    public function getFirst()
-    {
-        $text = Lang::get('pagination.first');
-        if ($this->currentPage <= 1) {
-            return '<li class="disabled"><span>'.$text.'</span></li>';
-        } else {
-            $url = $this->paginator->getUrl(1);
-            return '<li><a href="'.$url.'">'.$text.'</a></li>';
-        }
-    }
-
-    public function getLast()
-    {
-        $text = Lang::get('pagination.last');
-        if ($this->currentPage >= $this->lastPage) {
-            return '<li class="disabled"><span>'.$text.'</span></li>';
-        } else {
-            $url = $this->paginator->getUrl($this->lastPage);
-            return '<li><a href="'.$url.'">'.$text.'</a></li>';
+        public function getLast()
+        {
+            $text = Lang::get('pagination.last');
+            if ($this->currentPage >= $this->lastPage) {
+                return '<li class="disabled"><span>' . $text . '</span></li>';
+            } else {
+                $url = $this->paginator->getUrl($this->lastPage);
+                return '<li><a href="' . $url . '">' . $text . '</a></li>';
+            }
         }
     }
 }?>

@@ -4,19 +4,19 @@ class CampaignControllerTest extends BaseControllerTestCase {
 
     // List of all campaigns
 
-    public function testListAllCampaignsResponse()
+    public function testListAllActiveCampaignsResponse()
     {
         $this->flushSession();
 
-        $this->requestAction('GET', 'CampaignController@findAllCampaigns');
+        $this->requestAction('GET', 'CampaignController@findAllActiveCampaigns');
         $this->assertResponseOk();
     }
 
-    public function testListAllCampaignsVariables()
+    public function testListAllActiveCampaignsVariables()
     {
         $this->flushSession();
 
-        $this->requestAction('GET', 'CampaignController@findAllCampaigns');
+        $this->requestAction('GET', 'CampaignController@findAllActiveCampaigns');
         $this->assertViewHas('campaigns');
     }
 

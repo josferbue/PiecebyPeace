@@ -19,36 +19,6 @@ class Ngo extends Eloquent {
         return $this->banned;
     }
 
-	public function holderName()
-	{
-		return $this->holderName;
-	}
-
-	public function brandName()
-	{
-		return $this->brandName;
-	}
-
-	public function number()
-	{
-		return $this->number;
-	}
-
-	public function expirationMonth()
-	{
-		return $this->expirationMonth;
-	}
-
-	public function expirationYear()
-	{
-		return $this->expirationYear;
-	}
-
-	public function cvv()
-	{
-		return $this->cvv;
-	}
-
 	public function description()
 	{
 		return $this->description;

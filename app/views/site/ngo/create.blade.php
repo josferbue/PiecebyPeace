@@ -69,45 +69,6 @@
 
                 </div>
                 <div class="span3">
-                    <div class="form-group  {{{ $errors->has('holderName') ? 'error' : '' }}}">
-                        <label for="holderName">{{{ Lang::get('ngo/ngo.holderName') }}}</label>
-                        <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.holderName') }}}" type="text"
-                               name="holderName" id="holderName" value="{{{ Input::old('holderName') }}}">
-                        {{ $errors->first('holderName', '<span class="help-block">:message</span>') }}
-                    </div>
-                    <div class="form-group  {{{ $errors->has('brandName') ? 'error' : '' }}}">
-                        <label for="brandName">{{{ Lang::get('ngo/ngo.brandName') }}}</label>
-                        <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.brandName') }}}" type="text"
-                               name="brandName" id="brandName" value="{{{ Input::old('brandName') }}}">
-                        {{ $errors->first('brandName', '<span class="help-block">:message</span>') }}
-                    </div>
-                    <div class="form-group  {{{ $errors->has('number') ? 'error' : '' }}}">
-                        <label for="number">{{{ Lang::get('ngo/ngo.number') }}}</label>
-                        <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.number') }}}" type="text"
-                               name="number" id="number" value="{{{ Input::old('number') }}}">
-                        {{ $errors->first('number', '<span class="help-block">:message</span>') }}
-                    </div>
-                    <div class="form-group  {{{ $errors->has('expirationMonth') ? 'error' : '' }}}">
-                        <label for="expirationMonth">{{{ Lang::get('ngo/ngo.expirationMonth') }}}</label>
-                        <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.expirationMonth') }}}"
-                               type="text"
-                               name="expirationMonth" id="expirationMonth"
-                               value="{{{ Input::old('expirationMonth') }}}">
-                        {{ $errors->first('expirationMonth', '<span class="help-block">:message</span>') }}
-                    </div>
-                    <div class="form-group  {{{ $errors->has('expirationYear') ? 'error' : '' }}}">
-                        <label for="expirationYear">{{{ Lang::get('ngo/ngo.expirationYear') }}}</label>
-                        <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.expirationYear') }}}"
-                               type="text"
-                               name="expirationYear" id="expirationYear" value="{{{ Input::old('expirationYear') }}}">
-                        {{ $errors->first('expirationYear', '<span class="help-block">:message</span>') }}
-                    </div>
-                    <div class="form-group  {{{ $errors->has('cvv') ? 'error' : '' }}}">
-                        <label for="cvv">{{{ Lang::get('ngo/ngo.cvv') }}}</label>
-                        <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.cvv') }}}" type="text"
-                               name="cvv" id="cvv" value="{{{ Input::old('cvv') }}}">
-                        {{ $errors->first('cvv', '<span class="help-block">:message</span>') }}
-                    </div>
                     <div class="form-group  {{{ $errors->has('logo') ? 'error' : '' }}}">
                         <label for="logo">{{{ Lang::get('ngo/ngo.logo') }}}</label>
                         <input class="form-control" type="file" name="logo" id="logo">

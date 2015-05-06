@@ -36,7 +36,7 @@ class NgoTest extends TestCase
     public function testDescription()
     {
         $ngo = $this->ngo;
-        $this->assertEquals($ngo->description, 'descripcion');
+        $this->assertEquals($ngo->description, 'NGO1 NGO1 NGO1 NGO1');
     }
 
     public function testDescriptionIsAString()
@@ -48,7 +48,7 @@ class NgoTest extends TestCase
     public function testPhone()
     {
         $ngo = $this->ngo;
-        $this->assertEquals($ngo->phone, '646464646');
+        $this->assertEquals($ngo->phone, '612345678');
     }
 
     public function testPhoneIsAString()
@@ -66,7 +66,7 @@ class NgoTest extends TestCase
     public function testLogo()
     {
         $ngo = $this->ngo;
-        $this->assertNull($ngo->logo);
+        $this->assertNotNull($ngo->logo);
     }
 
     public function testActive()
@@ -80,75 +80,4 @@ class NgoTest extends TestCase
         $ngo = $this->ngo;
         $this->assertInternalType('boolean', (boolean)$ngo->active);
     }
-
-    //creditCard
-    public function testNumbersAString()
-    {
-        $ngo = $this->ngo;
-        $this->assertInternalType('string', $ngo->numebr);
-    }
-
-    public function testNumberComplainsWithURLPattern()
-    {
-        $ngo = $this->ngo;
-        $this->assertRegExp('{/^([4]{1})([0-9]{12,15})$}', $ngo->number);
-    }
-
-    public function testHolderName()
-    {
-        $ngo = $this->ngo;
-        $this->assertEquals($ngo->holderName, 'NGO 1');
-    }
-
-    public function testHolderNameIsAString()
-    {
-        $ngo = $this->ngo;
-        $this->assertInternalType('string', $ngo->phone);
-    }
-
-    public function testBrandName()
-    {
-        $ngo = $this->ngo;
-        $this->assertEquals($ngo->brandName, 'Visa');
-    }
-
-    public function testBrandNameIsAString()
-    {
-        $ngo = $this->ngo;
-        $this->assertInternalType('string', $ngo->phone);
-    }
-    public function testExpirationMonth()
-    {
-        $ngo = $this->ngo;
-        $this->assertEquals($ngo->ExpirationMonth, '10');
-    }
-
-    public function testExpirationMonthIsAInteger()
-    {
-        $ngo = $this->ngo;
-        $this->assertInternalType('integer', $ngo->ExpirationMonth);
-    }
-    public function testExpirationYear()
-    {
-        $ngo = $this->ngo;
-        $this->assertEquals($ngo->ExpirationYear, '2015');
-    }
-
-    public function testExpirationYearIsAInteger()
-    {
-        $ngo = $this->ngo;
-        $this->assertInternalType('integer', $ngo->ExpirationYear);
-    }
-    public function testCVV()
-    {
-        $ngo = $this->ngo;
-        $this->assertEquals($ngo->ExpirationYear, '2015');
-    }
-
-    public function testCVVIsAInteger()
-    {
-        $ngo = $this->ngo;
-        $this->assertInternalType('integer', $ngo->cvv);
-    }
-
 }

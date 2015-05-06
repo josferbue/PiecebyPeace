@@ -47,16 +47,8 @@ class NgoController extends BaseController
     {
 
         $rules = array(
-            'holderName' => 'required|min:3',
-            'brandName' => 'required|min:3',
-            'number' => array('required', 'Regex:/^([4]{1})([0-9]{12,15})$/'),//visa
-            'expirationMonth' => 'required|integer|between:1,12',
-            'expirationYear' => 'required|integer|min:2014',
-            'cvv' => 'required|integer|between:100,999',
             'description' => 'required|min:3',
             'phone' => array('required', 'Regex:/^\d+$/')
-
-
         );
 
         // Validate the inputs
@@ -68,12 +60,6 @@ class NgoController extends BaseController
         $this->user->username = Input::get('username');
         $this->user->email = Input::get('email');
         $this->ngo->name = Input::get("name");
-        $this->ngo->holderName = Input::get("holderName");
-        $this->ngo->brandName = Input::get("brandName");
-        $this->ngo->number = Input::get("number");
-        $this->ngo->expirationMonth = Input::get("expirationMonth");
-        $this->ngo->expirationYear = Input::get("expirationYear");
-        $this->ngo->cvv = Input::get("cvv");
         $this->ngo->description = Input::get("description");
         $this->ngo->phone = Input::get("phone");
 
