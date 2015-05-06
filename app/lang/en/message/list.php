@@ -15,9 +15,9 @@ return array(
 
     'BroadcastAllVolunteers'        => 'All volunteers',
 
-    'titleSent'                     => 'Sent Messages',
+    'titleSent'                     => 'Sent messages',
     'titleInbox'                    => 'Inbox',
-    'empty'                         => 'Empty list of messages',
+    'empty'                         => 'No messages were found.',
 
 
     'back'                          => 'Back',

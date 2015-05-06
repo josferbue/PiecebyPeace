@@ -4,10 +4,10 @@ return array(
 
 
     'createMessage' => array(
-        'error' => 'El mensaje no se ha podido enviar, inténtelo de nuevo.',
+        'error' => 'El mensaje no se pudo enviar, inténtelo de nuevo.',
         'success' => 'El mensaje se ha enviado con éxito.',
-        'errorNotHisProject' => 'Error sólo puede enviar mensajes a los voluntarios que colaboren en sus proyectos.',
-        'errorNohasVolunteeer' => 'Aún no hay ningún voluntario en el proyecto al que manderle un mensaje.',
+        'errorNotHisProject' => 'Sólo puede enviar mensajes a los voluntarios que colaboren en sus proyectos.',
+        'errorHasNotVolunteer' => 'Aún no hay ningún voluntario en el proyecto al que poder enviarla un mensaje.',
 
     )
 

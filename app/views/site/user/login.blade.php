@@ -9,20 +9,20 @@
 {{-- Content --}}
 @section('content')
 <div class="page-header">
-	<h1>Login into your account</h1>
+	<h1>{{{ Lang::get('user/user.login') }}}</h1>
 </div>
 <form class="form-horizontal" method="POST" action="{{ URL::to('user/login') }}" accept-charset="UTF-8">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <fieldset>
         <div class="form-group">
-            <label class="col-md-2 control-label" for="email">{{ Lang::get('confide::confide.username_e_mail') }}</label>
+            <label class="col-md-2 control-label" for="email">{{ Lang::get('confide::confide.username_e_mail') }}: </label>
             <div class="col-md-10">
                 <input class="form-control" tabindex="1" placeholder="{{ Lang::get('confide::confide.username_e_mail') }}" type="text" name="email" id="email" value="{{ Input::old('email') }}">
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 control-label" for="password">
-                {{ Lang::get('confide::confide.password') }}
+                {{ Lang::get('confide::confide.password') }}:
             </label>
             <div class="col-md-10">
                 <input class="form-control" tabindex="2" placeholder="{{ Lang::get('confide::confide.password') }}" type="password" name="password" id="password">

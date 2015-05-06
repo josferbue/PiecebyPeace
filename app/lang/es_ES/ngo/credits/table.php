@@ -2,10 +2,10 @@
 
 return array(
 
-	'credits'   => 'Creditos',
+	'credits'   => 'Créditos',
 	'price'   	=> 'Precio por unidad',
 	'total' 	=> 'Total',
-	'title'		=> 'Comprar creditos para campañas',
-	'pay'		=> 'Pagar con paypal',
+	'title'		=> 'Comprar creditos',
+	'pay'		=> 'Pagar con PayPal',
 
 );

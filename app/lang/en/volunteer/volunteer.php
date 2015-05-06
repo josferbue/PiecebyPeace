@@ -19,7 +19,7 @@ return array(
     'surname'                 					=> 'Surname',
     'address'                					=> 'Address',
     'city'                     					=> 'City',
-    'zipCode'                 					=> 'Zip Code',
+    'zipCode'                 					=> 'ZIP code',
     'country'             	 					=> 'Country',
     'biography'               					=> 'Biography',
 

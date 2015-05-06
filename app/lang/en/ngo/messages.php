@@ -4,10 +4,10 @@ return array(
 
 
     'createMessage' => array(
-        'error'             => 'The message was not sent, please try again.',
-        'success'           => 'The message has been successfully sent.',
-        'errorNotHisProject' => 'Error,you can only send messages to the volunteers of your project.',
-        'errorNohasVolunteeer' => 'The project does not have volunteers to send message.',
+        'error'                     => 'The message was not sent. Please, try it again.',
+        'success'                   => 'The message has been successfully sent.',
+        'errorNotHisProject'        => 'You can only send messages to cooperators of your CSR projects.',
+        'errorHasNotVolunteers'     => 'You can not send messages related to this project due to it does not have cooperators.',
 
     )
 

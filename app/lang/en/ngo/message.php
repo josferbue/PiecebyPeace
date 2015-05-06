@@ -18,9 +18,9 @@ return array(
 	'recipient'						=> 'Recipient',
 	'subject'						=> 'Subject',
 	'textBox'						=> 'Text',
-	'volunteer'						=>'Indiviual message',
-	'broadcast'						=>'Broadcast message',
-	'selectVolunteer'				=>'Select Volunteer',
+	'volunteer'						=> 'Individual message',
+	'broadcast'						=> 'Broadcast message',
+	'selectVolunteer'				=> 'Select volunteer',
 	'send'							=> 'Send',
 	'back'							=> 'Back',
 

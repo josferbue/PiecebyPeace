@@ -61,6 +61,7 @@ class NgoCampaignController extends BaseController
         $this->campaign->startDate = Input::get( 'startDate' );
         $this->campaign->finishDate = Input::get( 'finishDate' );
         $this->campaign->link = Input::get( 'link' );
+        $this->campaign->maxVisits = Input::get( 'maxVisits' );
         $this->campaign->expirationDate = Input::get( 'expirationDate' );
         $this->campaign->ngo_id = Ngo::where('user_id','=',Auth::id())->first()->id;
 
@@ -72,6 +73,14 @@ class NgoCampaignController extends BaseController
             $filename = $image->getClientOriginalName();
             $image->move($destinationPath, $filename);
             $this->campaign->image =  '/campaigns_images/'.$this->campaign->name .'/'. $filename;
+
+            if(!Auth::user()->actor()->credits) {
+                return Redirect::to('ngo/campaign/create')->withInput(Input::all())->with('error', Lang::get('campaign/campaign.zeroCredits'));
+            }
+
+            if(!$this->checkIfNgoHasEnoughCredits($this->campaign)) {
+                return Redirect::to('ngo/campaign/create')->withInput(Input::all())->with('error', Lang::get('campaign/campaign.noEnoughCredits'));
+            }
 
             $this->campaign->save();
 
@@ -160,6 +169,51 @@ class NgoCampaignController extends BaseController
 
 
         Return View::make('site/ngo/emails')->with('campaignId',$campaign->id)->with('campaignName',$campaign->name);
+    }
+
+    public function checkIfNgoHasEnoughCredits($newCampaign) {
+        $campaigns = Campaign::where('ngo_id', '=', Auth::user()->actor()->id)->where('expirationDate', '>', Carbon::now());
+        $ngo = Auth::user()->actor();
+        $canCreateNewCampaign = false;
+        $click6 = 0;
+        $click9 = 0;
+        $click12 = 0;
+
+        foreach($campaigns as $campaign)
+        {
+            if($campaign->visits < 201) {
+                if ($campaign->maxVisits > 200) {
+                    $click6 += (200 - $campaign->visits);
+                    if ($campaign->maxVisits <= 1000) {
+                        $click9 += ($campaign->maxVisits - 200);
+                    } else {
+                        $click9 += 800;
+                        $click12 += ($campaign->maxVisits - 1000);
+                    }
+                } else {
+                    $click6 += ($campaign->maxVisits - $campaign->visits);
+                }
+            }
+            if($campaign->visits >= 201 && $campaign->visits < 1001) {
+                if($campaign->maxVisits <= 1000) {
+                    $click9 += ($campaign->maxVisits - $campaign->visits);
+                } else {
+                    $click9 += (1000 - $campaign->visits);
+                    $click12 += ($campaign->maxVisits - 1000);
+                }
+            }
+            if($campaign->visits >= 1001) {
+                $click12 += ($campaign->maxVisits - $campaign->visits);
+            }
+        }
+
+        $requiredCredits = 6 * $click6 + 9 * $click9 + 12 * $click12 + $newCampaign->maxVisits;
+
+        if($ngo->credits >= $requiredCredits) {
+            $canCreateNewCampaign = true;
+        }
+
+        return $canCreateNewCampaign;
     }
 
 

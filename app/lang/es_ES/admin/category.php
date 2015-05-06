@@ -33,5 +33,6 @@ return array(
 	'successfullyCreated'				=> 'La categoría ha sido creada con éxito.',
 	'categoryDoesNotExist'				=> 'La categoría no existe.',
 	'nameTooShort'						=> 'El nombre de la categoría es demasiado corto',
+	'nameAlreadyInUse'					=> 'Ya existe una categoría con el nombre especificado. Por favor, escoja otro.',
 
 );

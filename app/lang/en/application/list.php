@@ -13,13 +13,13 @@ return array(
 	|
 	*/
 
-	'titleCsr' 						=> 'Applications of CSR projects',
-	'titleVolunteer' 				=> 'Applications of volunteer projects',
+	'titleCsr' 						=> 'Applications for CSR projects',
+	'titleVolunteer' 				=> 'Applications for volunteering projects',
 	'titlePending' 					=> 'Pending applications',
 	'titleAnswered' 				=> 'Answered applications',
-	'nameProject' 					=> 'Project Name',
-	'notImage'   					=> 'Not image',
-	'empty'							=> 'Hasn&apos;t got applications.',
+	'nameProject' 					=> 'Project name',
+	'notImage'   					=> 'Image not found',
+	'empty'							=> 'No applications were found for this project.',
 	'cancelApplication'				=> 'Cancel',
 	'view'							=> 'View',
 	'confirmDelete'					=> 'Are you sure you want to delete this application?',

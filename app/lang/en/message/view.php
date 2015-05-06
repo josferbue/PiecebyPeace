@@ -13,7 +13,7 @@ return array(
     |
     */
 
-    'title'                     => 'Message Details',
+    'title'                     => 'Message details',
     'from'                      => 'From',
     'to'                        => 'To',
     'date'                      => 'Date',

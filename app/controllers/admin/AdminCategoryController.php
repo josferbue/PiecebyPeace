@@ -32,6 +32,10 @@ class AdminCategoryController extends BaseController
         $validator = Validator::make(Input::all(), $rules);
 
         if($validator->passes()) {
+            if(Category::where('name', '=', Input::get('name'))) {
+                return Redirect::to('admin/category/list')->with('error', Lang::get('admin/category.nameAlreadyInUse'));
+            }
+
             if ($id == 0) {
                 $this->category->name = Input::get('name');
                 $this->category->save();

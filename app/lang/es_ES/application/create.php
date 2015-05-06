@@ -16,7 +16,7 @@ return array(
 	'title' 						=> 'Solicitud de colaboración',
 	'nameProject' 					=> 'Nombre del proyecto',
 	'comments' 						=> 'Comentarios',
-	'notImage'   					=> 'No hay imagen',
+	'notImage'   					=> 'Sin imagen',
 	'submit'						=> 'Enviar solicitud',
 	'back'   				 		=> 'Cancelar'
 

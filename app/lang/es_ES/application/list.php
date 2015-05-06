@@ -12,14 +12,14 @@ return array(
 	| you want to customize your views to better match your application.
 	|
 	*/
-	'titleCsr' 						=> 'Solicitudes sobre proyectos RSC',
+	'titleCsr' 						=> 'Solicitudes sobre acciones de RSC',
 	'titleVolunteer' 				=> 'Solicitudes sobre proyectos de voluntariado',
 	'titlePending' 					=> 'Solicitudes pendientes',
 	'titleAnswered' 				=> 'Solicitudes contestadas',
 	'empty'							=> 'No tiene solicitudes.',
 	'nameProject' 					=> 'Nombre del proyecto',
 	'comments' 						=> 'Comentarios',
-	'notImage'   					=> 'No hay imagen',
+	'notImage'   					=> 'Sin imagen',
 	'submit'						=> 'Enviar solicitud',
 	'back'   				 		=> 'Atrás',
 	'cancelApplication'				=> 'Cancelar',

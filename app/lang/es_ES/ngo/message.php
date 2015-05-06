@@ -18,9 +18,9 @@ return array(
 	'recipient'						=> 'Destinatario',
 	'subject'						=> 'Asunto',
 	'textBox'						=> 'Cuerpo del mensaje',
-	'volunteer'						=>'Mensaje individual',
-	'broadcast'						=>'Mensaje para todos los voluntarios',
-	'selectVolunteer'				=>'Seleccione un voluntario',
+	'volunteer'						=> 'Mensaje individual',
+	'broadcast'						=> 'Mensaje para todos los voluntarios',
+	'selectVolunteer'				=> 'Seleccione un voluntario',
 	'send'							=> 'Enviar',
 	'back'							=> 'Volver',
 

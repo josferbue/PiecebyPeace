@@ -2,11 +2,11 @@
 
 return array(
     'listMessage' => array(
-        'errorNotLogged' => 'Only logged users can see messages.',
+        'errorNotLogged' => 'You are not logged-in.',
     ),
     'viewMessage' => array(
-        'errorHisMessage' => 'Only can  view your messages.',
-        'error' => 'Can not open this message, please try again.'
+        'errorHisMessage' => 'You can not see messages in which you are not one of the recipients.',
+        'error' => 'The message could not be opened. Please, try it again..'
 
     )
 

@@ -14,19 +14,19 @@ return array(
 	*/
 
 	'titleVolunteer' 	    		=> 'Volunteering projects',
-	'titleCsr' 	    				=> 'Corporate social responsibility projects',
-	'categories' 					=> 'Select Category',
-	'locations' 					=> 'Select City',
-	'dateFrom' 						=> 'Date From',
-	'dateTo' 						=> 'Date To',
+	'titleCsr' 	    				=> 'CSR projects',
+	'categories' 					=> 'Select category',
+	'locations' 					=> 'Select city',
+	'dateFrom' 						=> 'Date from',
+	'dateTo' 						=> 'Date to',
 	'search' 						=> 'Search',
-	'notFound'   					=>'Not found projects.',
-	'notImage'    					=>'without-Photo',
-	'ngoEmptyProject'    			=>'Hasn&apos;t got volunteer projects.',
-	'companyEmptyProject'   		=>'Hasn&apos;t got CSR projects.',
-	'volunteerEmptyProject'    		=>'Still not cooperates on any project.',
-	'sendMessage'    				=>'Send message',
-	'back'   						=>'Back'
+	'notFound'   					=> 'No projects were found.',
+	'notImage'    					=> 'Image not found.',
+	'ngoEmptyProject'    			=> 'No volunteering projects were found.',
+	'companyEmptyProject'   		=> 'No CSR projects were found.',
+	'volunteerEmptyProject'    		=> 'You are not cooperating in any project, yet.',
+	'sendMessage'    				=> 'Send message',
+	'back'   						=> 'Back'
 
 
 

@@ -14,13 +14,13 @@ return array(
 	*/
 
 	'sendMessage'					=> 'Send message',
-	'nameProject'					=> 'Project Name',
+	'nameProject'					=> 'Project name',
 	'recipient'						=> 'Recipient',
 	'subject'						=> 'Subject',
 	'textBox'						=> 'Text',
-	'volunteer'						=>'Indiviual message',
-	'broadcast'						=>'Broadcast message',
-	'selectVolunteer'				=>'Select Volunteer',
+	'volunteer'						=> 'Individual message',
+	'broadcast'						=> 'Broadcast message',
+	'selectVolunteer'				=> 'Select volunteer',
 	'send'							=> 'Send',
 	'back'							=> 'Back',
 

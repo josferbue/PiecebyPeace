@@ -13,8 +13,8 @@ return array(
 	|
 	*/
 
-	'titleCreateVolunteerProject' 	=> 'Por favor, hablenos acerca de su nuevo proyecto',
-	'titleCreateCsrProject' 	    => 'Por favor, hablenos acerca de su nueva RSC',
+	'titleCreateVolunteerProject' 	=> 'Por favor, háblenos acerca de su nuevo proyecto',
+	'titleCreateCsrProject' 	    => 'Por favor, háblenos acerca de su nueva acción de RSC',
 	'name' 							=> 'Nombre del proyecto',
 	'description' 					=> 'Descripcion',
 	'maxVolunteers' 				=> 'Número de voluntarios',
@@ -27,10 +27,10 @@ return array(
 	'zipCode'    					=> 'Código postal',
 	'country'    					=> 'País',
 	'saveCreate'    				=> 'Crear proyecto',
-	'selectCategories'				=> 'Seleccione las categorias',
-	'editTitleProject'		=> 'Edicción del proyecto',
+	'selectCategories'				=> 'Seleccione las categorías',
+	'editTitleProject'				=> 'Edición del proyecto',
 	'saveEdit'						=> 'Guardar cambios',
-	'back'   				 		=>'Cancelar'
+	'back'   				 		=> 'Cancelar'
 
 
 

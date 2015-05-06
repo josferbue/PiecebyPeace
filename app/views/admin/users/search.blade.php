@@ -42,15 +42,7 @@
                         <div class="clearfix control-group span6">
                             <div class="caption">
 
-                                <h3> {{{ Lang::get('admin/search.username') }}} </h3>
-
-                                <p>{{$user->userAccount->username }}</p>
-
-                                <h3> {{{ Lang::get('admin/search.fullName') }}} </h3>
-
-                                <p>{{$user->name }} {{$user->surname }}</p>
-
-                                <h3> {{{ Lang::get('admin/search.fullAddress') }}} </h3>
+                                <h3>{{$user->name }} {{$user->surname }} ({{ $user->userAccount->username }})</h3>
 
                                 <p>{{$user->address }}{{{', '}}} {{$user->zipCode }} {{{ '(' }}}{{$user->city }} {{{ ', ' }}} {{$user->country }}{{{ ')' }}}</p>
 
@@ -67,15 +59,7 @@
                         <div class="clearfix control-group span6">
                             <div class="caption">
 
-                                <h3> {{{ Lang::get('admin/search.username') }}} </h3>
-
-                                <p>{{$user->userAccount->username }}</p>
-
-                                <h3> {{{ Lang::get('admin/search.fullName') }}} </h3>
-
-                                <p>{{$user->name }}</p>
-
-                                <h3> {{{ Lang::get('admin/search.contactPhone') }}} </h3>
+                                <h3>{{$user->name }} ({{ $user->userAccount->username }})</h3>
 
                                 <p><b>{{$user->phone }}</b></p>
 

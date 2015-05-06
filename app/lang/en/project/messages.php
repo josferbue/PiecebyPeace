@@ -4,60 +4,60 @@ return array(
 
 
     'createVolunteer' => array(
-        'error'             => 'Volunteer project was not created, please try again.',
-        'success'           => 'Volunteer project created successfully.',
-        'errorBanned'       => 'His o her account is banned.',
-        'errorNotActive'    => 'His o her account is not active by administrator yet.'
+        'error'             => 'The volunteering project has not been created. Please, try it again.',
+        'success'           => 'The volunteering project has been successfully created.',
+        'errorBanned'       => 'It seems that this user account has been banned. Please, send us an e-mail for clarifications.',
+        'errorNotActive'    => 'It seems that this user account has not been activated, yet. Please, send us an e-mail if the account is not activated soon.'
 
     ),
     'editVolunteer' => array(
-        'error'                     => 'Volunteer project was not edited, please try again.',
-        'success'                   => 'Volunteer project edited successfully.',
-        'errorBanned'               => 'His o her account is banned.',
-        'errorNotActive'            => 'His o her account is not active by administrator yet.',
-        'errorNotHisProject'        => 'His o her can only edit their projects.',
-        'errorWithVolunteer'        => 'His o her can not  edit project with volunteers.',
-        'errorWithApplications'     => 'His o her can not edit project with pending applications.'
+        'error'                     => 'The volunteering project has not been edited. Please, try it again.',
+        'success'                   => 'The volunteering project has been successfully edited.',
+        'errorBanned'               => 'It seems that this user account has been banned. Please, send us an e-mail for clarifications.',
+        'errorNotActive'            => 'It seems that this user account has not been activated, yet. Please, send us an e-mail if the account is not activated soon.',
+        'errorNotHisProject'        => 'You can only edit your own projects.',
+        'errorWithVolunteer'        => 'You can only edit projects without cooperators.',
+        'errorWithApplications'     => 'You can only edit projects without applications (both answered and unanswered).'
 
 
     ),
     'deleteVolunteer' => array(
-        'error'                     => 'Volunteer project was not deleted, please try again.',
-        'success'                   => 'Volunteer project deleted successfully.',
-        'errorBanned'               => 'His o her account is banned.',
-        'errorNotActive'            => 'His o her account is not active by administrator yet.',
-        'errorNotHisProject'        => 'His o her can only delete their projects.',
-        'errorWithVolunteer'        => 'His o her can not  delete project with volunteers.',
-        'errorWithApplications'     => 'His o her can not delete project with pending applications.'
+        'error'                     => 'The volunteering project has not been deleted. Please, try it again.',
+        'success'                   => 'The volunteering project has been successfully deleted.',
+        'errorBanned'               => 'It seems that this user account has been banned. Please, send us an e-mail for clarifications.',
+        'errorNotActive'            => 'It seems that this user account has not been activated, yet. Please, send us an e-mail if the account is not activated soon.',
+        'errorNotHisProject'        => 'You can only delete your own projects.',
+        'errorWithVolunteer'        => 'You can only delete projects without cooperators.',
+        'errorWithApplications'     => 'You can only delete projects without applications (both answered and unanswered).'
 
 
     ),
     'createCsr' => array(
-        'error'             => 'CSR project was not created, please try again.',
-        'success'           => 'CSR project created successfully.',
-        'errorBanned'       => 'His o her account is banned.',
-        'errorNotActive'    => 'His o her account is not active by administrator yet.'
+        'error'             => 'The CSR project has not been created. Please, try it again.',
+        'success'           => 'The CSR project has been successfully created.',
+        'errorBanned'       => 'It seems that this user account has been banned. Please, send us an e-mail for clarifications.',
+        'errorNotActive'    => 'It seems that this user account has not been activated, yet. Please, send us an e-mail if the account is not activated soon.'
 
     ),
     'editCsr' => array(
-        'error'                     => 'CSR project was not edited, please try again.',
-        'success'                   => 'CSR project edited successfully.',
-        'errorBanned'               => 'His o her account is banned.',
-        'errorNotActive'            => 'His o her account is not active by administrator yet.',
-        'errorNotHisProject'        => 'His o her can only edit their projects.',
-        'errorWithVolunteer'        => 'His o her can not  edit project with volunteers.',
-        'errorWithApplications'     => 'His o her can not edit project with pending applications.'
+        'error'                     => 'The CSR project has not been edited. Please, try it again.',
+        'success'                   => 'The CSR project has been successfully edited.',
+        'errorBanned'               => 'It seems that this user account has been banned. Please, send us an e-mail for clarifications.',
+        'errorNotActive'            => 'It seems that this user account has not been activated, yet. Please, send us an e-mail if the account is not activated soon.',
+        'errorNotHisProject'        => 'You can only edit your own projects.',
+        'errorWithVolunteer'        => 'You can only edit projects without cooperators.',
+        'errorWithApplications'     => 'You can only edit projects without applications (both answered and unanswered).'
 
 
     ),
     'deleteCsr' => array(
-        'error'                     => 'CSR project was not deleted, please try again.',
-        'success'                   => 'CSR project deleted successfully.',
-        'errorBanned'               => 'His o her account is banned.',
-        'errorNotActive'            => 'His o her account is not active by administrator yet.',
-        'errorNotHisProject'        => 'His o her can only delete their projects.',
-        'errorWithVolunteer'        => 'His o her can not  delete project with volunteers.',
-        'errorWithApplications'     => 'His o her can not delete project with pending applications.'
+        'error'                     => 'The CSR project has not been deleted. Please, try it again.',
+        'success'                   => 'The CSR project has been successfully deleted.',
+        'errorBanned'               => 'It seems that this user account has been banned. Please, send us an e-mail for clarifications.',
+        'errorNotActive'            => 'It seems that this user account has not been activated, yet. Please, send us an e-mail if the account is not activated soon.',
+        'errorNotHisProject'        => 'You can only delete your own projects.',
+        'errorWithVolunteer'        => 'You can only delete projects without cooperators.',
+        'errorWithApplications'     => 'You can only delete projects without applications (both answered and unanswered).'
 
 
     )

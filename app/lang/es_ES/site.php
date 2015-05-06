@@ -27,11 +27,11 @@ return array(
 
 	'projects' 						=> 'Proyectos',
 	'findVolunteerProjects' 		=> 'Buscar proyectos de voluntariado',
-	'findCsrProjects' 				=> 'Buscar proyectos de RSC',
+	'findCsrProjects' 				=> 'Buscar acción de RSC',
 	'createVolunteerProjects' 		=> 'Crear proyecto de voluntariado',
 	'myVolunteersProjects' 			=> 'Mis proyectos de voluntariado',
-	'createCsrProject' 				=> 'Crear proyecto de RSC',
-	'myCsrProjects' 				=> 'Mis proyectos de RSC',
+	'createCsrProject' 				=> 'Crear acción de RSC',
+	'myCsrProjects' 				=> 'Mis acciones de RSC',
 
 	'categories'					=> 'Categorías',
 
@@ -42,13 +42,13 @@ return array(
 	'findCompanies'					=> 'Buscar empresas',
 	'findNGOs'						=> 'Buscar ONGs',
 	'broadcastMessage'				=> 'Enviar mensaje global',
-	'myCsrProjects'					=> 'Mis proyectos de RSC',
+	'myCsrProjects'					=> 'Mis acciones de RSC',
 	'messages'						=> 'Mensajes',
 	'messagesSent'					=> 'Mensajes enviados',
 	'messagesInbox'					=> 'Bandeja de entrada',
 
-	'myCsrApplication'				=> 'Proyectos RSC',
-	'myVolunteerApplication'		=> 'Proyectos de voluntariado',
+	'myCsrApplication'				=> 'Mis solicitudes a acciones de RSC',
+	'myVolunteerApplication'		=> 'Mis solicitudes a proyectos de voluntariado',
 
 	'applications'					=> 'Solicitudes',
 	'pendingApplications'			=> 'Solicitudes pendientes',

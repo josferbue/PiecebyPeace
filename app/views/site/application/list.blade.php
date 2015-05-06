@@ -13,17 +13,6 @@
         <h1> {{{ $title}}}</h1>
     </div>
 
-
-    <div class="pagination">
-
-        <input type="button" class="btn btn-primary"
-               onclick="window.location.href='{{ URL::to('/') }}'"
-               value="{{ Lang::get('application/list.back') }}">
-        <br>
-        {{ $applications->links()}}
-        {{--mostramos los links para paginar--}}
-    </div>
-
     {{Session::put('backUrl', Request::url())}}
 
 
@@ -64,5 +53,15 @@
             @endforeach
         </div>
     @endif
+
+    <hr>
+    <div class="pagination">
+
+        <input type="button" class="btn btn-primary"
+               onclick="window.location.href='{{ URL::to(Session::get('backUrl')) }}'"
+               value="{{ Lang::get('application/list.back') }}">
+
+        {{ $applications->links()}}
+    </div>
 @stop
 

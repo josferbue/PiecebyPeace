@@ -20,7 +20,7 @@ return array(
 	'fullAddress'			=> 'Dirección',
 
 	'name'					=> 'Nombre',
-	'contactPhone'			=> 'Contact phone',
+	'contactPhone'			=> 'Teléfono de contacto',
 	'sendMessage'			=> 'Enviar mensaje',
 
 	'search'				=> 'Buscar',

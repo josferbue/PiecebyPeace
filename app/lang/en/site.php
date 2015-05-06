@@ -47,8 +47,8 @@ return array(
 	'messagesSent'					=> 'Sent messages',
 	'messagesInbox'					=> 'Inbox',
 
-	'myCsrApplication'				=> 'CSR projects',
-	'myVolunteerApplication'		=> 'Volunteer projects',
+	'myCsrApplication'				=> 'My applications for CSR projects',
+	'myVolunteerApplication'		=> 'My applications for volunteering projects',
 
 	'applications'					=> 'Applications',
 	'pendingApplications'			=> 'Pending applications',

@@ -13,23 +13,23 @@ return array(
 	|
 	*/
 
-	'title' 	   			 => 'Project Details',
+	'title' 	   			 => 'Project details',
 	'name' 					 => 'Name',
 	'description' 	  	     => 'Description',
 	'categories' 		     => 'Categories',
 	'location' 				 => 'Location',
-	'startDate' 			 => 'Start Date',
-	'finishDate'   		 	 =>'Finish Date',
-	'ngo'    				 =>'NGO',
-	'company'    			 =>'Company',
-	'notImage'   	 		 =>'without-Photo',
-	'availableVolunteers'    =>'available Volunteers',
-	'maxVolunteers'   		 =>'Maximun Volunteers',
-	'edit'    				 =>'Edit roject',
-	'delete'    		   	 =>'Delete project',
-	'confirmDelete'   		 =>'Are you sure you want to delete this project?',
-	'back'   				 =>'Back',
-	'apply'   				 =>'Apply'
+	'startDate' 			 => 'Start date',
+	'finishDate'   		 	 => 'Finish date',
+	'ngo'    				 => 'NGO',
+	'company'    			 => 'Company',
+	'notImage'   	 		 => 'Image not available.',
+	'availableVolunteers'    => 'Available volunteers',
+	'maxVolunteers'   		 => 'Maximum number of volunteers',
+	'edit'    				 => 'Edit project',
+	'delete'    		   	 => 'Delete project',
+	'confirmDelete'   		 => 'Are you sure you want to delete this project?',
+	'back'   				 => 'Back',
+	'apply'   				 => 'Apply'
 
 
 );

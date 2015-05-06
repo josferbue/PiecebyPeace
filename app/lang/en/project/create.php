@@ -13,24 +13,24 @@ return array(
 	|
 	*/
 
-	'titleCreateVolunteerProject' 	    => 'Please, tell us a few things about this new project',
-	'titleCreateCsrProject' 	    => 'Please, tell us a few things about this new CSR',
-	'name' 							=> 'Project name',
-	'description' 					=> 'Description',
-	'maxVolunteers' 				=> 'Volunteers number',
-	'startDate' 					=> 'Start date',
-	'finishDate' 					=> 'Finish date',
-	'location'    					=>'Location Info',
-	'image'    						=>'Choose an image',
-	'address'   					=>'Address',
-	'city'    						=>'City',
-	'zipCode'    					=>'ZIP code',
-	'country'    					=>'Country',
-	'saveCreate'    				=>'Create project',
-	'selectCategories'				=>'Select Categories',
-	'editTitleProject'		=> 'Edit Project',
-	'saveEdit'						=> 'Save',
-	'back'   						 =>'Cancel'
+	'titleCreateVolunteerProject' 	    => 'Please, tell us a few things about this new volunteering project',
+	'titleCreateCsrProject' 	    	=> 'Please, tell us a few things about this new CSR project',
+	'name' 								=> 'Project name',
+	'description' 						=> 'Description',
+	'maxVolunteers' 					=> 'Number of volunteers',
+	'startDate' 						=> 'Start date',
+	'finishDate' 						=> 'Finish date',
+	'location'    						=> 'Location info',
+	'image'    							=> 'Choose an image',
+	'address'   						=> 'Address',
+	'city'    							=> 'City',
+	'zipCode'    						=> 'ZIP code',
+	'country'    						=> 'Country',
+	'saveCreate'    					=> 'Create project',
+	'selectCategories'					=> 'Select categories',
+	'editTitleProject'					=> 'Edit project',
+	'saveEdit'							=> 'Save',
+	'back'   						 	=> 'Cancel'
 
 
 

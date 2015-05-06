@@ -36,13 +36,9 @@
             <div class="span9">
                 <div class="caption">
 
-                    <h3> {{{ Lang::get('campaign/campaign.name') }}} </h3>
+                    <h3> {{ HTML::link('campaign/details/'.$campaign->id, $campaign->name) }} </h3>
 
-                    <a href="{{{ URL::to('campaign/details/'.$campaign->id) }}}"><p>{{$campaign->name }}</p></a>
-
-                    <h3> {{{ Lang::get('campaign/campaign.description') }}} </h3>
-
-                    <p>{{$campaign->description }}</p>
+                    <p> {{$campaign->description }} </p>
 
                 </div>
 

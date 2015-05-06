@@ -30,29 +30,29 @@ return array(
 
 	),
 	'createCsr'=> array(
-	'error'   		=> 'El proyecto de RSC no se ha podido crear.',
-	'success' 		=> 'El proyecto de RSC se ha creado con éxito.',
+	'error'   		=> 'La acción de RSC no se ha podido crear.',
+	'success' 		=> 'La acción de RSC se ha creado con éxito.',
 	'errorBanned' 	=> 'Su cuenta se encuentra baneada, no puede crear proyectos.',
 	'errorNotActive'=> 'Su cuenta aún no está verificada por el administrador, no puede crear proyectos.'
 ),
 	'editCsr'=> array(
-	'error'   		=> 'El proyecto de RSC no se ha podido modificar.',
-	'success' 		=> 'El proyecto de RSC se ha modificado con éxito.',
+	'error'   		=> 'La acción de RSC no se ha podido modificar.',
+	'success' 		=> 'La acción de RSC se ha modificado con éxito.',
 	'errorBanned' 	=> 'Su cuenta se encuentra baneada, no puede editar proyectos.',
 	'errorNotActive'=> 'Su cuenta aún no está verificada por el administrador, no puede editar proyectos.',
-	'errorNotHisProject'=> 'Sólo puede editar sus proyectos.',
-	'errorWithVolunteer'    => 'No se pueden editar proyectos con voluntarios ya añadidos.',
-	'errorWithApplications'    => 'No se pueden editar proyectos con solicitudes de voluntariado pendientes.'
+	'errorNotHisProject'=> 'Sólo puede editar sus acciones de RSC.',
+	'errorWithVolunteer'    => 'No se pueden editar acciones de RSC con voluntarios ya añadidos.',
+	'errorWithApplications'    => 'No se pueden editar acciones de RSC con solicitudes de voluntariado pendientes.'
 
 ),
 	'deleteCsr'=> array(
-	'error'   				=> 'El proyecto de RSC no se ha podido eliminar.',
-	'success' 				=> 'El proyecto de RSC se ha eliminado con éxito.',
+	'error'   				=> 'La acción de RSC no se ha podido eliminar.',
+	'success' 				=> 'La acción de RSC se ha eliminado con éxito.',
 	'errorBanned' 	        => 'Su cuenta se encuentra baneada, no puede eliminar proyectos.',
 	'errorNotActive'        => 'Su cuenta aún no está verificada por el administrador, no puede eliminar proyectos.',
-	'errorNotHisProject'    => 'Sólo puede eliminar sus proyectos.',
-	'errorWithVolunteer'    => 'No se pueden eliminar proyectos con voluntarios ya añadidos.',
-	'errorWithApplications' => 'No se pueden eliminar proyectos con solicitudes de voluntariado pendientes.'
+	'errorNotHisProject'    => 'Sólo puede eliminar sus acciones de RSC.',
+	'errorWithVolunteer'    => 'No se pueden eliminar acciones de RSC con voluntarios ya añadidos.',
+	'errorWithApplications' => 'No se pueden eliminar acciones de RSC con solicitudes de voluntariado pendientes.'
 
 )
 

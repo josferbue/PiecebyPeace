@@ -13,11 +13,11 @@ return array(
 	|
 	*/
 
-	'title' 						=> 'Cooperate application',
-	'nameProject' 					=> 'Project Name',
+	'title' 						=> 'Apply for a cooperation in this project',
+	'nameProject' 					=> 'Project name',
 	'comments' 						=> 'Comments',
-	'notImage'   					=> 'Not image',
-	'submit'						=> 'Send application',
+	'notImage'   					=> 'Image not found',
+	'submit'						=> 'Apply',
 	'back'   				 		=> 'Cancel'
 
 );

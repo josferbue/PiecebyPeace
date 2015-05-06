@@ -11,11 +11,11 @@ return array(
     */
 
     'name'                    				=> 'Name',
-    'holderName'                 			=> 'Holder Name',
-    'brandName'                				=> 'Brand Name',
-    'number'                     			=> 'CreditCard Number',
-    'expirationMonth'                 		=> 'Expiration Month',
-    'expirationYear'             	 		=> 'Expiration Year',
+    'holderName'                 			=> 'Holder name',
+    'brandName'                				=> 'Brand name',
+    'number'                     			=> 'Credit card number',
+    'expirationMonth'                 		=> 'Expiration month',
+    'expirationYear'             	 		=> 'Expiration year',
     'cvv'               					=> 'CVV',
     'description'               			=> 'Description',
     'phone'               					=> 'Phone',
@@ -23,9 +23,9 @@ return array(
     'active'               					=> 'Active',
     'back'               					=> 'Cancel',
     'campaign'                              => 'Campaign',
-    'numberEmails'                          => 'Number of email to send. One email per credit',
+    'numberEmails'                          => 'Number of e-mail to be sent (1 credit per e-mail)',
     'send'                                  => 'Send',
-    'sendEmail'                             => 'Send Marketing emails',
+    'sendEmail'                             => 'Send marketing e-mails',
 
 
 

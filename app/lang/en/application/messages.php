@@ -3,27 +3,27 @@
 return array(
 
     'create' => array(
-        'error'                     => 'Application was not sent, please try again.',
-        'success'                   => 'Application sent successfully.',
-        'errorNotIsVolunteer'       => 'Only volunteers can apply.',
-        'errorNotVolunteerPlaces'   => 'Not available places.',
-        'errorIsCooperateYet'       => 'You already cooperate in the project.',
-        'errorIsApplyYet'           => 'You already apply the project.',
-        'errorFinishProject'        => 'The project has been completed.',
-        'errorOverlapsDates'        => 'The project date overlaps with your other projects.',
+        'error'                     => 'The application could not be sent. Please, try it again.',
+        'success'                   => 'The application has been successfully sent.',
+        'errorNotIsVolunteer'       => 'Only volunteers can apply for projects.',
+        'errorNotVolunteerPlaces'   => 'The maximum number of cooperators has already been reached.',
+        'errorIsCooperateYet'       => 'You are already cooperating in this project.',
+        'errorIsApplyYet'           => 'You have already applied for this project.',
+        'errorFinishProject'        => 'This project has finished.',
+        'errorOverlapsDates'        => 'The dates of this project overlap with the ones from your other projects.',
     ),
     'cancel' => array(
-        'errorIsAnswered'           => 'Ean not delete answered applications.',
-        'error'                     => 'The application was not delete, please try again.',
+        'errorIsAnswered'           => 'Answered applications can not be deleted.',
+        'error'                     => 'An error took place while deleting the application. Please, try it again.',
         'success'                   => 'The application has been successfully deleted.',
 
     ),
     'answer' => array(
-        'error'                     => 'Application was not answer, please try again.',
-        'success'                   => 'Application answered successfully.',
-        'errorNotHisProject'        => 'Only can answered applications of his/her projects.',
+        'error'                     => 'The answer for this application was not sent. Please, try it again.',
+        'success'                   => 'The application has been succesfully answered.',
+        'errorNotHisProject'        => 'You can only answer applications involved in your projects.',
         'errorAnsweredYet'          => 'The application has been already answered.',
-        'errorRequest'              => 'In request url.',
+        'errorRequest'              => 'An error took place due to the URL was manipulated.',
     )
 
 );

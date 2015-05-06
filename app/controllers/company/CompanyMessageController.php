@@ -15,7 +15,7 @@ class CompanyMessageController extends BaseController
         $project = Project::where('id', '=', $id)->first();
         $volunteers = $project->volunteers;
         if($volunteers->isEmpty()){
-            return Redirect::to(Session::get('backUrl'))->with('error', Lang::get('company/messages.createMessage.errorNohasVolunteeer'));
+            return Redirect::to(Session::get('backUrl'))->with('error', Lang::get('company/messages.createMessage.errorHasNotVolunteers'));
 
         }
         $action = 'company/message/sendMessage';
