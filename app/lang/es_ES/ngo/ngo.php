@@ -20,8 +20,8 @@ return array(
     'numberEmails'                          => 'Número de emails para envias. Un email por crédito',
     'send'                                  => 'Enviar',
     'sendEmail'                             => 'Enviar emails de marketing',
-
-
-
+    'oldPassword'                           => 'Contraseña actual',
+    'save'                                  => 'Guardar',
+    'update'                                => 'Actualizar',
 
 );

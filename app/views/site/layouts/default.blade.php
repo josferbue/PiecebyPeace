@@ -215,8 +215,21 @@
                                         <li class="dropdown">
                                             <a href="#" class="dropdown-toggle">{{{ Auth::user()->username }}} <b class="caret"></b></a>
                                             <ul class="dropdown-menu">
+                                            @if (Auth::user()->hasRole('NonGovernmentalOrganization'))
+                                                <li><a href="{{{ URL::to('userNgo/edit') }}}"> {{{ Lang::get('site.editUser') }}} </a></li>
+                                            @endif
+
+                                            @if (Auth::user()->hasRole('COMPANY'))
+                                                    <li><a href="{{{ URL::to('userCompany/edit') }}}"> {{{ Lang::get('site.editUser') }}} </a></li>
+                                            @endif
+
+                                            @if (Auth::user()->hasRole('VOLUNTEER'))
+                                                    <li><a href="{{{ URL::to('userVolunteer/edit') }}}"> {{{ Lang::get('site.editUser') }}} </a></li>
+                                            @endif
+
                                                 <li><a href="{{{ URL::to('user/logout') }}}"> {{{ Lang::get('site.logout') }}} </a></li>
                                             </ul>
+
                                         </li>
                                     @endif
 

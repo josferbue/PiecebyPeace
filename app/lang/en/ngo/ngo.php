@@ -20,6 +20,10 @@ return array(
     'numberEmails'                          => 'Number of email to send. One email per credit',
     'send'                                  => 'Send',
     'sendEmail'                             => 'Send Marketing emails',
+    'oldPassword'                           => 'Current password',
+    'save'                                  => 'Save',
+    'update'                                => 'Update',
+
 
 
 

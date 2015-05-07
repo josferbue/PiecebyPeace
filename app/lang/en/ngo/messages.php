@@ -8,7 +8,5 @@ return array(
         'success'                   => 'The message has been successfully sent.',
         'errorNotHisProject'        => 'You can only send messages to cooperators of your CSR projects.',
         'errorHasNotVolunteers'     => 'You can not send messages related to this project due to it does not have cooperators.',
-
     )
-
 );
