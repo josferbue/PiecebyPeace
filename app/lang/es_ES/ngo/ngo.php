@@ -23,7 +23,7 @@ return array(
     'active'               					=> 'Activo',
     'back'               					=> 'Cancelar',
     'campaign'                              => 'Campaña',
-    'numberEmails'                          => 'Número de e-mails a enviar (1 crédito por e-mail)',
+    'numberEmails'                          => 'Número de e-mails a enviar, 1 centimo por email máximo :max',
     'send'                                  => 'Enviar',
     'sendEmail'                             => 'Enviar e-mails de marketing',
 

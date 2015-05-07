@@ -9,7 +9,7 @@
 {{-- Content --}}
 @section('content')
     <div class="page-header">
-        <h1>{{{ Lang::get('site.ngo') }}}</h1>
+        <h1>{{{ Lang::get('ngo/ngo.sendEmail') }}}</h1>
     </div>
     <form method="POST" action="{{{URL::to('ngo/sendEmails')  }}}"
           enctype="multipart/form-data" accept-charset="UTF-8">
@@ -21,13 +21,13 @@
                 <div class="span3">
 
                     <div class="form-group">
-                        <label for="Campaing">{{{ Lang::get('ngo/ngo.campaing') }}}</label>
+                        <label for="Campaing">{{{ Lang::get('ngo/ngo.campaign') }}}</label>
                         <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.campaign') }}}" type="text"
                                name="campaing" id="campaing" value="{{{  $campaignName}}}">
 
                     </div>
                     <div class="form-group">
-                        <label for="numberEmails">{{{ Lang::get('ngo/ngo.numberEmails') }}}</label>
+                        <label for="numberEmails">{{{ Lang::get('ngo/ngo.numberEmails', array('max' => Volunteer::count())) }}}</label>
                         <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.numberEmails') }}}" type="text"
                                name="numberEmails" id="numberEmails" value="0">
 
