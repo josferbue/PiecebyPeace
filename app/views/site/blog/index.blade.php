@@ -29,39 +29,53 @@
 
 	<div id="contentOuterSeparator"></div>
 
+
+
 	<div class="container">
 
 		<div class="divPanel page-content">
 
 			<div class="row-fluid">
 
-				<div class="span12" id="divmain">
+				<div class="span12" id="divMain">
 
 					<div class="lead">
-						<h2>lorem ipsum dolor sit amet.</h2>
-						<h3>vivamus leo ante, consectetur sit amet vulputate vel, dapibus sit amet lectus.</h3>
+						<h3>Ngos.</h3>
 					</div>
 					<br />
 
 					<div class="list_carousel responsive">
 						<ul id="list_photos">
 							@foreach($ngos as $ngo)
-								<li><img src="{{{ URL::to($ngo->logo) }}}" class="img-responsive">  </li>
+								<li><img src="{{{ URL::to($ngo->logo) }}}" class="img-polaroid" style="max-width: 150px">  </li>
 							@endforeach
+								@foreach($ngos as $ngo)
+									<li><img src="{{{ URL::to($ngo->logo) }}}" class="img-polaroid" style="max-width: 150px">  </li>
+								@endforeach
+								@foreach($ngos as $ngo)
+									<li><img src="{{{ URL::to($ngo->logo) }}}" class="img-polaroid" style="max-width: 150px">  </li>
+								@endforeach
 						</ul>
 					</div>
 
-					<div class="list_carousel responsive">
-						<ul id="list_photos" class="">
-							@foreach($companies as $company)
-								<li><img src="{{{ URL::to($company->logo) }}}" class="img-responsive">  </li>
-							@endforeach
-						</ul>
+					<div class="lead">
+						<h3>Companies.</h3>
 					</div>
+
+
+						<div class="list_carousel responsive">
+							<ul id="list_photos">
+								@foreach($companies as $company)
+									<li><img src="{{{ URL::to($company->logo) }}}" class="img-polaroid" style="max-width: 150px">  </li>
+								@endforeach
+							</ul>
+						</div>
+
+
 				</div>
 
 			</div>
-
+			<div id="footerInnerSeparator"></div>
 
 		</div>
 

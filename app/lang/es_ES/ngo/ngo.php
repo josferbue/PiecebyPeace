@@ -17,12 +17,14 @@ return array(
     'active'               					=> 'Activo',
     'back'               					=> 'Cancelar',
     'campaign'                              => 'Campaña',
-    'numberEmails'                          => 'Número de emails para envias. Un email por crédito',
+    'numberEmails'                          => 'Número de e-mails a enviar, 1 centimo por email máximo :max emails',
     'send'                                  => 'Enviar',
     'sendEmail'                             => 'Enviar emails de marketing',
     'oldPassword'                           => 'Contraseña actual',
     'newPassword'                           => 'Nueva contraseña',
     'save'                                  => 'Guardar',
-    'update'                                => 'Actualizar',
+    'update'
+
+
 
 );

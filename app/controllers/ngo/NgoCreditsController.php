@@ -73,7 +73,7 @@ class NgoCreditsController extends BaseController {
                 ->setDescription('Credits for campaigns')
                 ->setCurrency('EUR')
                 ->setQuantity($credits)
-                ->setPrice(0.06);
+                ->setPrice(0.01);
 
 
             $itemList = Paypalpayment::itemList();
@@ -82,15 +82,15 @@ class NgoCreditsController extends BaseController {
 
             $details = Paypalpayment::details();
             $details->setShipping("0")
-                ->setTax(''.$credits * 0.06 * 0.21)
+                ->setTax(''.$credits * 0.01 * 0.21)
                 //total of items prices
-                ->setSubtotal(''.$credits * 0.06);
+                ->setSubtotal(''.$credits * 0.01);
 
             //Payment Amount
             $amount = Paypalpayment::amount();
             $amount->setCurrency("EUR")
                 // the total is $17.8 = (16 + 0.6) * 1 ( of quantity) + 1.2 ( of Shipping).
-                ->setTotal(($credits * 0.06 * 0.21) + ($credits * 0.06))
+                ->setTotal(($credits * 0.01 * 0.21) + ($credits * 0.01))
                 ->setDetails($details);
 
             // ### Transaction
