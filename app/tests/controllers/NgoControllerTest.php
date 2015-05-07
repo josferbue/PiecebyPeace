@@ -2,7 +2,6 @@
 
 class NgoControllerTest extends BaseControllerTestCase {
 
-    // Registration of new company
 
     public function testRegisterAsNgoResponse()
     {
@@ -10,7 +9,6 @@ class NgoControllerTest extends BaseControllerTestCase {
 
         $this->requestAction('GET', 'NgoController@getCreate');
         $this->assertResponseOk();
-        $this->assertViewHas('backUrl');
     }
 
     public function testRegisterAsNgoRequiredParameter()
@@ -20,18 +18,17 @@ class NgoControllerTest extends BaseControllerTestCase {
         $this->requestAction('GET', 'NgoController@getCreate');
         $this->assertResponseOk();
 
-        // Register as company3
-        $companyData = array(
+        $ngoData = array(
             //'username'                      => 'ngo3',
             'email'                         => 'ngo3@gmail.com',
-            'password'                      => 'ngo3',
-            'password_confirmation'         => 'ngo3',
+            'password'                      => 'ngo33',
+            'password_confirmation'         => 'ngo33',
             'name'                          => 'ngo  3',
             'description'                   => 'Description ngo 3',
             'phone'                         => '6789610123',
         );
 
-        $this->withInput( $companyData )->requestAction('POST', 'NgoController@postIndex');
+        $this->withInput( $ngoData )->requestAction('POST', 'NgoController@postIndex');
         $this->assertSessionHasErrors('username');
     }
 
@@ -42,18 +39,17 @@ class NgoControllerTest extends BaseControllerTestCase {
         $this->requestAction('GET', 'NgoController@getCreate');
         $this->assertResponseOk();
 
-        // Register as company3
-        $companyData = array(
+        $ngoData = array(
             'username'                      => 'ab',
             'email'                         => 'ngo3@gmail.com',
-            'password'                      => 'ngo3',
-            'password_confirmation'         => 'ngo3',
+            'password'                      => 'ngo33',
+            'password_confirmation'         => 'ngo33',
             'name'                          => 'ngo  3',
             'description'                   => 'Description ngo 3',
             'phone'                         => '6789610123',
         );
 
-        $this->withInput( $companyData )->requestAction('POST', 'NgoController@postIndex');
+        $this->withInput( $ngoData )->requestAction('POST', 'NgoController@postIndex');
         $this->assertSessionHasErrors('username');
     }
 
@@ -64,18 +60,17 @@ class NgoControllerTest extends BaseControllerTestCase {
         $this->requestAction('GET', 'NgoController@getCreate');
         $this->assertResponseOk();
 
-        // Register as company3
-        $companyData = array(
+        $ngoData = array(
             'username'                      => 'abcdefghijklmnopqrstuvwxyz1234567890',
             'email'                         => 'ngo3@gmail.com',
-            'password'                      => 'ngo3',
-            'password_confirmation'         => 'ngo3',
+            'password'                      => 'ngo33',
+            'password_confirmation'         => 'ngo33',
             'name'                          => 'ngo  3',
             'description'                   => 'Description ngo 3',
             'phone'                         => '6789610123',
         );
 
-        $this->withInput( $companyData )->requestAction('POST', 'NgoController@postIndex');
+        $this->withInput( $ngoData )->requestAction('POST', 'NgoController@postIndex');
         $this->assertSessionHasErrors('username');
     }
 
@@ -86,17 +81,17 @@ class NgoControllerTest extends BaseControllerTestCase {
         $this->requestAction('GET', 'NgoController@getCreate');
         $this->assertResponseOk();
 
-        $companyData = array(
+        $ngoData = array(
             'username'                      => 'ngo1',
             'email'                         => 'ngo1@gmail.com',
-            'password'                      => 'ngo1',
-            'password_confirmation'         => 'ngo1',
+            'password'                      => 'ngo11',
+            'password_confirmation'         => 'ngo11',
             'name'                          => 'ngo  1',
             'description'                   => 'Description ngo 1',
             'phone'                         => '6789610123',
         );
 
-        $this->withInput( $companyData )->requestAction('POST', 'NgoController@postIndex');
+        $this->withInput( $ngoData )->requestAction('POST', 'NgoController@postIndex');
         $this->assertSessionHasErrors('username');
     }
 
@@ -107,18 +102,17 @@ class NgoControllerTest extends BaseControllerTestCase {
         $this->requestAction('GET', 'NgoController@getCreate');
         $this->assertResponseOk();
 
-        // Register as company3
-        $companyData = array(
+        $ngoData = array(
             'username'                      => 'ngo3',
             'email'                         => 'emailBad',
-            'password'                      => 'ngo3',
-            'password_confirmation'         => 'ngo3',
+            'password'                      => 'ngo33',
+            'password_confirmation'         => 'ngo33',
             'name'                          => 'ngo  3',
             'description'                   => 'Description ngo 3',
             'phone'                         => '6789610123',
         );
 
-        $this->withInput( $companyData )->requestAction('POST', 'NgoController@postIndex');
+        $this->withInput( $ngoData )->requestAction('POST', 'NgoController@postIndex');
         $this->assertSessionHasErrors('email');
     }
 
@@ -129,18 +123,17 @@ class NgoControllerTest extends BaseControllerTestCase {
         $this->requestAction('GET', 'NgoController@getCreate');
         $this->assertResponseOk();
 
-        // Register as company3
-        $companyData = array(
+        $ngoData = array(
             'username'                      => 'company1',
             'email'                         => 'ngo3@gmail.com',
-            'password'                      => 'ngo3',
-            'password_confirmation'         => 'ngo3',
+            'password'                      => 'ngo33',
+            'password_confirmation'         => 'ngo33',
             'name'                          => 'ngo  3',
             'description'                   => 'Description ngo 3',
             'phone'                         => 'badPhone',
         );
 
-        $this->withInput( $companyData )->requestAction('POST', 'NgoController@postIndex');
+        $this->withInput( $ngoData )->requestAction('POST', 'NgoController@postIndex');
         $this->assertSessionHasErrors('phone');
     }
 
@@ -151,19 +144,20 @@ class NgoControllerTest extends BaseControllerTestCase {
         $this->requestAction('GET', 'NgoController@getCreate');
         $this->assertResponseOk();
 
-        // Register as company3
-        $companyData = array(
+        $ngoData = array(
             'username'                      => 'ngo3',
             'email'                         => 'ngo3@gmail.com',
-            'password'                      => 'ngo3',
-            'password_confirmation'         => 'ngo3',
+            'password'                      => 'ngo33',
+            'password_confirmation'         => 'ngo33',
             'name'                          => 'ngo  3',
             'description'                   => 'Description ngo 3',
             'phone'                         => '6789610123',
             'logo'                          => 'abcd',
         );
 
-        $this->withInput( $companyData )->requestAction('POST', 'NgoController@postIndex');
+        $this->withInput( $ngoData )->requestAction('POST', 'NgoController@postIndex');
         $this->assertSessionHasErrors('logo');
+
     }
+
 }

@@ -47,7 +47,6 @@ class NgoProjectController extends BaseController
         return View::make('site/project/createProject', compact('categories', 'title'));
     }
 
-
     public function saveVolunteerProject()
     {
         $user = Auth::user();
@@ -70,7 +69,7 @@ class NgoProjectController extends BaseController
             'startDate' => 'required|date|after:"now"',
             'finishDate' => 'required|date|after:startDate',
             'categories' => 'required|array|min:1',
-            'logo'          => 'image',
+            'image'          => 'image',
 
         );
 
@@ -128,7 +127,6 @@ class NgoProjectController extends BaseController
         // Form validation failed
         return Redirect::to('ngo/project/createVolunteerProject')->withInput()->withErrors($validator);
     }
-
 
     public function editGetVolunteerProject($id)
     {
@@ -216,9 +214,6 @@ class NgoProjectController extends BaseController
 
     }
 
-
-
-
     public function editSaveVolunteerProject($id)
     {
 
@@ -261,7 +256,7 @@ class NgoProjectController extends BaseController
             'startDate' => 'required|date|after:"now"',
             'finishDate' => 'required|date|after:startDate',
             'categories' => 'required|array|min:1',
-            'logo'          => 'image',
+            'image'          => 'image',
 
         );
 
@@ -281,7 +276,6 @@ class NgoProjectController extends BaseController
             $projectOld->country = Input::get("country");
             $projectOld->startDate = Input::get("startDate");
             $projectOld->finishDate = Input::get("finishDate");
-            $projectOld->created_at = $projectOld->create_at;
             $projectOld->updated_at = date("Y-m-d");
 
 

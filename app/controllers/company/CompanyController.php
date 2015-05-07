@@ -49,7 +49,7 @@ class CompanyController extends BaseController {
             'sector'        => 'required|min:3',
             'description'   => 'required|min:3',
             'phone'         => 'required|regex:/\d+/',
-            'logo'          => 'required|image',
+            'logo'          => 'image',
         );
 
         // Validate the inputs
@@ -66,7 +66,7 @@ class CompanyController extends BaseController {
         $this->company->phone = Input::get("phone");
         $this->company->logo = Input::file("logo");
 
-        $destinationPath = public_path().'\\logos\\'.$this->user->email;
+        $destinationPath = public_path().'/logos/'.$this->user->email;
 
         //Active y Banned no hace falta ponerlos, en la base de datos van por defecto a falso
 
@@ -110,6 +110,8 @@ class CompanyController extends BaseController {
                     $logo->move($destinationPath, $filename);
                     $this->company->logo = '/logos/'.$this->user->email .'/'. $filename;
 
+                }else{
+                    $this->company->logo ='/logos/imageNotFound.gif';
                 }
 
                 $this->company->save();

@@ -65,7 +65,7 @@ class CompanyProjectController extends BaseController
             'startDate' => 'required|date|after:"now"',
             'finishDate' => 'required|date|after:startDate',
             'categories' => 'required|array|min:1',
-            'logo'          => 'image',
+            'image'          => 'image',
 
         );
 
@@ -254,7 +254,7 @@ class CompanyProjectController extends BaseController
             'startDate' => 'required|date|after:"now"',
             'finishDate' => 'required|date|after:startDate',
             'categories' => 'required|array|min:1',
-            'logo'          => 'image',
+            'image'          => 'image',
 
         );
 
@@ -274,7 +274,6 @@ class CompanyProjectController extends BaseController
             $projectOld->country = Input::get("country");
             $projectOld->startDate = Input::get("startDate");
             $projectOld->finishDate = Input::get("finishDate");
-            $projectOld->created_at = $projectOld->create_at;
             $projectOld->updated_at = date("Y-m-d");
 
 

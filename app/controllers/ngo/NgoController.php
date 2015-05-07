@@ -29,7 +29,7 @@ class NgoController extends BaseController
      */
     public function getIndex()
     {
-        list($user, $redirect) = $this->user->checkAuthAndRedirect('ngo');
+        list($user, $redirect) = $this->user->checkAuthAndRedirect('userNgo');
         if ($redirect) {
             return $redirect;
         }
@@ -47,8 +47,13 @@ class NgoController extends BaseController
     {
 
         $rules = array(
-            'description' => 'required|min:3',
-            'phone' => array('required', 'Regex:/^\d+$/')
+            'username'      => 'required|min:5|max:32|unique:users,username',
+            'password'      => 'required|min:5|max:32',
+            'email'         => 'required|email',
+            'name'          => 'required|min:3',
+            'description'   => 'required|min:3',
+            'phone'         => 'required|regex:/\d+/',
+            'logo'          => 'image',
         );
 
         // Validate the inputs
@@ -95,9 +100,7 @@ class NgoController extends BaseController
             // Save if valid. Password field will be hashed before save
 
 
-            $this->user->save();//al guardar se generara el id
-            //tenemos que coger el usuario de la base de datos puesto que este aun no tiene el id
-            //$this->usuarioSalvado = (User::where('email', '=', $this->user->email)->first());
+            $this->user->save();
             if ($this->user->id) {
                 $this->user->attachRole(Role::where('name', '=', 'NonGovernmentalOrganization')->first());
                 $this->ngo->user_id = $this->user->id;
@@ -111,6 +114,8 @@ class NgoController extends BaseController
                     $logo->move($destinationPath, $filename);
                     $this->ngo->logo =  '/logos/'.$this->user->email .'/'. $filename;
 
+                }else{
+                    $this->ngo->logo ='/logos/imageNotFound.gif';
                 }
                 $this->ngo->save();
 
