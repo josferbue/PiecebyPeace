@@ -219,6 +219,21 @@ Route::get('about', function() {
     return View::make('site/about');
 });
 
+# FAQ
+Route::get('faq', function() {
+    return View::make('site/faq');
+});
+
+# Privacy policy
+Route::get('privacyPolicy', function() {
+    return View::make('site/privacyPolicy');
+});
+
+# Privacy policy
+Route::get('termsAndConditions', function() {
+    return View::make('site/termsAndConditions');
+});
+
 # Contact Us Static Page
 Route::get('contact-us', function () {
     // Return about us page
