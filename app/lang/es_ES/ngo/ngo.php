@@ -21,6 +21,7 @@ return array(
     'send'                                  => 'Enviar',
     'sendEmail'                             => 'Enviar emails de marketing',
     'oldPassword'                           => 'Contraseña actual',
+    'newPassword'                           => 'Nueva contraseña',
     'save'                                  => 'Guardar',
     'update'                                => 'Actualizar',
 

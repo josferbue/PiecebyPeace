@@ -12,8 +12,9 @@
         <h1>{{{ Lang::get('site.ngo') }}}</h1>
     </div>
 
-    <form method="POST" action="{{{ (Confide::checkAction('NgoController@store')) ?: URL::to($actionEdit)  ?: URL::to('userNgo')  }}}"
-        enctype="multipart/form-data" accept-charset="UTF-8">
+    <form method="POST" id="idForm"
+          action="{{{ (Confide::checkAction('NgoController@store')) ?: URL::to('userNgo')  }}}"
+          enctype="multipart/form-data" accept-charset="UTF-8">
         <input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
 
         <div class="tab-content">
@@ -46,7 +47,11 @@
                                name="oldPassword" id="oldPassword">
                     </div>
                     <div class="form-group{{{ $errors->has('password') ? 'error' : '' }}}">
-                        <label for="password">{{{ Lang::get('confide::confide.password') }}}</label>
+                        @if(isset($isEdit))
+                            <label for="password">{{{ Lang::get('ngo/ngo.newPassword') }}}</label>
+                        @else
+                            <label for="password">{{{ Lang::get('confide::confide.password') }}}</label>
+                        @endif
                         <input class="form-control" placeholder="{{{ Lang::get('confide::confide.password') }}}"
                                type="password"
                                name="password" id="password">
@@ -109,8 +114,9 @@
                     <button type="submit"
                             class="btn btn-primary">{{{ Lang::get('confide::confide.signup.submit') }}}</button>
                 @else
-                    <button type="submit"
-                            class="btn btn-primary">{{{ Lang::get('ngo/ngo.update') }}}</button>
+                    <input type="button" class="btn btn-primary" onclick="submitUpdate()"
+                           value="{{ Lang::get('ngo/ngo.update') }}">
+
                 @endif
                 <input type="button" class="btn btn-primary"
                        onclick="window.location.href='{{ URL::to('/') }}'"
@@ -121,3 +127,18 @@
         </div>
     </form>
 @stop
+
+@section('js')
+
+    <script type="text/javascript">
+        function submitUpdate() {
+
+            $("#idForm").attr("action","{{{URL::to('userNgo/edit')}}}");
+
+            $("#idForm").submit();
+        }
+    </script>
+@stop
+
+
+

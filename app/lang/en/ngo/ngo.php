@@ -21,6 +21,7 @@ return array(
     'send'                                  => 'Send',
     'sendEmail'                             => 'Send Marketing emails',
     'oldPassword'                           => 'Current password',
+    'newPassword'                           => 'New password',
     'save'                                  => 'Save',
     'update'                                => 'Update',
 
