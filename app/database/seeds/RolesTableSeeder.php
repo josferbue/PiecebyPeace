@@ -22,29 +22,68 @@ class RolesTableSeeder extends Seeder {
         $companyRole ->name = 'COMPANY';
         $companyRole ->save();
 
-        $user = User::where('username','=','administrator1')->first();
+        $user = User::where('username','=','admin')->first();
         $user->attachRole( $administratorRole );
 
-        $user = User::where('username','=','administrator2')->first();
-        $user->attachRole( $administratorRole );
-
-        $user = User::where('username','=','ngo1')->first();
+        $user = User::where('username','=','eat')->first();
         $user->attachRole( $ngoRole );
 
-        $user = User::where('username','=','ngo2')->first();
+        $user = User::where('username','=','elephant')->first();
         $user->attachRole( $ngoRole );
 
-        $user = User::where('username','=','volunteer1')->first();
-        $user->attachRole( $volunteerRole );
+        $user = User::where('username','=','greenone')->first();
+        $user->attachRole( $ngoRole );
 
-        $user = User::where('username','=','volunteer2')->first();
-        $user->attachRole( $volunteerRole );
+        $user = User::where('username','=','send')->first();
+        $user->attachRole( $ngoRole );
 
-        $user = User::where('username','=','company1')->first();
+        $user = User::where('username','=','steps')->first();
+        $user->attachRole( $ngoRole );
+
+        $user = User::where('username','=','boliri')->first();
         $user->attachRole( $companyRole );
 
-        $user = User::where('username','=','company2')->first();
+        $user = User::where('username','=','chaos')->first();
         $user->attachRole( $companyRole );
+
+        $user = User::where('username','=','jaylodet')->first();
+        $user->attachRole( $companyRole );
+
+        $user = User::where('username','=','xeilaale')->first();
+        $user->attachRole( $companyRole );
+
+        $user = User::where('username','=','xorysoft')->first();
+        $user->attachRole( $companyRole );
+
+        $user = User::where('username','=','manu')->first();
+        $user->attachRole( $volunteerRole );
+
+        $user = User::where('username','=','maria')->first();
+        $user->attachRole( $volunteerRole );
+
+        $user = User::where('username','=','carlos')->first();
+        $user->attachRole( $volunteerRole );
+
+        $user = User::where('username','=','jose')->first();
+        $user->attachRole( $volunteerRole );
+
+        $user = User::where('username','=','marta')->first();
+        $user->attachRole( $volunteerRole );
+
+        $user = User::where('username','=','fernando')->first();
+        $user->attachRole( $volunteerRole );
+
+        $user = User::where('username','=','antonio')->first();
+        $user->attachRole( $volunteerRole );
+
+        $user = User::where('username','=','rafael')->first();
+        $user->attachRole( $volunteerRole );
+
+        $user = User::where('username','=','juan')->first();
+        $user->attachRole( $volunteerRole );
+
+        $user = User::where('username','=','raquel')->first();
+        $user->attachRole( $volunteerRole );
 
     }
 

@@ -9,15 +9,11 @@ class AdministratorsTableSeeder extends Seeder {
 
         $administrators = array(
             array(
-                'name'      => 'Administrator 1',
+                'name'      => 'Rafael',
                 'banned'      => false,
-                'user_id' => User::where('username','=','administrator1')->first()->id,
+                'user_id' => User::where('username','=','admin')->first()->id,
             ),
-            array(
-                'name'      => 'Administrator 2',
-                'banned'      => false,
-                'user_id' => User::where('username','=','administrator2')->first()->id,
-            ),
+
         );
 
         DB::table('administrator')->insert( $administrators );

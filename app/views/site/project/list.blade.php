@@ -25,9 +25,9 @@
                         @foreach ($categories as $category)
                             @if( Input::old('category')==$category->id)
 
-                                <option selected="selected" value={{ $category->id }}>{{{ $category->name }}}</option>
+                                <option selected="selected" value={{ $category->id }}>{{{ Lang::get($category->name) }}}</option>
                             @else
-                                <option value={{ $category->id }}>{{{ $category->name }}}</option>
+                                <option value={{ $category->id }}>{{{ Lang::get($category->name) }}}</option>
 
                             @endif
                         @endforeach
