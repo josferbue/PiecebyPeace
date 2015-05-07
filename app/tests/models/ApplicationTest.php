@@ -13,7 +13,7 @@ class ApplicationTest extends TestCase {
     public function testMoment()
     {
         $application = $this->application;
-        $this->assertEquals( date('Y-m-d', strtotime($application->moment)), date('Y-m-d', strtotime(\Carbon\Carbon::createFromDate(2015,5,6))));
+        $this->assertEquals( date('Y-m-d', strtotime($application->moment)), date('Y-m-d', strtotime(\Carbon\Carbon::createFromDate(2015,5,7))));
 
     }
 
