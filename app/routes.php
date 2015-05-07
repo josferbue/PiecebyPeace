@@ -60,11 +60,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
 
     # Activate NGOs and companies accounts
     Route::get('/user/activateAccount/{id}', 'AdminUsersController@activateAccount');
-
-    # Categories management
-    Route::get('/category/list', 'AdminCategoryController@listCategories');
-    Route::get('/category/delete/{id}', 'AdminCategoryController@delete');
-    Route::post('/category/createAndEdit', 'AdminCategoryController@createAndEdit');
+    Route::get('/user/deactivateAccount/{id}', 'AdminUsersController@deactivateAccount');
 
     # User Management
     Route::get('users/{user}/show', 'AdminUsersController@getShow');
@@ -103,7 +99,8 @@ Route::group(array('prefix' => 'volunteer', 'before' => 'auth'), function () {
     Route::get('/application/cancel/{id}', 'VolunteerApplicationController@cancelApplication');
     Route::get('/application/view/{id}', 'VolunteerApplicationController@viewApplication');
 
-
+    // Delete volunteer's user account
+    Route::get('/delete', 'VolunteerController@deleteVolunteer');
 
 # Send messages
     Route::get('/message/sendMessage/{id}', 'VolunteerMessageController@createMessage');

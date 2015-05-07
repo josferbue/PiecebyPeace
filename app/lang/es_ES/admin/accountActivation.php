@@ -14,7 +14,9 @@ return array(
 	*/
 
 	'activate'								=> 'Activar cuenta',
+	'deactivate'							=> 'Desactivar cuenta',
 
 	'successfullyActivated'					=> 'La cuenta de usuario ha sido habilitada con éxito.',
+	'successfullyDeactivated'				=> 'La cuenta de usuario ha sido deshabilitada con éxito.',
 
 );

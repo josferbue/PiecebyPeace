@@ -181,6 +181,27 @@ class VolunteerController extends BaseController {
         return View::make('site/volunteer/create');
     }
 
+    // Delete volunteer
+
+    public function deleteVolunteer() {
+        $volunteer = Auth::user()->actor();
+
+        if(!$volunteer->hasRole('VOLUNTEER')) {
+            Return Redirect::to('/')->with('error', 'volunteer/messages.deleteVolunteer.error');
+        }
+
+        $applications = Application::where('volunteer_id', '=', Auth::id())->where('result', '=', 2);
+
+        foreach($applications as $application) {
+            if(Carbon::now() < $application->project->startDate) {
+                Return Redirect::to('/')->with('error', 'volunteer/messages.deleteVolunteer.errorAlreadyCooperating');
+            }
+        }
+
+        $volunteer->userAccount->delete();
+        Return Redirect::to('/')->with('success', 'volunteer/messages.deleteVolunteer.successfullyDeleted');
+    }
+
 
 
 }

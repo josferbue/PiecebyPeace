@@ -15,6 +15,9 @@ return array(
 
 	'navigation'					=> 'Navegación',
 
+	'companies'						=> 'Empresas',
+	'ngos'							=> 'ONGs',
+
 	'contact_us' 					=> 'Contáctenos',
     'sign_up' 	 					=> 'Registro',
 	'login'							=> 'Inicio de sesión',
