@@ -19,6 +19,7 @@ return array(
     'sign_up' 	 					=> 'Registro',
 	'login'							=> 'Inicio de sesión',
 	'logout'						=> 'Cerrar sesión',
+	'editUser'						=> 'Editar perfil',
 	'volunteer' 					=> 'Registrarse como voluntario',
 	'company' 						=> 'Registrarse como empresa',
 	'ngo' 							=> 'Registrarse como ONG',

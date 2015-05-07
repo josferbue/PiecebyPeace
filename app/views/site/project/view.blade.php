@@ -74,7 +74,7 @@
                            value="{{ Lang::get('project/view.edit') }}">
                 @else
                     <input type="button" class="btn btn-primary"
-                           onclick="window.location.href='{{ URL::to('project/editVolunteerProject/'.$project->id) }}'"
+                           onclick="window.location.href='{{ URL::to('ngo/project/editVolunteerProject/'.$project->id) }}'"
                            value="{{ Lang::get('project/view.edit') }}">
                 @endif
 
@@ -105,7 +105,7 @@
                 @if($isCsrProject)
                 window.location.href = '{{ URL::to('company/project/deleteCsrProject/'.$project->id) }}'
                 @else
-                    window.location.href = '{{ URL::to('project/deleteVolunteerProject/'.$project->id) }}'
+                    window.location.href = '{{ URL::to('ngo/project/deleteVolunteerProject/'.$project->id) }}'
                 @endif
             }
         }

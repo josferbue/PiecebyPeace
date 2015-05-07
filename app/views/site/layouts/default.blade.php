@@ -114,7 +114,7 @@
                                                 </li>
                                             @elseif (Auth::check() && Auth::user()->hasRole('NonGovernmentalOrganization'))
                                                 <li class="dropdown"><a
-                                                            href="{{{ URL::to('project/createVolunteerProject') }}}">{{{ Lang::get('site.createVolunteerProjects') }}}</a>
+                                                            href="{{{ URL::to('ngo/project/createVolunteerProject') }}}">{{{ Lang::get('site.createVolunteerProjects') }}}</a>
                                                 </li>
                                                 <li class="dropdown"><a
                                                             href="{{{ URL::to('ngo/project/myVolunteersProjects') }}}">{{{ Lang::get('site.myVolunteersProjects') }}}</a>
@@ -215,8 +215,21 @@
                                         <li class="dropdown">
                                             <a href="#" class="dropdown-toggle">{{{ Auth::user()->username }}} <b class="caret"></b></a>
                                             <ul class="dropdown-menu">
+                                            @if (Auth::user()->hasRole('NonGovernmentalOrganization'))
+                                                <li><a href="{{{ URL::to('userNgo/edit') }}}"> {{{ Lang::get('site.editUser') }}} </a></li>
+                                            @endif
+
+                                            @if (Auth::user()->hasRole('COMPANY'))
+                                                    <li><a href="{{{ URL::to('userCompany/edit') }}}"> {{{ Lang::get('site.editUser') }}} </a></li>
+                                            @endif
+
+                                            @if (Auth::user()->hasRole('VOLUNTEER'))
+                                                    <li><a href="{{{ URL::to('userVolunteer/edit') }}}"> {{{ Lang::get('site.editUser') }}} </a></li>
+                                            @endif
+
                                                 <li><a href="{{{ URL::to('user/logout') }}}"> {{{ Lang::get('site.logout') }}} </a></li>
                                             </ul>
+
                                         </li>
                                     @endif
 

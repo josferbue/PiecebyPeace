@@ -155,29 +155,29 @@ class ProjectController extends BaseController
         $categories = Category::all();
 
         //esto es un mapa que tendra como clave los county y valores las ciudades sin repeticion
-        $locationVolunteerProjects = array();
+        $locationCsrProjects = array();
 
         foreach ($projects as $project) {
             $countryActual = $project->country;
-            if (array_key_exists($countryActual, $locationVolunteerProjects)) {
+            if (array_key_exists($countryActual, $locationCsrProjects)) {
                 //si ya existe la ciudad no la volvemos a poner
-                if (!in_array($project->city, $locationVolunteerProjects[$countryActual])) {
+                if (!in_array($project->city, $locationCsrProjects[$countryActual])) {
                     //con esto no pisamos el value lo añadimos al final
-                    $locationVolunteerProjects[$countryActual][] = $project->city;
+                    $locationCsrProjects[$countryActual][] = $project->city;
                 }
             } else {
-                $locationVolunteerProjects[$countryActual] [] = $project->city;
+                $locationCsrProjects[$countryActual] [] = $project->city;
 
             }
         }
 
         Session::put('categories', $categories);
-        Session::put('locations', $locationVolunteerProjects);
+        Session::put('locations', $locationCsrProjects);
 
 
         $data = array(
             'categories' => $categories,
-            'locations' => $locationVolunteerProjects,
+            'locations' => $locationCsrProjects,
 
         );
 

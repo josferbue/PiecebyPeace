@@ -11,22 +11,19 @@ return array(
     */
 
     'name'                    				=> 'Nombre',
-    'holderName'                 			=> 'Nombre del titular',
-    'brandName'                				=> 'Marca de la tarjeta de crédito',
-    'number'                     			=> 'Número de la tarjeta de crédito',
-    'expirationMonth'                 		=> 'Mes de expiración',
-    'expirationYear'             	 		=> 'Año de expiración',
-    'cvv'               					=> 'CVV',
     'description'               			=> 'Descripción',
-    'phone'               					=> 'Número de teléfono',
+    'phone'               					=> 'Número de Teléfono',
     'logo'               					=> 'Logo',
     'active'               					=> 'Activo',
     'back'               					=> 'Cancelar',
     'campaign'                              => 'Campaña',
-    'numberEmails'                          => 'Número de e-mails a enviar, 1 centimo por email máximo :max',
+    'numberEmails'                          => 'Número de e-mails a enviar, 1 centimo por email máximo :max emails',
     'send'                                  => 'Enviar',
-    'sendEmail'                             => 'Enviar e-mails de marketing',
-
+    'sendEmail'                             => 'Enviar emails de marketing',
+    'oldPassword'                           => 'Contraseña actual',
+    'newPassword'                           => 'Nueva contraseña',
+    'save'                                  => 'Guardar',
+    'update'
 
 
 

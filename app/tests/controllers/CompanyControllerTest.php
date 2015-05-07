@@ -30,7 +30,6 @@ class CompanyControllerTest extends BaseControllerTestCase {
             'sector'                        => 'Sector 3',
             'description'                   => 'Description company 3',
             'phone'                         => '6543210123',
-            'logo'                          => new Symfony\Component\HttpFoundation\File\UploadedFile('C:\ds-firebird-logo-500.png', 'ds-firebird-logo-500.png'),
         );
 
         $this->withInput( $companyData )->requestAction('POST', 'CompanyController@postIndex');
@@ -54,7 +53,6 @@ class CompanyControllerTest extends BaseControllerTestCase {
             'sector'                        => 'Sector 3',
             'description'                   => 'Description company 3',
             'phone'                         => '6543210123',
-            'logo'                          => new Symfony\Component\HttpFoundation\File\UploadedFile('C:\ds-firebird-logo-500.png', 'ds-firebird-logo-500.png'),
         );
 
         $this->withInput( $companyData )->requestAction('POST', 'CompanyController@postIndex');
@@ -78,7 +76,6 @@ class CompanyControllerTest extends BaseControllerTestCase {
             'sector'                        => 'Sector 3',
             'description'                   => 'Description company 3',
             'phone'                         => '6543210123',
-            'logo'                          => new Symfony\Component\HttpFoundation\File\UploadedFile('C:\ds-firebird-logo-500.png', 'ds-firebird-logo-500.png'),
         );
 
         $this->withInput( $companyData )->requestAction('POST', 'CompanyController@postIndex');
@@ -102,7 +99,6 @@ class CompanyControllerTest extends BaseControllerTestCase {
             'sector'                        => 'Sector 3',
             'description'                   => 'Description company 3',
             'phone'                         => '6543210123',
-            'logo'                          => new Symfony\Component\HttpFoundation\File\UploadedFile('C:\ds-firebird-logo-500.png', 'ds-firebird-logo-500.png'),
         );
 
         $this->withInput( $companyData )->requestAction('POST', 'CompanyController@postIndex');
@@ -126,7 +122,6 @@ class CompanyControllerTest extends BaseControllerTestCase {
             'sector'                        => 'Sector 3',
             'description'                   => 'Description company 3',
             'phone'                         => '6543210123',
-            'logo'                          => new Symfony\Component\HttpFoundation\File\UploadedFile('C:\ds-firebird-logo-500.png', 'ds-firebird-logo-500.png'),
         );
 
         $this->withInput( $companyData )->requestAction('POST', 'CompanyController@postIndex');
@@ -150,7 +145,6 @@ class CompanyControllerTest extends BaseControllerTestCase {
             'sector'                        => 'Sector 3',
             'description'                   => 'Description company 3',
             'phone'                         => 'abcd',
-            'logo'                          => new Symfony\Component\HttpFoundation\File\UploadedFile('C:\ds-firebird-logo-500.png', 'ds-firebird-logo-500.png'),
         );
 
         $this->withInput( $companyData )->requestAction('POST', 'CompanyController@postIndex');
@@ -198,7 +192,6 @@ class CompanyControllerTest extends BaseControllerTestCase {
             'sector'                        => 'Sector 3',
             'description'                   => 'Description company 3',
             'phone'                         => '6543210123',
-            'logo'                          => new Symfony\Component\HttpFoundation\File\UploadedFile('C:\ds-firebird-logo-500.png', 'ds-firebird-logo-500.png'),
         );
 
         $this->withInput( $companyData )->requestAction('POST', 'CompanyController@postIndex');

@@ -16,44 +16,45 @@ class CampaignViewsTest extends BaseControllerTestCase {
         $this->withInput( $credentials )
             ->requestAction('POST', 'UserController@postLogin');
 
-        $crawler = $this->client->request('GET', '/campaign/create');
 
-        $this->assertTrue($this->client->getResponse()->isOk());
+        $crawler = $this->client->request('GET', URL::to('ngo/campaign/create'));
+
+        $this->assertResponseOk();
     }
 
     public function testCreateResponseNotAuthenticated()
     {
-        $crawler = $this->client->request('GET', '/campaign/create');
+        $crawler = $this->client->request('GET', URL::to('ngo/campaign/create'));
 
         $this->assertRedirection( URL::to('/') );
     }
 
     // List of all campaigns
 
-    public function testListCampaignsResponse()
+    public function testListActiveCampaignsResponse()
     {
-        $crawler = $this->client->request('GET', '/campaigns');
+        $crawler = $this->client->request('GET', URL::to('campaign/findActive'));
 
         $this->assertTrue($this->client->getResponse()->isOk());
     }
 
     public function testCampaign1Name()
     {
-        $crawler = $this->client->request('GET', '/campaigns');
+        $crawler = $this->client->request('GET', URL::to('campaign/findActive'));
 
-        $this->assertCount(1, $crawler->filter('p:contains("Campaign 1")'));
+        $this->assertCount(1, $crawler->filter('h3:contains("Campaign 1")'));
     }
 
     public function testCampaign2Name()
     {
-        $crawler = $this->client->request('GET', '/campaigns');
+        $crawler = $this->client->request('GET', URL::to('campaign/findActive'));
 
-        $this->assertCount(1, $crawler->filter('p:contains("Campaign 2")'));
+        $this->assertCount(1, $crawler->filter('h3:contains("Campaign 2")'));
     }
 
     public function testCampaign1NameLinkToDetails()
     {
-        $crawler = $this->client->request('GET', '/campaigns');
+        $crawler = $this->client->request('GET', URL::to('campaign/findActive'));
 
         $link = $crawler->selectLink('Campaign 1')->link();
 
@@ -64,7 +65,7 @@ class CampaignViewsTest extends BaseControllerTestCase {
 
     public function testCampaign2NameLinkToDetails()
     {
-        $crawler = $this->client->request('GET', '/campaigns');
+        $crawler = $this->client->request('GET', URL::to('campaign/findActive'));
 
         $link = $crawler->selectLink('Campaign 2')->link();
 
@@ -87,14 +88,14 @@ class CampaignViewsTest extends BaseControllerTestCase {
         $this->withInput( $credentials )
             ->requestAction('POST', 'UserController@postLogin');
 
-        $crawler = $this->client->request('GET', '/myCampaigns');
+        $crawler = $this->client->request('GET', URL::to('ngo/myCampaigns'));
 
         $this->assertTrue($this->client->getResponse()->isOk());
     }
 
     public function testListNGOCampaignsResponseNotAuthenticated()
     {
-        $crawler = $this->client->request('GET', '/myCampaigns');
+        $crawler = $this->client->request('GET', URL::to('ngo/myCampaigns'));
 
         $this->assertRedirection( URL::to('/') );
     }
@@ -111,9 +112,9 @@ class CampaignViewsTest extends BaseControllerTestCase {
         $this->withInput( $credentials )
             ->requestAction('POST', 'UserController@postLogin');
 
-        $crawler = $this->client->request('GET', '/myCampaigns');
+        $crawler = $this->client->request('GET', URL::to('ngo/myCampaigns'));
 
-        $this->assertCount(1, $crawler->filter('p:contains("Campaign 1")'));
+        $this->assertCount(1, $crawler->filter('h3:contains("Campaign 1")'));
     }
 
     public function testNGOCampaign1NameLinkToDetails()
@@ -128,7 +129,7 @@ class CampaignViewsTest extends BaseControllerTestCase {
         $this->withInput( $credentials )
             ->requestAction('POST', 'UserController@postLogin');
 
-        $crawler = $this->client->request('GET', '/myCampaigns');
+        $crawler = $this->client->request('GET', URL::to('ngo/myCampaigns'));
 
         $link = $crawler->selectLink('Campaign 1')->link();
 
@@ -141,28 +142,28 @@ class CampaignViewsTest extends BaseControllerTestCase {
 
     public function testDetailsCampaign1Response()
     {
-        $crawler = $this->client->request('GET', '/campaign/details/1');
+        $crawler = $this->client->request('GET', URL::to('/campaign/details/1'));
 
         $this->assertTrue($this->client->getResponse()->isOk());
     }
 
     public function testDetailsCampaign2Response()
     {
-        $crawler = $this->client->request('GET', '/campaign/details/2');
+        $crawler = $this->client->request('GET',URL::to( '/campaign/details/2'));
 
         $this->assertTrue($this->client->getResponse()->isOk());
     }
 
     public function testDetailsCampaign1Description()
     {
-        $crawler = $this->client->request('GET', '/campaign/details/1');
+        $crawler = $this->client->request('GET', URL::to('/campaign/details/1'));
 
         $this->assertCount(1, $crawler->filter('p:contains("Description campaign 1")'));
     }
 
     public function testDetailsCampaign2Description()
     {
-        $crawler = $this->client->request('GET', '/campaign/details/2');
+        $crawler = $this->client->request('GET', URL::to('/campaign/details/2'));
 
         $this->assertCount(1, $crawler->filter('p:contains("Description campaign 2")'));
     }

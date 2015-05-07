@@ -1,41 +1,15 @@
 <?php
 
-class NgoProjectControllerTest extends BaseControllerTestCase
+class CompanyProjectControllerTest extends BaseControllerTestCase
 {
 
-    public function testListNGOVolunteerProjectResponse()
+    public function testListCompanyCsrProjectResponse()
     {
         $this->flushSession();
 
-        // Login in as ngo1
+
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
-            'csrf_token' => Session::getToken()
-        );
-
-        $this->withInput($credentials)
-            ->requestAction('POST', 'UserController@postLogin');
-
-        $this->requestAction('GET', 'NgoProjectController@findMyVolunteersProjects');
-        $this->assertResponseOk();
-    }
-
-    public function testListNGOVolunteerProjectNotAuthenticated()
-    {
-        $this->flushSession();
-
-        $this->requestAction('GET', 'NgoProjectController@findMyVolunteersProjects');
-        $this->assertRedirectedTo('/');
-    }
-
-    public function testListNGOVolunteerProjectAuthenticatedAsACompany()
-    {
-        $this->flushSession();
-
-        // Login in as company1
-        $credentials = array(
-            'email' => 'company@company1.com',
+            'email' => 'company1@company1.com',
             'password' => 'company1',
             'csrf_token' => Session::getToken()
         );
@@ -43,26 +17,47 @@ class NgoProjectControllerTest extends BaseControllerTestCase
         $this->withInput($credentials)
             ->requestAction('POST', 'UserController@postLogin');
 
-        $this->requestAction('GET', 'NgoProjectController@findMyVolunteersProjects');
-        $this->assertRedirectedTo('/');
+        $this->requestAction('GET', 'CompanyProjectController@findMyCsrProjects');
+        $this->assertResponseOk();
     }
 
-    public function testListNGOVolunteerProjectVariables()
+    public function testListCompanyCsrProjectNotAuthenticated()
     {
         $this->flushSession();
 
-        // Login in as ngo1
+        $this->requestAction('GET', 'CompanyProjectController@findMyCsrProjects');
+        $this->assertRedirectedTo('/');
+    }
+
+    public function testListCompanyCsrProjectAuthenticatedAsANgo()
+    {
+        $this->flushSession();
+
         $credentials = array(
             'email' => 'ngo1@ngo1.com',
             'password' => 'ngo1',
             'csrf_token' => Session::getToken()
         );
-
         $this->withInput($credentials)
             ->requestAction('POST', 'UserController@postLogin');
 
-        $this->requestAction('GET', 'NgoProjectController@findMyVolunteersProjects');
-        $this->assertViewHas('viewNgoMyProjects');
+        $this->requestAction('GET', 'CompanyProjectController@findMyCsrProjects');
+        $this->assertRedirectedTo('/');
+    }
+
+    public function testListCompanyCsrProjectVariables()
+    {
+        $this->flushSession();
+
+        $credentials = array(
+            'email' => 'company1@company1.com',
+            'password' => 'company1',
+            'csrf_token' => Session::getToken()
+        );
+        $this->withInput($credentials)
+            ->requestAction('POST', 'UserController@postLogin');
+
+        $this->requestAction('GET', 'CompanyProjectController@findMyCsrProjects');
         $this->assertViewHas('projects');
         $this->assertViewHas('emptyProjects');
 
@@ -71,160 +66,153 @@ class NgoProjectControllerTest extends BaseControllerTestCase
 
     // Creation of a new Volunteer project
 
-    public function testCreateVolunteerProjectResponse()
+    public function testCreateCsrProjectResponse()
     {
         $this->flushSession();
 
-        // Login in as ngo1
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'company1@company1.com',
+            'password' => 'company1',
             'csrf_token' => Session::getToken()
         );
 
         $this->withInput($credentials)
             ->requestAction('POST', 'UserController@postLogin');
 
-        $this->requestAction('GET', 'NgoProjectController@createVolunteerProject');
+        $this->requestAction('GET', 'CompanyProjectController@createCsrProject');
         $this->assertResponseOk();
     }
 
 
-    public function testCreateVolunteerProjectRequiredField()
+    public function testCreateCsrProjectRequiredField()
     {
         $this->flushSession();
 
-        // Login in as ngo1
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'company1@company1.com',
+            'password' => 'company1',
             'csrf_token' => Session::getToken()
         );
 
         $this->withInput($credentials)
             ->requestAction('POST', 'UserController@postLogin');
 
-        $this->requestAction('GET', 'NgoProjectController@createVolunteerProject');
+        $this->requestAction('GET', 'CompanyProjectController@createCsrProject');
 
         $projectData = array(
-//            'name'                          => 'ngo  3',
             'address' => 'calle liberty',
             'city' => 'Sevilla',
             'zipCode' => '41930',
             'country' => 'España',
             'maxVolunteers' => 20,
-            'description' => 'Description volunteer project 3',
+            'description' => 'Description csr project 3',
             'startDate' => \Carbon\Carbon::createFromDate(2015, 7, 23)->toDateTimeString(),
             'finishDate' => \Carbon\Carbon::createFromDate(2015, 8, 23)->toDateTimeString(),
-            'categories' => array(2),
+            'categories' => array(1),
         );
 
-        $this->withInput($projectData)->requestAction('POST', 'NgoProjectController@saveVolunteerProject');
-        $this->assertRedirectedTo(URL::to('ngo/project/createVolunteerProject'));
+        $this->withInput($projectData)->requestAction('POST', 'CompanyProjectController@saveCsrProject');
+        $this->assertRedirectedTo(URL::to('company/project/createCsrProject'));
         $this->assertSessionHasErrors('name');
     }
 
-    public function testCreateVolunteerProjectNotEnoughLength()
+    public function testCreateCsrProjectNotEnoughLength()
     {
         $this->flushSession();
 
-        // Login in as ngo1
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'company1@company1.com',
+            'password' => 'company1',
             'csrf_token' => Session::getToken()
         );
 
         $this->withInput($credentials)
             ->requestAction('POST', 'UserController@postLogin');
 
-        $this->requestAction('GET', 'NgoProjectController@createVolunteerProject');
+        $this->requestAction('GET', 'CompanyProjectController@createCsrProject');
 
         $projectData = array(
-            'name' => 'ng',
+            'name' => 'cm',
             'address' => 'calle liberty',
             'city' => 'Sevilla',
             'zipCode' => '41930',
             'country' => 'España',
             'maxVolunteers' => 20,
-            'description' => 'Description volunteer project 3',
+            'description' => 'Description csr project 3',
             'startDate' => \Carbon\Carbon::createFromDate(2015, 7, 23)->toDateTimeString(),
             'finishDate' => \Carbon\Carbon::createFromDate(2015, 8, 23)->toDateTimeString(),
-            'categories' => array(2),
+            'categories' => array(1),
         );
 
-        $this->withInput($projectData)->requestAction('POST', 'NgoProjectController@saveVolunteerProject');
-        $this->assertRedirectedTo(URL::to('ngo/project/createVolunteerProject'));
+        $this->withInput($projectData)->requestAction('POST', 'CompanyProjectController@saveCsrProject');
+        $this->assertRedirectedTo(URL::to('company/project/createCsrProject'));
         $this->assertSessionHasErrors('name');
 
     }
 
-    public function testCreateVolunteerProjectImageFieldIsNotAnImage()
+    public function testCreateCsrProjectImageFieldIsNotAnImage()
     {
         $this->flushSession();
 
-        // Login in as ngo1
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'company1@company1.com',
+            'password' => 'company1',
             'csrf_token' => Session::getToken()
         );
 
         $this->withInput($credentials)
             ->requestAction('POST', 'UserController@postLogin');
 
-        $this->requestAction('GET', 'NgoProjectController@createVolunteerProject');
+        $this->requestAction('GET', 'CompanyProjectController@createCsrProject');
 
         $projectData = array(
-            'name' => 'ngo  3',
+            'name' => 'companyProject',
             'address' => 'calle liberty',
             'city' => 'Sevilla',
             'zipCode' => '41930',
             'country' => 'España',
             'maxVolunteers' => 20,
-            'description' => 'Description volunteer project 3',
+            'description' => 'Description csr project 3',
             'startDate' => \Carbon\Carbon::createFromDate(2015, 7, 23)->toDateTimeString(),
             'finishDate' => \Carbon\Carbon::createFromDate(2015, 8, 23)->toDateTimeString(),
-            'categories' => array(2),
+            'categories' => array(1),
             'image' => 'image'
         );
 
-        $this->withInput($projectData)->requestAction('POST', 'NgoProjectController@saveVolunteerProject');
-        $this->assertRedirectedTo(URL::to('ngo/project/createVolunteerProject'));
+        $this->withInput($projectData)->requestAction('POST', 'CompanyProjectController@saveCsrProject');
+        $this->assertRedirectedTo(URL::to('company/project/createCsrProject'));
         $this->assertSessionHasErrors('image');
     }
 
-    public function testCreateVolunteerProjectOK()
+    public function testCreateCsrProjectOK()
     {
         $this->flushSession();
 
-        // Login in as ngo1
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'company1@company1.com',
+            'password' => 'company1',
             'csrf_token' => Session::getToken()
         );
-
         $this->withInput($credentials)
             ->requestAction('POST', 'UserController@postLogin');
 
-        $this->requestAction('GET', 'NgoProjectController@createVolunteerProject');
+        $this->requestAction('GET', 'CompanyProjectController@createCsrProject');
 
         $projectData = array(
-            'name' => 'ngo  3',
+            'name' => 'companyProject',
             'address' => 'calle liberty',
             'city' => 'Sevilla',
             'zipCode' => '41930',
             'country' => 'España',
             'maxVolunteers' => 20,
-            'description' => 'Description volunteer project 3',
+            'description' => 'Description csr project 3',
             'startDate' => \Carbon\Carbon::createFromDate(2016, 7, 23)->toDateTimeString(),
             'finishDate' => \Carbon\Carbon::createFromDate(2017, 8, 23)->toDateTimeString(),
-            'categories' => array(2),
+            'categories' => array(1),
         );
 
-        $this->withInput($projectData)->requestAction('POST', 'NgoProjectController@saveVolunteerProject');
-        $this->assertRedirectedTo(URL::to('ngo/project/myVolunteersProjects'));
+        $this->withInput($projectData)->requestAction('POST', 'CompanyProjectController@saveCsrProject');
+        $this->assertRedirectedTo(URL::to('company/project/myCsrProjects'));
 
         $this->assertSessionHas("success");
 
@@ -277,7 +265,6 @@ class NgoProjectControllerTest extends BaseControllerTestCase
         $this->assertRedirectedTo(URL::to('/'));
 
 
-
     }
 
     public function testEditGetVolunteerProjectOK()
@@ -324,166 +311,167 @@ class NgoProjectControllerTest extends BaseControllerTestCase
 
 
     }
-    public function testEditSaveVolunteerProjectErrorAuthCompany()
+
+    public function testEditSaveCsrProjectErrorAuthNgo()
     {
 
         $this->flushSession();
 
-        // Login in as ngo1
+        // Login in as company1
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'company1@company1.com',
+            'password' => 'company1',
             'csrf_token' => Session::getToken()
         );
 
         $this->withInput($credentials)
             ->requestAction('POST', 'UserController@postLogin');
 
-        $this->requestAction('GET', 'NgoProjectController@createVolunteerProject');
+        $this->requestAction('GET', 'CompanyProjectController@createCsrProject');
 
         $projectData = array(
-            'name' => 'ngo  3',
+            'name' => 'project Company 3',
             'address' => 'calle liberty',
             'city' => 'Sevilla',
             'zipCode' => '41930',
             'country' => 'España',
             'maxVolunteers' => 20,
-            'description' => 'Description volunteer project 3',
+            'description' => 'Description csr project 3',
             'startDate' => \Carbon\Carbon::createFromDate(2016, 7, 23)->toDateTimeString(),
             'finishDate' => \Carbon\Carbon::createFromDate(2017, 8, 23)->toDateTimeString(),
-            'categories' => array(2),
+            'categories' => array(1,2),
         );
 
-        $this->withInput($projectData)->requestAction('POST', 'NgoProjectController@saveVolunteerProject');
+        $this->withInput($projectData)->requestAction('POST', 'CompanyProjectController@saveCsrProject');
 
 
-        $project = Project::where('name', '=', 'ngo  3')->first();
+        $project = Project::where('name', '=', 'project Company 3')->first();
 
         $projectDataEdit = array(
-            'name' => 'EditadoNGO·',
+            'name' => 'EditadoComapany',
             'address' => 'calle libertyEditada',
             'city' => 'Madrid',
             'zipCode' => '41940',
             'country' => 'España',
             'maxVolunteers' => 10,
-            'description' => 'Description volunteer project 3 editado',
+            'description' => 'Description csr project 3 editado',
             'startDate' => \Carbon\Carbon::createFromDate(2015, 7, 23)->toDateTimeString(),
             'finishDate' => \Carbon\Carbon::createFromDate(2017, 8, 23)->toDateTimeString(),
-            'categories' => array(1,2),
+            'categories' => array(1, 2),
         );
 
         $this->flushSession();
 
         $credentials2 = array(
-            'email' => 'company1@company1.com',
-            'password' => 'company1',
+            'email' => 'ngo1@ngo1.com',
+            'password' => 'ngo1',
             'csrf_token' => Session::getToken()
         );
 
         $this->withInput($credentials2)
             ->requestAction('POST', 'UserController@postLogin');
 
-        $this->withInput($projectDataEdit)->requestAction('POST', 'NgoProjectController@editSaveVolunteerProject', array($project->id));
+        $this->withInput($projectDataEdit)->requestAction('POST', 'CompanyProjectController@editSaveCsrProject', array($project->id));
 
         $this->assertRedirectedTo("/");
 
 
     }
 
-    public function testEditSaveVolunteerProjectOK()
+    public function testEditSaveCsrProjectOK()
     {
 
         $this->flushSession();
 
-        // Login in as ngo1
+        // Login in as company1
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'company1@company1.com',
+            'password' => 'company1',
             'csrf_token' => Session::getToken()
         );
 
         $this->withInput($credentials)
             ->requestAction('POST', 'UserController@postLogin');
 
-        $this->requestAction('GET', 'NgoProjectController@createVolunteerProject');
+        $this->requestAction('GET', 'CompanyProjectController@createCsrProject');
 
         $projectData = array(
-            'name' => 'ngo  3',
+            'name' => 'project Company 3',
             'address' => 'calle liberty',
             'city' => 'Sevilla',
             'zipCode' => '41930',
             'country' => 'España',
             'maxVolunteers' => 20,
-            'description' => 'Description volunteer project 3',
+            'description' => 'Description csr project 3',
             'startDate' => \Carbon\Carbon::createFromDate(2016, 7, 23)->toDateTimeString(),
             'finishDate' => \Carbon\Carbon::createFromDate(2017, 8, 23)->toDateTimeString(),
-            'categories' => array(2),
+            'categories' => array(1,2),
         );
 
-        $this->withInput($projectData)->requestAction('POST', 'NgoProjectController@saveVolunteerProject');
+        $this->withInput($projectData)->requestAction('POST', 'CompanyProjectController@saveCsrProject');
 
 
-        $project = Project::where('name', '=', 'ngo  3')->first();
+        $project = Project::where('name', '=', 'project Company 3')->first();
 
         $projectDataEdit = array(
-            'name' => 'EditadoNGO·',
+            'name' => 'EditadoComapany',
             'address' => 'calle libertyEditada',
             'city' => 'Madrid',
             'zipCode' => '41940',
             'country' => 'España',
             'maxVolunteers' => 10,
-            'description' => 'Description volunteer project 3 editado',
+            'description' => 'Description csr project 3 editado',
             'startDate' => \Carbon\Carbon::createFromDate(2015, 7, 23)->toDateTimeString(),
             'finishDate' => \Carbon\Carbon::createFromDate(2017, 8, 23)->toDateTimeString(),
-            'categories' => array(1,2),
+            'categories' => array(1, 2),
         );
 
 
-        $this->withInput($projectDataEdit)->requestAction('POST', 'NgoProjectController@editSaveVolunteerProject', array($project->id));
+        $this->withInput($projectDataEdit)->requestAction('POST', 'CompanyProjectController@editSaveCsrProject', array($project->id));
 
-        $this->assertRedirectedTo("ngo/project/myVolunteersProjects/",array("success"));
-
+        $this->assertRedirectedTo("company/project/myCsrProjects/", array("success"));
 
 
     }
-    public function testDeleteVolunteerProjectErrorNotHisProject()
+
+    public function testDeleteCsrProjectErrorNotHisProject()
     {
 
         $this->flushSession();
 
-        // Login in as ngo1
+        // Login in as company1
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'company1@company1.com',
+            'password' => 'company1',
             'csrf_token' => Session::getToken()
         );
 
         $this->withInput($credentials)
             ->requestAction('POST', 'UserController@postLogin');
 
-        $this->requestAction('GET', 'NgoProjectController@createVolunteerProject');
+        $this->requestAction('GET', 'CompanyProjectController@createCsrProject');
 
         $projectData = array(
-            'name' => 'ngo  3',
+            'name' => 'project Company 3',
             'address' => 'calle liberty',
             'city' => 'Sevilla',
             'zipCode' => '41930',
             'country' => 'España',
             'maxVolunteers' => 20,
-            'description' => 'Description volunteer project 3',
+            'description' => 'Description csr project 3',
             'startDate' => \Carbon\Carbon::createFromDate(2016, 7, 23)->toDateTimeString(),
             'finishDate' => \Carbon\Carbon::createFromDate(2017, 8, 23)->toDateTimeString(),
-            'categories' => array(2),
+            'categories' => array(1,2),
         );
 
-        $this->withInput($projectData)->requestAction('POST', 'NgoProjectController@saveVolunteerProject');
+        $this->withInput($projectData)->requestAction('POST', 'CompanyProjectController@saveCsrProject');
 
 
-        $project = Project::where('name', '=', 'ngo  3')->first();
+        $project = Project::where('name', '=', 'project Company 3')->first();
 
         $credentials2 = array(
-            'email' => 'ngo2@ngo2.com',
-            'password' => 'ngo2',
+            'email' => 'company2@company2.com',
+            'password' => 'company2',
             'csrf_token' => Session::getToken()
         );
 
@@ -491,55 +479,53 @@ class NgoProjectControllerTest extends BaseControllerTestCase
             ->requestAction('POST', 'UserController@postLogin');
 
 
+        $this->requestAction('GET', 'CompanyProjectController@deleteCsrProject', array($project->id));
 
-
-        $this->requestAction('GET', 'NgoProjectController@deleteVolunteerProject', array($project->id));
-
-        $this->assertRedirectedTo("project/view/".$project->id,array("error"));
+        $this->assertRedirectedTo("projectCsr/view/" . $project->id, array("error"));
 
     }
-    public function testDeleteVolunteerProjectOK()
-    {
 
+    public function testDeleteCsrProjectOK()
+    {
         $this->flushSession();
 
-        // Login in as ngo1
+        // Login in as company1
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'company1@company1.com',
+            'password' => 'company1',
             'csrf_token' => Session::getToken()
         );
 
         $this->withInput($credentials)
             ->requestAction('POST', 'UserController@postLogin');
 
-        $this->requestAction('GET', 'NgoProjectController@createVolunteerProject');
+        $this->requestAction('GET', 'CompanyProjectController@createCsrProject');
 
         $projectData = array(
-            'name' => 'ngo  3',
+            'name' => 'project Company 3',
             'address' => 'calle liberty',
             'city' => 'Sevilla',
             'zipCode' => '41930',
             'country' => 'España',
             'maxVolunteers' => 20,
-            'description' => 'Description volunteer project 3',
+            'description' => 'Description csr project 3',
             'startDate' => \Carbon\Carbon::createFromDate(2016, 7, 23)->toDateTimeString(),
             'finishDate' => \Carbon\Carbon::createFromDate(2017, 8, 23)->toDateTimeString(),
-            'categories' => array(2),
+            'categories' => array(1,2),
         );
 
-        $this->withInput($projectData)->requestAction('POST', 'NgoProjectController@saveVolunteerProject');
+        $this->withInput($projectData)->requestAction('POST', 'CompanyProjectController@saveCsrProject');
 
 
-        $project = Project::where('name', '=', 'ngo  3')->first();
+        $project = Project::where('name', '=', 'project Company 3')->first();
 
 
-        $this->requestAction('GET', 'NgoProjectController@deleteVolunteerProject', array($project->id));
+        $this->requestAction('GET', 'CompanyProjectController@deleteCsrProject', array($project->id));
 
-        $this->assertRedirectedTo("ngo/project/myVolunteersProjects",array("success"));
-
+        $this->assertRedirectedTo("company/project/myCsrProjects", array("success"));
 
 
     }
-
 }
+
+

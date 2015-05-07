@@ -71,4 +71,6 @@
         @endif
     </div>
 
+    {{Session::put('backUrl', Request::url())}}
+
 @stop

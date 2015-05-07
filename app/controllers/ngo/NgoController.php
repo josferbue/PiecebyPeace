@@ -29,7 +29,7 @@ class NgoController extends BaseController
      */
     public function getIndex()
     {
-        list($user, $redirect) = $this->user->checkAuthAndRedirect('ngo');
+        list($user, $redirect) = $this->user->checkAuthAndRedirect('/');
         if ($redirect) {
             return $redirect;
         }
@@ -47,16 +47,13 @@ class NgoController extends BaseController
     {
 
         $rules = array(
-            'holderName' => 'required|min:3',
-            'brandName' => 'required|min:3',
-            'number' => array('required', 'Regex:/^([4]{1})([0-9]{12,15})$/'),//visa
-            'expirationMonth' => 'required|integer|between:1,12',
-            'expirationYear' => 'required|integer|min:2014',
-            'cvv' => 'required|integer|between:100,999',
+            'username' => 'required|min:5|max:32|unique:users,username',
+            'password' => 'required|min:5|max:32',
+            'email' => 'required|email',
+            'name' => 'required|min:3',
             'description' => 'required|min:3',
-            'phone' => array('required', 'Regex:/^\d+$/')
-
-
+            'phone' => 'required|regex:/\d+/',
+            'logo' => 'image',
         );
 
         // Validate the inputs
@@ -68,17 +65,11 @@ class NgoController extends BaseController
         $this->user->username = Input::get('username');
         $this->user->email = Input::get('email');
         $this->ngo->name = Input::get("name");
-        $this->ngo->holderName = Input::get("holderName");
-        $this->ngo->brandName = Input::get("brandName");
-        $this->ngo->number = Input::get("number");
-        $this->ngo->expirationMonth = Input::get("expirationMonth");
-        $this->ngo->expirationYear = Input::get("expirationYear");
-        $this->ngo->cvv = Input::get("cvv");
         $this->ngo->description = Input::get("description");
         $this->ngo->phone = Input::get("phone");
 
 
-        $destinationPath = public_path().'/logos/'.$this->user->email;
+        $destinationPath = public_path() . '/logos/' . $this->user->email;
 
 
         //Active y Banned no hace falta ponerlos, en la base de datos van por defecto a falso
@@ -109,9 +100,7 @@ class NgoController extends BaseController
             // Save if valid. Password field will be hashed before save
 
 
-            $this->user->save();//al guardar se generara el id
-            //tenemos que coger el usuario de la base de datos puesto que este aun no tiene el id
-            //$this->usuarioSalvado = (User::where('email', '=', $this->user->email)->first());
+            $this->user->save();
             if ($this->user->id) {
                 $this->user->attachRole(Role::where('name', '=', 'NonGovernmentalOrganization')->first());
                 $this->ngo->user_id = $this->user->id;
@@ -123,8 +112,10 @@ class NgoController extends BaseController
 
                     $filename = $logo->getClientOriginalName();
                     $logo->move($destinationPath, $filename);
-                    $this->ngo->logo =  '/logos/'.$this->user->email .'/'. $filename;
+                    $this->ngo->logo = '/logos/' . $this->user->email . '/' . $filename;
 
+                } else {
+                    $this->ngo->logo = '/logos/imageNotFound.gif';
                 }
                 $this->ngo->save();
 
@@ -152,52 +143,86 @@ class NgoController extends BaseController
      *
      */
     public
-    function postEdit($user)
+    function postEdit()
     {
         // Validate the inputs
-        $validator = Validator::make(Input::all(), $user->getUpdateRules());
+        $ngo = Ngo::where('user_id', '=', Auth::id())->first();
 
+        $rules = array(
+            'password' => 'required|min:5|max:32',
+            'email' => 'required|email',
+            'name' => 'required|min:3',
+            'description' => 'required|min:3',
+            'phone' => 'required|regex:/\d+/',
+            'logo' => 'image',
+        );
 
-        if ($validator->passes()) {
-            $oldUser = clone $user;
-            $user->username = Input::get('username');
-            $user->email = Input::get('email');
+        if ($ngo != null) {
 
+            $oldPassword = Input::get('oldPassword');
             $password = Input::get('password');
             $passwordConfirmation = Input::get('password_confirmation');
-
+            if (!Hash::check($oldPassword, $ngo->userAccount->password)) {
+                return Redirect::to('userNgo/edit')
+                    ->withInput(Input::except('password', 'password_confirmation', 'oldPassword'))
+                    ->with('error', Lang::get('user/messages.editProfile.oldPasswordIncorrect'));
+            }
             if (!empty($password)) {
                 if ($password === $passwordConfirmation) {
-                    $user->password = $password;
+
+                    $ngo->userAccount->password = $password;
                     // The password confirmation will be removed from model
                     // before saving. This field will be used in Ardent's
                     // auto validation.
-                    $user->password_confirmation = $passwordConfirmation;
+                    $ngo->userAccount->password_confirmation = $passwordConfirmation;
                 } else {
                     // Redirect to the new user page
-                    return Redirect::to('users')->with('error', Lang::get('admin/users/messages.password_does_not_match'));
+                    return Redirect::to('userNgo/edit')->with('error', Lang::get('admin/users/messages.password_does_not_match'));
                 }
             } else {
-                unset($user->password);
-                unset($user->password_confirmation);
+                unset($ngo->userAccount->password);
+                unset($ngo->userAccount->password_confirmation);
             }
 
-            $user->prepareRules($oldUser, $user);
-
-            // Save if valid. Password field will be hashed before save
-            $user->amend();
+        } else {
+            return Redirect::to('/')->with('error', Lang::get('user/messages.editProfile.errorEditNotYourProfile'));
         }
 
-        // Get validation errors (see Ardent package)
-        $error = $user->errors()->all();
+        // Validate the inputs
+        $validator = Validator::make(Input::all(), $rules);
 
-        if (empty($error)) {
-            return Redirect::to('user')
-                ->with('success', Lang::get('user/user.user_account_updated'));
+        if ($validator->passes()) {
+            $ngo->userAccount->email = Input::get('email');
+            $ngo->name = Input::get("name");
+            $ngo->description = Input::get("description");
+            $ngo->phone = Input::get("phone");
+
+            $destinationPath = public_path() . '/logos/' . $ngo->userAccount->email;
+
+            $logo = Input::file('logo');
+            if ($logo != null) {
+
+                $filename = $logo->getClientOriginalName();
+                $logo->move($destinationPath, $filename);
+                $ngo->logo = '/logos/' . $ngo->userAccount->email . '/' . $filename;
+            }
+            if ($ngo->userAccount->save()) {
+                // Redirect with success message, You may replace "Lang::get(..." for your custom message.
+                if ($ngo->save()) {
+                    Confide::logout();
+                    return Redirect::to('user/login')
+                        ->with('success', Lang::get('user/user.user_account_updated'));
+                }
+            }
+            return Redirect::to('userNgo/edit')
+                ->withInput(Input::except('password', 'password_confirmation', 'oldPassword'))
+                ->with('error',  Lang::get('user/messages.editProfile.errorEditSave'));
+
         } else {
-            return Redirect::to('user')
-                ->withInput(Input::except('password', 'password_confirmation'))
-                ->with('error', $error);
+
+            return Redirect::to('userNgo/edit')
+                ->withInput(Input::except('password', 'password_confirmation', 'oldPassword'))
+                ->withErrors($validator);
         }
     }
 
@@ -209,6 +234,15 @@ class NgoController extends BaseController
     function getCreate()
     {
         return View::make('site/ngo/create');
+    }
+
+    public
+    function getEdit()
+    {
+        $ngo = Ngo::where('user_id', '=', Auth::id())->first();
+        $isEdit = true;
+        $actionEdit = 'userNgo/edit';
+        return View::make('site/ngo/create', compact('ngo', 'isEdit', 'actionEdit'));
     }
 
 

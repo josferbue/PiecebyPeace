@@ -45,5 +45,6 @@ return array(
 	'creationSuccessful'	=> 'Campaña creada con éxito',
 	'noEnoughCredits'		=> 'Debe comprar más creditos, ya que sus otras campañas podrían agotar todos los créditos que actualmente posee.',
 	'zeroCredits'			=> 'No posee créditos actualmente. Por favor, compre los que necesite y vuelta a intentarlo.',
+	'campaignNoLongerAvailable' => 'Los detalles de la campaña especificada no pueden mostrarse debido a que ésta expiró',
 
 );

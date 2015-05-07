@@ -62,7 +62,7 @@ class MessageTest extends TestCase {
 
     public function testMessageWasSentByAdmin()
     {
-        $this->assertGreaterThan( $this->message->administrator_id, 0);
+        $this->assertEquals( $this->message->administrator_id, 1);
         $this->assertNull( $this->message->company_id);
         $this->assertNull( $this->message->volunteer_id);
         $this->assertNull( $this->message->ngo_id);

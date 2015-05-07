@@ -2,11 +2,10 @@
 
 class CompanyViewsTest extends BaseControllerTestCase {
 
-    // Creation of campaigns
 
     public function testCreateResponse()
     {
-        $crawler = $this->client->request('GET', '/company/create');
+        $crawler = $this->client->request('GET', URL::to('userCompany/create'));
 
         $this->assertTrue($this->client->getResponse()->isOk());
     }

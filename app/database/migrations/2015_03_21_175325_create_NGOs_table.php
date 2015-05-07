@@ -16,12 +16,6 @@ class CreateNGOsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->boolean('banned')->default(false);
-            $table->string('holderName');
-            $table->string('brandName');
-            $table->string('number');
-            $table->integer('expirationMonth')->unsigned();
-            $table->integer('expirationYear')->unsigned();
-            $table->integer('cvv')->unsigned();
             $table->text('description');
             $table->string('phone');
             $table->string('logo')->nullable();
