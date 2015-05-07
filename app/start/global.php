@@ -81,7 +81,7 @@ App::error(function(Exception $exception, $code)
 | to the user if maintenace mode is in effect for this application.
 |
 */
-
+App::setLocale(Session::get('lang', 'en'));
 App::down(function()
 {
 	return Response::make("Be right back!", 503);

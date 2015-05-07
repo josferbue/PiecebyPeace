@@ -75,6 +75,8 @@
 
                 @if(!$user->active && ($searchType == 'companies' || $searchType == 'NGOs'))
                     <input type="button" class="btn btn-primary" onclick="window.location.href='{{{ URL::to('admin/user/activateAccount/'.$user->id) }}}'" value="{{{ Lang::get('admin/accountActivation.activate') }}}">
+                @elseif($user->active && ($searchType == 'companies' || $searchType == 'NGOs'))
+                    <input type="button" class="btn btn-danger" onclick="window.location.href='{{{ URL::to('admin/user/deactivateAccount/'.$user->id) }}}'" value="{{{ Lang::get('admin/accountActivation.deactivate') }}}">
                 @endif
 
                 @if(!$user->banned)

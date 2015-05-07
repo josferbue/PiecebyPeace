@@ -91,6 +91,118 @@ class NgoCampaignController extends BaseController
             return Redirect::to('ngo/campaign/create')->withInput(Input::all())->withErrors($validator);
         }
     }
+    public function postCreate()
+    {
+        $title = Lang::get('ngo/credits/table.title');
+        // Declare the rules for the form validation
+        $rules = array(
+            'numberEmail' => 'required|integer|min:0|max:'.Volunteer::count(),
+        );
+
+        // Validate the inputs
+        $validator = Validator::make(Input::all(), $rules);
+
+        // Check if the form validates with success
+        if ($validator->passes()) {
+            // Create a new blog post
+            $user = Auth::user();
+
+            // ### Payer
+            // A resource representing a Payer that funds a payment
+            // Use the List of `FundingInstrument` and the Payment Method
+            // as 'credit_card'
+            $credits = Input::get("credits");
+            $payer = Paypalpayment::payer();
+            $payer->setPaymentMethod("paypal");
+
+            $item1 = Paypalpayment::item();
+            $item1->setName('Credits Piece by Peace')
+                ->setDescription('Credits for campaigns')
+                ->setCurrency('EUR')
+                ->setQuantity($credits)
+                ->setPrice(0.01);
+
+
+            $itemList = Paypalpayment::itemList();
+            $itemList->setItems(array($item1));
+
+
+            $details = Paypalpayment::details();
+            $details->setShipping("0")
+                ->setTax(''.$credits * 0.01 * 0.21)
+                //total of items prices
+                ->setSubtotal(''.$credits * 0.01);
+
+            //Payment Amount
+            $amount = Paypalpayment::amount();
+            $amount->setCurrency("EUR")
+                // the total is $17.8 = (16 + 0.6) * 1 ( of quantity) + 1.2 ( of Shipping).
+                ->setTotal(($credits * 0.01 * 0.21) + ($credits * 0.01))
+                ->setDetails($details);
+
+            // ### Transaction
+            // A transaction defines the contract of a
+            // payment - what is the payment for and who
+            // is fulfilling it. Transaction is created with
+            // a `Payee` and `Amount` types
+
+            $transaction = Paypalpayment::transaction();
+            $transaction->setAmount($amount)
+                ->setItemList($itemList)
+                ->setDescription("Payment description")
+                ->setInvoiceNumber(uniqid());
+
+
+            $redirectUrls = Paypalpayment::redirectUrls();
+            $redirectUrls->setReturnUrl(URL::to('ngo/executePayment'))
+                ->setCancelUrl(URL::to('ngo/executePayment'));
+
+            // ### Payment
+            // A Payment Resource; create one using
+            // the above types and intent as 'sale'
+
+            $payment = Paypalpayment::payment();
+
+            $payment->setIntent("sale")
+                ->setPayer($payer)
+                ->setRedirectUrls($redirectUrls)
+                ->setTransactions(array($transaction));
+
+            try {
+                $payment->create($this->_api_context);
+            } catch (\PayPal\Exception\PPConnectionException $ex) {
+                if (\Config::get('app.debug')) {
+                    echo "Exception: " . $ex->getMessage() . PHP_EOL;
+                    $err_data = json_decode($ex->getData(), true);
+                    exit;
+                } else {
+                    die('Some error occur, sorry for inconvenient');
+                }
+            }
+
+            foreach($payment->getLinks() as $link) {
+                if($link->getRel() == 'approval_url') {
+                    $redirect_url = $link->getHref();
+                    break;
+                }
+            }
+
+            // add payment ID to session
+            Session::put('paypal_payment_id', $payment->getId());
+            Session::put('credits',$credits);
+            if(isset($redirect_url)) {
+                // redirect to paypal
+                return Redirect::away($redirect_url);
+            }
+
+            return View::make('site/ngo/credits', compact('title'))->with('error', 'Unknown error occurred');
+        }
+        else {
+            View::make('site/ngo/credits', compact('title'))->withInput(Input::all())->withErrors($validator);
+        }
+
+    }
+
     public function sendEmails()
     {
         $curl = curl_init('http://10code.ip-zone.com//ccm/admin/api/version/2/&type=json');

@@ -374,4 +374,22 @@ class AdminUsersController extends AdminController {
         Return Redirect::to(Session::get('backUrl'))->with('success', Lang::get('admin/accountActivation.successfullyActivated'));
     }
 
+    public function deactivateAccount($id)
+    {
+        $type = Session::get('type');
+
+        if($type == 'companies') {
+            $company = Company::where('user_id', '=', $id)->first();
+            $company->active = false;
+            $company->save();
+        }
+        if($type == 'NGOs') {
+            $ngo = Ngo::where('user_id', '=', $id)->first();
+            $ngo->active = false;
+            $ngo->save();
+        }
+
+        Return Redirect::to(Session::get('backUrl'))->with('success', Lang::get('admin/accountActivation.successfullyDeactivated'));
+    }
+
 }

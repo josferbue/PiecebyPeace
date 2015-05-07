@@ -38,11 +38,7 @@
 			<div class="row-fluid">
 
 				<div class="span12" id="divMain">
-
-					<div class="lead">
-						<h3>Ngos.</h3>
-					</div>
-					<br />
+					<h3>{{{ Lang::get('site.ngos') }}}</h3>
 
 					<div class="list_carousel responsive">
 						<ul id="list_photos">
@@ -57,11 +53,12 @@
 								@endforeach
 						</ul>
 					</div>
+				</div>
+			</div>
 
-					<div class="lead">
-						<h3>Companies.</h3>
-					</div>
-
+			<div class="row-fluid">
+				<div class="span12" id="divMain">
+						<h3>{{{ Lang::get('site.companies') }}}</h3>
 
 						<div class="list_carousel responsive">
 							<ul id="list_photos">
@@ -70,10 +67,8 @@
 								@endforeach
 							</ul>
 						</div>
-
-
+					</div>
 				</div>
-
 			</div>
 			<div id="footerInnerSeparator"></div>
 

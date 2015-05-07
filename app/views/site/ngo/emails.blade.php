@@ -10,6 +10,7 @@
 @section('content')
     <div class="page-header">
         <h1>{{{ Lang::get('ngo/ngo.sendEmail') }}}</h1>
+        <h4>{{{ Lang::get('ngo/ngo.numberEmails', array('max' => Volunteer::count())) }}}</h4>
     </div>
     <form method="POST" action="{{{URL::to('ngo/sendEmails')  }}}"
           enctype="multipart/form-data" accept-charset="UTF-8">
@@ -27,7 +28,7 @@
 
                     </div>
                     <div class="form-group">
-                        <label for="numberEmails">{{{ Lang::get('ngo/ngo.numberEmails', array('max' => Volunteer::count())) }}}</label>
+                        <label for="numberEmails">{{{ Lang::get('ngo/ngo.numberEmailsTitle') }}}</label>
                         <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.numberEmails') }}}" type="text"
                                name="numberEmails" id="numberEmails" value="0">
 

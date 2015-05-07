@@ -31,6 +31,10 @@ Route::pattern('role', '[0-9]+');
 Route::pattern('campaign', '[0-9]+');
 Route::pattern('token', '[0-9a-z]+');
 
+
+
+
+
 /** ------------------------------------------
  *  Admin Routes
  *  ------------------------------------------
@@ -56,11 +60,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
 
     # Activate NGOs and companies accounts
     Route::get('/user/activateAccount/{id}', 'AdminUsersController@activateAccount');
-
-    # Categories management
-    Route::get('/category/list', 'AdminCategoryController@listCategories');
-    Route::get('/category/delete/{id}', 'AdminCategoryController@delete');
-    Route::post('/category/createAndEdit', 'AdminCategoryController@createAndEdit');
+    Route::get('/user/deactivateAccount/{id}', 'AdminUsersController@deactivateAccount');
 
     # User Management
     Route::get('users/{user}/show', 'AdminUsersController@getShow');
@@ -99,7 +99,8 @@ Route::group(array('prefix' => 'volunteer', 'before' => 'auth'), function () {
     Route::get('/application/cancel/{id}', 'VolunteerApplicationController@cancelApplication');
     Route::get('/application/view/{id}', 'VolunteerApplicationController@viewApplication');
 
-
+    // Delete volunteer's user account
+    Route::get('/delete', 'VolunteerController@deleteVolunteer');
 
 # Send messages
     Route::get('/message/sendMessage/{id}', 'VolunteerMessageController@createMessage');
@@ -239,10 +240,30 @@ Route::get('contact-us', function () {
     // Return about us page
     return View::make('site/contact-us');
 });
+Route::when('change-language', 'detectLang');
+
+Route::get('change-language/{language}', function ($language) {
+
+    $rules = [
+        'language' => 'in:es,en' //list of supported languages of your application.
+    ];
+
+     //lang is name of form select field.
+
+    $validator = Validator::make(compact($language),$rules);
+
+    if($validator->passes())
+    {
+        Session::put('lang',$language);
+        Config::set('app.locale', $language);
+        App::setLocale($language);
+    }
+    return Redirect::back();
+});
 
 # Posts - Second to last set, match slug
 Route::get('{postSlug}', 'BlogController@getView');
 Route::post('{postSlug}', 'BlogController@postView');
 
 # Index Page - Last route, no matches
-Route::get('/', array('after' => 'detectLang', 'uses' => 'BlogController@getIndex'));
+Route::get('/','BlogController@getIndex');
