@@ -9,6 +9,7 @@ class NgoController extends BaseController
      */
     protected $ngo;
     protected $user;
+    public static $app;
 
 
     /**
@@ -149,7 +150,7 @@ class NgoController extends BaseController
         $ngo = Ngo::where('user_id', '=', Auth::id())->first();
 
         $rules = array(
-            'password' => 'required|min:5|max:32',
+            'password' => 'min:5|max:32',
             'email' => 'required|email',
             'name' => 'required|min:3',
             'description' => 'required|min:3',
@@ -162,12 +163,15 @@ class NgoController extends BaseController
             $oldPassword = Input::get('oldPassword');
             $password = Input::get('password');
             $passwordConfirmation = Input::get('password_confirmation');
+
             if (!Hash::check($oldPassword, $ngo->userAccount->password)) {
                 return Redirect::to('userNgo/edit')
                     ->withInput(Input::except('password', 'password_confirmation', 'oldPassword'))
                     ->with('error', Lang::get('user/messages.editProfile.oldPasswordIncorrect'));
             }
-            if (!empty($password)) {
+            $passwordisChanged = false;
+
+            if (!empty($password) || !empty($passwordConfirmation)) {
                 if ($password === $passwordConfirmation) {
 
                     $ngo->userAccount->password = $password;
@@ -175,23 +179,42 @@ class NgoController extends BaseController
                     // before saving. This field will be used in Ardent's
                     // auto validation.
                     $ngo->userAccount->password_confirmation = $passwordConfirmation;
+                    $passwordisChanged = true;
+
                 } else {
                     // Redirect to the new user page
                     return Redirect::to('userNgo/edit')->with('error', Lang::get('admin/users/messages.password_does_not_match'));
                 }
-            } else {
-                unset($ngo->userAccount->password);
-                unset($ngo->userAccount->password_confirmation);
             }
-
         } else {
             return Redirect::to('/')->with('error', Lang::get('user/messages.editProfile.errorEditNotYourProfile'));
         }
 
         // Validate the inputs
+//        $validator = Validator::make(Input::all(), $user->getUpdateRules());
+
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->passes()) {
+
+
+            if ($ngo->userAccount->email != Input::get('email')) {
+
+                //hacemos que vuelva a enviar email de confirmacion si este se cambia
+                $ngo->userAccount->email = Input::get('email');
+
+                $ngo->userAccount->confirmation_code = md5(uniqid(mt_rand(), true));
+                $ngo->userAccount->confirmed = 0;
+                if (!static::$app) {
+                    static::$app = app();
+                }
+                $signup_cache = (int)static::$app['config']->get('confide::signup_cache');
+                if ($signup_cache !== 0) {
+                    static::$app['cache']->put('confirmation_email_' . $ngo->userAccount->getKey(), false, $signup_cache);
+                }
+            }
+
+
             $ngo->userAccount->email = Input::get('email');
             $ngo->name = Input::get("name");
             $ngo->description = Input::get("description");
@@ -206,17 +229,22 @@ class NgoController extends BaseController
                 $logo->move($destinationPath, $filename);
                 $ngo->logo = '/logos/' . $ngo->userAccount->email . '/' . $filename;
             }
-            if ($ngo->userAccount->save()) {
+
+            if ($ngo->userAccount->amend()) {//amend funcion para actualizar los usuarios
                 // Redirect with success message, You may replace "Lang::get(..." for your custom message.
                 if ($ngo->save()) {
-                    Confide::logout();
-                    return Redirect::to('user/login')
+                    if ($passwordisChanged) {
+                        Confide::logout();
+                        return Redirect::to('user/login')
+                            ->with('success', Lang::get('user/user.user_account_updated'));
+                    }
+                    return Redirect::to('/')
                         ->with('success', Lang::get('user/user.user_account_updated'));
                 }
             }
             return Redirect::to('userNgo/edit')
                 ->withInput(Input::except('password', 'password_confirmation', 'oldPassword'))
-                ->with('error',  Lang::get('user/messages.editProfile.errorEditSave'));
+                ->with('error', Lang::get('user/messages.editProfile.errorEditSave'));
 
         } else {
 
@@ -225,6 +253,7 @@ class NgoController extends BaseController
                 ->withErrors($validator);
         }
     }
+
 
     /**
      * Displays the form for user creation
@@ -241,8 +270,7 @@ class NgoController extends BaseController
     {
         $ngo = Ngo::where('user_id', '=', Auth::id())->first();
         $isEdit = true;
-        $actionEdit = 'userNgo/edit';
-        return View::make('site/ngo/create', compact('ngo', 'isEdit', 'actionEdit'));
+        return View::make('site/ngo/create', compact('ngo', 'isEdit'));
     }
 
 

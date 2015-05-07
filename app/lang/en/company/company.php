@@ -21,6 +21,11 @@ return array(
     'phone'                 					=> 'Phone number',
     'logo'                     					=> 'Logo',
 
-    'back'                                      => 'Return',
+    'back'                                      => 'Cancel',
+    'oldPassword'                               => 'Current password',
+    'newPassword'                               => 'New password',
+    'save'                                      => 'Save',
+    'update'                                    => 'Update',
+    'delete'                                    => 'Delete account',
 
 );

@@ -5,7 +5,8 @@ return array(
     'editProfile' => array(
         'oldPasswordIncorrect'       => 'The current password does not match.',
         'errorEditNotIsNgo'          => 'You can only edit your profile.',
-        'errorEditSave'              => 'No se pudo actualizar el perfil, inténtelo de nuevo.',
+        'errorEditSave'              => 'The profile  has not been updated. Please, try it again.'
+
 
     )
 

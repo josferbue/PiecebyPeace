@@ -2,14 +2,26 @@
 
 {{-- Web site Title --}}
 @section('title')
-    {{{ Lang::get('user/user.register') }}} ::
+    @if(!isset($isEdit))
+
+        {{{ Lang::get('user/user.register') }}} ::
+    @else
+        {{{ Lang::get('site.editUser') }}} ::
+
+    @endif
     @parent
 @stop
 
 {{-- Content --}}
 @section('content')
     <div class="page-header">
-        <h1>{{{ Lang::get('site.ngo') }}}</h1>
+        @if(!isset($isEdit))
+
+            <h1>{{{ Lang::get('site.ngo') }}}</h1>
+        @else
+            <h1> {{{ Lang::get('site.editUser') }}} </h1>
+
+        @endif
     </div>
 
     <form method="POST" id="idForm"

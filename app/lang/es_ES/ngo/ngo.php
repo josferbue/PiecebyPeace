@@ -23,7 +23,9 @@ return array(
     'oldPassword'                           => 'Contraseña actual',
     'newPassword'                           => 'Nueva contraseña',
     'save'                                  => 'Guardar',
-    'update'
+    'update'                                => 'Actualizar',
+    'delete'                                => 'Eliminar cuenta',
+
 
 
 

@@ -6,6 +6,7 @@
 /app/config/staging
 /app/config/production
 
+/app/config/local
 # Composer
 composer.phar
 composer.lock

@@ -22,6 +22,11 @@ return array(
     'zipCode'                 					=> 'Código postal',
     'country'             	 					=> 'País',
     'biography'               					=> 'Biografía',
+    'oldPassword'                               => 'Contraseña actual',
+    'newPassword'                               => 'Nueva contraseña',
+    'save'                                      => 'Guardar',
+    'update'                                    => 'Actualizar',
+    'delete'                                    => 'Eliminar cuenta',
 
 
 );

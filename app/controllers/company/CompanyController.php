@@ -8,6 +8,8 @@ class CompanyController extends BaseController {
      */
     protected $company;
     protected $user;
+    public static $app;
+
     /**
      * Inject the models.
      * @param User $user
@@ -26,7 +28,7 @@ class CompanyController extends BaseController {
      */
     public function getIndex()
     {
-        list($user,$redirect) = $this->user->checkAuthAndRedirect('userCompany');
+        list($user,$redirect) = $this->user->checkAuthAndRedirect('/');
         if($redirect){return $redirect;}
         $company = $this->company;
         // Show the page
@@ -142,56 +144,118 @@ class CompanyController extends BaseController {
      * Edits a user
      *
      */
-    public function postEdit($user)
+    public
+    function postEdit()
     {
         // Validate the inputs
-        $validator = Validator::make(Input::all(), $user->getUpdateRules());
+        $company = Company::where('user_id', '=', Auth::id())->first();
 
+        $rules = array(
+            'password'      => 'min:5|max:32',
+            'email'         => 'required|email',
+            'name'          => 'required|min:3',
+            'sector'        => 'required|min:3',
+            'description'   => 'required|min:3',
+            'phone'         => 'required|regex:/\d+/',
+            'logo'          => 'image',
+        );
 
-        if ($validator->passes())
-        {
-            $oldUser = clone $user;
-            $user->username = Input::get( 'username' );
-            $user->email = Input::get( 'email' );
+        if ($company != null) {
 
-            $password = Input::get( 'password' );
-            $passwordConfirmation = Input::get( 'password_confirmation' );
+            $oldPassword = Input::get('oldPassword');
+            $password = Input::get('password');
+            $passwordConfirmation = Input::get('password_confirmation');
 
-            if(!empty($password)) {
-                if($password === $passwordConfirmation) {
-                    $user->password = $password;
+            if (!Hash::check($oldPassword, $company->userAccount->password)) {
+                return Redirect::to('userCompany/edit')
+                    ->withInput(Input::except('password', 'password_confirmation', 'oldPassword'))
+                    ->with('error', Lang::get('user/messages.editProfile.oldPasswordIncorrect'));
+            }
+            $passwordIsChanged = false;
+
+            if (!empty($password) || !empty($passwordConfirmation)) {
+                if ($password === $passwordConfirmation) {
+
+                    $company->userAccount->password = $password;
                     // The password confirmation will be removed from model
                     // before saving. This field will be used in Ardent's
                     // auto validation.
-                    $user->password_confirmation = $passwordConfirmation;
+                    $company->userAccount->password_confirmation = $passwordConfirmation;
+                    $passwordIsChanged = true;
+
                 } else {
                     // Redirect to the new user page
-                    return Redirect::to('users')->with('error', Lang::get('admin/users/messages.password_does_not_match'));
+                    return Redirect::to('userCompany/edit')->with('error', Lang::get('admin/users/messages.password_does_not_match'));
                 }
-            } else {
-                unset($user->password);
-                unset($user->password_confirmation);
+            }
+        } else {
+            return Redirect::to('/')->with('error', Lang::get('user/messages.editProfile.errorEditNotYourProfile'));
+        }
+
+        // Validate the inputs
+//        $validator = Validator::make(Input::all(), $user->getUpdateRules());
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->passes()) {
+
+
+            if ($company->userAccount->email != Input::get('email')) {
+
+                //hacemos que vuelva a enviar email de confirmacion si este se cambia
+                $company->userAccount->email = Input::get('email');
+
+                $company->userAccount->confirmation_code = md5(uniqid(mt_rand(), true));
+                $company->userAccount->confirmed = 0;
+                if (!static::$app) {
+                    static::$app = app();
+                }
+                $signup_cache = (int)static::$app['config']->get('confide::signup_cache');
+                if ($signup_cache !== 0) {
+                    static::$app['cache']->put('confirmation_email_' . $company->userAccount->getKey(), false, $signup_cache);
+                }
             }
 
-            $user->prepareRules($oldUser, $user);
 
-            // Save if valid. Password field will be hashed before save
-            $user->amend();
-        }
+            $company->userAccount->email = Input::get('email');
+            $company->name = Input::get("name");
+            $company->sector = Input::get("sector");
+            $company->description = Input::get("description");
+            $company->phone = Input::get("phone");
 
-        // Get validation errors (see Ardent package)
-        $error = $user->errors()->all();
+            $destinationPath = public_path() . '/logos/' . $company->userAccount->email;
 
-        if(empty($error)) {
-            return Redirect::to('user')
-                ->with( 'success', Lang::get('user/user.user_account_updated') );
+            $logo = Input::file('logo');
+            if ($logo != null) {
+
+                $filename = $logo->getClientOriginalName();
+                $logo->move($destinationPath, $filename);
+                $company->logo = '/logos/' . $company->userAccount->email . '/' . $filename;
+            }
+
+            if ($company->userAccount->amend()) {//amend funcion para actualizar los usuarios
+                // Redirect with success message, You may replace "Lang::get(..." for your custom message.
+                if ($company->save()) {
+                    if ($passwordIsChanged) {
+                        Confide::logout();
+                        return Redirect::to('user/login')
+                            ->with('success', Lang::get('user/user.user_account_updated'));
+                    }
+                    return Redirect::to('/')
+                        ->with('success', Lang::get('user/user.user_account_updated'));
+                }
+            }
+            return Redirect::to('userCompany/edit')
+                ->withInput(Input::except('password', 'password_confirmation', 'oldPassword'))
+                ->with('error', Lang::get('user/messages.editProfile.errorEditSave'));
+
         } else {
-            return Redirect::to('user')
-                ->withInput(Input::except('password','password_confirmation'))
-                ->with( 'error', $error );
+
+            return Redirect::to('userCompany/edit')
+                ->withInput(Input::except('password', 'password_confirmation', 'oldPassword'))
+                ->withErrors($validator);
         }
     }
-
     /**
      * Displays the form for user creation
      *
@@ -205,6 +269,13 @@ class CompanyController extends BaseController {
         );
 
         return View::make('site/company/create')->with($data);
+    }
+    public
+    function getEdit()
+    {
+        $company = Company::where('user_id', '=', Auth::id())->first();
+        $isEdit = true;
+        return View::make('site/company/create', compact('company', 'isEdit'));
     }
 
 
