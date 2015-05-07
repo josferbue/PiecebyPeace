@@ -93,12 +93,7 @@
                                                 <a href="{{{ URL::to('projectsCsr') }}}">{{{ Lang::get('site.findCsrProjects') }}}</a>
                                             </li>
 
-                                            @if (Auth::check() && Auth::user()->hasRole('ADMINISTRATOR'))
-                                                <li class="dropdown"><a
-                                                            href="{{{ URL::to('admin/category/list') }}}">{{{ Lang::get('site.categories') }}}</a>
-                                                </li>
-
-                                            @elseif (Auth::check() && Auth::user()->hasRole('VOLUNTEER'))
+                                            @if (Auth::check() && Auth::user()->hasRole('VOLUNTEER'))
 
                                                 <li class="dropdown"><a
                                                             href="{{{ URL::to('volunteer/project/myVolunteerProjects') }}}">{{{ Lang::get('site.myVolunteersProjects') }}}</a>
