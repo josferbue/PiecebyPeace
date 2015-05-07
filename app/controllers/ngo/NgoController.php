@@ -29,7 +29,7 @@ class NgoController extends BaseController
      */
     public function getIndex()
     {
-        list($user, $redirect) = $this->user->checkAuthAndRedirect('userNgo');
+        list($user, $redirect) = $this->user->checkAuthAndRedirect('/');
         if ($redirect) {
             return $redirect;
         }

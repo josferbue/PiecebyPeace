@@ -21,11 +21,12 @@
             <div class="row">
                 <div class="span3">
                     @if(!isset($isEdit))
-                        <div class="form-group">
+                        <div class="form-group{{{ $errors->has('username') ? 'error' : '' }}}">
                             <label for="username">{{{ Lang::get('confide::confide.username') }}}</label>
                             <input class="form-control" placeholder="{{{ Lang::get('confide::confide.username') }}}"
                                    type="text"
                                    name="username" id="username" value="{{{ Input::old('username') }}}">
+                            {{ $errors->first('username', '<span class="help-block">:message</span>') }}
 
                         </div>
                     @endif
@@ -40,12 +41,14 @@
                         {{ $errors->first('email', '<span class="help-block">:message</span>') }}
 
                     </div>
-                    <div class="form-group">
-                        <label for="oldPassword">{{{ Lang::get('ngo/ngo.oldPassword') }}}</label>
-                        <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.oldPassword') }}}"
-                               type="password"
-                               name="oldPassword" id="oldPassword">
-                    </div>
+                    @if(isset($isEdit))
+                        <div class="form-group">
+                            <label for="oldPassword">{{{ Lang::get('ngo/ngo.oldPassword') }}}</label>
+                            <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.oldPassword') }}}"
+                                   type="password"
+                                   name="oldPassword" id="oldPassword">
+                        </div>
+                    @endif
                     <div class="form-group{{{ $errors->has('password') ? 'error' : '' }}}">
                         @if(isset($isEdit))
                             <label for="password">{{{ Lang::get('ngo/ngo.newPassword') }}}</label>
@@ -133,7 +136,7 @@
     <script type="text/javascript">
         function submitUpdate() {
 
-            $("#idForm").attr("action","{{{URL::to('userNgo/edit')}}}");
+            $("#idForm").attr("action", "{{{URL::to('userNgo/edit')}}}");
 
             $("#idForm").submit();
         }
