@@ -31,6 +31,10 @@ Route::pattern('role', '[0-9]+');
 Route::pattern('campaign', '[0-9]+');
 Route::pattern('token', '[0-9a-z]+');
 
+
+
+
+
 /** ------------------------------------------
  *  Admin Routes
  *  ------------------------------------------
@@ -239,10 +243,30 @@ Route::get('contact-us', function () {
     // Return about us page
     return View::make('site/contact-us');
 });
+Route::when('change-language', 'detectLang');
+
+Route::get('change-language/{language}', function ($language) {
+
+    $rules = [
+        'language' => 'in:es,en' //list of supported languages of your application.
+    ];
+
+     //lang is name of form select field.
+
+    $validator = Validator::make(compact($language),$rules);
+
+    if($validator->passes())
+    {
+        Session::put('lang',$language);
+        Config::set('app.locale', $language);
+        App::setLocale($language);
+    }
+    return Redirect::back();
+});
 
 # Posts - Second to last set, match slug
 Route::get('{postSlug}', 'BlogController@getView');
 Route::post('{postSlug}', 'BlogController@postView');
 
 # Index Page - Last route, no matches
-Route::get('/', array('after' => 'detectLang', 'uses' => 'BlogController@getIndex'));
+Route::get('/','BlogController@getIndex');

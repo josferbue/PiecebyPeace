@@ -253,6 +253,7 @@
                                                     href="{{{ URL::to('user/login') }}}">{{{ Lang::get('site.login') }}}</a></li>
                                     @endif
                                 </ul>
+                                <a href="{{{ URL::to('change-language').'/es_ES' }}}">es</a>/ <a href="{{{ URL::to('change-language').'/en' }}}">en</a>
                             </div>
                         </div>
                     </div>
