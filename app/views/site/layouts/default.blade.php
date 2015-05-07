@@ -340,9 +340,9 @@
 
                     <p>
                         <a href="{{{ URL::to('about') }}}" title="About">{{{ Lang::get('site.aboutUs') }}}</a><br/>
-                        <a href="#" title="Terms of Use">{{{ Lang::get('site.termsAndConditions') }}}</a><br/>
-                        <a href="#" title="Privacy Policy">{{{ Lang::get('site.privacyPolicy') }}}</a><br/>
-                        <a href="#" title="FAQ">FAQ</a><br/>
+                        <a href="{{{ URL::to('termsAndConditions') }}}" title="Terms of Use">{{{ Lang::get('site.termsAndConditions') }}}</a><br/>
+                        <a href="{{{ URL::to('privacyPolicy') }}}" title="Privacy Policy">{{{ Lang::get('site.privacyPolicy') }}}</a><br/>
+                        <a href="{{{ URL::to('faq') }}}" title="FAQ">FAQ</a><br/>
                         <a href="{{{ URL::to('project/futureVolunteeringProjects') }}}" title="V_proyects">{{{ Lang::get('site.volunteeringProjects') }}}</a><br/>
                         <a href="{{{ URL::to('project/futureCSRProjects') }}}" title="CSR_proyects">{{{ Lang::get('site.csrProjects') }}}</a><br/>
                     </p>
