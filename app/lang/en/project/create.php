@@ -30,8 +30,8 @@ return array(
 	'selectCategories'					=> 'Select categories',
 	'editTitleProject'					=> 'Edit project',
 	'saveEdit'							=> 'Save',
-	'back'   						 	=> 'Cancel'
-
+	'back'   						 	=> 'Cancel',
+	'categories'							=> 'Categories'
 
 
 

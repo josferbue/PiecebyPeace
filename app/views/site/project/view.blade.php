@@ -53,7 +53,7 @@
                 </tr>
                 </thead>
                 <tr>
-                    <td>{{{$project->addres }}} {{{$project->city }}}, {{{$project->country }}}
+                    <td>{{{$project->address }}} {{{$project->city }}}, {{{$project->country }}}
                         . {{{$project->zipCode }}}</td>
                     <td>{{{$project->startDate }}}</td>
                     <td>{{{$project->finishDate }}}</td>

@@ -105,7 +105,8 @@
                     {{ $errors->first('image', '<span class="help-block">:message</span>') }}
 
                 </div>
-                <div class="dropup {{{ $errors->has('categories') ? 'error' : '' }}}">
+                <div class="dropdown {{{ $errors->has('categories') ? 'error' : '' }}}">
+                    <label for="image">{{{ Lang::get('project/create.categories') }}}</label>
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2"
                             data-toggle="dropdown" aria-expanded="true">
                         {{{ Lang::get('project/create.selectCategories') }}}
@@ -124,12 +125,12 @@
                                         @if($project->categories->contains($category))
                                             <input type="checkbox" name="categories[]"
                                                    value="{{{ $category->id }}}" checked>
-                                            <font color="white">{{{ $category->name }}}</font>
+                                            <font color="white">{{{ Lang::get($category->name) }}}</font>
 
                                         @else
                                             <input type="checkbox" name="categories[]"
                                                    value="{{{ $category->id }}}"><font
-                                                    color="white">{{{ $category->name }}}</font>
+                                                    color="white">{{{ Lang::get($category->name) }}}</font>
                                         @endif
 
                                     @else
@@ -138,17 +139,17 @@
 
                                                 <input type="checkbox" name="categories[]"
                                                        value="{{{ $category->id }}}" checked>
-                                                <font color="white">{{{ $category->name }}}</font>
+                                                <font color="white">{{{ Lang::get($category->name) }}}</font>
                                             @else
                                                 <input type="checkbox" name="categories[]"
                                                        value="{{{ $category->id }}}"><font
-                                                        color="white">{{{ $category->name }}}</font>
+                                                        color="white">{{{ Lang::get($category->name) }}}</font>
                                             @endif
 
                                         @else
                                             <input type="checkbox" name="categories[]"
                                                    value="{{{ $category->id }}}"><font
-                                                    color="white">{{{ $category->name }}}</font>
+                                                    color="white">{{{ Lang::get($category->name) }}}</font>
                                         @endif
 
                                     @endif
