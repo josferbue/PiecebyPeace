@@ -150,6 +150,10 @@ class NgoCreditsController extends BaseController {
 
             return View::make('site/ngo/credits', compact('title'))->with('error', 'Unknown error occurred');
         }
+        else{
+            return View::make('site/ngo/credits', compact('title'))->withInput(Input::all())->withErrors($validator);
+        }
+
     }
 
     /**
