@@ -20,11 +20,13 @@ return array(
 
     'lineTitle'	            => 'Registros por meses',
     'lineUnit'	            => 'Registros',
-    'lineNGO'				=> 'ONG',
+    'lineNGO'				=> 'ONGs',
     'lineVolunteer'			=> 'Voluntarios',
-    'lineCompany'			=> 'Empresa',
-    'pieTitle'	            => 'Total de usuarios piece by peace',
-    'pieProyects'	        => 'Projectos',
-    'pieCsr'	            => 'Rsc',
+    'lineCompany'			=> 'Empresas',
+    'pieTitle'	            => 'Total de usuarios Piece by Peace',
+    'pieProyects'	        => 'Proyectos',
+    'pieCsr'	            => 'RSC',
+    'donutTitle'            => 'Proyectos publicados',
+    'pieUsers'              => 'Usuarios',
 
 );

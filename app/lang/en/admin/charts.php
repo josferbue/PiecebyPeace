@@ -20,12 +20,14 @@ return array(
 
     'lineTitle'	            => 'Monthly Registers',
     'lineUnit'	            => 'Registers',
-    'lineNGO'				=> 'NGO',
-    'lineVolunteer'			=> 'Volunteer',
-    'lineCompany'			=> 'Company',
-    'pieTitle'	            => 'Total users in piece by peace',
-    'pieProyects'	        => 'Proyects',
-    'pieCsr'	            => 'Csr',
+    'lineNGO'				=> 'NGOs',
+    'lineVolunteer'			=> 'Volunteers',
+    'lineCompany'			=> 'Companies',
+    'pieTitle'	            => 'Total users in Piece by Peace',
+    'pieProyects'	        => 'Projects',
+    'pieCsr'	            => 'CSR',
+    'donutTitle'            => 'Published projects',
+    'pieUsers'              => 'Users',
 
 
 );

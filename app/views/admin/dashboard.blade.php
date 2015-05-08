@@ -84,9 +84,7 @@
                 title: {
                     text: '{{Lang::get('admin/charts.pieTitle')}}'
                 },
-                tooltip: {
-                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                },
+
                 plotOptions: {
                     pie: {
                         allowPointSelect: true,
@@ -102,7 +100,7 @@
                 },
                 series: [{
                     type: 'pie',
-                    name: 'Users',
+                    name: '{{Lang::get('admin/charts.pieUsers')}}',
                     data: Laracasts.pieDataSet
                 }]
             });
@@ -120,17 +118,24 @@
                     }
                 },
                 title: {
-                    text: 'Contents of Highsoft\'s weekly fruit delivery'
+                    text: '{{Lang::get('admin/charts.donutTitle')}}'
                 },
 
                 plotOptions: {
                     pie: {
                         innerSize: 100,
-                        depth: 45
+                        depth: 45,
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
                     }
                 },
                 series: [{
-                    name: 'Delivered amount',
+                    name: '{{Lang::get('admin/charts.pieProyects')}}',
                     data: Laracasts.donutDataSet
                 }]
             });
