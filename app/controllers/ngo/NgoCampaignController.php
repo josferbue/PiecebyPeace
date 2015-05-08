@@ -235,7 +235,9 @@ class NgoCampaignController extends BaseController
         // clear the session payment ID
         Session::forget('paypal_payment_id');
 
-        if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
+        $payerId=Input::get('PayerID');
+        $token=Input::get('token');
+        if (empty($payerId) || empty($token)) {
             return Redirect::action('BlogController@getIndex')
                 ->with('error', 'Payment failed');
         }
