@@ -31,24 +31,25 @@
 
 @media (max-width: 767px) {
     #divHeaderLine4{
-        display: inline-block !important
+        display: inline-block !important;
+        text-align: center !important;
+        width: 100%;
+
     }
 
     #divHeaderLine5 {
         display: none;
     }
 
-    #divHeaderLine1, #divHeaderLine2 {
-        text-align: center !important;
-    }
     #divHeaderLine1 {
+        text-align: center !important;
         line-height: 1em;
         margin-bottom: 4em;
         margin-top: 0.5em;
         font-size: 2.5em;
     }
     #divHeaderLine2 {
-        line-height: 1.1em;
+        display: none !important;
 
     }
 
