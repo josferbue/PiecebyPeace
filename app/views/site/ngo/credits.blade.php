@@ -17,12 +17,13 @@
 
         </h3>
     </div>
-    <form class="form-horizontal" method="post" action="{{ URL::to('ngo/credits/create')}}" autocomplete="off">
-        <!-- CSRF Token -->
-        <input type="hidden" name="_token" value="{{{ csrf_token() }}}"/>
-        <!-- ./ csrf token -->
 
-        <div class='hidden-xs'>
+    <div class='hidden-xs'>
+
+        <form class="form-horizontal" method="post" action="{{ URL::to('ngo/credits/create')}}" autocomplete="off">
+            <!-- CSRF Token -->
+            <input type="hidden" name="_token" value="{{{ csrf_token() }}}"/>
+            <!-- ./ csrf token -->
 
 
             <table id="credit" class="table table-striped table-hover">
@@ -48,10 +49,28 @@
                 </tr>
                 </tbody>
             </table>
-        </div>
 
 
-        <div class='visible-xs'>
+            <div class="form-actions form-group">
+                <button type="submit"
+                        class="btn btn-primary">{{{ Lang::get('ngo/credits/table.pay') }}}</button>
+                <input type="button" class="btn btn-primary"
+                       onclick="window.location.href='{{ URL::to('/') }}'"
+
+                       value="{{ Lang::get('ngo/ngo.back') }}">
+            </div>
+
+
+        </form>
+
+    </div>
+
+
+    <div class='visible-xs'>
+        <form class="form-horizontal" method="post" action="{{ URL::to('ngo/credits/create')}}" autocomplete="off">
+            <!-- CSRF Token -->
+            <input type="hidden" name="_token" value="{{{ csrf_token() }}}"/>
+            <!-- ./ csrf token -->
 
             <table id="credit" class="table table-striped table-hover">
                 <thead>
@@ -89,19 +108,20 @@
                 </tr>
                 </tbody>
             </table>
-        </div>
-
-        <div class="form-actions form-group">
-            <button type="submit"
-                    class="btn btn-primary">{{{ Lang::get('ngo/credits/table.pay') }}}</button>
-            <input type="button" class="btn btn-primary"
-                   onclick="window.location.href='{{ URL::to('/') }}'"
-
-                   value="{{ Lang::get('ngo/ngo.back') }}">
-        </div>
 
 
-    </form>
+            <div class="form-actions form-group">
+                <button type="submit"
+                        class="btn btn-primary">{{{ Lang::get('ngo/credits/table.pay') }}}</button>
+                <input type="button" class="btn btn-primary"
+                       onclick="window.location.href='{{ URL::to('/') }}'"
+
+                       value="{{ Lang::get('ngo/ngo.back') }}">
+            </div>
+
+
+        </form>
+    </div>
 @stop
 
 
