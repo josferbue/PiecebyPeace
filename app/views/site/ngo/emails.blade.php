@@ -19,14 +19,13 @@
 
         <div class="tab-content">
             <div class="row">
-                <div class="span3">
-
-                    <div class="form-group">
-                        <label for="Campaing">{{{ Lang::get('ngo/ngo.campaign') }}}</label>
-                        <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.campaign') }}}" type="text"
-                               name="campaing" id="campaing" value="{{{  $campaignName}}}">
-
-                    </div>
+                <div class="span6">
+                    <h3><b>{{{ $campaignName }}}</b></h3>
+                    <br/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span6">
                     <div class="form-group  {{{ $errors->has('numberEmails') ? 'error' : '' }}}">
                         <label for="numberEmails">{{{ Lang::get('ngo/ngo.numberEmailsTitle') }}}</label>
                         <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.numberEmails') }}}" type="text"
