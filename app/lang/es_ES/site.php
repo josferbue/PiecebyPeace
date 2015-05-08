@@ -85,6 +85,8 @@ return array(
 
 	'footerCopyright'				=> 'Copyright © 2015 Piece by Peace. Todos los derechos reservados.',
 
+	'uploadFile'					=> 'Seleccione un archivo',
+
 );
 
 

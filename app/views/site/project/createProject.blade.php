@@ -8,6 +8,8 @@
 
 {{-- Content --}}
 @section('content')
+    <LINK href="{{URL::to('template/bootstrap/css/uploadFile.css')}}" rel="stylesheet" type="text/css">
+
     <div class="page-header">
         <h1>{{{$title}}}</h1>
     </div>
@@ -101,7 +103,9 @@
                 </div>
                 <div class="form-group  {{{ $errors->has('image') ? 'error' : '' }}}">
                     <label for="image">{{{ Lang::get('project/create.image') }}}</label>
-                    <input class="form-control" type="file" name="image" id="image">
+                    <div class="btn btn-default btn-file">
+                        {{{ Lang::get('site.uploadFile') }}} <input type="file" name="image" id="image">
+                    </div>
                     {{ $errors->first('image', '<span class="help-block">:message</span>') }}
 
                 </div>

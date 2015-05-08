@@ -6,10 +6,12 @@
 	display: block;
 }
 .list_carousel li {
-	margin: 10px;
-    height:150px;
-	display: block;
+	margin: 1.5em;
+    height: 10em;
+	display: inline-block;
 	float: left;
+	padding-right: 10em;
+
 }
 .list_carousel.responsive {
 	width: auto;

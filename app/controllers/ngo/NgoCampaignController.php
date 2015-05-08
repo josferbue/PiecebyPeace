@@ -59,12 +59,12 @@ class NgoCampaignController extends BaseController
         $rules = array(
             'name'                  => 'required|min:3',
             'description'           => 'required|min:3',
-            'image'                 => 'required|image',
-            'startDate'             => 'required|date|after:'.date('Y-m-d').'|before:'.Input::get('finishDate'),
-            'finishDate'            => 'required|date|after:'.date('Y-m-d'),
+            'image'                 => 'image',
+            'startDate'             => 'required|date|after:now|before:finishDate',
+            'finishDate'            => 'required|date|after:now',
             'link'                  => 'required|url',
-            'maxVisits'             => 'required|min:0',
-            'expirationDate'        => 'required|date|after:'.Input::get('startDate').'|before:'.Input::get('finishDate'),
+            'maxVisits'             => 'required|min:1|integer',
+            'expirationDate'        => 'required|date|before:finishDate',
         );
 
         // Validate the inputs
@@ -84,10 +84,17 @@ class NgoCampaignController extends BaseController
 
         if ($validator->passes())
         {
+
             $image = Input::file('image');
-            $filename = $image->getClientOriginalName();
-            $image->move($destinationPath, $filename);
-            $this->campaign->image =  '/campaigns_images/'.$this->campaign->name .'/'. $filename;
+            if ($image != null) {
+                $filename = $image->getClientOriginalName();
+                $image->move($destinationPath, $filename);
+                $this->campaign->image =  '/campaigns_images/'.$this->campaign->name .'/'. $filename;
+
+            }else{
+                $this->campaign->image ='/logos/imageNotFound.gif';
+            }
+
 
             if(!Auth::user()->actor()->credits) {
                 return Redirect::to('ngo/campaign/create')->withInput(Input::all())->with('error', Lang::get('campaign/campaign.zeroCredits'));
@@ -228,7 +235,9 @@ class NgoCampaignController extends BaseController
         // clear the session payment ID
         Session::forget('paypal_payment_id');
 
-        if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
+        $payerId=Input::get('PayerID');
+        $token=Input::get('token');
+        if (empty($payerId) || empty($token)) {
             return Redirect::action('BlogController@getIndex')
                 ->with('error', 'Payment failed');
         }

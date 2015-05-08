@@ -8,10 +8,12 @@
 
 {{-- Content --}}
 @section('content')
+    <LINK href="{{URL::to('template/bootstrap/css/faq.css')}}" rel="stylesheet" type="text/css">
+
     <div class="page-header">
         <h1> {{{ Lang::get('termsAndConditions.title') }}}</h1>
     </div>
-
+    <div class="faq">
     <h3> {{{ Lang::get('termsAndConditions.section1') }}} </h3>
 
     <p> {{{ Lang::get('termsAndConditions.section1Text1') }}} </p>
@@ -397,6 +399,6 @@
     <p> {{{ Lang::get('termsAndConditions.section3Text64') }}} </p>
 
     <p> {{{ Lang::get('termsAndConditions.section3Text65') }}} </p>
-
+</div>
 @stop
 

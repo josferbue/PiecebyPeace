@@ -1,0 +1,13 @@
+@media (max-width: 767px) {
+
+    #divLogo {
+        text-align: center;
+    }
+
+    .pull-left {
+        float: none;
+    }
+
+}
+
+

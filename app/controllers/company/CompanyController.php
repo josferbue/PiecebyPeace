@@ -97,6 +97,12 @@ class CompanyController extends BaseController {
 
         // Save if valid. Password field will be hashed before save
 
+            if(!Input::get('terms')) {
+                return Redirect::to('userCompany/create')
+                    ->withInput(Input::except('password','password_confirmation'))
+                    ->with('error', Lang::get('company/company.termsNotAccepted'));
+            }
+
             $this->user->save();
             if ( $this->user->id )
             {

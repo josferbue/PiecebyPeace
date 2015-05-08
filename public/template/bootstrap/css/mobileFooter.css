@@ -1,0 +1,46 @@
+@media (max-width: 767px) {
+    h1 {
+        text-align: center;
+    }
+
+    .mobileFooter p {
+        text-align: center;
+    }
+
+    .mobileFooter h3 {
+        margin: 0px;
+        text-align: center;
+    }
+
+    .mobileFooter ul#contact-info {
+        text-align: center;
+    }
+
+    .mobileFooter ul#contact-info .icon {
+        font-size: 1.8em;
+        float: none;
+        line-height: 1.6em;
+        margin-right: 0em;
+
+    }
+
+    .mobileFooter .social_bookmarks a {
+        margin-right: 0px;
+    }
+
+    .mobileFooter li {
+        line-height: 20px;
+        width: 94%;
+    }
+
+    .mobileFooter [class*="foundicon-"] {
+        display: block;
+    }
+
+}
+
+@media (min-width: 768px) {
+    .foundicon-home {
+        margin-bottom: 50px;
+    }
+}

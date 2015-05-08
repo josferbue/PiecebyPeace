@@ -14,7 +14,7 @@ return array(
 	'login'                 		 => 'Iniciar sesión',
 	'login_first'          			 => 'Iniciar sesión primero',
 	'account'              			 => 'Cuenta',
-	'forgot_password'      			 => '¿ Olvidaste tu contraseña ?',
+	'forgot_password'      			 => '¿Olvidó su contraseña?',
 	'settings'              		 => 'Configuración',
 	'profile'               		 => 'Perfil',
 	'user_account_is_not_confirmed'  => 'La cuenta de usuario no está confirmada.',

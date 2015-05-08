@@ -14,7 +14,7 @@ return array(
 	'login'                 					=> 'Login',
 	'login_first'           					=> 'Login first',
 	'account'               					=> 'Account',
-	'forgot_password'       					=> 'Forgot password',
+	'forgot_password'       					=> 'Did you forget your password?',
 	'settings'             	 					=> 'Settings',
 	'profile'               					=> 'Profile',
 	'user_account_is_not_confirmed'          	=> 'User account is not confirmed.',

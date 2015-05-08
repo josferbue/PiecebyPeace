@@ -18,16 +18,16 @@ return array(
     'back'               					=> 'Cancel',
     'campaign'                              => 'Campaign',
     'numberEmailsTitle'                     => 'Number of email to send',
-    'numberEmails'                          => '3 cent per email, max :max emails',
+    'numberEmails'                          => '3 cent per e-mail, max :max e-mails',
     'send'                                  => 'Send',
-    'sendEmail'                             => 'Send Marketing emails',
+    'sendEmail'                             => 'Send e-mail marketing',
     'oldPassword'                           => 'Current password',
     'newPassword'                           => 'New password',
     'save'                                  => 'Save',
     'update'                                => 'Update',
 
-
-
+    'termsMessage'                          => 'I have read and accept the Terms and Conditions of Piece by Peace',
+    'termsNotAccepted'                      => 'You must read and accept the Terms and Conditions of Piece by Peace',
 
 
 );

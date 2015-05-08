@@ -40,28 +40,69 @@
         <p>{{$project->description }}</p>
         <br> <br>
 
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>{{{ Lang::get('project/view.location') }}}</th>
-                    <th>{{{ Lang::get('project/view.startDate') }}}</th>
-                    <th>{{{ Lang::get('project/view.finishDate') }}}</th>
-                    <th>{{{ Lang::get('project/view.maxVolunteers') }}}</th>
-                    <th>{{{ Lang::get('project/view.availableVolunteers') }}}</th>
-                    <th>{{{ Lang::get('project/view.categories') }}}</th>
-                </tr>
-                </thead>
-                <tr>
-                    <td>{{{$project->address }}} {{{$project->city }}}, {{{$project->country }}}
-                        . {{{$project->zipCode }}}</td>
-                    <td>{{{$project->startDate }}}</td>
-                    <td>{{{$project->finishDate }}}</td>
-                    <td>{{{$project->maxVolunteers }}}</td>
-                    <td>{{{$availableVolunteers}}}</td>
-                    <td>{{{$categories}}}</td>
-                </tr>
-            </table>
+        <div class='hidden-xs'>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>{{{ Lang::get('project/view.location') }}}</th>
+                        <th>{{{ Lang::get('project/view.startDate') }}}</th>
+                        <th>{{{ Lang::get('project/view.finishDate') }}}</th>
+                        <th>{{{ Lang::get('project/view.maxVolunteers') }}}</th>
+                        <th>{{{ Lang::get('project/view.availableVolunteers') }}}</th>
+                        <th>{{{ Lang::get('project/view.categories') }}}</th>
+                    </tr>
+                    </thead>
+                    <tr>
+                        <td>{{{$project->address }}} {{{$project->city }}}, {{{$project->country }}}
+                            . {{{$project->zipCode }}}</td>
+                        <td>{{{$project->startDate }}}</td>
+                        <td>{{{$project->finishDate }}}</td>
+                        <td>{{{$project->maxVolunteers }}}</td>
+                        <td>{{{$availableVolunteers}}}</td>
+                        <td>{{{$categories}}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class='visible-xs'>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>{{{ Lang::get('project/view.location') }}}</th>
+                        <th>{{{ Lang::get('project/view.startDate') }}}</th>
+                        <th>{{{ Lang::get('project/view.finishDate') }}}</th>
+
+                    </tr>
+                    </thead>
+                    <tr>
+                        <td>{{{$project->address }}} {{{$project->city }}}, {{{$project->country }}}
+                            . {{{$project->zipCode }}}</td>
+                        <td>{{{$project->startDate }}}</td>
+                        <td>{{{$project->finishDate }}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>{{{ Lang::get('project/view.maxVolunteers') }}}</th>
+                        <th>{{{ Lang::get('project/view.availableVolunteers') }}}</th>
+                        <th>{{{ Lang::get('project/view.categories') }}}</th>
+
+                    </tr>
+                    </thead>
+                    <tr>
+                        <td>{{{$project->maxVolunteers }}}</td>
+                        <td>{{{$availableVolunteers}}}</td>
+                        <td>{{{$categories}}}</td>
+                    </tr>
+                </table>
+            </div>
+
         </div>
     </div>
 
@@ -107,6 +148,8 @@
                 @else
                     window.location.href = '{{ URL::to('ngo/project/deleteVolunteerProject/'.$project->id) }}'
                 @endif
+
+
             }
         }
     </script>

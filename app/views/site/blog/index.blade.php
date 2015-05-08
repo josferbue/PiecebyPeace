@@ -2,7 +2,9 @@
 
 {{-- Content --}}
 @section('content')
-	<div id="decorative1" style="position:relative">
+    <LINK href="{{URL::to('template/bootstrap/css/mobileIndex.css')}}" rel="stylesheet" type="text/css">
+
+    <div id="decorative1" style="position:relative">
 		<div class="container">
 
 			<div class="divPanel headerArea">
@@ -11,15 +13,20 @@
 
 						<div id="headerSeparator"></div>
 
-						<div id="divHeaderText" class="page-content">
-							<div id="divHeaderLine1">{{{ Lang::get('site.headerLine1') }}}</div><br />
-							<div id="divHeaderLine2">{{{ Lang::get('site.headerLine2') }}}</div><br />
-							<div id="divHeaderLine3"><a class="btn btn-large btn-primary" href="{{{ URL::to('about') }}}">{{{ Lang::get('site.headerLine3') }}}</a></div>
-						</div>
+                            <div class="mobileIndex">
 
-						<div id="headerSeparator2"></div>
+                                <div id="divHeaderText" class="page-content">
+                                    <div id="divHeaderLine1">{{{ Lang::get('site.headerLine1') }}}</div><br />
+                                    <div id="divHeaderLine2">{{{ Lang::get('site.headerLine2') }}}</div><br />
+                                    <div id="divHeaderLine5"><a class="btn btn-large btn-primary" href="{{{ URL::to('about') }}}">{{{ Lang::get('site.headerLine3') }}}</a></div>
+                                </div>
 
+                                <div id="headerSeparator2"></div>
+                                <div id="divHeaderLine4"><a class="btn btn-large btn-primary" href="{{{ URL::to('about') }}}">{{{ Lang::get('site.headerLine3') }}}</a></div>
+
+                          </div>
 					</div>
+
 				</div>
 
 			</div>

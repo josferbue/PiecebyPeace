@@ -57,7 +57,7 @@ class CompanyMessageController extends BaseController
 
             $this->message->subject = Input::get('subject');
             $this->message->textBox = Input::get('textBox');
-            $this->message->from = $company->name . ' ' . $company->surname;
+            $this->message->from = $company->name;
             $this->message->date = date("Y-m-d");
 
             $this->message->company_id = $company->id;

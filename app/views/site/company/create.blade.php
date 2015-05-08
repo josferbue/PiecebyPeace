@@ -15,6 +15,8 @@
 
 {{-- Content --}}
 @section('content')
+    <LINK href="{{URL::to('template/bootstrap/css/uploadFile.css')}}" rel="stylesheet" type="text/css">
+
     <div class="page-header">
         @if(!isset($isEdit))
 
@@ -89,25 +91,31 @@
                     <div class="form-group  {{{ $errors->has('name') ? 'error' : '' }}}">
                         <label for="name">{{{ Lang::get('company/company.name') }}}</label>
                         <input class="form-control" placeholder="{{{ Lang::get('company/company.name') }}}" type="text"
-                               name="name" id="name" value="{{{ Input::old('name', isset($company) ? $company->name : null) }}}">
+                               name="name" id="name"
+                               value="{{{ Input::old('name', isset($company) ? $company->name : null) }}}">
                         {{ $errors->first('name', '<span class="help-block">:message</span>') }}
                     </div>
                     <div class="form-group  {{{ $errors->has('sector') ? 'error' : '' }}}">
                         <label for="sector">{{{ Lang::get('company/company.sector') }}}</label>
                         <input class="form-control" placeholder="{{{ Lang::get('company/company.sector') }}}"
-                               type="text" name="sector" id="sector" value="{{{ Input::old('sector', isset($company) ? $company->sector : null) }}}">
+                               type="text" name="sector" id="sector"
+                               value="{{{ Input::old('sector', isset($company) ? $company->sector : null) }}}">
                         {{ $errors->first('sector', '<span class="help-block">:message</span>') }}
                     </div>
 
                     <div class="form-group  {{{ $errors->has('phone') ? 'error' : '' }}}">
                         <label for="phone">{{{ Lang::get('company/company.phone') }}}</label>
                         <input class="form-control" placeholder="{{{ Lang::get('company/company.phone') }}}"
-                               type="text"  name="phone" id="phone" value="{{{ Input::old('phone', isset($company) ? $company->phone : null) }}}">
+                               type="text" name="phone" id="phone"
+                               value="{{{ Input::old('phone', isset($company) ? $company->phone : null) }}}">
                         {{ $errors->first('phone', '<span class="help-block">:message</span>') }}
                     </div>
                     <div class="form-group  {{{ $errors->has('logo') ? 'error' : '' }}}">
                         <label for="logo">{{{ Lang::get('company/company.logo') }}}</label>
-                        <input class="form-control" type="file" name="logo" id="logo">
+
+                        <div class="btn btn-default btn-file">
+                            {{{ Lang::get('site.uploadFile') }}} <input type="file" name="logo" id="logo">
+                        </div>
                         {{ $errors->first('logo', '<span class="help-block">:message</span>') }}
                     </div>
                 </div>
@@ -116,15 +124,29 @@
         <div class="row">
             <div class="span6">
 
-            <div class="form-group  {{{ $errors->has('description') ? 'error' : '' }}}">
-                <label for="description">{{{ Lang::get('company/company.description') }}}</label>
+                <div class="form-group  {{{ $errors->has('description') ? 'error' : '' }}}">
+                    <label for="description">{{{ Lang::get('company/company.description') }}}</label>
                         <textarea class="field span7" placeholder="{{{ Lang::get('company/company.description') }}}"
                                   rows="9" name="description" id="description"
                                 >{{{ Input::old('description', isset($company) ? $company->description : null) }}}</textarea>
-                {{ $errors->first('description', '<span class="help-block">:message</span>') }}
+                    {{ $errors->first('description', '<span class="help-block">:message</span>') }}
+                </div>
             </div>
         </div>
-        </div>
+        @if(!isset($isEdit))
+            <div class="row">
+                <div class="span6">
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="terms" name="terms"
+                                       value="true"/> {{ Lang::get('company/company.termsMessage') }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
         @if ( Session::get('error') )
             <div class="alert alert-error alert-danger">
                 @if ( is_array(Session::get('error')) )
