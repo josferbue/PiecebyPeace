@@ -28,7 +28,7 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.gmail.com',
+	'host' => 'smtp.1and1.es',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => "info@piecebypeace.com", 'name' => "Piece by Peace"),
+	'from' => array('address' => "contact@piecebypeace.es", 'name' => "Piece by Peace"),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return array(
 	|
 	*/
 
-	'username' => "prueba",
+	'username' => "contact@piecebypeace.es",
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,6 +93,6 @@ return array(
 	|
 	*/
 
-	'password' => "prueba",
+	'password' => "berenjena",
 
 );
