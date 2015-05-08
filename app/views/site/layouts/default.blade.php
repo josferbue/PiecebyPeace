@@ -65,9 +65,12 @@
             <div class="row-fluid">
                 <div class="span12">
 
-                    <div id="divLogo" class="pull-left">
-                        <a href="{{{ URL::to('') }}}" id="divSiteTitle">Piece by peace</a><br/>
-                        <a href="{{{ URL::to('') }}}" id="divTagLine">Let's be helpful</a>
+                    <link rel="stylesheet" href="{{asset('template/bootstrap/css/mobileNavBar.css')}}">
+                    <div  class="mobileNavBar">
+                        <div id="divLogo" class="pull-left">
+                            <a href="{{{ URL::to('') }}}" id="divSiteTitle">Piece by peace</a><br/>
+                            <a href="{{{ URL::to('') }}}" id="divTagLine">Let's be helpful</a>
+                        </div>
                     </div>
 
                     <div id="divMenuRight" class="pull-right">
@@ -282,94 +285,97 @@
 <div id="footerOuterSeparator"></div>
 
 <div id="divFooter" class="footerArea">
+    <link rel="stylesheet" href="{{asset('template/bootstrap/css/mobileFooter.css')}}">
 
     <div class="container">
+        <div class="mobileFooter">
 
-        <div class="divPanel">
+            <div class="divPanel">
 
-            <div class="row-fluid">
-                <div class="span5" id="footerArea2">
+                <div class="row-fluid">
+                    <div class="span5" id="footerArea2">
 
-                    <h3>{{{ Lang::get('site.activity') }}}</h3>
+                        <h3>{{{ Lang::get('site.activity') }}}</h3>
 
-                    @foreach (Project::orderBy("updated_at","asc")->take(3)->get() as $act)
-                    <p>
-                        {{ HTML::link('/project/view/'.$act->id , $act->name) }}<br/>
-                        <span style="text-transform:none;">{{$act->interval_date()}}</span>
-                    </p>
-                    @endforeach
+                        @foreach (Project::orderBy("updated_at","asc")->take(3)->get() as $act)
+                        <p>
+                            {{ HTML::link('/project/view/'.$act->id , $act->name) }}<br/>
+                            <span style="text-transform:none;">{{$act->interval_date()}}</span>
+                        </p>
+                        @endforeach
 
 
+                    </div>
+
+                    <div class="span4" id="footerArea4">
+
+                        <h3>{{{ Lang::get('site.contact') }}}</h3>
+
+                        <ul id="contact-info">
+                            <li>
+                                <i class="general foundicon-phone icon"></i>
+                                <span class="field">{{{ Lang::get('site.phone') }}}:</span>
+                                <br/>
+                                +34 955 32 67 32
+                            </li>
+                            <li>
+                                <i class="general foundicon-mail icon"></i>
+                                <span class="field">{{{ Lang::get('site.email') }}}:</span>
+                                <br/>
+                                <a href="mailto:info@yourdomain.com" title="Email">contact@piecebypeace.es</a>
+                            </li>
+                            <li>
+                                <i class="general foundicon-home icon"></i>
+                                <span class="field">{{{ Lang::get('site.address') }}}:</span>
+                                <br/>
+                                Avda. Reina Mercedes s/n, ETSII<br/>
+                                {{{ Lang::get('site.physicalAddress') }}}<br/>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                    <div class="span3" id="footerArea1">
+
+                        <h3>{{{ Lang::get('site.footerAbout') }}}</h3>
+
+                        <p>
+                            <a href="{{{ URL::to('about') }}}" title="About">{{{ Lang::get('site.aboutUs') }}}</a><br/>
+                            <a href="{{{ URL::to('termsAndConditions') }}}" title="Terms of Use">{{{ Lang::get('site.termsAndConditions') }}}</a><br/>
+                            <a href="{{{ URL::to('privacyPolicy') }}}" title="Privacy Policy">{{{ Lang::get('site.privacyPolicy') }}}</a><br/>
+                            <a href="{{{ URL::to('faq') }}}" title="FAQ">FAQ</a><br/>
+                            <a href="{{{ URL::to('project/futureVolunteeringProjects') }}}" title="V_proyects">{{{ Lang::get('site.volunteeringProjects') }}}</a><br/>
+                            <a href="{{{ URL::to('project/futureCSRProjects') }}}" title="CSR_proyects">{{{ Lang::get('site.csrProjects') }}}</a><br/>
+                        </p>
+
+                    </div>
                 </div>
 
-                <div class="span4" id="footerArea4">
+                <br/><br/>
 
-                    <h3>{{{ Lang::get('site.contact') }}}</h3>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <p class="copyright">
+                            {{{ Lang::get('site.footerCopyright') }}}
+                        </p>
 
-                    <ul id="contact-info">
-                        <li>
-                            <i class="general foundicon-phone icon"></i>
-                            <span class="field">{{{ Lang::get('site.phone') }}}:</span>
-                            <br/>
-                            +34 955 32 67 32
-                        </li>
-                        <li>
-                            <i class="general foundicon-mail icon"></i>
-                            <span class="field">{{{ Lang::get('site.email') }}}:</span>
-                            <br/>
-                            <a href="mailto:info@yourdomain.com" title="Email">contact@piecebypeace.es</a>
-                        </li>
-                        <li>
-                            <i class="general foundicon-home icon" style="margin-bottom:50px"></i>
-                            <span class="field">{{{ Lang::get('site.address') }}}:</span>
-                            <br/>
-                            Avda. Reina Mercedes s/n, ETSII<br/>
-                            {{{ Lang::get('site.physicalAddress') }}}<br/>
-                        </li>
-                    </ul>
+                        <p class="social_bookmarks">
+                            <a href="https://www.facebook.com/thisispiecebypeace" target="_blank"><i class="social foundicon-facebook"></i> Facebook</a>
+                            <a href="https://twitter.com/piecebypeace" target="_blank"><i class="social foundicon-twitter"></i> Twitter</a>
 
+                        </p>
+                        <p>
+                        <a href="{{{ URL::to('change-language').'/es_ES' }}}">ES</a>|<a href="{{{ URL::to('change-language').'/en' }}}">EN</a>
+                        </p>
+                    </div>
                 </div>
+                <br/>
 
-                <div class="span3" id="footerArea1">
-
-                    <h3>{{{ Lang::get('site.footerAbout') }}}</h3>
-
-                    <p>
-                        <a href="{{{ URL::to('about') }}}" title="About">{{{ Lang::get('site.aboutUs') }}}</a><br/>
-                        <a href="{{{ URL::to('termsAndConditions') }}}" title="Terms of Use">{{{ Lang::get('site.termsAndConditions') }}}</a><br/>
-                        <a href="{{{ URL::to('privacyPolicy') }}}" title="Privacy Policy">{{{ Lang::get('site.privacyPolicy') }}}</a><br/>
-                        <a href="{{{ URL::to('faq') }}}" title="FAQ">FAQ</a><br/>
-                        <a href="{{{ URL::to('project/futureVolunteeringProjects') }}}" title="V_proyects">{{{ Lang::get('site.volunteeringProjects') }}}</a><br/>
-                        <a href="{{{ URL::to('project/futureCSRProjects') }}}" title="CSR_proyects">{{{ Lang::get('site.csrProjects') }}}</a><br/>
-                    </p>
-
-                </div>
             </div>
-
-            <br/><br/>
-
-            <div class="row-fluid">
-                <div class="span12">
-                    <p class="copyright">
-                        {{{ Lang::get('site.footerCopyright') }}}
-                    </p>
-
-                    <p class="social_bookmarks">
-                        <a href="https://www.facebook.com/thisispiecebypeace" target="_blank"><i class="social foundicon-facebook"></i> Facebook</a>
-                        <a href="https://twitter.com/piecebypeace" target="_blank"><i class="social foundicon-twitter"></i> Twitter</a>
-
-                    </p>
-                    <p>
-                    <a href="{{{ URL::to('change-language').'/es_ES' }}}">ES</a>|<a href="{{{ URL::to('change-language').'/en' }}}">EN</a>
-                    </p>
-                </div>
-            </div>
-            <br/>
-
-        </div>
 
     </div>
 
+    </div>
 </div>
 
 

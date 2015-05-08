@@ -1,0 +1,44 @@
+@media (max-width: 767px) {
+
+    p {
+        text-align: center;
+    }
+
+    h3 {
+        margin: 0px;
+        text-align: center;
+    }
+
+    ul#contact-info {
+        text-align: center;
+    }
+
+    ul#contact-info .icon {
+        font-size: 1.8em;
+        float: none;
+        line-height: 1.6em;
+        margin-right: 0em;
+
+    }
+
+    .social_bookmarks a {
+        margin-right: 0px;
+    }
+
+    li {
+        line-height: 20px;
+        width: 94%;
+    }
+
+    [class*="foundicon-"] {
+        display: block;
+    }
+
+}
+
+
+@media (min-width: 768px)  {
+    .foundicon-home  {
+        margin-bottom: 50px;
+    }
+}
