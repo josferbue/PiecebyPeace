@@ -355,8 +355,8 @@
                     </p>
 
                     <p class="social_bookmarks">
-                        <a href="#"><i class="social foundicon-facebook"></i> Facebook</a>
-                        <a href="#"><i class="social foundicon-twitter"></i> Twitter</a>
+                        <a href="https://www.facebook.com/thisispiecebypeace" target="_blank"><i class="social foundicon-facebook"></i> Facebook</a>
+                        <a href="https://twitter.com/piecebypeace" target="_blank"><i class="social foundicon-twitter"></i> Twitter</a>
 
                     </p>
                     <p class="social_bookmarks">
