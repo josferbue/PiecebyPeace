@@ -32,7 +32,7 @@ class CreateVolunteersTable extends Migration {
 
 
 			$table->integer('user_id')->unsigned()->index();
-			$table->foreign('user_id')->references('id')->on('users');
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
 
 

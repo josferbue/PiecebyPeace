@@ -8,6 +8,7 @@ class VolunteerController extends BaseController {
      */
     protected $volunteer;
     protected $user;
+    public static $app;
     /**
      * Inject the models.
      * @param User $user
@@ -26,7 +27,7 @@ class VolunteerController extends BaseController {
      */
     public function getIndex()
     {
-        list($user,$redirect) = $this->user->checkAuthAndRedirect('userVolunteer');
+        list($user,$redirect) = $this->user->checkAuthAndRedirect('/');
         if($redirect){return $redirect;}
         $volunteer = $this->volunteer;
         // Show the page
@@ -122,53 +123,107 @@ class VolunteerController extends BaseController {
      * Edits a user
      *
      */
-    public function postEdit($user)
+    public
+    function postEdit()
     {
         // Validate the inputs
-        $validator = Validator::make(Input::all(), $user->getUpdateRules());
+        $volunteer = Volunteer::where('user_id', '=', Auth::id())->first();
 
+        $rules = array(
+            'password' => 'min:5|max:32',
+            'email'    => 'required|email',
+            'name'    => 'required|min:3',
+            'surname' => 'required|min:3',
+            'city'    => 'required|min:3',
+            'zipCode' => 'required|min:3',
+            'country' => 'required|min:3'
+        );
 
-        if ($validator->passes())
-        {
-            $oldUser = clone $user;
-            $user->username = Input::get( 'username' );
-            $user->email = Input::get( 'email' );
+        if ($volunteer != null) {
 
-            $password = Input::get( 'password' );
-            $passwordConfirmation = Input::get( 'password_confirmation' );
+            $oldPassword = Input::get('oldPassword');
+            $password = Input::get('password');
+            $passwordConfirmation = Input::get('password_confirmation');
 
-            if(!empty($password)) {
-                if($password === $passwordConfirmation) {
-                    $user->password = $password;
+            if (!Hash::check($oldPassword, $volunteer->userAccount->password)) {
+                return Redirect::to('userVolunteer/edit')
+                    ->withInput(Input::except('password', 'password_confirmation', 'oldPassword'))
+                    ->with('error', Lang::get('user/messages.editProfile.oldPasswordIncorrect'));
+            }
+            $passwordisChanged = false;
+
+            if (!empty($password) || !empty($passwordConfirmation)) {
+                if ($password === $passwordConfirmation) {
+
+                    $volunteer->userAccount->password = $password;
                     // The password confirmation will be removed from model
                     // before saving. This field will be used in Ardent's
                     // auto validation.
-                    $user->password_confirmation = $passwordConfirmation;
+                    $volunteer->userAccount->password_confirmation = $passwordConfirmation;
+                    $passwordisChanged = true;
+
                 } else {
                     // Redirect to the new user page
-                    return Redirect::to('users')->with('error', Lang::get('admin/users/messages.password_does_not_match'));
+                    return Redirect::to('userVolunteer/edit')->with('error', Lang::get('admin/users/messages.password_does_not_match'));
                 }
-            } else {
-                unset($user->password);
-                unset($user->password_confirmation);
             }
-
-            $user->prepareRules($oldUser, $user);
-
-            // Save if valid. Password field will be hashed before save
-            $user->amend();
+        } else {
+            return Redirect::to('/')->with('error', Lang::get('user/messages.editProfile.errorEditNotYourProfile'));
         }
 
-        // Get validation errors (see Ardent package)
-        $error = $user->errors()->all();
+        $validator = Validator::make(Input::all(), $rules);
 
-        if(empty($error)) {
-            return Redirect::to('user')
-                ->with( 'success', Lang::get('user/user.user_account_updated') );
+        if ($validator->passes()) {
+
+            if ($volunteer->userAccount->email != Input::get('email')) {
+
+                //hacemos que vuelva a enviar email de confirmacion si este se cambia
+                $volunteer->userAccount->email = Input::get('email');
+
+                $volunteer->userAccount->confirmation_code = md5(uniqid(mt_rand(), true));
+                $volunteer->userAccount->confirmed = 0;
+                if (!static::$app) {
+                    static::$app = app();
+                }
+                $signup_cache = (int)static::$app['config']->get('confide::signup_cache');
+                if ($signup_cache !== 0) {
+                    static::$app['cache']->put('confirmation_email_' . $volunteer->userAccount->getKey(), false, $signup_cache);
+                }
+            }
+
+
+            $volunteer->userAccount->email = Input::get('email');
+            $volunteer->name = Input::get("name");
+            $volunteer->surname = Input::get("surname");
+            $volunteer->address = Input::get("address");
+            $volunteer->city = Input::get("city");
+            $volunteer->zipCode = Input::get("zipCode");
+            $volunteer->country = Input::get("country");
+            $volunteer->biography = Input::get("biography");
+
+
+
+            if ($volunteer->userAccount->amend()) {//amend funcion para actualizar los usuarios
+                // Redirect with success message, You may replace "Lang::get(..." for your custom message.
+                if ($volunteer->save()) {
+                    if ($passwordisChanged) {
+                        Confide::logout();
+                        return Redirect::to('user/login')
+                            ->with('success', Lang::get('user/user.user_account_updated'));
+                    }
+                    return Redirect::to('/')
+                        ->with('success', Lang::get('user/user.user_account_updated'));
+                }
+            }
+            return Redirect::to('userVolunteer/edit')
+                ->withInput(Input::except('password', 'password_confirmation', 'oldPassword'))
+                ->with('error', Lang::get('user/messages.editProfile.errorEditSave'));
+
         } else {
-            return Redirect::to('user')
-                ->withInput(Input::except('password','password_confirmation'))
-                ->with( 'error', $error );
+
+            return Redirect::to('userVolunteer/edit')
+                ->withInput(Input::except('password', 'password_confirmation', 'oldPassword'))
+                ->withErrors($validator);
         }
     }
 
@@ -180,14 +235,24 @@ class VolunteerController extends BaseController {
     {
         return View::make('site/volunteer/create');
     }
+    public
+    function getEdit()
+    {
+        $volunteer = Volunteer::where('user_id', '=', Auth::id())->first();
+        $isEdit = true;
+        return View::make('site/volunteer/create', compact('volunteer', 'isEdit'));
+    }
 
     // Delete volunteer
 
     public function deleteVolunteer() {
+        if(!Auth::check()){
+            Return Redirect::to('/')->with('error', 'volunteer/messages.deleteVolunteer.notLogging');
+        }
         $volunteer = Auth::user()->actor();
 
-        if(!$volunteer->hasRole('VOLUNTEER')) {
-            Return Redirect::to('/')->with('error', 'volunteer/messages.deleteVolunteer.error');
+        if(!Auth::user()->hasRole('VOLUNTEER')) {
+            Return Redirect::to('/')->with('error', 'volunteer/messages.deleteVolunteer.errorNotVolunteer');
         }
 
         $applications = Application::where('volunteer_id', '=', Auth::id())->where('result', '=', 2);
@@ -198,8 +263,12 @@ class VolunteerController extends BaseController {
             }
         }
 
-        $volunteer->userAccount->delete();
-        Return Redirect::to('/')->with('success', 'volunteer/messages.deleteVolunteer.successfullyDeleted');
+        if($volunteer->delete()){
+            Confide::logout();
+            Return Redirect::to('/')->with('success', 'volunteer/messages.deleteVolunteer.success');
+        }
+        Return Redirect::to('/')->with('error', 'volunteer/messages.deleteVolunteer.error');
+
     }
 
 

@@ -25,7 +25,6 @@ return array(
     'newPassword'                           => 'Nueva contraseña',
     'save'                                  => 'Guardar',
     'update'                                => 'Actualizar',
-    'delete'                                => 'Eliminar cuenta',
 
 
 

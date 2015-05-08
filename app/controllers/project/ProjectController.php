@@ -121,9 +121,9 @@ class ProjectController extends BaseController
         for ($i = 0; $i < sizeof($this->project->categories); $i++) {
             $category = $this->project->categories[$i];
             if ($i == (sizeof($this->project->categories) - 1)) {
-                $categories .= $category->name;
+                $categories .= Lang::get($category->name);
             } else {
-                $categories .= $category->name . ', ';
+                $categories .= Lang::get($category->name) . ', ';
             }
         }
 
@@ -253,9 +253,9 @@ class ProjectController extends BaseController
              $i++) {
             $category = $this->project->categories[$i];
             if ($i == (sizeof($this->project->categories) - 1)) {
-                $categories .= $category->name;
+                $categories .= Lang::get($category->name);
             } else {
-                $categories .= $category->name . ', ';
+                $categories .= Lang::get($category->name) . ', ';
             }
         }
         $data = array(
@@ -379,7 +379,7 @@ class ProjectController extends BaseController
 
         );
 
-        Return View::make('site/project/list')->with($data);
+        Return View::make('company/project/list')->with($data);
     }
 
     Public function getFutureVolunteeringProjects()

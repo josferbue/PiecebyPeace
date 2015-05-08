@@ -21,7 +21,7 @@ class CreateApplicationsTable extends Migration {
 
 
 			$table->integer('volunteer_id')->unsigned()->index();
-			$table->foreign('volunteer_id')->references('id')->on('volunteer');
+			$table->foreign('volunteer_id')->references('id')->on('volunteer')->onDelete('cascade');
 
 
 			$table->integer('project_id')->unsigned()->index();

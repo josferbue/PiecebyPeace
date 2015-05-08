@@ -13,7 +13,8 @@ return array(
     'deleteVolunteer' => array (
         'error'                         => 'Se ha producido un error. Por favor, inténtelo de nuevo.',
         'errorAlreadyCooperating'       => 'No puede eliminar su cuenta de usuario porque ha sido aceptado como colaborador en uno o más proyectos de voluntariado.',
-        'successfullyDeleted'           => 'Su cuenta de usuario ha sido eliminada con éxito.'
+        'success'                       => 'Su cuenta de usuario ha sido eliminada con éxito.',
+        'notLogging'                    => 'Debe estar logueado.',
+        'errorNotVolunteer'             => 'Su cuenta no tiene rol de voluntario.',
     ),
-
 );

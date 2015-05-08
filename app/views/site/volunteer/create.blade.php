@@ -42,26 +42,26 @@
                         </div>
                     @endif
 
-                        @if(isset($isEdit))
-                            <div class="form-group">
-                                <label for="oldPassword">{{{ Lang::get('volunteer/volunteer.oldPassword') }}}</label>
-                                <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.oldPassword') }}}"
-                                       type="password"
-                                       name="oldPassword" id="oldPassword">
-                            </div>
-                        @endif
-                        <div class="form-group{{{ $errors->has('password') ? 'error' : '' }}}">
-                            @if(isset($isEdit))
-                                <label for="password">{{{ Lang::get('volunteer/volunteer.newPassword') }}}</label>
-                            @else
-                                <label for="password">{{{ Lang::get('confide::confide.password') }}}</label>
-                            @endif
-                            <input class="form-control" placeholder="{{{ Lang::get('confide::confide.password') }}}"
+                    @if(isset($isEdit))
+                        <div class="form-group">
+                            <label for="oldPassword">{{{ Lang::get('volunteer/volunteer.oldPassword') }}}</label>
+                            <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.oldPassword') }}}"
                                    type="password"
-                                   name="password" id="password">
-                            {{ $errors->first('password', '<span class="help-block">:message</span>') }}
-
+                                   name="oldPassword" id="oldPassword">
                         </div>
+                    @endif
+                    <div class="form-group{{{ $errors->has('password') ? 'error' : '' }}}">
+                        @if(isset($isEdit))
+                            <label for="password">{{{ Lang::get('volunteer/volunteer.newPassword') }}}</label>
+                        @else
+                            <label for="password">{{{ Lang::get('confide::confide.password') }}}</label>
+                        @endif
+                        <input class="form-control" placeholder="{{{ Lang::get('confide::confide.password') }}}"
+                               type="password"
+                               name="password" id="password">
+                        {{ $errors->first('password', '<span class="help-block">:message</span>') }}
+
+                    </div>
 
                     <div class="form-group">
                         <label for="password_confirmation">{{{ Lang::get('confide::confide.password_confirmation') }}}</label>
@@ -72,13 +72,15 @@
                     <div class="form-group  {{{ $errors->has('name') ? 'error' : '' }}}">
                         <label for="name">{{{ Lang::get('volunteer/volunteer.name') }}}</label>
                         <input class="form-control" placeholder="{{{ Lang::get('volunteer/volunteer.name') }}}"
-                               type="text" name="name" id="name" value="{{{ Input::old('name', isset($volunteer) ? $volunteer->name : null) }}}">
+                               type="text" name="name" id="name"
+                               value="{{{ Input::old('name', isset($volunteer) ? $volunteer->name : null) }}}">
                         {{ $errors->first('name', '<span class="help-block">:message</span>') }}
                     </div>
                     <div class="form-group  {{{ $errors->has('surname') ? 'error' : '' }}}">
                         <label for="surname">{{{ Lang::get('volunteer/volunteer.surname') }}}</label>
                         <input class="form-control" placeholder="{{{ Lang::get('volunteer/volunteer.surname') }}}"
-                               type="text" name="surname" id="surname" value="{{{ Input::old('surname', isset($volunteer) ? $volunteer->surname : null) }}}">
+                               type="text" name="surname" id="surname"
+                               value="{{{ Input::old('surname', isset($volunteer) ? $volunteer->surname : null) }}}">
                         {{ $errors->first('surname', '<span class="help-block">:message</span>') }}
                     </div>
                 </div>
@@ -98,25 +100,29 @@
                     <div class="form-group">
                         <label for="address">{{{ Lang::get('volunteer/volunteer.address') }}}</label>
                         <input class="form-control" placeholder="{{{ Lang::get('volunteer/volunteer.address') }}}"
-                               type="text" name="address" id="address" value="{{{ Input::old('address', isset($volunteer) ? $volunteer->address : null) }}}">
+                               type="text" name="address" id="address"
+                               value="{{{ Input::old('address', isset($volunteer) ? $volunteer->address : null) }}}">
                     </div>
                     <div class="form-group  {{{ $errors->has('city') ? 'error' : '' }}}">
                         <label for="city">{{{ Lang::get('volunteer/volunteer.city') }}}</label>
                         <input class="form-control" placeholder="{{{ Lang::get('volunteer/volunteer.city') }}}"
-                               type="text" name="city" id="city" value="{{{ Input::old('city', isset($volunteer) ? $volunteer->city : null) }}}">
+                               type="text" name="city" id="city"
+                               value="{{{ Input::old('city', isset($volunteer) ? $volunteer->city : null) }}}">
                         {{ $errors->first('city', '<span class="help-block">:message</span>') }}
                     </div>
                     <div class="form-group  {{{ $errors->has('zipCode') ? 'error' : '' }}}">
                         <label for="zipCode">{{{ Lang::get('volunteer/volunteer.zipCode') }}}</label>
                         <input class="form-control" placeholder="{{{ Lang::get('volunteer/volunteer.zipCode') }}}"
-                               type="text" name="zipCode" id="zipCode" value="{{{ Input::old('zipCode', isset($volunteer) ? $volunteer->zipCode : null) }}}">
+                               type="text" name="zipCode" id="zipCode"
+                               value="{{{ Input::old('zipCode', isset($volunteer) ? $volunteer->zipCode : null) }}}">
                         {{ $errors->first('zipCode', '<span class="help-block">:message</span>') }}
                     </div>
                     <div class="form-group {{{ $errors->has('country') ? 'error' : '' }}}">
                         <div class="col-md-12">
                             <label for="country">{{{ Lang::get('volunteer/volunteer.country') }}}</label>
                             <input class="form-control" placeholder="{{{ Lang::get('volunteer/volunteer.country') }}}"
-                                   type="text" name="country" id="country" value="{{{ Input::old('country', isset($volunteer) ? $volunteer->country : null) }}}">
+                                   type="text" name="country" id="country"
+                                   value="{{{ Input::old('country', isset($volunteer) ? $volunteer->country : null) }}}">
                             {{ $errors->first('country', '<span class="help-block">:message</span>') }}
                         </div>
                     </div>
@@ -130,7 +136,8 @@
                     <div class="form-group">
                         <label for="biography">{{{ Lang::get('volunteer/volunteer.biography') }}}</label>
                         <textarea class="field span7" placeholder="{{{ Lang::get('volunteer/volunteer.biography') }}}"
-                                  rows="9" name="biography" id="biography">{{{ Input::old('biography', isset($volunteer) ? $volunteer->biography : null) }}}</textarea>
+                                  rows="9" name="biography"
+                                  id="biography">{{{ Input::old('biography', isset($volunteer) ? $volunteer->biography : null) }}}</textarea>
                     </div>
                 </div>
             </div>
@@ -152,19 +159,20 @@
                     <button type="submit"
                             class="btn btn-primary">{{{ Lang::get('confide::confide.signup.submit') }}}</button>
 
-                    <input type="button" class="btn btn-primary"
-                           onclick="window.location.href='{{ URL::to('/') }}'"
-
-                           value="{{ Lang::get('ngo/ngo.back') }}">
                 @else
                     <input type="button" class="btn btn-primary" onclick="submitUpdate()"
                            value="{{ Lang::get('volunteer/volunteer.update') }}">
+
+                    <input type="button" class="btn btn-primary"
+                           onclick="window.location.href='{{ URL::to('volunteer/delete') }}'"
+
+                           value="{{ Lang::get('volunteer/volunteer.delete') }}">
 
                 @endif
                 <input type="button" class="btn btn-primary"
                        onclick="window.location.href='{{ URL::to('/') }}'"
 
-                       value="{{ Lang::get('ngo/ngo.back') }}">
+                       value="{{ Lang::get('volunteer/volunteer.back') }}">
             </div>
 
 
