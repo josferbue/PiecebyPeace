@@ -4,6 +4,7 @@
     <!-- Basic Page Needs
     ================================================== -->
     <meta charset="utf-8"/>
+    <link rel="shortcut icon" href="{{URL::to('favicon.ico')}}" type="image/x-icon"/>
     <title>
         @section('title')
             Piece by Peace
