@@ -79,7 +79,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
     Route::controller('roles', 'AdminRolesController');
 
     # Admin Dashboard
-    Route::controller('/', 'AdminDashboardController');
+    Route::controller('/dashboard', 'AdminDashboardController');
 });
 /** ------------------------------------------
  *  Volunteer Routes
