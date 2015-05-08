@@ -121,18 +121,20 @@
                     </div>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="span6">
-                    <div class="form-group">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" id="terms" name="terms" value="true" /> {{ Lang::get('ngo/ngo.termsMessage') }}
-                            </label>
+            @if(!isset($isEdit))
+                <div class="row">
+                    <div class="span6">
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="terms" name="terms"
+                                           value="true"/> {{ Lang::get('ngo/ngo.termsMessage') }}
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endif
 
             @if ( Session::get('error') )
                 <div class="alert alert-error alert-danger">
