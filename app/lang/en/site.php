@@ -65,6 +65,10 @@ return array(
 	'activityMonths'				=> ':months months ago',
 	'activityYears'					=> ':years years ago',
 
+	'headerLine1'					=> 'Let\'s help building a better world!',
+	'headerLine2'					=> 'The platform to interconect, in an agile and easy way, volunteers, NGOs and companies',
+	'headerLine3'					=> 'More information',
+
 	'contact'						=> 'Contact',
 	'phone'							=> 'Phone',
 	'email'							=> 'Email',

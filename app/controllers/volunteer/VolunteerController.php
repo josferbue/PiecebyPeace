@@ -43,11 +43,14 @@ class VolunteerController extends BaseController {
     {
 
         $rules = array(
-            'name'    => 'required|min:3',
-            'surname' => 'required|min:3',
-            'city'    => 'required|min:3',
-            'zipCode' => 'required|min:3',
-            'country' => 'required|min:3'
+            'username'      => 'required|min:5|max:32|unique:users,username',
+            'password'      => 'required|min:5|max:32',
+            'email'    => 'required|email',
+            'name'     => 'required|min:3',
+            'surname'  => 'required|min:3',
+            'city'     => 'required|min:3',
+            'zipCode'  => 'required|min:3',
+            'country'  => 'required|min:3'
         );
 
         // Validate the inputs
@@ -247,27 +250,27 @@ class VolunteerController extends BaseController {
 
     public function deleteVolunteer() {
         if(!Auth::check()){
-            Return Redirect::to('/')->with('error', 'volunteer/messages.deleteVolunteer.notLogging');
+            Return Redirect::to('/')->with('error', Lang::get('volunteer/messages.deleteVolunteer.notLogging'));
         }
         $volunteer = Auth::user()->actor();
 
         if(!Auth::user()->hasRole('VOLUNTEER')) {
-            Return Redirect::to('/')->with('error', 'volunteer/messages.deleteVolunteer.errorNotVolunteer');
+            Return Redirect::to('/')->with('error', Lang::get('volunteer/messages.deleteVolunteer.errorNotVolunteer'));
         }
 
         $applications = Application::where('volunteer_id', '=', Auth::id())->where('result', '=', 2);
 
         foreach($applications as $application) {
             if(Carbon::now() < $application->project->startDate) {
-                Return Redirect::to('/')->with('error', 'volunteer/messages.deleteVolunteer.errorAlreadyCooperating');
+                Return Redirect::to('/')->with('error', Lang::get('volunteer/messages.deleteVolunteer.errorAlreadyCooperating'));
             }
         }
 
-        if($volunteer->delete()){
+        if($volunteer->userAccount->delete()){
             Confide::logout();
-            Return Redirect::to('/')->with('success', 'volunteer/messages.deleteVolunteer.success');
+            Return Redirect::to('/')->with('success', Lang::get('volunteer/messages.deleteVolunteer.success'));
         }
-        Return Redirect::to('/')->with('error', 'volunteer/messages.deleteVolunteer.error');
+        Return Redirect::to('/')->with('error', Lang::get('volunteer/messages.deleteVolunteer.error'));
 
     }
 
