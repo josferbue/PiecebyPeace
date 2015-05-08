@@ -84,7 +84,7 @@ return array(
 	'csrProjects'					=> 'Acciones de RSC',
 
 	'footerCopyright'				=> 'Copyright © 2015 Piece by Peace. Todos los derechos reservados.',
-
+	'dashboard'						=> 'Panel de control',
 	'uploadFile'					=> 'Seleccione un archivo',
 
 );

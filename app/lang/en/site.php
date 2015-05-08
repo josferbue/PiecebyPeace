@@ -82,6 +82,6 @@ return array(
 	'volunteeringProjects'			=> 'Volunteering projects',
 	'csrProjects'					=> 'CSR projects',
 	'dashboard'						=> 'Dashboard',
-	'footerCopyright'				=> 'Copyright © 2015 Piece by Peace. All rights reserved.'
+	'footerCopyright'				=> 'Copyright © 2015 Piece by Peace. All rights reserved.',
 	'uploadFile'					=> 'Select file',
 );
