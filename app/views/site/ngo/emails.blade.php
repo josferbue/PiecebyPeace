@@ -16,6 +16,7 @@
           enctype="multipart/form-data" accept-charset="UTF-8">
         <input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
         <input type="hidden" name="idCampaing" value="{{{ $campaignId }}}">
+        <input type="hidden" name="campaing" value="{{{ $campaignName }}}">
 
         <div class="tab-content">
             <div class="row">
