@@ -1,19 +1,22 @@
 @media (max-width: 767px) {
-
-    p {
+    h1 {
         text-align: center;
     }
 
-    h3 {
+    .mobileFooter p {
+        text-align: center;
+    }
+
+    .mobileFooter h3 {
         margin: 0px;
         text-align: center;
     }
 
-    ul#contact-info {
+    .mobileFooter ul#contact-info {
         text-align: center;
     }
 
-    ul#contact-info .icon {
+    .mobileFooter ul#contact-info .icon {
         font-size: 1.8em;
         float: none;
         line-height: 1.6em;
@@ -21,24 +24,23 @@
 
     }
 
-    .social_bookmarks a {
+    .mobileFooter .social_bookmarks a {
         margin-right: 0px;
     }
 
-    li {
+    .mobileFooter li {
         line-height: 20px;
         width: 94%;
     }
 
-    [class*="foundicon-"] {
+    .mobileFooter [class*="foundicon-"] {
         display: block;
     }
 
 }
 
-
-@media (min-width: 768px)  {
-    .foundicon-home  {
+@media (min-width: 768px) {
+    .foundicon-home {
         margin-bottom: 50px;
     }
 }
