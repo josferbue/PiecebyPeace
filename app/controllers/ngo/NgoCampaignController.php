@@ -63,7 +63,7 @@ class NgoCampaignController extends BaseController
             'startDate'             => 'required|date|after:now|before:finishDate',
             'finishDate'            => 'required|date|after:now',
             'link'                  => 'required|url',
-            'maxVisits'             => 'required|min:0',
+            'maxVisits'             => 'required|min:1|integer',
             'expirationDate'        => 'required|date|before:finishDate',
         );
 
