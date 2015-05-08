@@ -59,7 +59,7 @@ class NgoCampaignController extends BaseController
         $rules = array(
             'name'                  => 'required|min:3',
             'description'           => 'required|min:3',
-            'image'                 => 'required|image',
+            'image'                 => 'image',
             'startDate'             => 'required|date|after:'.date('Y-m-d').'|before:'.Input::get('finishDate'),
             'finishDate'            => 'required|date|after:'.date('Y-m-d'),
             'link'                  => 'required|url',
@@ -84,10 +84,17 @@ class NgoCampaignController extends BaseController
 
         if ($validator->passes())
         {
+
             $image = Input::file('image');
-            $filename = $image->getClientOriginalName();
-            $image->move($destinationPath, $filename);
-            $this->campaign->image =  '/campaigns_images/'.$this->campaign->name .'/'. $filename;
+            if ($image != null) {
+                $filename = $image->getClientOriginalName();
+                $image->move($destinationPath, $filename);
+                $this->campaign->image =  '/campaigns_images/'.$this->campaign->name .'/'. $filename;
+
+            }else{
+                $this->campaign->image ='/logos/imageNotFound.gif';
+            }
+
 
             if(!Auth::user()->actor()->credits) {
                 return Redirect::to('ngo/campaign/create')->withInput(Input::all())->with('error', Lang::get('campaign/campaign.zeroCredits'));
