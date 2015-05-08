@@ -2,11 +2,12 @@
 
 class CampaignController extends BaseController
 {
-    public function __construct(Campaign $campaign, Visitor $visitor)
+    public function __construct(Campaign $campaign, Visitor $visitor, Ngo $ngo)
     {
         parent::__construct();
         $this->campaign = $campaign;
         $this->visitor = $visitor;
+        $this->ngo = $ngo;
     }
 
     public function findAllActiveCampaigns()
@@ -43,7 +44,7 @@ class CampaignController extends BaseController
         $userIP = Request::ip();
         $user = Auth::user();
         $this->campaign = Campaign::find($id);
-        $ngo = Ngo::find($this->campaign->ngo_id);
+        $this->ngo = Ngo::find($this->campaign->ngo_id);
 
         if( $user->actor() != $this->campaign->ngo && $this->campaign->visits <= $this->campaign->maxVisits &&
             $this->campaign->expirationDate >= new DateTime('now') && !Visitor::where('ipAddress', '=', $userIP)->where('campaign_id', '=', $this->campaign->id)->first()) {
@@ -52,13 +53,14 @@ class CampaignController extends BaseController
                 }
                 if( count(Campaign::where('ngo_id', '=', $this->campaign->ngo->id)->get()) > 2 ) {
                     if( $this->campaign->visits <= 200 ) {
-                        $ngo->update(array('credits' => $ngo->credits - 6));
+                        $this->ngo->credits = $this->ngo->credits - 6;
+                        $this->ngo->save();
                     }
                     if( $this->campaign->visits > 200 && $this->campaign->visits <= 1000 ) {
-                        $ngo->update(array('credits' => $ngo->credits - 9));
+                        $this->ngo->update(array('credits' => $this->ngo->credits - 9));
                     }
                     if( $this->campaign->visits > 1000 ) {
-                        $ngo->update(array('credits' => $ngo->credits - 12));
+                        $this->ngo->update(array('credits' => $this->ngo->credits - 12));
                     }
                 }
         }
