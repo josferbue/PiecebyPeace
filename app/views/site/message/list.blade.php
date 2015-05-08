@@ -37,9 +37,9 @@
                                 <span class="listMessages">{{{$message->from}}}</span>
                             @else
                                 @if(substr($message->to, 0,1)=='(' && substr($message->to, -1)==')')
-                                    <span class="listMessages">{{{ Lang::get('message/list.BroadcastAllVolunteers').' '.$message->to }}}</span>
+                                    <span id="messageTo">{{{ Lang::get('message/list.BroadcastAllVolunteers').' '.$message->to }}}</span>
                                 @else
-                                    <span class="listMessages">{{{$message->to}}}</span>
+                                    <span id="messageTo">{{{$message->to}}}</span>
                                 @endif
                             @endif
                             @if(isset ($messagesNotReadId))

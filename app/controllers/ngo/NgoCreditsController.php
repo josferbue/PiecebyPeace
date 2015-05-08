@@ -1,12 +1,13 @@
 <?php
 
-class NgoCreditsController extends BaseController {
+class NgoCreditsController extends BaseController
+{
 
 
     private $_api_context;
 
-    private $_ClientId='AQ10YGdwkquqM6DpBspIeagRqOOeGPh4Dz19832jqdbr55laVUJPxXu2BBH6M7Ay2zNbhS6L2m9GhFaj';
-    private $_ClientSecret='EKwZnR0aoVXcgl4SkZgaDZeE2tctC6E0na4fEQmmcuFhyZi1l3kaS5NXQXc_IChCIePUVfgiRTPOdIgr';
+    private $_ClientId = 'AQ10YGdwkquqM6DpBspIeagRqOOeGPh4Dz19832jqdbr55laVUJPxXu2BBH6M7Ay2zNbhS6L2m9GhFaj';
+    private $_ClientSecret = 'EKwZnR0aoVXcgl4SkZgaDZeE2tctC6E0na4fEQmmcuFhyZi1l3kaS5NXQXc_IChCIePUVfgiRTPOdIgr';
 
     public function __construct()
     {
@@ -17,18 +18,18 @@ class NgoCreditsController extends BaseController {
             'mode' => 'sandbox',
             'http.ConnectionTimeOut' => 30,
             'log.LogEnabled' => true,
-            'log.FileName' => __DIR__.'/../PayPal.log',
+            'log.FileName' => __DIR__ . '/../PayPal.log',
             'log.LogLevel' => 'FINE'
         ));
     }
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function getCreate()
-	{
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function getCreate()
+    {
         // Title
         $title = Lang::get('ngo/credits/table.title');
 
@@ -37,14 +38,14 @@ class NgoCreditsController extends BaseController {
 
         // Show the page
         return View::make('site/ngo/credits', compact('title'));
-	}
+    }
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function postCreate()
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function postCreate()
     {
         $title = Lang::get('ngo/credits/table.title');
         // Declare the rules for the form validation
@@ -82,9 +83,9 @@ class NgoCreditsController extends BaseController {
 
             $details = Paypalpayment::details();
             $details->setShipping("0")
-                ->setTax(''.$credits * 0.01 * 0.21)
+                ->setTax('' . $credits * 0.01 * 0.21)
                 //total of items prices
-                ->setSubtotal(''.$credits * 0.01);
+                ->setSubtotal('' . $credits * 0.01);
 
             //Payment Amount
             $amount = Paypalpayment::amount();
@@ -133,8 +134,8 @@ class NgoCreditsController extends BaseController {
                 }
             }
 
-            foreach($payment->getLinks() as $link) {
-                if($link->getRel() == 'approval_url') {
+            foreach ($payment->getLinks() as $link) {
+                if ($link->getRel() == 'approval_url') {
                     $redirect_url = $link->getHref();
                     break;
                 }
@@ -142,15 +143,14 @@ class NgoCreditsController extends BaseController {
 
             // add payment ID to session
             Session::put('paypal_payment_id', $payment->getId());
-            Session::put('credits',$credits);
-            if(isset($redirect_url)) {
+            Session::put('credits', $credits);
+            if (isset($redirect_url)) {
                 // redirect to paypal
                 return Redirect::away($redirect_url);
             }
 
             return View::make('site/ngo/credits', compact('title'))->with('error', 'Unknown error occurred');
-        }
-        else{
+        } else {
             return View::make('site/ngo/credits', compact('title'))->withInput(Input::all())->withErrors($validator);
         }
 
@@ -162,8 +162,8 @@ class NgoCreditsController extends BaseController {
      * @param $post
      * @return Response
      */
-	public function getExecutePayment()
-	{
+    public function getExecutePayment()
+    {
 
         // Get the payment ID before session clear
         $payment_id = Session::get('paypal_payment_id');
@@ -171,7 +171,9 @@ class NgoCreditsController extends BaseController {
         // clear the session payment ID
         Session::forget('paypal_payment_id');
 
-        if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
+        $payerId = Input::get('PayerID');
+        $token = Input::get('token');
+        if (empty($payerId) || empty($token)) {
             return Redirect::action('BlogController@getIndex')
                 ->with('error', 'Payment failed');
         }
@@ -199,8 +201,7 @@ class NgoCreditsController extends BaseController {
         }
         return Redirect::action('BlogController@getIndex')
             ->with('error', 'Payment failed');
-	}
-
+    }
 
 
 }
