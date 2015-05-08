@@ -81,7 +81,7 @@ return array(
 	'aboutUs'						=> "What is Piece by Peace?",
 	'volunteeringProjects'			=> 'Volunteering projects',
 	'csrProjects'					=> 'CSR projects',
-
+	'dashboard'						=> 'Dashboard',
 	'footerCopyright'				=> 'Copyright © 2015 Piece by Peace. All rights reserved.'
 
 );
