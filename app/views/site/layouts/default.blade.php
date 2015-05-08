@@ -224,6 +224,9 @@
                                             @if (Auth::user()->hasRole('VOLUNTEER'))
                                                     <li><a href="{{{ URL::to('userVolunteer/edit') }}}"> {{{ Lang::get('site.editUser') }}} </a></li>
                                             @endif
+                                            @if (Auth::user()->hasRole('ADMINISTRATOR'))
+                                                <li><a href="{{{ URL::to('admin/dashboard') }}}"> {{{ Lang::get('site.dashboard') }}} </a></li>
+                                            @endif
 
                                                 <li><a href="{{{ URL::to('user/logout') }}}"> {{{ Lang::get('site.logout') }}} </a></li>
                                             </ul>
