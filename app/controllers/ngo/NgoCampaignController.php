@@ -60,11 +60,11 @@ class NgoCampaignController extends BaseController
             'name'                  => 'required|min:3',
             'description'           => 'required|min:3',
             'image'                 => 'image',
-            'startDate'             => 'required|date|after:'.date('Y-m-d').'|before:'.Input::get('finishDate'),
-            'finishDate'            => 'required|date|after:'.date('Y-m-d'),
+            'startDate'             => 'required|date|after:now|before:finishDate',
+            'finishDate'            => 'required|date|after:now',
             'link'                  => 'required|url',
             'maxVisits'             => 'required|min:0',
-            'expirationDate'        => 'required|date|after:'.Input::get('startDate').'|before:'.Input::get('finishDate'),
+            'expirationDate'        => 'required|date|before:finishDate',
         );
 
         // Validate the inputs
