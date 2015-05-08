@@ -116,8 +116,8 @@ Route::group(array('prefix' => 'ngo', 'before' => 'auth'), function () {
     Route::get('/executePayment', 'NgoCreditsController@getExecutePayment');
 
     //Email Marketing
-
-    Route::post('/sendEmails', 'NgoCampaignController@sendEmails');
+    Route::post('/createEmailPayment', 'NgoCampaignController@postCreateEmailPayment');
+    Route::get('/sendEmails', 'NgoCampaignController@sendEmails');
     Route::get('/createEmails/{campaign}', 'NgoCampaignController@createEmails');
 
 

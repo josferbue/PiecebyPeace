@@ -17,7 +17,7 @@ return array(
     'active'               					=> 'Activo',
     'back'               					=> 'Cancelar',
     'campaign'                              => 'Campaña',
-    'numberEmails'                          => '1 centimo por email, máximo :max emails',
+    'numberEmails'                          => '3 centimo por email, máximo :max emails',
     'numberEmailsTitle'                     => 'Número de e-mails a enviar',
     'send'                                  => 'Enviar',
     'sendEmail'                             => 'Enviar emails de marketing',

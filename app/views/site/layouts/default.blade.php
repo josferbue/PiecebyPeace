@@ -248,7 +248,7 @@
                                                     href="{{{ URL::to('user/login') }}}">{{{ Lang::get('site.login') }}}</a></li>
                                     @endif
                                 </ul>
-                                <a href="{{{ URL::to('change-language').'/es_ES' }}}">es</a>/ <a href="{{{ URL::to('change-language').'/en' }}}">en</a>
+
                             </div>
                         </div>
                     </div>
@@ -357,6 +357,10 @@
                     <p class="social_bookmarks">
                         <a href="#"><i class="social foundicon-facebook"></i> Facebook</a>
                         <a href="#"><i class="social foundicon-twitter"></i> Twitter</a>
+
+                    </p>
+                    <p class="social_bookmarks">
+                    <a href="{{{ URL::to('change-language').'/es_ES' }}}"><img src="{{asset('template/icons/spain.ico')}}" style="max-width: 24px"/></a><a href="{{{ URL::to('change-language').'/en' }}}"><img class="glyphicon" src="{{asset('template/icons/united.ico')}}" style="max-width: 24px" /></a>
                     </p>
                 </div>
             </div>

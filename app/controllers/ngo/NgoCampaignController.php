@@ -2,10 +2,24 @@
 
 class NgoCampaignController extends BaseController
 {
+    private $_api_context;
+
+    private $_ClientId='AQ10YGdwkquqM6DpBspIeagRqOOeGPh4Dz19832jqdbr55laVUJPxXu2BBH6M7Ay2zNbhS6L2m9GhFaj';
+    private $_ClientSecret='EKwZnR0aoVXcgl4SkZgaDZeE2tctC6E0na4fEQmmcuFhyZi1l3kaS5NXQXc_IChCIePUVfgiRTPOdIgr';
+    private $campaign;
     public function __construct(Campaign $campaign)
     {
         parent::__construct();
         $this->campaign = $campaign;
+        // setup PayPal api context
+        $this->_api_context = Paypalpayment::apiContext($this->_ClientId, $this->_ClientSecret);
+        $this->_api_context->setConfig(array(
+            'mode' => 'sandbox',
+            'http.ConnectionTimeOut' => 30,
+            'log.LogEnabled' => true,
+            'log.FileName' => __DIR__.'/../PayPal.log',
+            'log.LogLevel' => 'FINE'
+        ));
     }
 
     public function findCampaignsByCurrentNGO()
@@ -91,9 +105,10 @@ class NgoCampaignController extends BaseController
             return Redirect::to('ngo/campaign/create')->withInput(Input::all())->withErrors($validator);
         }
     }
-    public function postCreate()
+
+    public function postCreateEmailPayment()
     {
-        $title = Lang::get('ngo/credits/table.title');
+
         // Declare the rules for the form validation
         $rules = array(
             'numberEmail' => 'required|integer|min:0|max:'.Volunteer::count(),
@@ -111,16 +126,16 @@ class NgoCampaignController extends BaseController
             // A resource representing a Payer that funds a payment
             // Use the List of `FundingInstrument` and the Payment Method
             // as 'credit_card'
-            $credits = Input::get("credits");
+            $numberEmail = Input::get("numberEmail");
             $payer = Paypalpayment::payer();
             $payer->setPaymentMethod("paypal");
 
             $item1 = Paypalpayment::item();
-            $item1->setName('Credits Piece by Peace')
-                ->setDescription('Credits for campaigns')
+            $item1->setName('Email Marketing Piece by Peace')
+                ->setDescription('Email marketing for volunteer')
                 ->setCurrency('EUR')
-                ->setQuantity($credits)
-                ->setPrice(0.01);
+                ->setQuantity($numberEmail)
+                ->setPrice(0.03);
 
 
             $itemList = Paypalpayment::itemList();
@@ -129,15 +144,15 @@ class NgoCampaignController extends BaseController
 
             $details = Paypalpayment::details();
             $details->setShipping("0")
-                ->setTax(''.$credits * 0.01 * 0.21)
+                ->setTax(''.$numberEmail * 0.03 * 0.21)
                 //total of items prices
-                ->setSubtotal(''.$credits * 0.01);
+                ->setSubtotal(''.$numberEmail * 0.03);
 
             //Payment Amount
             $amount = Paypalpayment::amount();
             $amount->setCurrency("EUR")
                 // the total is $17.8 = (16 + 0.6) * 1 ( of quantity) + 1.2 ( of Shipping).
-                ->setTotal(($credits * 0.01 * 0.21) + ($credits * 0.01))
+                ->setTotal(($numberEmail * 0.03 * 0.21) + ($numberEmail * 0.01))
                 ->setDetails($details);
 
             // ### Transaction
@@ -154,8 +169,8 @@ class NgoCampaignController extends BaseController
 
 
             $redirectUrls = Paypalpayment::redirectUrls();
-            $redirectUrls->setReturnUrl(URL::to('ngo/executePayment'))
-                ->setCancelUrl(URL::to('ngo/executePayment'));
+            $redirectUrls->setReturnUrl(URL::to('ngo/sendEmails'))
+                ->setCancelUrl(URL::to('ngo/sendEmails'));
 
             // ### Payment
             // A Payment Resource; create one using
@@ -189,91 +204,123 @@ class NgoCampaignController extends BaseController
 
             // add payment ID to session
             Session::put('paypal_payment_id', $payment->getId());
-            Session::put('credits',$credits);
+            Session::put('numberEmail',$numberEmail);
+            Session::put('idCampaing',Input::get( 'idCampaing' ));
             if(isset($redirect_url)) {
                 // redirect to paypal
                 return Redirect::away($redirect_url);
             }
 
-            return View::make('site/ngo/credits', compact('title'))->with('error', 'Unknown error occurred');
+            return View::make('site/ngo/emails')->with('error', 'Unknown error occurred');
         }
         else {
-            View::make('site/ngo/credits', compact('title'))->withInput(Input::all())->withErrors($validator);
+            View::make('site/ngo/emails')->withInput(Input::all())->withErrors($validator);
         }
 
     }
 
     public function sendEmails()
     {
-        $curl = curl_init('http://10code.ip-zone.com//ccm/admin/api/version/2/&type=json');
+        // Get the payment ID before session clear
+        $payment_id = Session::get('paypal_payment_id');
 
-        $postData = array(
-            'function' => 'doAuthentication',
-            'username' => '10code',
-            'password' => 'eef6bd5d',
-        );
+        // clear the session payment ID
+        Session::forget('paypal_payment_id');
 
-        curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($postData));
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-
-        $json = curl_exec($curl);
-        $result = json_decode($json);
-
-        if ($result->status == 0) {
+        if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
             return Redirect::action('BlogController@getIndex')
-                ->with('error', 'Authentication failure');
+                ->with('error', 'Payment failed');
         }
 
-        $camp = Campaign::find(Input::get( 'idCampaing' ));
-        $numberEmail = Input::get('numberEmail');
-        $arrayAux = array();
-        foreach(Volunteer::all() as $aux){
-            $arrayAux[]=$aux;
-        }
-        $volunteers = array_rand($arrayAux,2);
-        $cont= 0;
-        $rcpt = array();
-        foreach($volunteers as $volunteer){
-              $rcpt[] = array(
+        $payment = Paypalpayment::getById($payment_id, $this->_api_context);
+
+        // PaymentExecution object includes information necessary
+        // to execute a PayPal account payment.
+        // The payer_id is added to the request query parameters
+        // when the user is redirected from paypal back to your site
+        $execution = Paypalpayment::PaymentExecution();
+        $execution->setPayerId(Input::get('PayerID'));
+
+        //Execute the payment
+        $result = $payment->execute($execution, $this->_api_context);
+
+        //echo '<pre>';print_r($result);echo '</pre>';exit; // DEBUG RESULT, remove it later
+
+        if ($result->getState() == 'approved') { // payment made
+
+
+            $curl = curl_init('http://10code.ip-zone.com//ccm/admin/api/version/2/&type=json');
+
+            $postData = array(
+                'function' => 'doAuthentication',
+                'username' => '10code',
+                'password' => 'eef6bd5d',
+            );
+
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($postData));
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+
+            $json = curl_exec($curl);
+            $result = json_decode($json);
+
+            if ($result->status == 0) {
+                return Redirect::action('NgoCampaignController@createEmails')
+                    ->with('error', 'Authentication failure');
+            }
+
+            $camp = Campaign::find(Session::get( 'idCampaing' ));
+            $numberEmail = Session::get('numberEmail');
+            $arrayAux = array();
+            foreach(Volunteer::all() as $aux){
+                $arrayAux[]=$aux;
+            }
+            $volunteers = array_rand($arrayAux,$numberEmail);
+            $rcpt = array();
+            foreach($volunteers as $volunteer){
+                $rcpt[] = array(
                     'name' => $arrayAux[$volunteer]->name,
                     'email' => $arrayAux[$volunteer]->userAccount->email
                 );
 
+            }
+            $rcpt[] = array(
+                'name' => 'Prueba',
+                'email' => 'jose1561991@gmail.com'
+            );
+
+            $postData = array(
+                'function' => 'sendMail',
+                'apiKey' => $result->data,
+                'subject' => $camp->ngo->name,
+                'html' => '<html><head><title>'.$camp->name.'</title></head><body><h1>'.$camp->name.'</h1>'.$camp->description.' <br> </p> <a herf='.$camp->link.' >Go to link</a></body></html>',
+                'mailboxFromId' => 1,
+                'mailboxReplyId' => 1,
+                'mailboxReportId' => 1,
+                'packageId' => 6,
+                'emails' => $rcpt
+            );
+
+            $post = http_build_query($postData);
+
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $post);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+
+            $json = curl_exec($curl);
+            $result = json_decode($json);
+
+            if ($result->status == 0) {
+                return Redirect::action('NgoCampaignController@findCampaignsByCurrentNGO')->with('error', 'Sending failure');
+            }
+            else {
+                return Redirect::action('NgoCampaignController@findCampaignsByCurrentNGO')
+                    ->with('success', 'Email sent successfully');
+            }
+
         }
-        $rcpt[] = array(
-            'name' => 'Prueba',
-            'email' => 'jose1561991@gmail.com'
-        );
+        return Redirect::action('NgoCampaignController@findCampaignsByCurrentNGO')->with('error', 'Payment failed');
 
-        $postData = array(
-            'function' => 'sendMail',
-            'apiKey' => $result->data,
-            'subject' => $camp->ngo->name,
-            'html' => '<html><head><title>'.$camp->name.'</title></head><body><h1>'.$camp->name.'</h1>'.$camp->description.' <br> </p> <a herf='.$camp->link.' >Go to link</a></body></html>',
-            'mailboxFromId' => 1,
-            'mailboxReplyId' => 1,
-            'mailboxReportId' => 1,
-            'packageId' => 6,
-            'emails' => $rcpt
-        );
-
-        $post = http_build_query($postData);
-
-        curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $post);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-
-        $json = curl_exec($curl);
-        $result = json_decode($json);
-
-        if ($result->status == 0) {
-            return Redirect::action('NgoCampaignController@findCampaignsByCurrentNGO')->with('error', 'Sending failure');
-        }
-        else {
-            return Redirect::action('NgoCampaignController@findCampaignsByCurrentNGO')
-                ->with('success', 'Email sent successfully');
-        }
     }
 
     public function createEmails($campaign)

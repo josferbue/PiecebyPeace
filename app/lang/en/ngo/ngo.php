@@ -18,7 +18,7 @@ return array(
     'back'               					=> 'Cancel',
     'campaign'                              => 'Campaign',
     'numberEmailsTitle'                     => 'Number of email to send',
-    'numberEmails'                          => '1 cent per email, max :max emails',
+    'numberEmails'                          => '3 cent per email, max :max emails',
     'send'                                  => 'Send',
     'sendEmail'                             => 'Send Marketing emails',
     'oldPassword'                           => 'Current password',

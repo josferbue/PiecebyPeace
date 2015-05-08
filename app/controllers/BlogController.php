@@ -36,8 +36,8 @@ class BlogController extends BaseController {
 	{
 		// Get all the blog posts
 		$posts = $this->post->orderBy('created_at', 'DESC')->paginate(10);
-		$ngos = Ngo::all();
-		$companies = Company::all();
+		$ngos = Ngo::where('active','=',1)->get();
+		$companies = Company::where('active','=',1)->get();
 
 		$data = array(
 			'ngos'		=> $ngos,
