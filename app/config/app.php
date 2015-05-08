@@ -107,8 +107,9 @@ return array(
         'Illuminate\Validation\ValidationServiceProvider',
         'Illuminate\View\ViewServiceProvider',
         'Illuminate\Workbench\WorkbenchServiceProvider',
-		
-        /* Additional Providers */
+		'Laracasts\Utilities\UtilitiesServiceProvider',
+
+		/* Additional Providers */
         'Zizaco\Confide\ConfideServiceProvider', // Confide Provider
         'Zizaco\Entrust\EntrustServiceProvider', // Entrust Provider for roles
         'Bllim\Datatables\DatatablesServiceProvider', // Datatables
@@ -192,8 +193,10 @@ return array(
         'Carbon'          => 'Carbon\Carbon', // Carbon
         'Datatables'      => 'Bllim\Datatables\Datatables', // DataTables
 		'Paypalpayment'   => 'Anouar\Paypalpayment\Facades\PaypalPayment',
+		'Javascript'  	  => 'Laracasts\Utilities\JavaScript\Facades\JavaScript',
 
-    ),
+
+	),
 
     'available_language' => array('en', 'pt', 'es'),
 

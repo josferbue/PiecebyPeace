@@ -37,7 +37,10 @@ class AdminDashboardController extends AdminController {
 		}
 		$project = Project::whereNotNull('ngo_id')->count();
 		$csr = Project::whereNotNull('company_id')->count();
-		$pieChart = array(array(Lang::get('admin/charts.lineNGO'), NGO::count()) , array(Lang::get('admin/charts.lineVolunteer'),Volunteer::count()),array(Lang::get('admin/charts.lineCompany'),Company::count()));
+		$ngoCount=Ngo::count();
+		$companyCount=Company::count();
+
+		$pieChart = array(array(Lang::get('admin/charts.lineNGO'),$ngoCount ) , array(Lang::get('admin/charts.lineVolunteer'),Volunteer::count()),array(Lang::get('admin/charts.lineCompany'),$companyCount));
 		$donutChart = array(array(Lang::get('admin/charts.pieProyects'), Project::whereNotNull('ngo_id')->count()) , array(Lang::get('admin/charts.pieCsr'),Project::whereNotNull('company_id')->count()));
 		JavaScript::put([
 			'lineDataSet1' => $ngoDataSet,
