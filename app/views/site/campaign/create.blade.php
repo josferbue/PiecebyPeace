@@ -8,7 +8,9 @@
 
 {{-- Content --}}
 @section('content')
-<div class="page-header">
+    <LINK href="{{URL::to('template/bootstrap/css/uploadFile.css')}}" rel="stylesheet" type="text/css">
+
+    <div class="page-header">
 	<h1>{{{ Lang::get('campaign/campaign.create') }}}</h1>
 </div>
 
@@ -28,10 +30,16 @@
 					<textarea class="form-control" placeholder="{{{ Lang::get('campaign/campaign.description') }}}" rows="11" name="description" id="description">{{{ Input::old('description') }}}</textarea>
 					{{ $errors->first('description', '<span class="help-block">:message</span>') }}
 				</div>
+
+
+
 				<div class="form-group  {{{ $errors->has('image') ? 'error' : '' }}}">
 					<label class="control-label" for="image">{{{ Lang::get('campaign/campaign.image') }}}</label>
-					<input class="form-control" type="file" name="image" id="image">
-					{{ $errors->first('image', '<span class="help-block">:message</span>') }}
+
+					<div class="btn btn-default btn-file">
+						{{{ Lang::get('site.uploadFile') }}} <input type="file" name="image" id="image">
+					</div>
+                    {{ $errors->first('image', '<span class="help-block">:message</span>') }}
 				</div>
 			</div>
 		</div>

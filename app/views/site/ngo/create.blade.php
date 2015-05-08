@@ -14,6 +14,7 @@
 
 {{-- Content --}}
 @section('content')
+    <LINK href="{{URL::to('template/bootstrap/css/uploadFile.css')}}" rel="stylesheet" type="text/css">
     <div class="page-header">
         @if(!isset($isEdit))
 
@@ -90,13 +91,7 @@
                                id="name" value="{{{ Input::old('name', isset($ngo) ? $ngo->name : null) }}}">
                         {{ $errors->first('name', '<span class="help-block">:message</span>') }}
                     </div>
-                    <div class="form-group  {{{ $errors->has('description') ? 'error' : '' }}}">
-                        <label for="description">{{{ Lang::get('ngo/ngo.description') }}}</label>
-                        <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.description') }}}" type="text"
-                               name="description" id="description"
-                               value="{{{ Input::old('description', isset($ngo) ? $ngo->description : null) }}}">
-                        {{ $errors->first('description', '<span class="help-block">:message</span>') }}
-                    </div>
+
                     <div class="form-group  {{{ $errors->has('phone') ? 'error' : '' }}}">
                         <label for="phone">{{{ Lang::get('ngo/ngo.phone') }}}</label>
                         <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.phone') }}}" type="text"
@@ -106,12 +101,26 @@
                     </div>
                     <div class="form-group  {{{ $errors->has('logo') ? 'error' : '' }}}">
                         <label for="logo">{{{ Lang::get('ngo/ngo.logo') }}}</label>
-                        <input class="form-control" type="file" name="logo" id="logo">
+
+                        <div class="btn btn-default btn-file">
+                            {{{ Lang::get('site.uploadFile') }}} <input type="file" name="logo" id="logo">
+                        </div>
                         {{ $errors->first('logo', '<span class="help-block">:message</span>') }}
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="span6">
+                    <div class="form-group  {{{ $errors->has('description') ? 'error' : '' }}}">
+                        <label for="description">{{{ Lang::get('ngo/ngo.description') }}}</label>
+                        <textarea class="field span6" placeholder="{{{ Lang::get('ngo/ngo.description') }}}"
+                                  rows="9" name="description" id="description"
+                                >{{{ Input::old('description', isset($ngo) ? $ngo->description : null) }}}</textarea>
+                        {{ $errors->first('description', '<span class="help-block">:message</span>') }}
                     </div>
                 </div>
             </div>
-
             @if ( Session::get('error') )
                 <div class="alert alert-error alert-danger">
                     @if ( is_array(Session::get('error')) )

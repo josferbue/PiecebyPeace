@@ -15,6 +15,8 @@
 
 {{-- Content --}}
 @section('content')
+    <LINK href="{{URL::to('template/bootstrap/css/uploadFile.css')}}" rel="stylesheet" type="text/css">
+
     <div class="page-header">
         @if(!isset($isEdit))
 
@@ -107,7 +109,10 @@
                     </div>
                     <div class="form-group  {{{ $errors->has('logo') ? 'error' : '' }}}">
                         <label for="logo">{{{ Lang::get('company/company.logo') }}}</label>
-                        <input class="form-control" type="file" name="logo" id="logo">
+
+                        <div class="btn btn-default btn-file">
+                            {{{ Lang::get('site.uploadFile') }}} <input type="file" name="logo" id="logo">
+                        </div>
                         {{ $errors->first('logo', '<span class="help-block">:message</span>') }}
                     </div>
                 </div>
