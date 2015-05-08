@@ -46,7 +46,7 @@
             @if (Auth::check() && Auth::user()->hasRole('NonGovernmentalOrganization') && $campaign->ngo == Auth::user()->actor())
             <div class="span3">
                 {{--<div class="thumbnail">--}}
-                <a href="{{{ URL::to('ngo/createEmails/'.$campaign->id) }}}">{{{ Lang::get('ngo/ngo.sendEmail') }}}</a>
+                <input type="button" class="btn btn-info" onclick="window.location.href='{{{ URL::to('ngo/createEmails/'.$campaign->id) }}}'" value="{{{ Lang::get('ngo/ngo.sendEmail') }}}" />
 
                 {{--</div>--}}
             </div>

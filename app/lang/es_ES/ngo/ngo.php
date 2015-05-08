@@ -26,7 +26,8 @@ return array(
     'save'                                  => 'Guardar',
     'update'                                => 'Actualizar',
 
-
+    'termsMessage'                          => 'He leído y acepto los términos y condiciones de uso de Piece by Peace',
+    'termsNotAccepted'                      => 'Debe leer y aceptar los términos y condiciones de uso de Piece by Peace',
 
 
 );

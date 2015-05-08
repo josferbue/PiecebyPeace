@@ -26,6 +26,7 @@
             </label>
             <div class="col-md-10">
                 <input class="form-control" tabindex="2" placeholder="{{ Lang::get('confide::confide.password') }}" type="password" name="password" id="password">
+                <a href="forgot">{{ Lang::get('user/user.forgot_password') }}</a>
             </div>
         </div>
 
@@ -51,7 +52,6 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <button tabindex="3" type="submit" class="btn btn-primary">{{ Lang::get('confide::confide.login.submit') }}</button>
-                <a class="btn btn-default" href="forgot">{{ Lang::get('confide::confide.login.forgot_password') }}</a>
             </div>
         </div>
     </fieldset>

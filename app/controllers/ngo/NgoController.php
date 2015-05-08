@@ -99,7 +99,11 @@ class NgoController extends BaseController
         if ($validator->passes()) {
 
             // Save if valid. Password field will be hashed before save
-
+            if(!Input::get('terms')) {
+                return Redirect::to('userNgo/create')
+                    ->withInput(Input::except('password','password_confirmation'))
+                    ->with('error', Lang::get('ngo/ngo.termsNotAccepted'));
+            }
 
             $this->user->save();
             if ($this->user->id) {

@@ -33,11 +33,20 @@ class CampaignController extends BaseController
             'backUrl'   => $backUrl,
         );
 
-        if(Carbon::now() > $campaign->expirationDate && Auth::user()->actor() != $ngo) {
-            Return Redirect::to($backUrl)->with('error', 'campaign/campaign.campaignNoLongerAvailable');
+        if(Auth::user()) {
+            if(Carbon::now() > $campaign->expirationDate && Auth::user()->actor() != $ngo) {
+                Return Redirect::to($backUrl)->with('error', 'campaign/campaign.campaignNoLongerAvailable');
+            } else {
+                Return View::make('site/campaign/details', $data);
+            }
         } else {
-            Return View::make('site/campaign/details', $data);
+            if(Carbon::now() > $campaign->expirationDate) {
+                Return Redirect::to($backUrl)->with('error', 'campaign/campaign.campaignNoLongerAvailable');
+            } else {
+                Return View::make('site/campaign/details', $data);
+            }
         }
+
     }
 
     public function payToClick($id) {

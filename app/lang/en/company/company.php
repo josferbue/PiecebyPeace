@@ -27,4 +27,7 @@ return array(
     'save'                                      => 'Save',
     'update'                                    => 'Update',
 
+    'termsMessage'                              => 'I have read and accept the Terms and Conditions of Piece by Peace',
+    'termsNotAccepted'                          => 'You must read and accept the Terms and Conditions of Piece by Peace',
+
 );

@@ -93,6 +93,12 @@ class VolunteerController extends BaseController {
 
         // Save if valid. Password field will be hashed before save
 
+            if(!Input::get('terms')) {
+                return Redirect::to('userVolunteer/create')
+                    ->withInput(Input::except('password','password_confirmation'))
+                    ->with('error', Lang::get('volunteer/volunteer.termsNotAccepted'));
+            }
+
             $this->user->save();
             if ( $this->user->id )
             {

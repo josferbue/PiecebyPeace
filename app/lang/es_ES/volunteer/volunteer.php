@@ -29,5 +29,8 @@ return array(
     'back'                                      => 'Cancelar',
     'delete'                                    => 'Eliminar cuenta',
 
+    'termsMessage'                              => 'He leído y acepto los términos y condiciones de uso de Piece by Peace',
+    'termsNotAccepted'                          => 'Debe leer y aceptar los términos y condiciones de uso de Piece by Peace',
+
 
 );
