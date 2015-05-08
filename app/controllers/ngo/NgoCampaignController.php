@@ -7,6 +7,7 @@ class NgoCampaignController extends BaseController
     private $_ClientId='AQ10YGdwkquqM6DpBspIeagRqOOeGPh4Dz19832jqdbr55laVUJPxXu2BBH6M7Ay2zNbhS6L2m9GhFaj';
     private $_ClientSecret='EKwZnR0aoVXcgl4SkZgaDZeE2tctC6E0na4fEQmmcuFhyZi1l3kaS5NXQXc_IChCIePUVfgiRTPOdIgr';
     private $campaign;
+
     public function __construct(Campaign $campaign)
     {
         parent::__construct();
@@ -111,7 +112,7 @@ class NgoCampaignController extends BaseController
 
         // Declare the rules for the form validation
         $rules = array(
-            'numberEmail' => 'required|integer|min:0|max:'.Volunteer::count(),
+            'numberEmails' => 'required|integer|between:1,'.Volunteer::count(),
         );
 
         // Validate the inputs
@@ -126,7 +127,7 @@ class NgoCampaignController extends BaseController
             // A resource representing a Payer that funds a payment
             // Use the List of `FundingInstrument` and the Payment Method
             // as 'credit_card'
-            $numberEmail = Input::get("numberEmail");
+            $numberEmail = Input::get("numberEmails");
             $payer = Paypalpayment::payer();
             $payer->setPaymentMethod("paypal");
 
@@ -152,7 +153,7 @@ class NgoCampaignController extends BaseController
             $amount = Paypalpayment::amount();
             $amount->setCurrency("EUR")
                 // the total is $17.8 = (16 + 0.6) * 1 ( of quantity) + 1.2 ( of Shipping).
-                ->setTotal(($numberEmail * 0.03 * 0.21) + ($numberEmail * 0.01))
+                ->setTotal(($numberEmail * 0.03 * 0.21) + ($numberEmail * 0.03))
                 ->setDetails($details);
 
             // ### Transaction
@@ -211,10 +212,10 @@ class NgoCampaignController extends BaseController
                 return Redirect::away($redirect_url);
             }
 
-            return View::make('site/ngo/emails')->with('error', 'Unknown error occurred');
+            return View::make('site/ngo/emails')->with('campaignId',Input::get( 'idCampaing' ))->with('campaignName',Input::get( 'campaing' ))->with('error', 'Unknown error occurred');
         }
         else {
-            View::make('site/ngo/emails')->withInput(Input::all())->withErrors($validator);
+            return View::make('site/ngo/emails')->with('campaignId',Input::get( 'idCampaing' ))->with('campaignName',Input::get( 'campaing' ))->withInput(Input::all())->withErrors($validator);
         }
 
     }
@@ -284,10 +285,10 @@ class NgoCampaignController extends BaseController
                 );
 
             }
-            $rcpt[] = array(
+            /*$rcpt[] = array(
                 'name' => 'Prueba',
                 'email' => 'jose1561991@gmail.com'
-            );
+            );*/
 
             $postData = array(
                 'function' => 'sendMail',
