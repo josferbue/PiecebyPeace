@@ -8,9 +8,13 @@
 
 {{-- Content --}}
 @section('content')
+    <LINK href="{{URL::to('template/bootstrap/css/faq.css')}}" rel="stylesheet" type="text/css">
+
     <div class="page-header">
         <h1> {{{ Lang::get('about.title') }}}</h1>
     </div>
+
+    <div class="faq">
 
     <div class="span6">
         <br/>
@@ -28,7 +32,8 @@
     </div>
 
     <div class="span5">
-        <img src="../template/images/header.png"
+        <img src="{{{URL::to('template/images/header.png')}}}"
+    </div>
     </div>
 @stop
 

@@ -292,7 +292,7 @@
 
                     <h3>{{{ Lang::get('site.activity') }}}</h3>
 
-                    @foreach (Project::orderBy("updated_at","asc")->take(5)->get() as $act)
+                    @foreach (Project::orderBy("updated_at","asc")->take(3)->get() as $act)
                     <p>
                         {{ HTML::link('/project/view/'.$act->id , $act->name) }}<br/>
                         <span style="text-transform:none;">{{$act->interval_date()}}</span>
