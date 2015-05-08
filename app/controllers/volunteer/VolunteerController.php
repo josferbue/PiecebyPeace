@@ -43,11 +43,14 @@ class VolunteerController extends BaseController {
     {
 
         $rules = array(
-            'name'    => 'required|min:3',
-            'surname' => 'required|min:3',
-            'city'    => 'required|min:3',
-            'zipCode' => 'required|min:3',
-            'country' => 'required|min:3'
+            'username'      => 'required|min:5|max:32|unique:users,username',
+            'password'      => 'required|min:5|max:32',
+            'email'    => 'required|email',
+            'name'     => 'required|min:3',
+            'surname'  => 'required|min:3',
+            'city'     => 'required|min:3',
+            'zipCode'  => 'required|min:3',
+            'country'  => 'required|min:3'
         );
 
         // Validate the inputs
