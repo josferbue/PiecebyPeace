@@ -24,5 +24,8 @@ return array(
     'lineVolunteer'			=> 'Volunteer',
     'lineCompany'			=> 'Company',
     'pieTitle'	            => 'Total users in piece by peace',
+    'pieProyects'	        => 'Proyects',
+    'pieCsr'	            => 'Csr',
+
 
 );

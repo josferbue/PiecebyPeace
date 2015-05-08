@@ -24,5 +24,7 @@ return array(
     'lineVolunteer'			=> 'Voluntarios',
     'lineCompany'			=> 'Empresa',
     'pieTitle'	            => 'Total de usuarios piece by peace',
+    'pieProyects'	        => 'Projectos',
+    'pieCsr'	            => 'Rsc',
 
 );

@@ -17,9 +17,11 @@
     </div>
     <div id="linechart" style="width:100%; height:20em;"></div>
 
-    <div id="piechart" style="width:100%; height:22em;"></div>
-    <div id="donut" style="width:100%; height:22em;"></div>
-
+    <hr style="margin:45px 0 35px" />
+    <div class="row">
+        <div class="span6" id="piechart" style="height:22em;"></div>
+        <div class="span6" id="donut" style="height:22em;"></div>
+    </div>
 @stop
 
 @section('js')
@@ -129,17 +131,7 @@
                 },
                 series: [{
                     name: 'Delivered amount',
-                    data: [
-                        ['Bananas', 8],
-                        ['Kiwi', 3],
-                        ['Mixed nuts', 1],
-                        ['Oranges', 6],
-                        ['Apples', 8],
-                        ['Pears', 4],
-                        ['Clementines', 4],
-                        ['Reddish (bag)', 1],
-                        ['Grapes (bunch)', 1]
-                    ]
+                    data: Laracasts.donutDataSet
                 }]
             });
         });
