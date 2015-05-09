@@ -35,12 +35,12 @@ class CampaignController extends BaseController
 
         if (Carbon::now() > $campaign->expirationDate || $campaign->visits >= $campaign->maxVisits) {
             if (Auth::user() && Auth::user()->hasRole('NonGovernmentalOrganization')) {
-                $ngo = Ngo::where('user_id', '=', Auth::id());
+                $ngo = Auth::user()->actor();
                 if ($campaign->ngo_id == $ngo->id) {
                     Return View::make('site/campaign/details', $data);
                 }
             }
-            Return Redirect::to($backUrl)->with('error', 'campaign/campaign.campaignNoLongerAvailable');
+            Return Redirect::to($backUrl)->with('error', Lang::get('campaign/campaign.campaignNoLongerAvailable'));
 
         } else {
 

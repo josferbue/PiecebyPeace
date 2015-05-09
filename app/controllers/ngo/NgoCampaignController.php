@@ -135,7 +135,7 @@ class NgoCampaignController extends BaseController
 
             $this->campaign->save();
 
-            return Redirect::to('ngo/myCampaigns')->with('success', Lang::get('campaign/campaign.creationSuccessful'));
+            return Redirect::to('ngo/myActiveCampaigns')->with('success', Lang::get('campaign/campaign.creationSuccessful'));
         }
         else
         {
