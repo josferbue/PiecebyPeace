@@ -41,12 +41,12 @@
                 <br>
                 @if (Auth::user()->hasRole('NonGovernmentalOrganization'))
                 <input type="button" class="btn btn-primary"
-                    onclick="window.location.href='{{ URL::to('ngo/application/view/'.$application->id) }}'"
+                    onclick="window.location.href='{{ URL::to('ngo/applicationsInProject/view/'.$application->project->id.'/pending') }}'"
                        value="{{ Lang::get('application/list.view') }}">
 
                 @elseif(Auth::user()->hasRole('COMPANY'))
                     <input type="button" class="btn btn-primary"
-                           onclick="window.location.href='{{ URL::to('company/application/view/'.$application->id) }}'"
+                           onclick="window.location.href='{{ URL::to('company/applicationsInProject/view/'.$application->project->id) }}'"
                            value="{{ Lang::get('application/list.view') }}">
                 @endif
                 <hr/>

@@ -15,7 +15,8 @@ return array(
 
 	'campaigns' 			=> 'Campañas',
 	'allActiveCampaigns' 	=> 'Mostrar campañas activas',
-	'myCampaigns'			=> 'Mostrar mis campañas',
+	'myActiveCampaigns'		=> 'Mostrar mis campañas activas',
+	'myExpiredCampaigns'	=> 'Mostrar mis campañas terminadas',
 
 	'title'					=> 'Campañas',
 	'name'					=> 'Nombre',

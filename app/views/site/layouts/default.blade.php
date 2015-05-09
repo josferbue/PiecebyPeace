@@ -152,7 +152,10 @@
                                             </li>
                                             @if (Auth::check() && Auth::user()->hasRole('NonGovernmentalOrganization'))
                                                 <li class="dropdown"><a
-                                                            href="{{{ URL::to('ngo/myCampaigns') }}}">{{{ Lang::get('campaign/campaign.myCampaigns') }}}</a>
+                                                            href="{{{ URL::to('ngo/myActiveCampaigns') }}}">{{{ Lang::get('campaign/campaign.myActiveCampaigns') }}}</a>
+                                                </li>
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('ngo/myExpiredCampaigns') }}}">{{{ Lang::get('campaign/campaign.myExpiredCampaigns') }}}</a>
                                                 </li>
                                                 <li class="dropdown"><a
                                                             href="{{{ URL::to('ngo/campaign/create') }}}">{{{ Lang::get('campaign/campaign.create') }}}</a>

@@ -19,6 +19,13 @@
                 <h3> {{{ Lang::get('campaign/campaign.notFound') }}}</h3>
             </div>
         </div>
+    @elseif($campaigns->getTotal()==0)
+        <div class="row">
+            <div class="span3">
+                <h3> {{{ Lang::get('campaign/campaign.notFound') }}}</h3>
+            </div>
+        </div>
+
     @endif
 
     @foreach ($campaigns as $campaign)
@@ -27,8 +34,9 @@
 
             <div class="span3">
                 {{--<div class="thumbnail">--}}
-                <a href="{{{ URL::to('campaign/details/'.$campaign->id) }}}"><img src="{{ URL::to($campaign->image)}}" class="img-rounded"
-                     alt="{{{ Lang::get('campaign/campaign.notImage') }}}"/></a>
+                <a href="{{{ URL::to('campaign/details/'.$campaign->id) }}}"><img src="{{ URL::to($campaign->image)}}"
+                                                                                  class="img-rounded"
+                                                                                  alt="{{{ Lang::get('campaign/campaign.notImage') }}}"/></a>
 
                 {{--</div>--}}
             </div>
@@ -44,12 +52,14 @@
 
             </div>
             @if (Auth::check() && Auth::user()->hasRole('NonGovernmentalOrganization') && $campaign->ngo == Auth::user()->actor())
-            <div class="span3">
-                {{--<div class="thumbnail">--}}
-                <input type="button" class="btn btn-info" onclick="window.location.href='{{{ URL::to('ngo/createEmails/'.$campaign->id) }}}'" value="{{{ Lang::get('ngo/ngo.sendEmail') }}}" />
+                <div class="span3">
+                    {{--<div class="thumbnail">--}}
+                    <input type="button" class="btn btn-info"
+                           onclick="window.location.href='{{{ URL::to('ngo/createEmails/'.$campaign->id) }}}'"
+                           value="{{{ Lang::get('ngo/ngo.sendEmail') }}}"/>
 
-                {{--</div>--}}
-            </div>
+                    {{--</div>--}}
+                </div>
             @endif
         </div>
 
@@ -58,9 +68,12 @@
     @endforeach
 
     <div class="pagination">
-        <input type="button" class="btn btn-primary" onclick="window.location.href='{{ URL::to('/') }}'" value="{{ Lang::get('campaign/campaign.back') }}">
+        <input type="button" class="btn btn-primary" onclick="window.location.href='{{ URL::to('/') }}'"
+               value="{{ Lang::get('campaign/campaign.back') }}">
         @if(Auth::check() && Auth::user()->hasRole('NonGovernmentalOrganization'))
-            <input type="button" class="btn btn-default" onclick="window.location.href='{{{ URL::to('ngo/campaign/create') }}}'" value="{{{ Lang::get('campaign/campaign.create') }}}">
+            <input type="button" class="btn btn-default"
+                   onclick="window.location.href='{{{ URL::to('ngo/campaign/create') }}}'"
+                   value="{{{ Lang::get('campaign/campaign.create') }}}">
         @endif
         <br>
 

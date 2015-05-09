@@ -7,6 +7,7 @@ class NgoCampaignController extends BaseController
     private $_ClientId='AQ10YGdwkquqM6DpBspIeagRqOOeGPh4Dz19832jqdbr55laVUJPxXu2BBH6M7Ay2zNbhS6L2m9GhFaj';
     private $_ClientSecret='EKwZnR0aoVXcgl4SkZgaDZeE2tctC6E0na4fEQmmcuFhyZi1l3kaS5NXQXc_IChCIePUVfgiRTPOdIgr';
     private $campaign;
+    protected $ngo;
 
     public function __construct(Campaign $campaign)
     {
@@ -23,13 +24,14 @@ class NgoCampaignController extends BaseController
         ));
     }
 
-    public function findCampaignsByCurrentNGO()
+    public function findActiveCampaignsByCurrentNGO()
     {
         if(Auth::check() && Auth::user()->hasRole('NonGovernmentalOrganization'))
         {
             $user = Auth::user();
             $ngo = Ngo::where('user_id','=',$user->id)->first();
-            $campaigns = Campaign::where('ngo_id','=',$ngo->id)->paginate(3);
+            $campaigns = Campaign::where('expirationDate', '>', Carbon::now())
+                ->whereRaw('visits < maxVisits')->where('ngo_id','=',$ngo->id)->paginate(3);
 
             $data = array(
                 'campaigns' => $campaigns,
@@ -43,6 +45,33 @@ class NgoCampaignController extends BaseController
         }
     }
 
+    public function findExpiredCampaignsByCurrentNGO()
+    {
+        if(Auth::check() && Auth::user()->hasRole('NonGovernmentalOrganization'))
+        {
+            $user = Auth::user();
+            $this->ngo = Ngo::where('user_id','=',$user->id)->first();
+
+            $campaigns = Campaign::where(function ($query) {
+                $query->where('ngo_id','=',$this->ngo->id)
+                    ->whereRaw('visits >= maxVisits');
+
+            })->orWhere(function ($query) {
+                $query->where('ngo_id','=',$this->ngo->id)
+                    ->where('expirationDate', '<=', Carbon::now());
+
+            })->paginate(3);
+            $data = array(
+                'campaigns' => $campaigns,
+            );
+
+            Return View::make('site/campaign/list')->with($data);
+        }
+        else
+        {
+            Return Redirect::to('/');
+        }
+    }
     public function createCampaign()
     {
         $backUrl=  Session::get('backUrl');

@@ -121,7 +121,8 @@ Route::group(array('prefix' => 'ngo', 'before' => 'auth'), function () {
     Route::get('/createEmails/{campaign}', 'NgoCampaignController@createEmails');
 
 
-    Route::get('/myCampaigns', 'NgoCampaignController@findCampaignsByCurrentNGO');
+    Route::get('/myActiveCampaigns', 'NgoCampaignController@findActiveCampaignsByCurrentNGO');
+    Route::get('/myExpiredCampaigns', 'NgoCampaignController@findExpiredCampaignsByCurrentNGO');
     Route::get('/campaign/create', 'NgoCampaignController@createCampaign');
     Route::post('/campaign/create', 'NgoCampaignController@saveCampaign');
     # Send messages
