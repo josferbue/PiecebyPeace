@@ -51,7 +51,7 @@
 					<div class="list_carousel responsive">
 						<ul id="list_photos1">
 							@foreach($ngos as $ngo)
-								<li><img src="{{{ URL::to($ngo->logo) }}}" class="img-polaroid" style="max-width: 12em">  </li>
+								<li><a href="{{ URL::to('nonGovernmentalOrganizations/details/'.$ngo->id) }}"><img src="{{{ URL::to($ngo->logo) }}}" class="img-polaroid" style="max-width: 12em"></a>  </li>
 							@endforeach
 
 								</ul>
@@ -67,7 +67,7 @@
 						<div class="list_carousel responsive">
 							<ul id="list_photos2">
 								@foreach($companies as $company)
-									<li><img src="{{{ URL::to($company->logo) }}}" class="img-polaroid" style="max-width: 12em ">  </li>
+									<li><a href="{{ URL::to('companies/details/'.$company->id) }}"><img src="{{{ URL::to($company->logo) }}}" class="img-polaroid" style="max-width: 12em "></a>  </li>
 								@endforeach
 							</ul>
 						</div>

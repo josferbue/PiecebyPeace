@@ -470,4 +470,21 @@ class NgoController extends BaseController
         }
         return $redirect;
     }
+
+    // Ngo details
+    public function details($id) {
+        $ngo = Ngo::find($id);
+
+        $data = array(
+            'ngo'     => $ngo,
+        );
+
+        if(!$ngo) {
+            Return Redirect::to('/')->with('error', Lang::get('ngo/ngo.notFound'));
+        } elseif(!$ngo->active) {
+            Return Redirect::to('/')->with('error', Lang::get('ngo/ngo.notActive'));
+        } else {
+            Return View::make('site/ngo/details')->with($data);
+        }
+    }
 }

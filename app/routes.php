@@ -202,6 +202,10 @@ Route::get('messages/inbox', 'MessageController@getInbox');
 Route::get('messages/sent', 'MessageController@getSent');
 Route::get('message/view/{id}', 'MessageController@view');
 
+# Company and NGO details
+Route::get('companies/details/{id}', 'CompanyController@details');
+Route::get('nonGovernmentalOrganizations/details/{id}', 'NgoController@details');
+
 //Volunteering projects controller
 Route::get('project/futureVolunteeringProjects', 'ProjectController@getFutureVolunteeringProjects');
 

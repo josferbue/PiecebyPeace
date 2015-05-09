@@ -478,4 +478,21 @@ class CompanyController extends BaseController {
         }
         return $redirect;
     }
+
+    // Company details
+    public function details($id) {
+        $company = Company::find($id);
+
+        $data = array(
+          'company'     => $company,
+        );
+
+        if(!$company) {
+            Return Redirect::to('/')->with('error', Lang::get('company/company.notFound'));
+        } elseif(!$company->active) {
+            Return Redirect::to('/')->with('error', Lang::get('company/company.notActive'));
+        } else {
+            Return View::make('site/company/details')->with($data);
+        }
+    }
 }

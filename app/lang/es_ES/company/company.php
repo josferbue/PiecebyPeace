@@ -26,9 +26,15 @@ return array(
     'newPassword'                               => 'Nueva contraseña',
     'save'                                      => 'Guardar',
     'update'                                    => 'Actualizar',
+    'details'                                   => 'Detalles de ',
+    'contactPhone'                              => 'Teléfono de contacto',
+    'sector'                                    => 'Sector',
 
     'termsMessage'                              => 'He leído y acepto los términos y condiciones de uso de Piece by Peace',
     'termsNotAccepted'                          => 'Debe leer y aceptar los términos y condiciones de uso de Piece by Peace',
+
+    'notFound'                                  => 'La empresa especificada no existe.',
+    'notActive'                                 => 'La empresa especificada no utiliza actualmente los servicios de Piece by Peace.',
 
 
 );
