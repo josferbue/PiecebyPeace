@@ -132,6 +132,7 @@ Route::group(array('prefix' => 'ngo', 'before' => 'auth'), function () {
     #application
     Route::get('/application/answered', 'NgoApplicationController@findOurAnsweredApplications');
     Route::get('/application/pending', 'NgoApplicationController@findOurPendingApplications');
+    Route::get('/application/listInProject/{idProject}/{state}', 'NgoApplicationController@listApplicationsInProject');
     Route::get('/application/view/{id}', 'NgoApplicationController@viewApplication');
     Route::get('/application/answer/{id}/{answer}', 'NgoApplicationController@answer');
 
@@ -161,6 +162,7 @@ Route::group(array('prefix' => 'company', 'before' => 'auth'), function () {
     #application
     Route::get('/application/answered', 'CompanyApplicationController@findOurAnsweredApplications');
     Route::get('/application/pending', 'CompanyApplicationController@findOurPendingApplications');
+    Route::get('/application/listInProject/{idProject}/{state}', 'CompanyApplicationController@listApplicationsInProject');
     Route::get('/application/view/{id}', 'CompanyApplicationController@viewApplication');
     Route::get('/application/answer/{id}/{answer}', 'CompanyApplicationController@answer');
 });

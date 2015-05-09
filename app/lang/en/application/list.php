@@ -22,6 +22,8 @@ return array(
 	'empty'							=> 'No applications were found for this project.',
 	'cancelApplication'				=> 'Cancel',
 	'view'							=> 'View',
+	'viewDetails'					=> 'View details',
+	'listInProject'					=> 'View applications',
 	'confirmDelete'					=> 'Are you sure you want to delete this application?',
 	'back'   				 		=> 'Back'
 

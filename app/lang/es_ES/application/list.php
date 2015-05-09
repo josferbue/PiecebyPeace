@@ -24,5 +24,7 @@ return array(
 	'back'   				 		=> 'Atrás',
 	'cancelApplication'				=> 'Cancelar',
 	'view'							=> 'Ver',
+	'viewDetails'					=> 'Ver detalles',
+	'listInProject'					=> 'Ver solicitudes',
 	'confirmDelete'					=> '¿Está seguro de que desea eliminar la solicitud?',
 );

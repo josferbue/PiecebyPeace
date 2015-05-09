@@ -99,6 +99,7 @@
 
                 @endif
 
+
             }
         }
         function ConfirmDenied() {
@@ -111,6 +112,7 @@
                 window.location.href = '{{ URL::to('ngo/application/answer/'.$application->id.'/1')  }}'
 
                 @endif
+
             }
         }
     </script>

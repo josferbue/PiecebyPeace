@@ -4,6 +4,7 @@ class NgoApplicationController extends BaseController
 {
 
     protected $ngo;
+    protected $project;
 
 
     public function __construct(Application $application)
@@ -14,10 +15,13 @@ class NgoApplicationController extends BaseController
 
     public function findOurAnsweredApplications()
     {
-        $title=Lang::get('application/list.titleAnswered');
-        $this->ngo=Ngo::where('user_id','=',Auth::id())->first();
+        $title = Lang::get('application/list.titleAnswered');
+        $this->ngo = Ngo::where('user_id', '=', Auth::id())->first();
 
-        $applications = Application::where('result','>',0)->whereHas('project', function ($q) {$q->where('ngo_id','=', $this->ngo->id);})
+        $applications = Application::where('result', '>', 0)->groupBy('project_id')
+            ->whereHas('project', function ($q) {
+                $q->where('ngo_id', '=', $this->ngo->id);
+            })
             ->paginate(4);
 
         $data = array(
@@ -29,17 +33,57 @@ class NgoApplicationController extends BaseController
 
     public function findOurPendingApplications()
     {
-        $title=Lang::get('application/list.titlePending');
-        $this->ngo=Ngo::where('user_id','=',Auth::id())->first();
+        $title = Lang::get('application/list.titlePending');
+        $this->ngo = Ngo::where('user_id', '=', Auth::id())->first();
 
-        $applications = Application::where('result','=',0)->whereHas('project', function ($q) {$q->where('ngo_id','=', $this->ngo->id);})
+        $applications = Application::where('result', '=', 0)->groupBy('project_id')
+            ->whereHas('project', function ($q) {
+                $q->where('ngo_id', '=', $this->ngo->id);
+            })
             ->paginate(4);
 
         $data = array(
             'applications' => $applications,
             'title' => $title,
+            'isPending' => true,
         );
         Return View::make('site/application/list')->with($data);
+    }
+
+    public function listApplicationsInProject($idProject, $pending)
+    {
+        $this->project = Project::where('id', '=', $idProject)->first();
+        $this->ngo = Ngo::where('user_id', '=', Auth::id())->first();
+
+        if ($pending == 'pending') {
+            $title = Lang::get('application/list.titlePending');
+            $backUrl = 'ngo/application/pending';
+
+            $applications = Application::where('result', '=', 0)
+                ->whereHas('project', function ($q) {
+                    $q->where('ngo_id', '=', $this->ngo->id)->where('id', '=', $this->project->id);
+                })
+                ->paginate(4);
+
+        } else {
+            $title = Lang::get('application/list.titleAnswered');
+
+            $backUrl = 'ngo/application/answered';
+
+            $applications = Application::where('result', '>', 0)
+                ->whereHas('project', function ($q) {
+                    $q->where('ngo_id', '=', $this->ngo->id)->where('id', '=', $this->project->id);
+                })
+                ->paginate(4);
+
+        }
+
+        $data = array(
+            'backUrl' => $backUrl,
+            'title' => $title,
+            'applications' => $applications,
+        );
+        Return View::make('site/application/listInProject')->with($data);
     }
 
     public function viewApplication($id)
@@ -47,11 +91,11 @@ class NgoApplicationController extends BaseController
         $application = Application::where('id', '=', $id)->first();
 
 
-        if ($application->result==0) {
-            $backUrl = 'ngo/application/pending';
+        if ($application->result == 0) {
+            $backUrl = 'ngo/application/listInProject/' . $application->project->id . '/pending';
 
         } else {
-            $backUrl = 'ngo/application/answered';
+            $backUrl = 'ngo/application/listInProject/' . $application->project->id . '/answered';
         }
 
         $data = array(
@@ -61,35 +105,36 @@ class NgoApplicationController extends BaseController
         Return View::make('site/application/view')->with($data);
     }
 
-    public function answer($id,$answer){
+    public function answer($id, $answer)
+    {
         $application = Application::where('id', '=', $id)->first();
-        $ngo=Ngo::where('user_id','=',Auth::id())->first();
-        $backUrl='ngo/application/view/'.$id;
+        $ngo = Ngo::where('user_id', '=', Auth::id())->first();
+        $backUrl = '/listInProject/'.$application->project_id.'/pending';
 
-        if($application->project->ngo_id!=$ngo->id){
+        if ($application->project->ngo_id != $ngo->id) {
             return Redirect::to($backUrl)->with('error', Lang::get('application/messages.answer.errorNotHisProject'));
         }
-        if($application->result!=0){
+        if ($application->result != 0) {
             return Redirect::to($backUrl)->with('error', Lang::get('application/messages.answer.errorAnsweredYet'));
         }
 
-        if($answer==1 || $answer==2){
+        if ($answer == 1 || $answer == 2) {
 
-            $application->result=$answer;
+            $application->result = $answer;
 
-        }else{
+        } else {
             return Redirect::to($backUrl)->with('error', Lang::get('application/messages.answer.errorRequest'));
         }
 
-        if($application->save()){
-            if($application->result==2){
+        if ($application->save()) {
+            if ($application->result == 2) {
 
-                $project=Project::where('id','=',$application->project_id)->first();
-                $volunteer=Volunteer::where('id','=',$application->volunteer_id)->first();
+                $project = Project::where('id', '=', $application->project_id)->first();
+                $volunteer = Volunteer::where('id', '=', $application->volunteer_id)->first();
 
                 $project->volunteers()->attach($volunteer);
             }
-            return Redirect::to('ngo/application/answered')->with('success', Lang::get('application/messages.answer.success'));
+            return Redirect::to('ngo/application/listInProject/'.$application->project_id.'/pending')->with('success', Lang::get('application/messages.answer.success'));
         }
 
         return Redirect::to($backUrl)->with('error', Lang::get('application/messages.answer.error'));

@@ -40,14 +40,27 @@
                 </div>
                 <br>
                 @if (Auth::user()->hasRole('NonGovernmentalOrganization'))
-                <input type="button" class="btn btn-primary"
-                    onclick="window.location.href='{{ URL::to('ngo/applicationsInProject/view/'.$application->project->id.'/pending') }}'"
-                       value="{{ Lang::get('application/list.view') }}">
-
+                    @if(isset($isPending))
+                        <input type="button" class="btn btn-primary"
+                               onclick="window.location.href='{{ URL::to('ngo/application/listInProject/'.$application->project->id.'/pending') }}'"
+                               value="{{ Lang::get('application/list.listInProject') }}">
+                    @else
+                        <input type="button" class="btn btn-primary"
+                               onclick="window.location.href='{{ URL::to('ngo/application/listInProject/'.$application->project->id.'/answered') }}'"
+                               value="{{ Lang::get('application/list.listInProject') }}">
+                    @endif
                 @elseif(Auth::user()->hasRole('COMPANY'))
-                    <input type="button" class="btn btn-primary"
-                           onclick="window.location.href='{{ URL::to('company/applicationsInProject/view/'.$application->project->id) }}'"
-                           value="{{ Lang::get('application/list.view') }}">
+                    @if(isset($isPending))
+
+                        <input type="button" class="btn btn-primary"
+                               onclick="window.location.href='{{ URL::to('company/application/listInProject/'.$application->project->id.'/pending') }}'"
+                               value="{{ Lang::get('application/list.listInProject') }}">
+                    @else
+                        <input type="button" class="btn btn-primary"
+                               onclick="window.location.href='{{ URL::to('company/application/listInProject/'.$application->project->id.'/pending') }}'"
+                               value="{{ Lang::get('application/list.listInProject') }}">
+                    @endif
+
                 @endif
                 <hr/>
             @endforeach
@@ -56,12 +69,10 @@
 
     <hr>
     <div class="pagination">
-
-        <input type="button" class="btn btn-primary"
-               onclick="window.location.href='{{ URL::to(Session::get('backUrl')) }}'"
-               value="{{ Lang::get('application/list.back') }}">
-
         {{ $applications->links()}}
     </div>
+    <input type="button" class="btn btn-primary"
+           onclick="window.location.href='{{ URL::to(Session::get('backUrl')) }}'"
+           value="{{ Lang::get('application/list.back') }}">
 @stop
 
