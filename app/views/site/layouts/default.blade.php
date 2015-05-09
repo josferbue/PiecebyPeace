@@ -326,7 +326,7 @@
                                 <i class="general foundicon-mail icon"></i>
                                 <span class="field">{{{ Lang::get('site.email') }}}:</span>
                                 <br/>
-                                <a href="mailto:info@yourdomain.com" title="Email">contact@piecebypeace.es</a>
+                                <a href="mailto:contact@piecebypeace.es" title="Email">contact@piecebypeace.es</a>
                             </li>
                             <li>
                                 <i class="general foundicon-home icon"></i>

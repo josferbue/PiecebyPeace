@@ -66,7 +66,7 @@ return array(
 	'activityMonths'				=> 'Hace :months meses',
 	'activityYears'					=> 'Hace :years años',
 
-	'headerLine1'					=> '!Ayudemos a construir un mundo mejor!',
+	'headerLine1'					=> '¡Ayudemos a construir un mundo mejor!',
 	'headerLine2'					=> 'Una plataforma para interconectar de manera ágil y sencilla a voluntarios, ONGs y empresas',
 	'headerLine3'					=> 'Más información',
 
