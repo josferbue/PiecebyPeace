@@ -2,6 +2,7 @@
 
 class AdminSearchController extends BaseController
 {
+    protected $name;
 
     public function __construct()
     {
@@ -19,11 +20,11 @@ class AdminSearchController extends BaseController
 
     public function findVolunteersWithSimilarUsername()
     {
-        $users = Volunteer::join('users', function($join)
-            {
-            $join->on('Volunteer.user_id', '=', 'users.id')
-                ->where('users.username', 'like', '%'.Input::get('username').'%');
-            })->get();
+        $this->name = Input::get('username');
+        $users = Volunteer::whereHas('userAccount', function ($q) {
+            $q->where('username', '=', $this->name);
+        })->get();
+
 
         $data = array(
             'users' => $users,
@@ -46,10 +47,9 @@ class AdminSearchController extends BaseController
 
     public function findCompaniesWithSimilarUsername()
     {
-        $users = Company::join('users', function($join)
-        {
-            $join->on('Company.user_id', '=', 'users.id')
-                ->where('users.username', 'like', '%'.Input::get('username').'%');
+        $this->name = Input::get('username');
+        $users = Company::whereHas('userAccount', function ($q) {
+            $q->where('username', '=', $this->name);
         })->get();
 
         $data = array(
@@ -73,10 +73,9 @@ class AdminSearchController extends BaseController
 
     public function findNGOsWithSimilarUsername()
     {
-        $users = Ngo::join('users', function($join)
-        {
-            $join->on('Ngo.user_id', '=', 'users.id')
-                ->where('users.username', 'like', '%'.Input::get('username').'%');
+        $this->name = Input::get('username');
+        $users = Ngo::whereHas('userAccount', function ($q) {
+            $q->where('username', '=', $this->name);
         })->get();
 
         $data = array(
