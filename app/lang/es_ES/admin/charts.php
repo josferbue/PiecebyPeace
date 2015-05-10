@@ -28,5 +28,10 @@ return array(
     'pieCsr'	            => 'RSC',
     'donutTitle'            => 'Proyectos publicados',
     'pieUsers'              => 'Usuarios',
+    'barTitle'              => 'Visitas por campañas',
+    'campaignMax'           => 'Máximo de visitas',
+    'campaignAve'           => 'Media de visitas',
+    'campaignMin'           => 'Minimo de visitas',
+    'visits'                => 'Visitas',
 
 );

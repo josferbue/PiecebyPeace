@@ -22,6 +22,7 @@
         <div class="span6" id="piechart" style="height:22em;"></div>
         <div class="span6" id="donut" style="height:22em;"></div>
     </div>
+
     <hr style="margin:45px 0 35px" />
     <div class="row">
         @if(!empty($projectMax))
@@ -77,10 +78,10 @@
     </div>
     <hr style="margin:45px 0 35px" />
     @if(!empty($campaign))
-    <strong><h4>{{{ Lang::get('admin/dashboard.campaign') }}}</h4></strong>
+
     <div class="row">
         <div class="span3">
-
+            <strong><h4>{{{ Lang::get('admin/dashboard.campaign') }}}</h4></strong>
             {{--<div class="thumbnail">--}}
             <a href="{{{ URL::to('campaign/details/'.$campaign->id) }}}"><img src="{{ URL::to($campaign->image)}}"
                                                                               class="img-rounded"
@@ -89,9 +90,9 @@
             {{--</div>--}}
         </div>
 
-        <div class="span9">
+        <div class="span3">
             <div class="caption">
-
+                <hr style="margin:45px 0 35px" />
                 <h4> {{ HTML::link('campaign/details/'.$campaign->id, $campaign->name) }} </h4>
 
                 <p> {{$campaign->description }} </p>
@@ -99,6 +100,9 @@
             </div>
             <strong>{{$campaign->visits }} {{{ Lang::get('admin/dashboard.visits') }}} </strong>
         </div>
+
+        <div class="span6" id="barChar" style="height:22em;"></div>
+
     </div>
     @endif
 @stop
@@ -216,6 +220,50 @@
                 series: [{
                     name: '{{Lang::get('admin/charts.pieProyects')}}',
                     data: Laracasts.donutDataSet
+                }]
+            });
+        });
+
+        $(function () {
+            $('#barChar').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: '{{Lang::get('admin/charts.barTitle')}}'
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '{{Lang::get('admin/charts.visits')}}'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: '{{Lang::get('admin/charts.campaignMax')}}',
+                    data: [Laracasts.campaignMax]
+
+                }, {
+                    name: '{{Lang::get('admin/charts.campaignAve')}}',
+                    data: [Laracasts.campaignAve]
+
+                }, {
+                    name: '{{Lang::get('admin/charts.campaignMin')}}',
+                    data: [Laracasts.campaignMin]
+
                 }]
             });
         });

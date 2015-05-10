@@ -28,6 +28,11 @@ return array(
     'pieCsr'	            => 'CSR',
     'donutTitle'            => 'Published projects',
     'pieUsers'              => 'Users',
+    'barTitle'              => 'Visits per campaigns',
+    'campaignMax'           => 'Max visits',
+    'campaignAve'           => 'Average of visits',
+    'campaignMin'           => 'Min of visits',
+    'visits'                => 'Visits',
 
 
 );
