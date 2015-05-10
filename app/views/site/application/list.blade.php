@@ -72,7 +72,7 @@
         {{ $applications->links()}}
     </div>
     <input type="button" class="btn btn-primary"
-           onclick="window.location.href='{{ URL::to(Session::get('backUrl')) }}'"
+           onclick="window.location.href='{{ URL::to($backUrl) }}'"
            value="{{ Lang::get('application/list.back') }}">
 @stop
 

@@ -61,7 +61,7 @@
             <input type="button" class="btn btn-primary"
                    onclick="ConfirmAccept();"
                    value="{{ Lang::get('application/view.accept') }}">
-            <input type="button" class="btn btn-primary"
+            <input type="button" class="btn btn-danger"
                    onclick="ConfirmDenied();"
                    value="{{ Lang::get('application/view.deny') }}">
         @endif

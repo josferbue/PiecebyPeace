@@ -24,7 +24,12 @@ class NgoApplicationController extends BaseController
             })
             ->paginate(4);
 
+        $backUrl=URL::previous();
+        if(strpos($backUrl,'application') !== false){
+            $backUrl='/';
+        }
         $data = array(
+            'backUrl'   => $backUrl,
             'applications' => $applications,
             'title' => $title,
         );
@@ -38,11 +43,17 @@ class NgoApplicationController extends BaseController
 
         $applications = Application::where('result', '=', 0)->groupBy('project_id')
             ->whereHas('project', function ($q) {
-                $q->where('ngo_id', '=', $this->ngo->id);
+                $q->where('ngo_id', '=', $this->ngo->id)
+                ->where('startDate', '<', Carbon::now());
             })
             ->paginate(4);
 
+        $backUrl=URL::previous();
+        if(strpos($backUrl,'application') !== false){
+            $backUrl='/';
+        }
         $data = array(
+            'backUrl'   => $backUrl,
             'applications' => $applications,
             'title' => $title,
             'isPending' => true,
@@ -61,7 +72,9 @@ class NgoApplicationController extends BaseController
 
             $applications = Application::where('result', '=', 0)
                 ->whereHas('project', function ($q) {
-                    $q->where('ngo_id', '=', $this->ngo->id)->where('id', '=', $this->project->id);
+                    $q->where('ngo_id', '=', $this->ngo->id)
+                        ->where('id', '=', $this->project->id)
+                        ->where('startDate', '<', Carbon::now());
                 })
                 ->paginate(4);
 

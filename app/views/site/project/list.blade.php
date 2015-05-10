@@ -25,7 +25,8 @@
                         @foreach ($categories as $category)
                             @if( Input::old('category')==$category->id)
 
-                                <option selected="selected" value={{ $category->id }}>{{{ Lang::get($category->name) }}}</option>
+                                <option selected="selected"
+                                        value={{ $category->id }}>{{{ Lang::get($category->name) }}}</option>
                             @else
                                 <option value={{ $category->id }}>{{{ Lang::get($category->name) }}}</option>
 
@@ -64,35 +65,10 @@
 
             <LINK href="{{URL::to('template/bootstrap/css/listProject.css')}}" rel="stylesheet" type="text/css">
 
-            <div class="pagination">
                 <button type="submit"
                         class="btn btn-primary">{{{ Lang::get('project/list.search') }}}</button>
-
-                <input type="button" class="btn btn-primary"
-                       onclick="window.location.href='{{ URL::to('/') }}'"
-                       value="{{ Lang::get('project/list.back') }}">
                 <br>
-                {{--comprobamos que exista la variable para los casos de iniciar el filtrado en los que aun no esta--}}
-                @if(isset($projects))
-                    {{ $projects->appends(array('category'=>Input::get('category'),
-                 'city'=>Input::get('city'),'startDate'=>Input::get('startDate'),
-                 'finishDate'=>Input::get('finishDate'),))->links()}}
-                    {{--mostramos los links para paginar--}}
-                @endif
-            </div>
         </form>
-    @else
-        <div class="pagination">
-
-            <input type="button" class="btn btn-primary"
-                   onclick="window.location.href='{{ URL::to('/') }}'"
-                   value="{{ Lang::get('project/list.back') }}">
-            <br>
-            @if(isset($projects))
-                {{ $projects->links()}}
-                {{--mostramos los links para paginar--}}
-            @endif
-        </div>
 
     @endif
     {{--Comprobamos que existen proyectos y los muestra los proyectos--}}
@@ -115,7 +91,6 @@
                         </div>
                         <div class="span9">
                             <div class="caption">
-                                {{--<a href="{{{ URL::to('campaign/details/'.$campaign->id) }}}"><p>{{$campaign->name }}</p></a>--}}
 
                                 <h3> {{ HTML::link('/project/view/'.$project->id , $project->name) }}  </h3>
 
@@ -141,14 +116,28 @@
                         @endif
                     @elseif(isset($authVolunteerId)&&isset($projectsOfVolunteer))
                         @if($authVolunteerId!=null && $projectsOfVolunteer->contains($project->id))
-                        <input type="button" class="btn btn-primary"
-                               onclick="window.location.href='{{ URL::to('volunteer/message/sendMessage/'.$project->id) }}'"
-                               value="{{ Lang::get('project/list.sendMessage') }}">
+                            <input type="button" class="btn btn-primary"
+                                   onclick="window.location.href='{{ URL::to('volunteer/message/sendMessage/'.$project->id) }}'"
+                                   value="{{ Lang::get('project/list.sendMessage') }}">
                         @endif
                     @endif
                     <hr/>
                 @endforeach
             </div>
+            <div class="pagination">
+                {{--comprobamos que exista la variable para los casos de iniciar el filtrado en los que aun no esta--}}
+                @if(!isset($viewNgoMyProjects))
+                    {{ $projects->appends(array('category'=>Input::get('category'),
+                     'city'=>Input::get('city'),'startDate'=>Input::get('startDate'),
+                     'finishDate'=>Input::get('finishDate'),))->links()}}
+                    {{--mostramos los links para paginar--}}
+                @else
+                    {{ $projects->links()}}
+                @endif
+            </div>
         @endif
     @endif
+    <input type="button" class="btn btn-primary"
+           onclick="window.location.href='{{ URL::to('/') }}'"
+           value="{{ Lang::get('project/list.back') }}">
 @stop

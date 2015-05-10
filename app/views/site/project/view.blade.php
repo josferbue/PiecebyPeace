@@ -6,6 +6,7 @@
     @parent
 @stop
 <LINK href="{{URL::to('template/bootstrap/css/viewProject.css')}}" rel="stylesheet" type="text/css">
+<LINK href="{{URL::to('template/bootstrap/css/separateButton.css')}}" rel="stylesheet" type="text/css">
 
 
 @section('content')
@@ -105,35 +106,37 @@
 
         </div>
     </div>
+    <div class="separateButton">
 
-    <div class="form-actions form-group">
-        @if(isset($editable))
-            @if($editable)
-                @if($isCsrProject)
+        <div class="form-actions form-group">
+            @if(isset($editable))
+                @if($editable)
+                    @if($isCsrProject)
+                        <input type="button" class="btn btn-primary"
+                               onclick="window.location.href='{{ URL::to('company/project/editCsrProject/'.$project->id) }}'"
+                               value="{{ Lang::get('project/view.edit') }}">
+                    @else
+                        <input type="button" class="btn btn-primary"
+                               onclick="window.location.href='{{ URL::to('ngo/project/editVolunteerProject/'.$project->id) }}'"
+                               value="{{ Lang::get('project/view.edit') }}">
+                    @endif
+
                     <input type="button" class="btn btn-primary"
-                           onclick="window.location.href='{{ URL::to('company/project/editCsrProject/'.$project->id) }}'"
-                           value="{{ Lang::get('project/view.edit') }}">
-                @else
-                    <input type="button" class="btn btn-primary"
-                           onclick="window.location.href='{{ URL::to('ngo/project/editVolunteerProject/'.$project->id) }}'"
-                           value="{{ Lang::get('project/view.edit') }}">
+                           onclick="ConfirmDelete();"
+                           value="{{ Lang::get('project/view.delete') }}">
                 @endif
-
-                <input type="button" class="btn btn-primary"
-                       onclick="ConfirmDelete();"
-                       value="{{ Lang::get('project/view.delete') }}">
             @endif
-        @endif
-        @if($canApply)
+            @if($canApply)
+                <input type="button" class="btn btn-primary"
+                       onclick="window.location.href='{{ URL::to('volunteer/apply/project/'.$project->id) }}'"
+                       value="{{ Lang::get('project/view.apply') }}">
+            @endif
             <input type="button" class="btn btn-primary"
-                   onclick="window.location.href='{{ URL::to('volunteer/apply/project/'.$project->id) }}'"
-                   value="{{ Lang::get('project/view.apply') }}">
-        @endif
-        <input type="button" class="btn btn-primary"
 
-               onclick="window.location.href='{{ URL::to($backUrl) }}'"
+                   onclick="window.location.href='{{ URL::to($backUrl) }}'"
 
-               value="{{ Lang::get('project/view.back') }}">
+                   value="{{ Lang::get('project/view.back') }}">
+        </div>
     </div>
 
 @stop
@@ -148,6 +151,7 @@
                 @else
                     window.location.href = '{{ URL::to('ngo/project/deleteVolunteerProject/'.$project->id) }}'
                 @endif
+
 
 
             }

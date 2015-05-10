@@ -22,7 +22,12 @@ class CompanyApplicationController extends BaseController
                 $q->where('company_id', '=', $this->company->id);
             })->paginate(4);
 
+        $backUrl=URL::previous();
+        if(strpos($backUrl,'application') !== false){
+            $backUrl='/';
+        }
         $data = array(
+            'backUrl'   => $backUrl,
             'applications' => $applications,
             'title' => $title,
         );
@@ -36,10 +41,16 @@ class CompanyApplicationController extends BaseController
 
         $applications = Application::where('result', '=', 0)->groupBy('project_id')
             ->whereHas('project', function ($q) {
-                $q->where('company_id', '=', $this->company->id);
+                $q->where('company_id', '=', $this->company->id)
+                    ->where('startDate', '<', Carbon::now());
             })->paginate(4);
 
+        $backUrl=URL::previous();
+        if(strpos($backUrl,'application') !== false){
+            $backUrl='/';
+        }
         $data = array(
+            'backUrl'   => $backUrl,
             'applications' => $applications,
             'title' => $title,
             'isPending' => true,
@@ -58,7 +69,9 @@ class CompanyApplicationController extends BaseController
 
             $applications = Application::where('result', '=', 0)
                 ->whereHas('project', function ($q) {
-                    $q->where('ngo_id', '=', $this->company->id)->where('id', '=', $this->project->id);
+                    $q->where('ngo_id', '=', $this->company->id)
+                        ->where('startDate', '<', Carbon::now())
+                            ->where('id', '=', $this->project->id);
                 })
                 ->paginate(4);
 

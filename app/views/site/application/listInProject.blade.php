@@ -5,6 +5,7 @@
     {{{ $title }}} ::
     @parent
 @stop
+<LINK href="{{URL::to('template/bootstrap/css/separateButton.css')}}" rel="stylesheet" type="text/css">
 
 {{-- Content --}}
 @section('content')
@@ -46,12 +47,15 @@
 
                         <td id="{{$application->id}}">
                             @if( $application->result==0)
-                                <input type="button" class="btn btn-primary"
-                                       onclick="ConfirmAccept('{{$application->id}}');"
-                                       value="{{ Lang::get('application/view.accept') }}">
-                                <input type="button" class="btn btn-primary"
-                                       onclick="ConfirmDenied('{{$application->id}}');"
-                                       value="{{ Lang::get('application/view.deny') }}">
+                                <div class="separateButton">
+
+                                    <input type="button" class="btn btn-primary"
+                                           onclick="ConfirmAccept('{{$application->id}}');"
+                                           value="{{ Lang::get('application/view.accept') }}">
+                                    <input type="button" class="btn btn-danger"
+                                           onclick="ConfirmDenied('{{$application->id}}');"
+                                           value="{{ Lang::get('application/view.deny') }}">
+                                </div>
                             @endif
                         </td>
                     </tr>
@@ -101,6 +105,7 @@
 
 
 
+
             }
         }
         function ConfirmDenied(idApplication) {
@@ -120,13 +125,14 @@
                 @else
                     if (window.location.href.indexOf("public") > -1) {
 
-                        window.location.href = '/PiecebyPeace/public/ngo/application/answer/' + idApplication + '/1'
-                    }
-                    else {
-                        window.location.href = '/ngo/application/answer/' + idApplication + '/1'
-                    }
+                    window.location.href = '/PiecebyPeace/public/ngo/application/answer/' + idApplication + '/1'
+                }
+                else {
+                    window.location.href = '/ngo/application/answer/' + idApplication + '/1'
+                }
 
                 @endif
+
 
             }
         }

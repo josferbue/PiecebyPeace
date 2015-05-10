@@ -15,7 +15,7 @@ class NgoMessageController extends BaseController
         $project = Project::where('id', '=', $id)->first();
         $volunteers = $project->volunteers;
         if($volunteers->isEmpty()){
-            return Redirect::to(Session::get('backUrl'))->with('error', Lang::get('ngo/messages.createMessage.errorNohasVolunteeer'));
+            return Redirect::to(Session::get('backUrl'))->with('error', Lang::get('ngo/messages.createMessage.errorHasNotVolunteers'));
 
         }
         $action = 'ngo/message/sendMessage';
