@@ -40,6 +40,9 @@ class RolesTableSeeder extends Seeder {
         $user = User::where('username','=','steps')->first();
         $user->attachRole( $ngoRole );
 
+        $user = User::where('username','=','inventa')->first();
+        $user->attachRole( $ngoRole );
+
         $user = User::where('username','=','boliri')->first();
         $user->attachRole( $companyRole );
 
@@ -83,6 +86,12 @@ class RolesTableSeeder extends Seeder {
         $user->attachRole( $volunteerRole );
 
         $user = User::where('username','=','raquel')->first();
+        $user->attachRole( $volunteerRole );
+
+        $user = User::where('username','=','isabel')->first();
+        $user->attachRole( $volunteerRole );
+
+        $user = User::where('username','=','pablo')->first();
         $user->attachRole( $volunteerRole );
 
     }

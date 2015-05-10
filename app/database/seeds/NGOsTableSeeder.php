@@ -58,6 +58,16 @@ class NGOsTableSeeder extends Seeder {
                 'logo'=> '/logos/testlogos/steps.jpg',
                 'user_id' => User::where('username','=','steps')->first()->id,
             ),
+            array(
+                'name'=>'Inventa',
+                'banned'=>0,
+                'description' => 'Esta ONG tiene como principal objetivo tratar temas relacionados con los derechos humanos.',
+                'phone' => '659785231',
+                'active' => true,
+                'credits' => 100000,
+                'logo'=> '/logos/testlogos/inventa.jpg',
+                'user_id' => User::where('username','=','inventa')->first()->id,
+            ),
         );
 
         DB::table('ngo')->insert( $ngos );

@@ -120,38 +120,120 @@ class VolunteersTableSeeder extends Seeder {
                 'biography' => '',
                 'user_id' => User::where('username','=','raquel')->first()->id,
             ),
+            array(
+                'name'      => 'Isabel',
+                'banned'   => 0,
+                'surname'   => 'Ocaña',
+                'address'   => 'C/ Clara Campoamor nº3',
+                'city'   => 'Vejer de la Frontera',
+                'zipCode'   => '11150',
+                'country'   => 'España',
+                'biography' => '',
+                'user_id' => User::where('username','=','isabel')->first()->id,
+            ),
+            array(
+                'name'      => 'Pablo',
+                'banned'   => 0,
+                'surname'   => 'Rodríguez',
+                'address'   => 'C/ Guadalhorce nº65',
+                'city'   => 'Madrid',
+                'zipCode'   => '28052',
+                'country'   => 'España',
+                'biography' => '',
+                'user_id' => User::where('username','=','pablo')->first()->id,
+            ),
 
         );
 
         DB::table('volunteer')->insert( $volunteers );
-/*        $pros = Project::whereNull('company_id')->get();
-
-        foreach($pros as $pro_fila){
-            $pro_company = $pro_fila;
-        }
-        $pros = Project::whereNull('ngo_id')->get();
-
-        foreach($pros as $pro_fila){
-            $pro_ong = $pro_fila;
-        }
 
         $project_volunteer = array(
             array(
-                'project_id'      => (int)$pro_company["id"],
-                'volunteer_id'    => Volunteer::where('name','=','volunteer1')->first()->id,
-
-
+                'project_id'      => Project::where('company_id','=',Company::where('user_id','=',User::where('username','=','boliri')->first()->id)->first()->id)->first()->id,
+                'volunteer_id'    => Volunteer::where('name','=','Raquel')->first()->id,
             ),
             array(
-                'project_id'      => (int)$pro_ong["id"],
-                'volunteer_id'    => Volunteer::where('name','=','volunteer2')->first()->id,
+                'project_id'      => Project::where('company_id','=',Company::where('user_id','=',User::where('username','=','boliri')->first()->id)->first()->id)->first()->id,
+                'volunteer_id'    => Volunteer::where('name','=','Isabel')->first()->id,
+            ),
+            array(
+                'project_id'      => Project::where('company_id','=',Company::where('user_id','=',User::where('username','=','boliri')->first()->id)->first()->id)->first()->id,
+                'volunteer_id'    => Volunteer::where('name','=','Jose')->first()->id,
+            ),
+            array(
+                'project_id'      => Project::where('company_id','=',Company::where('user_id','=',User::where('username','=','boliri')->first()->id)->first()->id)->first()->id,
+                'volunteer_id'    => Volunteer::where('name','=','Fernando')->first()->id,
+            ),
+            array(
+                'project_id'      => Project::where('company_id','=',Company::where('user_id','=',User::where('username','=','boliri')->first()->id)->first()->id)->first()->id,
+                'volunteer_id'    => Volunteer::where('name','=','Manuel')->first()->id,
+            ),
+            array(
+                'project_id'      => Project::where('company_id','=',Company::where('user_id','=',User::where('username','=','boliri')->first()->id)->first()->id)->first()->id,
+                'volunteer_id'    => Volunteer::where('name','=','Juan')->first()->id,
+            ),
+            array(
+                'project_id'      => Project::where('company_id','=',Company::where('user_id','=',User::where('username','=','boliri')->first()->id)->first()->id)->first()->id,
+                'volunteer_id'    => Volunteer::where('name','=','Rafael')->first()->id,
+            ),
+            array(
+                'project_id'      => Project::where('company_id','=',Company::where('user_id','=',User::where('username','=','boliri')->first()->id)->first()->id)->first()->id,
+                'volunteer_id'    => Volunteer::where('name','=','Antonio')->first()->id,
+            ),
 
+
+            array(
+                'project_id'      => Project::where('ngo_id','=',Ngo::where('user_id','=',User::where('username','=','eat')->first()->id)->first()->id)->first()->id,
+                'volunteer_id'    => Volunteer::where('name','=','Antonio')->first()->id,
+            ),
+            array(
+                'project_id'      => Project::where('ngo_id','=',Ngo::where('user_id','=',User::where('username','=','eat')->first()->id)->first()->id)->first()->id,
+                'volunteer_id'    => Volunteer::where('name','=','Rafael')->first()->id,
+            ),
+            array(
+                'project_id'      => Project::where('ngo_id','=',Ngo::where('user_id','=',User::where('username','=','eat')->first()->id)->first()->id)->first()->id,
+                'volunteer_id'    => Volunteer::where('name','=','Juan')->first()->id,
+            ),
+            array(
+                'project_id'      => Project::where('ngo_id','=',Ngo::where('user_id','=',User::where('username','=','eat')->first()->id)->first()->id)->first()->id,
+                'volunteer_id'    => Volunteer::where('name','=','Manuel')->first()->id,
+            ),
+            array(
+                'project_id'      => Project::where('ngo_id','=',Ngo::where('user_id','=',User::where('username','=','eat')->first()->id)->first()->id)->first()->id,
+                'volunteer_id'    => Volunteer::where('name','=','María')->first()->id,
+            ),
+            array(
+                'project_id'      => Project::where('ngo_id','=',Ngo::where('user_id','=',User::where('username','=','eat')->first()->id)->first()->id)->first()->id,
+                'volunteer_id'    => Volunteer::where('name','=','Carlos')->first()->id,
+            ),
+            array(
+                'project_id'      => Project::where('ngo_id','=',Ngo::where('user_id','=',User::where('username','=','eat')->first()->id)->first()->id)->first()->id,
+                'volunteer_id'    => Volunteer::where('name','=','Jose')->first()->id,
+            ),
+            array(
+                'project_id'      => Project::where('ngo_id','=',Ngo::where('user_id','=',User::where('username','=','eat')->first()->id)->first()->id)->first()->id,
+                'volunteer_id'    => Volunteer::where('name','=','Marta')->first()->id,
+            ),
+            array(
+                'project_id'      => Project::where('ngo_id','=',Ngo::where('user_id','=',User::where('username','=','eat')->first()->id)->first()->id)->first()->id,
+                'volunteer_id'    => Volunteer::where('name','=','Fernando')->first()->id,
+            ),
+            array(
+                'project_id'      => Project::where('ngo_id','=',Ngo::where('user_id','=',User::where('username','=','eat')->first()->id)->first()->id)->first()->id,
+                'volunteer_id'    => Volunteer::where('name','=','Raquel')->first()->id,
+            ),
+            array(
+                'project_id'      => Project::where('ngo_id','=',Ngo::where('user_id','=',User::where('username','=','eat')->first()->id)->first()->id)->first()->id,
+                'volunteer_id'    => Volunteer::where('name','=','Isabel')->first()->id,
+            ),
+            array(
+                'project_id'      => Project::where('ngo_id','=',Ngo::where('user_id','=',User::where('username','=','eat')->first()->id)->first()->id)->first()->id,
+                'volunteer_id'    => Volunteer::where('name','=','Pablo')->first()->id,
             ),
 
         );
 
-
-        DB::table('project_volunteer')->insert( $project_volunteer );*/
+        DB::table('project_volunteer')->insert( $project_volunteer );
 
     }
 
