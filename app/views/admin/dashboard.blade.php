@@ -22,6 +22,85 @@
         <div class="span6" id="piechart" style="height:22em;"></div>
         <div class="span6" id="donut" style="height:22em;"></div>
     </div>
+    <hr style="margin:45px 0 35px" />
+    <div class="row">
+        @if(!empty($projectMax))
+        {{--*/ $project = Project::find($projectMax->project_id) /*--}}
+
+
+        <div class="span3">
+            <strong><h4>{{{ Lang::get('admin/dashboard.projectMaxTitle') }}}</h4></strong>
+            <img src="{{ URL::to($project->image)}}" class="img-rounded"
+                 alt="{{Lang::get('project/list.notImage') }}"/>
+        </div>
+        <div class="span3">
+            <div class="caption">
+                {{--<a href="{{{ URL::to('campaign/details/'.$campaign->id) }}}"><p>{{$campaign->name }}</p></a>--}}
+                <hr style="margin:45px 0 35px" />
+                <h4> {{ HTML::link('/project/view/'.$project->id , $project->name) }}  </h4>
+
+                {{Session::put('backUrl', Request::url())}}
+
+                <p>{{ $project->description}}</p>
+
+                <p2> {{ $project->city}}, {{ $project->country}} </p2>
+
+            </div>
+            <p> <strong>{{$projectMax->voluntarios}} {{ Lang::get('admin/dashboard.volunteers') }}</strong></p>
+
+        </div>
+        @endif
+            @if(!empty($csrMax))
+        {{--*/ $csr = Project::find($csrMax->project_id) /*--}}
+        <div class="span3">
+            <strong> <h4>{{{ Lang::get('admin/dashboard.csrMaxTitle') }}}</h4></strong>
+            <img src="{{ URL::to($csr->image)}}" class="img-rounded"
+                 alt="{{Lang::get('project/list.notImage') }}"/>
+        </div>
+        <div class="span3">
+              <div class="caption">
+                {{--<a href="{{{ URL::to('campaign/details/'.$campaign->id) }}}"><p>{{$campaign->name }}</p></a>--}}
+                <hr style="margin:45px 0 35px" />
+                <h4> {{ HTML::link('/project/view/'.$csr->id , $csr->name) }}  </h4>
+
+                {{Session::put('backUrl', Request::url())}}
+
+                <p>{{ $csr->description}}</p>
+
+                <p2> {{ $csr->city}}, {{ $csr->country}} </p2>
+
+
+            </div>
+            <p> <strong>{{$csrMax->voluntarios}} {{ Lang::get('admin/dashboard.volunteers') }}</strong></p>
+        </div>
+                @endif
+    </div>
+    <hr style="margin:45px 0 35px" />
+    @if(!empty($campaign))
+    <strong><h4>{{{ Lang::get('admin/dashboard.campaign') }}}</h4></strong>
+    <div class="row">
+        <div class="span3">
+
+            {{--<div class="thumbnail">--}}
+            <a href="{{{ URL::to('campaign/details/'.$campaign->id) }}}"><img src="{{ URL::to($campaign->image)}}"
+                                                                              class="img-rounded"
+                                                                              alt="{{{ Lang::get('campaign/campaign.notImage') }}}"/></a>
+
+            {{--</div>--}}
+        </div>
+
+        <div class="span9">
+            <div class="caption">
+
+                <h4> {{ HTML::link('campaign/details/'.$campaign->id, $campaign->name) }} </h4>
+
+                <p> {{$campaign->description }} </p>
+
+            </div>
+            <strong>{{$campaign->visits }} {{{ Lang::get('admin/dashboard.visits') }}} </strong>
+        </div>
+    </div>
+    @endif
 @stop
 
 @section('js')
