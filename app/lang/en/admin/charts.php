@@ -18,21 +18,27 @@ return array(
     |
     */
 
-    'lineTitle'	            => 'Monthly Registers',
-    'lineUnit'	            => 'Registers',
-    'lineNGO'				=> 'NGOs',
-    'lineVolunteer'			=> 'Volunteers',
-    'lineCompany'			=> 'Companies',
-    'pieTitle'	            => 'Total users in Piece by Peace',
-    'pieProyects'	        => 'Projects',
-    'pieCsr'	            => 'CSR',
-    'donutTitle'            => 'Published projects',
-    'pieUsers'              => 'Users',
-    'barTitle'              => 'Visits per campaigns',
-    'campaignMax'           => 'Max visits',
-    'campaignAve'           => 'Average of visits',
-    'campaignMin'           => 'Min of visits',
-    'visits'                => 'Visits',
+    'lineTitle'	                => 'Monthly Registers',
+    'lineUnit'	                => 'Registers',
+    'lineNGO'				    => 'NGOs',
+    'lineVolunteer'			    => 'Volunteers',
+    'lineCompany'			    => 'Companies',
+    'pieTitle'	                => 'Total users in Piece by Peace',
+    'pieProyects'	            => 'Projects',
+    'pieCsr'	                => 'CSR',
+    'donutTitle'                => 'Published projects',
+    'pieUsers'                  => 'Users',
+    'barTitle'                  => 'Visits per campaigns',
+    'campaignMax'               => 'Max visits',
+    'campaignAve'               => 'Average of visits',
+    'campaignMin'               => 'Min of visits',
+    'visits'                    => 'Visits',
+    'barInscripTitle'           => 'Applications overview',
+    'applications'              => 'Application',
+    'applicationNotAccepted'    => 'Application not accepted',
+    'applicationAccepted'       => 'Application accepted',
+    'applicationNotAnswered'    => 'Application not answered',
+
 
 
 );

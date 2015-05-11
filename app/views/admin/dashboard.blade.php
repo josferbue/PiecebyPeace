@@ -104,6 +104,9 @@
         <div class="span6" id="barChar" style="height:22em;"></div>
 
     </div>
+    <div class="row">
+        <div class="span6" id="barCharInscrip" style="max-width:100% ;height:22em;"></div>
+    </div>
     @endif
 @stop
 
@@ -263,6 +266,53 @@
                 }, {
                     name: '{{Lang::get('admin/charts.campaignMin')}}',
                     data: [Laracasts.campaignMin]
+
+                }]
+            });
+        });
+
+        $(function () {
+            $('#barCharInscrip').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: '{{Lang::get('admin/charts.barInscripTitle')}}'
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '{{Lang::get('admin/charts.applications')}}'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: '{{Lang::get('admin/charts.applicationNotAccepted')}}',
+                    data: [Laracasts.applicationNotAccepted],
+                    color: '#FF0D0D'
+
+                }, {
+                    name: '{{Lang::get('admin/charts.applicationAccepted')}}',
+                    data: [Laracasts.applicationAccepted],
+                    color: '#008000'
+
+                }, {
+                    name: '{{Lang::get('admin/charts.applicationNotAnswered')}}',
+                    data: [Laracasts.applicationNotAnswered],
+                    color: '#7C8387'
 
                 }]
             });

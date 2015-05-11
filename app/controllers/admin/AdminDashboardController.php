@@ -55,15 +55,25 @@ class AdminDashboardController extends AdminController {
 		$campaignAve = round(Campaign::where('expirationDate', '>', Carbon::now())->whereRaw('visits < maxVisits')->avg('visits'),2);
 		$campaignMin = Campaign::where('expirationDate', '>', Carbon::now())->whereRaw('visits < maxVisits')->min('visits');
 
+		$applicationNotAnswered = Application::where('result','=',0)->count();
+		$applicationNotAccepted = Application::where('result','=',1)->count();
+		$applicationAccepted = Application::where('result','=',2)->count();
+
+
 		JavaScript::put([
-			'lineDataSet1' 	=> $ngoDataSet,
-			'lineDataSet2' 	=> $volunteerDataSet,
-			'lineDataSet3' 	=> $companyDataSet,
-			'pieDataSet' 	=> $pieChart,
-			'donutDataSet' 	=> $donutChart,
-			'campaignMax'	=> $campaignMax,
-			'campaignAve'	=> $campaignAve,
-			'campaignMin'	=> $campaignMin,
+			'lineDataSet1'			 	=> $ngoDataSet,
+			'lineDataSet2'			 	=> $volunteerDataSet,
+			'lineDataSet3' 				=> $companyDataSet,
+			'pieDataSet' 				=> $pieChart,
+			'donutDataSet' 				=> $donutChart,
+			'campaignMax'				=> $campaignMax,
+			'campaignAve'				=> $campaignAve,
+			'campaignMin'				=> $campaignMin,
+			'applicationNotAnswered'	=> $applicationNotAnswered,
+			'applicationNotAccepted'	=> $applicationNotAccepted,
+			'applicationAccepted'		=> $applicationAccepted
+
+
 
 
 		]);
