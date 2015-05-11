@@ -142,6 +142,9 @@ class CompanyProjectController extends BaseController
             return Redirect::to('projectCsr/view/' . $id)->with('error', Lang::get('project/messages.editCsr.errorWithVolunteer'));
         }
 
+        if(!(Carbon::now() < $projectOld->startDate)) {
+            return Redirect::to('projectCsr/view/' . $id)->with('error', Lang::get('project/messages.editCsr.errorAlreadyStarted'));
+        }
 
         $applications = $projectOld->applications;
         if (sizeof($applications) > 0) {
@@ -192,6 +195,10 @@ class CompanyProjectController extends BaseController
                     return Redirect::to('projectCsr/view/' . $id)->with('error', Lang::get('project/messages.deleteCsr.errorWithApplications'));
                 }
             }
+        }
+
+        if(!(Carbon::now() < $projectOld->startDate)) {
+            return Redirect::to('projectCsr/view/' . $id)->with('error', Lang::get('project/messages.deleteCsr.errorAlreadyStarted'));
         }
 
         if (!$company->active) {

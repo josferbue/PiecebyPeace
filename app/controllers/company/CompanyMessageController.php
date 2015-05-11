@@ -14,12 +14,16 @@ class CompanyMessageController extends BaseController
         $backUrl = Session::get('backUrl');
         $project = Project::where('id', '=', $id)->first();
         $volunteers = $project->volunteers;
+
         if($volunteers->isEmpty()){
             return Redirect::to(Session::get('backUrl'))->with('error', Lang::get('company/messages.createMessage.errorHasNotVolunteers'));
-
         }
-        $action = 'company/message/sendMessage';
 
+        if($project->finishDate < Carbon::now()) {
+            return Redirect::to(Session::get('backUrl'))->with('error', Lang::get('company/messages.createMessage.errorProjectHasFinished'));
+        }
+
+        $action = 'company/message/sendMessage';
 
         $data = array(
             'project' => $project,

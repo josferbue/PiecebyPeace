@@ -125,18 +125,18 @@
                         </div>
                     </div>
                     <br>
-                    @if( isset($viewCsrMyProjects))
+                    @if( isset($viewCsrMyProjects) && !($project->finishDate < Carbon::now()))
                         <input type="button" class="btn btn-primary"
                                onclick="window.location.href='{{ URL::to('company/message/sendMessage/'.$project->id) }}'"
                                value="{{ Lang::get('project/list.sendMessage') }}">
 
-                    @elseif(isset($authCompanyId))
+                    @elseif(isset($authCompanyId) && !($project->finishDate < Carbon::now()))
                         @if($authCompanyId!=null && $authCompanyId==$project->company_id)
                             <input type="button" class="btn btn-primary"
                                    onclick="window.location.href='{{ URL::to('company/message/sendMessage/'.$project->id) }}'"
                                    value="{{ Lang::get('project/list.sendMessage') }}">
                         @endif
-                    @elseif(isset($authVolunteerId)&&isset($projectsOfVolunteer))
+                    @elseif(isset($authVolunteerId)&&isset($projectsOfVolunteer) && !($project->finishDate < Carbon::now()))
                         @if($authVolunteerId!=null && $projectsOfVolunteer->contains($project->id))
                             <input type="button" class="btn btn-primary"
                                    onclick="window.location.href='{{ URL::to('volunteer/message/sendMessage/'.$project->id) }}'"

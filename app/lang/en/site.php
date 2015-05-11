@@ -33,7 +33,7 @@ return array(
 	'findVolunteerProjects' 		=> 'Find volunteering projects',
 	'findCsrProjects' 				=> 'Find CSR projects',
 	'createVolunteerProjects' 		=> 'Create volunteering project',
-	'myVolunteersProjects' 			=> 'My volunteer projects',
+	'myVolunteersProjects' 			=> 'My volunteering projects',
 	'createCsrProject' 				=> 'Create CSR project',
 	'myCsrProjects' 				=> 'My CSR projects',
 

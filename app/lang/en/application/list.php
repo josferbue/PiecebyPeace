@@ -19,7 +19,7 @@ return array(
 	'titleAnswered' 				=> 'Answered applications',
 	'nameProject' 					=> 'Project name',
 	'notImage'   					=> 'Image not found',
-	'empty'							=> 'No applications were found for this project.',
+	'empty'							=> 'No applications were found.',
 	'cancelApplication'				=> 'Cancel',
 	'view'							=> 'View',
 	'viewDetails'					=> 'View details',

@@ -17,8 +17,8 @@ return array(
         'errorNotActive'            => 'It seems that this user account has not been activated, yet. Please, send us an e-mail if the account is not activated soon.',
         'errorNotHisProject'        => 'You can only edit your own projects.',
         'errorWithVolunteer'        => 'You can only edit projects without cooperators.',
-        'errorWithApplications'     => 'You can only edit projects without applications (both answered and unanswered).'
-
+        'errorWithApplications'     => 'You can only edit projects without applications (both answered and unanswered).',
+        'errorAlreadyStarted'       => 'You can not edit projects in progress.',
 
     ),
     'deleteVolunteer' => array(
@@ -28,8 +28,8 @@ return array(
         'errorNotActive'            => 'It seems that this user account has not been activated, yet. Please, send us an e-mail if the account is not activated soon.',
         'errorNotHisProject'        => 'You can only delete your own projects.',
         'errorWithVolunteer'        => 'You can only delete projects without cooperators.',
-        'errorWithApplications'     => 'You can only delete projects without applications (both answered and unanswered).'
-
+        'errorWithApplications'     => 'You can only delete projects without applications (both answered and unanswered).',
+        'errorAlreadyStarted'       => 'You can not delete projects in progress.',
 
     ),
     'createCsr' => array(
@@ -46,8 +46,8 @@ return array(
         'errorNotActive'            => 'It seems that this user account has not been activated, yet. Please, send us an e-mail if the account is not activated soon.',
         'errorNotHisProject'        => 'You can only edit your own projects.',
         'errorWithVolunteer'        => 'You can only edit projects without cooperators.',
-        'errorWithApplications'     => 'You can only edit projects without applications (both answered and unanswered).'
-
+        'errorWithApplications'     => 'You can only edit projects without applications (both answered and unanswered).',
+        'errorAlreadyStarted'       => 'You can not edit projects in progress.',
 
     ),
     'deleteCsr' => array(
@@ -57,8 +57,8 @@ return array(
         'errorNotActive'            => 'It seems that this user account has not been activated, yet. Please, send us an e-mail if the account is not activated soon.',
         'errorNotHisProject'        => 'You can only delete your own projects.',
         'errorWithVolunteer'        => 'You can only delete projects without cooperators.',
-        'errorWithApplications'     => 'You can only delete projects without applications (both answered and unanswered).'
-
+        'errorWithApplications'     => 'You can only delete projects without applications (both answered and unanswered).',
+        'errorAlreadyStarted'       => 'You can not delete projects in progress.'
 
     )
 

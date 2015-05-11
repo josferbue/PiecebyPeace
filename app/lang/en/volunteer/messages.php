@@ -6,8 +6,8 @@ return array(
     'createMessage' => array(
         'error'                         => 'The message has not been sent. Please, try it again.',
         'success'                       => 'The message has been successfully sent.',
-        'errorNotCooperateInProject'    => 'You are not a cooperator of this project.'
-
+        'errorNotCooperateInProject'    => 'You are not a cooperator of this project.',
+        'errorProjectHasFinished'       => 'You can not send messages related to this project due to it has already finished.',
     ),
 
     'deleteVolunteer' => array (

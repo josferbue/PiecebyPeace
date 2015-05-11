@@ -111,19 +111,21 @@
         <div class="form-actions form-group">
             @if(isset($editable))
                 @if($editable)
-                    @if($isCsrProject)
+                    @if($isCsrProject && Carbon::now() < $project->startDate)
                         <input type="button" class="btn btn-primary"
                                onclick="window.location.href='{{ URL::to('company/project/editCsrProject/'.$project->id) }}'"
                                value="{{ Lang::get('project/view.edit') }}">
-                    @else
+                    @elseif(!$isCsrProject && Carbon::now() < $project->startDate)
                         <input type="button" class="btn btn-primary"
                                onclick="window.location.href='{{ URL::to('ngo/project/editVolunteerProject/'.$project->id) }}'"
                                value="{{ Lang::get('project/view.edit') }}">
                     @endif
 
-                    <input type="button" class="btn btn-primary"
-                           onclick="ConfirmDelete();"
-                           value="{{ Lang::get('project/view.delete') }}">
+                    @if(Carbon::now() < $project->startDate)
+                        <input type="button" class="btn btn-primary"
+                               onclick="ConfirmDelete();"
+                               value="{{ Lang::get('project/view.delete') }}">
+                    @endif
                 @endif
             @endif
             @if($canApply)

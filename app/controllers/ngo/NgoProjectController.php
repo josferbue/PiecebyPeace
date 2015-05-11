@@ -146,6 +146,10 @@ class NgoProjectController extends BaseController
             return Redirect::to('project/view/' . $id)->with('error', Lang::get('project/messages.editVolunteer.errorWithVolunteer'));
         }
 
+        if(!(Carbon::now() < $projectOld->startDate)) {
+            return Redirect::to('project/view/' . $id)->with('error', Lang::get('project/messages.editVolunteer.errorAlreadyStarted'));
+        }
+
 
         $applications = $projectOld->applications;
         if (sizeof($applications) > 0) {
@@ -197,6 +201,10 @@ class NgoProjectController extends BaseController
                     return Redirect::to('project/view/' . $id)->with('error', Lang::get('project/messages.deleteVolunteer.errorWithApplications'));
                 }
             }
+        }
+
+        if(!(Carbon::now() < $projectOld->startDate)) {
+            return Redirect::to('project/view/' . $id)->with('error', Lang::get('project/messages.deleteVolunteer.errorAlreadyStarted'));
         }
 
         if (!$ngo->active) {

@@ -14,12 +14,16 @@ class NgoMessageController extends BaseController
         $backUrl = Session::get('backUrl');
         $project = Project::where('id', '=', $id)->first();
         $volunteers = $project->volunteers;
+
         if($volunteers->isEmpty()){
             return Redirect::to(Session::get('backUrl'))->with('error', Lang::get('ngo/messages.createMessage.errorHasNotVolunteers'));
-
         }
-        $action = 'ngo/message/sendMessage';
 
+        if($project->finishDate < Carbon::now()) {
+            return Redirect::to(Session::get('backUrl'))->with('error', Lang::get('ngo/messages.createMessage.errorProjectHasFinished'));
+        }
+
+        $action = 'ngo/message/sendMessage';
 
         $data = array(
             'project' => $project,

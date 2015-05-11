@@ -20,6 +20,11 @@ class VolunteerMessageController extends BaseController
             $userId = Ngo::where('id', '=', $project->ngo_id)->first()->user_id;
 
         }
+
+        if($project->finishDate < Carbon::now()) {
+            return Redirect::to(Session::get('backUrl'))->with('error', Lang::get('volunteer/messages.createMessage.errorProjectHasFinished'));
+        }
+
         $data = array(
             'userId' => $userId,
             'backUrl' => $backUrl,
