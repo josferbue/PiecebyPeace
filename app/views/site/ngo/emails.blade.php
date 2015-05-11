@@ -29,7 +29,7 @@
                 <div class="span6">
                     <div class="form-group  {{{ $errors->has('numberEmails') ? 'error' : '' }}}">
                         <label for="numberEmails">{{{ Lang::get('ngo/ngo.numberEmailsTitle') }}}</label>
-                        <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.numberEmails') }}}" type="text"
+                        <input class="form-control" placeholder="{{{ Lang::get('ngo/ngo.inputNumberEmails') }}}" type="text"
                                name="numberEmails" id="numberEmails" value="0">
                         {{ $errors->first('numberEmails', '<span class="help-block">:message</span>') }}
                     </div>

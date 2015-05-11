@@ -33,6 +33,6 @@ return array(
 
     'notFound'                              => 'The specified NGO does not exists.',
     'notActive'                             => 'The specified NGO is not using the services of Piece by Peace at this moment.',
-
+    'inputNumberEmails'                     => 'Introduce a number of emails',
 
 );
