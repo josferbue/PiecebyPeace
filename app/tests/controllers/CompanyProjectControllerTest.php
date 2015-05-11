@@ -9,8 +9,8 @@ class CompanyProjectControllerTest extends BaseControllerTestCase
 
 
         $credentials = array(
-            'email' => 'company1@company1.com',
-            'password' => 'company1',
+            'email' => 'xeilaale@gmail.com',
+            'password' => 'xeilaale1',
             'csrf_token' => Session::getToken()
         );
 
@@ -34,8 +34,8 @@ class CompanyProjectControllerTest extends BaseControllerTestCase
         $this->flushSession();
 
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'steps@gmail.com',
+            'password' => 'steps1',
             'csrf_token' => Session::getToken()
         );
         $this->withInput($credentials)
@@ -50,8 +50,8 @@ class CompanyProjectControllerTest extends BaseControllerTestCase
         $this->flushSession();
 
         $credentials = array(
-            'email' => 'company1@company1.com',
-            'password' => 'company1',
+            'email' => 'xeilaale@gmail.com',
+            'password' => 'xeilaale1',
             'csrf_token' => Session::getToken()
         );
         $this->withInput($credentials)
@@ -71,8 +71,8 @@ class CompanyProjectControllerTest extends BaseControllerTestCase
         $this->flushSession();
 
         $credentials = array(
-            'email' => 'company1@company1.com',
-            'password' => 'company1',
+            'email' => 'xeilaale@gmail.com',
+            'password' => 'xeilaale1',
             'csrf_token' => Session::getToken()
         );
 
@@ -89,8 +89,8 @@ class CompanyProjectControllerTest extends BaseControllerTestCase
         $this->flushSession();
 
         $credentials = array(
-            'email' => 'company1@company1.com',
-            'password' => 'company1',
+            'email' => 'xeilaale@gmail.com',
+            'password' => 'xeilaale1',
             'csrf_token' => Session::getToken()
         );
 
@@ -121,8 +121,8 @@ class CompanyProjectControllerTest extends BaseControllerTestCase
         $this->flushSession();
 
         $credentials = array(
-            'email' => 'company1@company1.com',
-            'password' => 'company1',
+            'email' => 'xeilaale@gmail.com',
+            'password' => 'xeilaale1',
             'csrf_token' => Session::getToken()
         );
 
@@ -155,8 +155,8 @@ class CompanyProjectControllerTest extends BaseControllerTestCase
         $this->flushSession();
 
         $credentials = array(
-            'email' => 'company1@company1.com',
-            'password' => 'company1',
+            'email' => 'xeilaale@gmail.com',
+            'password' => 'xeilaale1',
             'csrf_token' => Session::getToken()
         );
 
@@ -189,8 +189,8 @@ class CompanyProjectControllerTest extends BaseControllerTestCase
         $this->flushSession();
 
         $credentials = array(
-            'email' => 'company1@company1.com',
-            'password' => 'company1',
+            'email' => 'xeilaale@gmail.com',
+            'password' => 'xeilaale1',
             'csrf_token' => Session::getToken()
         );
         $this->withInput($credentials)
@@ -218,95 +218,46 @@ class CompanyProjectControllerTest extends BaseControllerTestCase
 
     }
 
-    public function testEditGetVolunteerProjectCompanyError()
+
+    public function testEditGetCsrProjectOK()
     {
 
         $this->flushSession();
 
-        // Login in as ngo1
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'xeilaale@gmail.com',
+            'password' => 'xeilaale1',
             'csrf_token' => Session::getToken()
         );
 
         $this->withInput($credentials)
             ->requestAction('POST', 'UserController@postLogin');
 
-        $this->requestAction('GET', 'NgoProjectController@createVolunteerProject');
+        $this->requestAction('GET', 'CompanyProjectController@createCsrProject');
 
         $projectData = array(
-            'name' => 'ngo  3',
+            'name' => 'company  3',
             'address' => 'calle liberty',
             'city' => 'Sevilla',
             'zipCode' => '41930',
             'country' => 'España',
             'maxVolunteers' => 20,
-            'description' => 'Description volunteer project 3',
+            'description' => 'Description csr project 3',
             'startDate' => \Carbon\Carbon::createFromDate(2016, 7, 23)->toDateTimeString(),
             'finishDate' => \Carbon\Carbon::createFromDate(2017, 8, 23)->toDateTimeString(),
             'categories' => array(2),
         );
 
-        $this->withInput($projectData)->requestAction('POST', 'NgoProjectController@saveVolunteerProject');
-
-        $this->flushSession();
-        $credentials2 = array(
-            'email' => 'company1@company1.com',
-            'password' => 'company1',
-            'csrf_token' => Session::getToken()
-        );
-        $this->withInput($credentials2)
-            ->requestAction('POST', 'UserController@postLogin');
-        $idProject = Project::where('name', '=', 'ngo  3')->first()->id;
-
-        $this->requestAction('GET', 'NgoProjectController@editGetVolunteerProject', array($idProject));
-
-        $this->assertRedirectedTo(URL::to('/'));
+        $this->withInput($projectData)->requestAction('POST', 'CompanyProjectController@saveCsrProject');
 
 
-    }
-
-    public function testEditGetVolunteerProjectOK()
-    {
-
-        $this->flushSession();
-
-        // Login in as ngo1
-        $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
-            'csrf_token' => Session::getToken()
-        );
-
-        $this->withInput($credentials)
-            ->requestAction('POST', 'UserController@postLogin');
-
-        $this->requestAction('GET', 'NgoProjectController@createVolunteerProject');
-
-        $projectData = array(
-            'name' => 'ngo  3',
-            'address' => 'calle liberty',
-            'city' => 'Sevilla',
-            'zipCode' => '41930',
-            'country' => 'España',
-            'maxVolunteers' => 20,
-            'description' => 'Description volunteer project 3',
-            'startDate' => \Carbon\Carbon::createFromDate(2016, 7, 23)->toDateTimeString(),
-            'finishDate' => \Carbon\Carbon::createFromDate(2017, 8, 23)->toDateTimeString(),
-            'categories' => array(2),
-        );
-
-        $this->withInput($projectData)->requestAction('POST', 'NgoProjectController@saveVolunteerProject');
-
-
-        $project = Project::where('name', '=', 'ngo  3')->first();
+        $project = Project::where('name', '=', 'company  3')->first();
         $project->volunteers;
         $project->categories;
         $project->applications;//se cargan las relaciones ya que el get del controlador las carga
 
 
-        $this->requestAction('GET', 'NgoProjectController@editGetVolunteerProject', array($project->id));
+        $this->requestAction('GET', 'CompanyProjectController@editGetCsrProject', array($project->id));
         $this->assertViewHas('project', $project);
 
 
@@ -317,10 +268,10 @@ class CompanyProjectControllerTest extends BaseControllerTestCase
 
         $this->flushSession();
 
-        // Login in as company1
+
         $credentials = array(
-            'email' => 'company1@company1.com',
-            'password' => 'company1',
+            'email' => 'xeilaale@gmail.com',
+            'password' => 'xeilaale1',
             'csrf_token' => Session::getToken()
         );
 
@@ -363,8 +314,8 @@ class CompanyProjectControllerTest extends BaseControllerTestCase
         $this->flushSession();
 
         $credentials2 = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'steps@gmail.com',
+            'password' => 'steps1',
             'csrf_token' => Session::getToken()
         );
 
@@ -383,10 +334,9 @@ class CompanyProjectControllerTest extends BaseControllerTestCase
 
         $this->flushSession();
 
-        // Login in as company1
         $credentials = array(
-            'email' => 'company1@company1.com',
-            'password' => 'company1',
+            'email' => 'xeilaale@gmail.com',
+            'password' => 'xeilaale1',
             'csrf_token' => Session::getToken()
         );
 
@@ -439,10 +389,9 @@ class CompanyProjectControllerTest extends BaseControllerTestCase
 
         $this->flushSession();
 
-        // Login in as company1
         $credentials = array(
-            'email' => 'company1@company1.com',
-            'password' => 'company1',
+            'email' => 'xeilaale@gmail.com',
+            'password' => 'xeilaale1',
             'csrf_token' => Session::getToken()
         );
 
@@ -470,8 +419,8 @@ class CompanyProjectControllerTest extends BaseControllerTestCase
         $project = Project::where('name', '=', 'project Company 3')->first();
 
         $credentials2 = array(
-            'email' => 'company2@company2.com',
-            'password' => 'company2',
+            'email' => 'xorysoft@gmail.com',
+            'password' => 'xorysoft1',
             'csrf_token' => Session::getToken()
         );
 
@@ -489,10 +438,9 @@ class CompanyProjectControllerTest extends BaseControllerTestCase
     {
         $this->flushSession();
 
-        // Login in as company1
         $credentials = array(
-            'email' => 'company1@company1.com',
-            'password' => 'company1',
+            'email' => 'xeilaale@gmail.com',
+            'password' => 'xeilaale1',
             'csrf_token' => Session::getToken()
         );
 

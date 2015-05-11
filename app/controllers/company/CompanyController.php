@@ -178,6 +178,7 @@ class CompanyController extends BaseController {
                     ->with('error', Lang::get('user/messages.editProfile.oldPasswordIncorrect'));
             }
             $passwordIsChanged = false;
+            $emailIsChanged = false;
 
             if (!empty($password) || !empty($passwordConfirmation)) {
                 if ($password === $passwordConfirmation) {
@@ -207,6 +208,7 @@ class CompanyController extends BaseController {
 
 
             if ($company->userAccount->email != Input::get('email')) {
+                $emailIsChanged=true;
 
                 //hacemos que vuelva a enviar email de confirmacion si este se cambia
                 $company->userAccount->email = Input::get('email');
@@ -242,10 +244,8 @@ class CompanyController extends BaseController {
             if ($company->userAccount->amend()) {//amend funcion para actualizar los usuarios
                 // Redirect with success message, You may replace "Lang::get(..." for your custom message.
                 if ($company->save()) {
-                    if ($passwordIsChanged) {
+                    if ($passwordIsChanged || $emailIsChanged) {
                         Confide::logout();
-                        return Redirect::to('user/login')
-                            ->with('success', Lang::get('user/user.user_account_updated'));
                     }
                     return Redirect::to('/')
                         ->with('success', Lang::get('user/user.user_account_updated'));

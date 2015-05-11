@@ -6,11 +6,9 @@ class NgoProjectControllerTest extends BaseControllerTestCase
     public function testListNGOVolunteerProjectResponse()
     {
         $this->flushSession();
-
-        // Login in as ngo1
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'eat@gmail.com',
+            'password' => 'eat1',
             'csrf_token' => Session::getToken()
         );
 
@@ -51,10 +49,9 @@ class NgoProjectControllerTest extends BaseControllerTestCase
     {
         $this->flushSession();
 
-        // Login in as ngo1
-        $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            $credentials = array(
+                'email' => 'eat@gmail.com',
+                'password' => 'eat1',
             'csrf_token' => Session::getToken()
         );
 
@@ -75,10 +72,10 @@ class NgoProjectControllerTest extends BaseControllerTestCase
     {
         $this->flushSession();
 
-        // Login in as ngo1
+
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'eat@gmail.com',
+            'password' => 'eat1',
             'csrf_token' => Session::getToken()
         );
 
@@ -94,10 +91,9 @@ class NgoProjectControllerTest extends BaseControllerTestCase
     {
         $this->flushSession();
 
-        // Login in as ngo1
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'eat@gmail.com',
+            'password' => 'eat1',
             'csrf_token' => Session::getToken()
         );
 
@@ -128,10 +124,10 @@ class NgoProjectControllerTest extends BaseControllerTestCase
     {
         $this->flushSession();
 
-        // Login in as ngo1
+
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'eat@gmail.com',
+            'password' => 'eat1',
             'csrf_token' => Session::getToken()
         );
 
@@ -163,10 +159,9 @@ class NgoProjectControllerTest extends BaseControllerTestCase
     {
         $this->flushSession();
 
-        // Login in as ngo1
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'eat@gmail.com',
+            'password' => 'eat1',
             'csrf_token' => Session::getToken()
         );
 
@@ -198,10 +193,10 @@ class NgoProjectControllerTest extends BaseControllerTestCase
     {
         $this->flushSession();
 
-        // Login in as ngo1
+
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'eat@gmail.com',
+            'password' => 'eat1',
             'csrf_token' => Session::getToken()
         );
 
@@ -235,10 +230,9 @@ class NgoProjectControllerTest extends BaseControllerTestCase
 
         $this->flushSession();
 
-        // Login in as ngo1
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'eat@gmail.com',
+            'password' => 'eat1',
             'csrf_token' => Session::getToken()
         );
 
@@ -264,8 +258,8 @@ class NgoProjectControllerTest extends BaseControllerTestCase
 
         $this->flushSession();
         $credentials2 = array(
-            'email' => 'company1@company1.com',
-            'password' => 'company1',
+            'email' => 'xeilaale@gmail.com',
+            'password' => 'xeilaale1',
             'csrf_token' => Session::getToken()
         );
         $this->withInput($credentials2)
@@ -285,10 +279,10 @@ class NgoProjectControllerTest extends BaseControllerTestCase
 
         $this->flushSession();
 
-        // Login in as ngo1
+
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'eat@gmail.com',
+            'password' => 'eat1',
             'csrf_token' => Session::getToken()
         );
 
@@ -329,10 +323,10 @@ class NgoProjectControllerTest extends BaseControllerTestCase
 
         $this->flushSession();
 
-        // Login in as ngo1
+
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'eat@gmail.com',
+            'password' => 'eat1',
             'csrf_token' => Session::getToken()
         );
 
@@ -375,8 +369,8 @@ class NgoProjectControllerTest extends BaseControllerTestCase
         $this->flushSession();
 
         $credentials2 = array(
-            'email' => 'company1@company1.com',
-            'password' => 'company1',
+            'email' => 'xeilaale@gmail.com',
+            'password' => 'xeilaale1',
             'csrf_token' => Session::getToken()
         );
 
@@ -395,10 +389,10 @@ class NgoProjectControllerTest extends BaseControllerTestCase
 
         $this->flushSession();
 
-        // Login in as ngo1
+
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'eat@gmail.com',
+            'password' => 'eat1',
             'csrf_token' => Session::getToken()
         );
 
@@ -451,10 +445,9 @@ class NgoProjectControllerTest extends BaseControllerTestCase
 
         $this->flushSession();
 
-        // Login in as ngo1
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'eat@gmail.com',
+            'password' => 'eat1',
             'csrf_token' => Session::getToken()
         );
 
@@ -482,8 +475,8 @@ class NgoProjectControllerTest extends BaseControllerTestCase
         $project = Project::where('name', '=', 'ngo  3')->first();
 
         $credentials2 = array(
-            'email' => 'ngo2@ngo2.com',
-            'password' => 'ngo2',
+            'email' => 'steps@gmail.com',
+            'password' => 'steps1',
             'csrf_token' => Session::getToken()
         );
 
@@ -503,10 +496,9 @@ class NgoProjectControllerTest extends BaseControllerTestCase
 
         $this->flushSession();
 
-        // Login in as ngo1
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'eat@gmail.com',
+            'password' => 'eat1',
             'csrf_token' => Session::getToken()
         );
 

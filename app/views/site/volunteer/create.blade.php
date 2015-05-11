@@ -176,7 +176,7 @@
                     <input type="button" class="btn btn-primary" onclick="submitUpdate()"
                            value="{{ Lang::get('volunteer/volunteer.update') }}">
 
-                    <input type="button" class="btn btn-primary"
+                    <input type="button" class="btn btn-danger"
                            onclick="window.location.href='{{ URL::to('volunteer/delete') }}'"
 
                            value="{{ Lang::get('volunteer/volunteer.delete') }}">

@@ -12,7 +12,7 @@ class CompanyTest extends TestCase {
     public function testName()
     {
         $company = $this->company;
-        $this->assertEquals( $company->name, 'company1' );
+        $this->assertEquals( $company->name, 'Boliri Association' );
     }
 
     public function testNameIsAString()
@@ -36,7 +36,7 @@ class CompanyTest extends TestCase {
     public function testSector()
     {
         $company = $this->company;
-        $this->assertEquals( $company->sector, 'sector1' );
+        $this->assertEquals( $company->sector, 'Servicios' );
     }
 
     public function testSectorIsAString()
@@ -48,7 +48,7 @@ class CompanyTest extends TestCase {
     public function testDescription()
     {
         $company = $this->company;
-        $this->assertEquals( $company->description, 'descripcion' );
+        $this->assertEquals( $company->description, 'En esta empresa se ayuda al cliente a no gastar dinero innecesariamente.' );
     }
 
     public function testDescriptionIsAString()
@@ -60,7 +60,7 @@ class CompanyTest extends TestCase {
     public function testPhone()
     {
         $company = $this->company;
-        $this->assertEquals( $company->phone, '646464646' );
+        $this->assertEquals( $company->phone, '635256458' );
     }
 
     public function testPhoneIsAString()

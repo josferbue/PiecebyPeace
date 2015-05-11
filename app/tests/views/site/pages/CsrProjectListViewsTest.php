@@ -7,8 +7,8 @@ class CsrProjectListViewsTest extends BaseControllerTestCase {
     {
         // Login in as company1
         $credentials = array(
-            'email'=>'company1@company1.com',
-            'password'=>'company1',
+            'email'=>'xeilaale@gmail.com',
+            'password'=>'xeilaale1',
             'csrf_token' => Session::getToken()
         );
 
@@ -38,8 +38,8 @@ class CsrProjectListViewsTest extends BaseControllerTestCase {
     public function testListCompanyCsrProjectResponse()
     {
         $credentials = array(
-            'email'=>'company1@company1.com',
-            'password'=>'company1',
+            'email'=>'xeilaale@gmail.com',
+            'password'=>'xeilaale1',
             'csrf_token' => Session::getToken()
         );
 
@@ -61,8 +61,8 @@ class CsrProjectListViewsTest extends BaseControllerTestCase {
     public function testCompanyCsrProject1Name()
     {
         $credentials = array(
-            'email'=>'company1@company1.com',
-            'password'=>'company1',
+            'email'=>'xeilaale@gmail.com',
+            'password'=>'xeilaale1',
             'csrf_token' => Session::getToken()
         );
 
@@ -72,7 +72,7 @@ class CsrProjectListViewsTest extends BaseControllerTestCase {
 
         $crawler = $this->client->request('GET', URL::to('company/project/myCsrProjects'));
 
-        $this->assertCount(1, $crawler->filter('h3:contains("Project 2")'));
+        $this->assertCount(1, $crawler->filter('h3:contains("Prevención de la violencia")'));
     }
 
     public function testDetailsCsrProject1Response()

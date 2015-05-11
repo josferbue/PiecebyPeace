@@ -13,7 +13,7 @@ class VolunteerTest extends TestCase {
     public function testName()
     {
         $volunteer = $this->volunteer;
-        $this->assertEquals( $volunteer->name, 'volunteer1' );
+        $this->assertEquals( $volunteer->name, 'Isabel' );
     }
 
     public function testNameIsAString()
@@ -37,7 +37,7 @@ class VolunteerTest extends TestCase {
     public function testSurname()
     {
         $volunteer = $this->volunteer;
-        $this->assertEquals( $volunteer->surname, 'surname1' );
+        $this->assertEquals( $volunteer->surname, 'Ocaña' );
     }
 
     public function testSurnameIsAString()
@@ -49,7 +49,7 @@ class VolunteerTest extends TestCase {
     public function testBiography()
     {
         $volunteer = $this->volunteer;
-        $this->assertEquals( $volunteer->biography, 'biography1' );
+        $this->assertEquals( $volunteer->biography, '' );
     }
 
     public function testBiographyIsAString()
@@ -61,7 +61,7 @@ class VolunteerTest extends TestCase {
     public function testAddress()
     {
         $volunteer = $this->volunteer;
-        $this->assertEquals( $volunteer->address, 'address1' );
+        $this->assertEquals( $volunteer->address, 'C/ Clara Campoamor nº3' );
     }
 
     public function testAddressIsAString()
@@ -72,7 +72,7 @@ class VolunteerTest extends TestCase {
        public function testCity()
     {
         $volunteer = $this->volunteer;
-        $this->assertEquals( $volunteer->city, 'Sevilla' );
+        $this->assertEquals( $volunteer->city, 'Vejer de la Frontera' );
     }
 
     public function testCityIsAString()
@@ -84,7 +84,7 @@ class VolunteerTest extends TestCase {
     public function testZipCode()
     {
         $volunteer = $this->volunteer;
-        $this->assertEquals( $volunteer->zipCode, '49999' );
+        $this->assertEquals( $volunteer->zipCode, '11150' );
     }
 
     public function testZipCodeIsAString()

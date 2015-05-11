@@ -173,7 +173,8 @@ class NgoController extends BaseController
                     ->withInput(Input::except('password', 'password_confirmation', 'oldPassword'))
                     ->with('error', Lang::get('user/messages.editProfile.oldPasswordIncorrect'));
             }
-            $passwordisChanged = false;
+            $passwordIsChanged = false;
+            $emailIsChanged = false;
 
             if (!empty($password) || !empty($passwordConfirmation)) {
                 if ($password === $passwordConfirmation) {
@@ -183,7 +184,7 @@ class NgoController extends BaseController
                     // before saving. This field will be used in Ardent's
                     // auto validation.
                     $ngo->userAccount->password_confirmation = $passwordConfirmation;
-                    $passwordisChanged = true;
+                    $passwordIsChanged = true;
 
                 } else {
                     // Redirect to the new user page
@@ -203,7 +204,7 @@ class NgoController extends BaseController
 
 
             if ($ngo->userAccount->email != Input::get('email')) {
-
+                $emailIsChanged=true;
                 //hacemos que vuelva a enviar email de confirmacion si este se cambia
                 $ngo->userAccount->email = Input::get('email');
 
@@ -237,10 +238,8 @@ class NgoController extends BaseController
             if ($ngo->userAccount->amend()) {//amend funcion para actualizar los usuarios
                 // Redirect with success message, You may replace "Lang::get(..." for your custom message.
                 if ($ngo->save()) {
-                    if ($passwordisChanged) {
+                    if ($passwordIsChanged || $emailIsChanged) {
                         Confide::logout();
-                        return Redirect::to('user/login')
-                            ->with('success', Lang::get('user/user.user_account_updated'));
                     }
                     return Redirect::to('/')
                         ->with('success', Lang::get('user/user.user_account_updated'));

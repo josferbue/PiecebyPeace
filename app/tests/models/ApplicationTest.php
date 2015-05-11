@@ -13,7 +13,7 @@ class ApplicationTest extends TestCase {
     public function testMoment()
     {
         $application = $this->application;
-        $this->assertEquals( date('Y-m-d', strtotime($application->moment)), date('Y-m-d', strtotime(\Carbon\Carbon::createFromDate(2015,5,7))));
+        $this->assertEquals( date('Y-m-d', strtotime($application->moment)), date('Y-m-d', strtotime(\Carbon\Carbon::createFromDate(2015,5,11))));
 
     }
 
@@ -26,7 +26,7 @@ class ApplicationTest extends TestCase {
     public function testComments()
     {
         $application = $this->application;
-        $this->assertEquals( $application->comments, 'comments1' );
+        $this->assertEquals( $application->comments, 'Buenas. Me gustaría participar en este proyecto de voluntariado.' );
     }
 
     public function testCommentsIsAString()
@@ -38,7 +38,7 @@ class ApplicationTest extends TestCase {
     public function testResult()
     {
         $application = $this->application;
-        $this->assertEquals( $application->result, 2);
+        $this->assertEquals( $application->result, 0);
     }
 
     public function testResultIsAnInt()
