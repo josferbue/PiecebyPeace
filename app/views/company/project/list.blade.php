@@ -80,19 +80,6 @@
             <LINK href="{{URL::to('template/bootstrap/css/listProject.css')}}" rel="stylesheet" type="text/css">
 
         </form>
-    @else
-        <div class="pagination">
-
-            <input type="button" class="btn btn-primary"
-                   onclick="window.location.href='{{ URL::to('/') }}'"
-                   value="{{ Lang::get('project/list.back') }}">
-            <br>
-            @if(isset($projects))
-                {{ $projects->links()}}
-                {{--mostramos los links para paginar--}}
-            @endif
-        </div>
-
     @endif
     {{--Comprobamos que existen proyectos y los muestra los proyectos--}}
     @if(isset($emptyProjects))
@@ -125,18 +112,18 @@
                         </div>
                     </div>
                     <br>
-                    @if( isset($viewCsrMyProjects) && !($project->finishDate < Carbon::now()))
+                    @if( isset($viewCsrMyProjects) && !($project->finishDate < Carbon::now()) && count($project->volunteers))
                         <input type="button" class="btn btn-primary"
                                onclick="window.location.href='{{ URL::to('company/message/sendMessage/'.$project->id) }}'"
                                value="{{ Lang::get('project/list.sendMessage') }}">
 
-                    @elseif(isset($authCompanyId) && !($project->finishDate < Carbon::now()))
+                    @elseif(isset($authCompanyId) && !($project->finishDate < Carbon::now()) && count($project->volunteers))
                         @if($authCompanyId!=null && $authCompanyId==$project->company_id)
                             <input type="button" class="btn btn-primary"
                                    onclick="window.location.href='{{ URL::to('company/message/sendMessage/'.$project->id) }}'"
                                    value="{{ Lang::get('project/list.sendMessage') }}">
                         @endif
-                    @elseif(isset($authVolunteerId)&&isset($projectsOfVolunteer) && !($project->finishDate < Carbon::now()))
+                    @elseif(isset($authVolunteerId)&&isset($projectsOfVolunteer) && !($project->finishDate < Carbon::now()) && count($project->volunteers))
                         @if($authVolunteerId!=null && $projectsOfVolunteer->contains($project->id))
                             <input type="button" class="btn btn-primary"
                                    onclick="window.location.href='{{ URL::to('volunteer/message/sendMessage/'.$project->id) }}'"
@@ -147,5 +134,19 @@
                 @endforeach
             </div>
         @endif
+    @endif
+
+    @if(isset($viewCsrMyProjects))
+        <div class="pagination">
+
+            <input type="button" class="btn btn-primary"
+                   onclick="window.location.href='{{ URL::to('/') }}'"
+                   value="{{ Lang::get('project/list.back') }}">
+            <br>
+            @if(isset($projects))
+                {{ $projects->links()}}
+                {{--mostramos los links para paginar--}}
+            @endif
+        </div>
     @endif
 @stop

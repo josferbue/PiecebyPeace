@@ -24,19 +24,6 @@
         @endif
     </div>
 
-
-    <div class="pagination">
-
-        <input type="button" class="btn btn-primary"
-               onclick="window.location.href='{{ URL::to('/') }}'"
-               value="{{ Lang::get('project/list.back') }}">
-        <br>
-        @if(isset($projects))
-            {{ $projects->links()}}
-            {{--mostramos los links para paginar--}}
-        @endif
-    </div>
-
     {{--Comprobamos que existen proyectos y los muestra los proyectos--}}
     @if($emptyProjects  )
             <h3> {{{ Lang::get('project/list.volunteerEmptyProject') }}}</h3>
@@ -62,11 +49,25 @@
                     </div>
                 </div>
                 <br>
-                <input type="button" class="btn btn-primary"
-                       onclick="window.location.href='{{ URL::to('volunteer/message/sendMessage/'.$project->id) }}'"
-                       value="{{ Lang::get('project/list.sendMessage') }}">
+                @if(!($project->finishDate < Carbon::now()))
+                    <input type="button" class="btn btn-primary"
+                           onclick="window.location.href='{{ URL::to('volunteer/message/sendMessage/'.$project->id) }}'"
+                           value="{{ Lang::get('project/list.sendMessage') }}">
+                @endif
                 <hr/>
             @endforeach
         </div>
     @endif
+
+    <div class="pagination">
+
+        <input type="button" class="btn btn-primary"
+               onclick="window.location.href='{{ URL::to('/') }}'"
+               value="{{ Lang::get('project/list.back') }}">
+        <br>
+        @if(isset($projects))
+            {{ $projects->links()}}
+            {{--mostramos los links para paginar--}}
+        @endif
+    </div>
 @stop

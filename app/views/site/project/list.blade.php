@@ -103,18 +103,18 @@
                         </div>
                     </div>
                     <br>
-                    @if( isset($viewNgoMyProjects) && !($project->finishDate < Carbon::now()))
+                    @if( isset($viewNgoMyProjects) && !($project->finishDate < Carbon::now()) && count($project->volunteers))
                         <input type="button" class="btn btn-primary"
                                onclick="window.location.href='{{ URL::to('ngo/message/sendMessage/'.$project->id) }}'"
                                value="{{ Lang::get('project/list.sendMessage') }}">
 
-                    @elseif(isset($authNgoId) && !($project->finishDate < Carbon::now()))
+                    @elseif(isset($authNgoId) && !($project->finishDate < Carbon::now()) && count($project->volunteers))
                         @if($authNgoId!=null && $authNgoId==$project->ngo_id)
                             <input type="button" class="btn btn-primary"
                                    onclick="window.location.href='{{ URL::to('ngo/message/sendMessage/'.$project->id) }}'"
                                    value="{{ Lang::get('project/list.sendMessage') }}">
                         @endif
-                    @elseif(isset($authVolunteerId)&&isset($projectsOfVolunteer)&& !($project->finishDate < Carbon::now()))
+                    @elseif(isset($authVolunteerId)&&isset($projectsOfVolunteer)&& !($project->finishDate < Carbon::now()) && count($project->volunteers))
                         @if($authVolunteerId!=null && $projectsOfVolunteer->contains($project->id))
                             <input type="button" class="btn btn-primary"
                                    onclick="window.location.href='{{ URL::to('volunteer/message/sendMessage/'.$project->id) }}'"
