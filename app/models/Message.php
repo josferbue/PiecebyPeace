@@ -62,22 +62,22 @@ class Message extends Eloquent
 
     public function recipients_ngo()
     {
-        return $this->belongsToMany('Ngo', 'message_recipient', 'message_id', 'recipient_ngo_id');
+        return $this->belongsToMany('Message', 'message_recipient', 'message_id', 'recipient_ngo_id');
     }
 
     public function recipients_company()
     {
-        return $this->belongsToMany('Ngo', 'message_recipient', 'message_id', 'recipient_company_id');
+        return $this->belongsToMany('Message', 'message_recipient', 'message_id', 'recipient_company_id');
     }
 
     public function recipients_volunteer()
-    {
-        return $this->belongsToMany('Ngo', 'message_recipient', 'message_id', 'recipient_volunteer_id');
+    {                               //model, StringTable,       StringForaignKey $string other key
+        return $this->belongsToMany('Message', 'message_recipient', 'message_id', 'recipient_volunteer_id');
     }
 
     public function recipients_administrator()
     {
-        return $this->belongsToMany('Ngo', 'message_recipient', 'message_id', 'recipient_administrator_id');
+        return $this->belongsToMany('Message', 'message_recipient', 'message_id', 'recipient_administrator_id');
     }
 
 

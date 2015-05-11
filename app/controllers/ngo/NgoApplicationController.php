@@ -44,7 +44,7 @@ class NgoApplicationController extends BaseController
         $applications = Application::where('result', '=', 0)->groupBy('project_id')
             ->whereHas('project', function ($q) {
                 $q->where('ngo_id', '=', $this->ngo->id)
-                ->where('startDate', '<', Carbon::now());
+                ->where('startDate', '>', Carbon::now());
             })
             ->paginate(4);
 
@@ -74,7 +74,7 @@ class NgoApplicationController extends BaseController
                 ->whereHas('project', function ($q) {
                     $q->where('ngo_id', '=', $this->ngo->id)
                         ->where('id', '=', $this->project->id)
-                        ->where('startDate', '<', Carbon::now());
+                        ->where('startDate', '>', Carbon::now());
                 })
                 ->paginate(4);
 

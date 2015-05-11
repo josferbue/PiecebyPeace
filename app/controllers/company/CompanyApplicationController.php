@@ -42,7 +42,7 @@ class CompanyApplicationController extends BaseController
         $applications = Application::where('result', '=', 0)->groupBy('project_id')
             ->whereHas('project', function ($q) {
                 $q->where('company_id', '=', $this->company->id)
-                    ->where('startDate', '<', Carbon::now());
+                    ->where('startDate', '>', Carbon::now());
             })->paginate(4);
 
         $backUrl=URL::previous();
@@ -70,7 +70,7 @@ class CompanyApplicationController extends BaseController
             $applications = Application::where('result', '=', 0)
                 ->whereHas('project', function ($q) {
                     $q->where('ngo_id', '=', $this->company->id)
-                        ->where('startDate', '<', Carbon::now())
+                        ->where('startDate', '>', Carbon::now())
                             ->where('id', '=', $this->project->id);
                 })
                 ->paginate(4);

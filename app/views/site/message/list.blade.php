@@ -34,12 +34,12 @@
                     <li class="dropdown ">
                         <a href="{{URL::to('message/view/'.$message->id)}}" class="list-group-item active">
                             @if($inbox)
-                                <span class="listMessages">{{{$message->from}}}</span>
+                                <span class="messageTo">{{{$message->from}}}</span>
                             @else
                                 @if(substr($message->to, 0,1)=='(' && substr($message->to, -1)==')')
-                                    <span id="messageTo">{{{ Lang::get('message/list.BroadcastAllVolunteers').' '.$message->to }}}</span>
+                                    <span class="messageTo">{{{ Lang::get('message/list.BroadcastAllVolunteers').' '.$message->to }}}</span>
                                 @else
-                                    <span id="messageTo">{{{$message->to}}}</span>
+                                    <span class="messageTo">{{{$message->to}}}</span>
                                 @endif
                             @endif
                             @if(isset ($messagesNotReadId))

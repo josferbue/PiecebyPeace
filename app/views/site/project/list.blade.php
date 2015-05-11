@@ -65,9 +65,14 @@
 
             <LINK href="{{URL::to('template/bootstrap/css/listProject.css')}}" rel="stylesheet" type="text/css">
 
-                <button type="submit"
-                        class="btn btn-primary">{{{ Lang::get('project/list.search') }}}</button>
-                <br>
+            <button type="submit"
+                    class="btn btn-primary">{{{ Lang::get('project/list.search') }}}</button>
+            @if(!isset($emptyProjects))
+                <input type="button" class="btn btn-primary"
+                       onclick="window.location.href='{{ URL::to('/') }}'"
+                       value="{{ Lang::get('project/list.back') }}">
+            @endif
+            <br>
         </form>
 
     @endif
@@ -136,8 +141,9 @@
                 @endif
             </div>
         @endif
+        <input type="button" class="btn btn-primary"
+               onclick="window.location.href='{{ URL::to('/') }}'"
+               value="{{ Lang::get('project/list.back') }}">
     @endif
-    <input type="button" class="btn btn-primary"
-           onclick="window.location.href='{{ URL::to('/') }}'"
-           value="{{ Lang::get('project/list.back') }}">
+
 @stop

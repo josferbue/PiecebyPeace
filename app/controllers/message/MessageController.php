@@ -51,6 +51,7 @@ class MessageController extends BaseController
 
 
         }
+
         $messages = Message::whereHas($this->eloquentRecipient, function ($q) {
             $q->where($this->columDatabase, '=', $this->user->id);
         })->paginate(4);
