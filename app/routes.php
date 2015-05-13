@@ -94,8 +94,8 @@ Route::group(array('prefix' => 'volunteer', 'before' => 'auth'), function () {
     //apply project
     Route::get('/apply/project/{id}', 'VolunteerApplicationController@createApplication');
     Route::post('/apply/project/{id}', 'VolunteerApplicationController@saveApplication');
-    Route::get('/application/Csr', 'VolunteerApplicationController@finMyApplicationsCsr');
-    Route::get('/application/Volunteer', 'VolunteerApplicationController@finMyApplicationsVolunteer');
+    Route::get('/application/Csr', 'VolunteerApplicationController@findMyApplicationsCsr');
+    Route::get('/application/Volunteer', 'VolunteerApplicationController@findMyApplicationsVolunteer');
     Route::get('/application/cancel/{id}', 'VolunteerApplicationController@cancelApplication');
     Route::get('/application/view/{id}', 'VolunteerApplicationController@viewApplication');
 

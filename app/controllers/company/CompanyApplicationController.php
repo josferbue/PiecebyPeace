@@ -14,20 +14,20 @@ class CompanyApplicationController extends BaseController
 
     public function findOurAnsweredApplications()
     {
-        $title=Lang::get('application/list.titleAnswered');
-        $this->company=Company::where('user_id','=',Auth::id())->first();
+        $title = Lang::get('application/list.titleAnswered');
+        $this->company = Company::where('user_id', '=', Auth::id())->first();
 
         $applications = Application::where('result', '>', 0)->groupBy('project_id')
             ->whereHas('project', function ($q) {
                 $q->where('company_id', '=', $this->company->id);
             })->paginate(4);
 
-        $backUrl=URL::previous();
-        if(strpos($backUrl,'application') !== false){
-            $backUrl='/';
+        $backUrl = URL::previous();
+        if (strpos($backUrl, 'application') !== false) {
+            $backUrl = '/';
         }
         $data = array(
-            'backUrl'   => $backUrl,
+            'backUrl' => $backUrl,
             'applications' => $applications,
             'title' => $title,
         );
@@ -36,8 +36,8 @@ class CompanyApplicationController extends BaseController
 
     public function findOurPendingApplications()
     {
-        $title=Lang::get('application/list.titlePending');
-        $this->company=Company::where('user_id','=',Auth::id())->first();
+        $title = Lang::get('application/list.titlePending');
+        $this->company = Company::where('user_id', '=', Auth::id())->first();
 
         $applications = Application::where('result', '=', 0)->groupBy('project_id')
             ->whereHas('project', function ($q) {
@@ -45,12 +45,12 @@ class CompanyApplicationController extends BaseController
                     ->where('startDate', '>', Carbon::now());
             })->paginate(4);
 
-        $backUrl=URL::previous();
-        if(strpos($backUrl,'application') !== false){
-            $backUrl='/';
+        $backUrl = URL::previous();
+        if (strpos($backUrl, 'application') !== false) {
+            $backUrl = '/';
         }
         $data = array(
-            'backUrl'   => $backUrl,
+            'backUrl' => $backUrl,
             'applications' => $applications,
             'title' => $title,
             'isPending' => true,
@@ -71,7 +71,7 @@ class CompanyApplicationController extends BaseController
                 ->whereHas('project', function ($q) {
                     $q->where('ngo_id', '=', $this->company->id)
                         ->where('startDate', '>', Carbon::now())
-                            ->where('id', '=', $this->project->id);
+                        ->where('id', '=', $this->project->id);
                 })
                 ->paginate(4);
 
@@ -95,10 +95,17 @@ class CompanyApplicationController extends BaseController
         );
         Return View::make('site/application/listInProject')->with($data);
     }
+
     public function viewApplication($id)
     {
         $application = Application::where('id', '=', $id)->first();
+        $company = Company::where('user_id', '=', Auth::id())->first();
 
+        if ($company == null) {
+            return Redirect::to('/')->with('error', Lang::get('application/messages.view.errorNotYourApplication'));
+        } elseif ($application->project->company_id != $company->id) {
+            return Redirect::to('/')->with('error', Lang::get('application/messages.view.errorNotYourApplication'));
+        }
 
         if ($application->result == 0) {
             $backUrl = 'company/application/listInProject/' . $application->project->id . '/pending';
@@ -115,35 +122,36 @@ class CompanyApplicationController extends BaseController
         Return View::make('site/application/view')->with($data);
     }
 
-    public function answer($id,$answer){
+    public function answer($id, $answer)
+    {
         $application = Application::where('id', '=', $id)->first();
-        $company=Company::where('user_id','=',Auth::id())->first();
-        $backUrl = '/listInProject/'.$application->project_id.'/pending';
+        $company = Company::where('user_id', '=', Auth::id())->first();
+        $backUrl = '/listInProject/' . $application->project_id . '/pending';
 
-        if($application->project->company_id!=$company->id){
+        if ($application->project->company_id != $company->id) {
             return Redirect::to($backUrl)->with('error', Lang::get('application/messages.answer.errorNotHisProject'));
         }
-        if($application->result!=0){
+        if ($application->result != 0) {
             return Redirect::to($backUrl)->with('error', Lang::get('application/messages.answer.errorAnsweredYet'));
         }
 
-        if($answer==1 || $answer==2){
+        if ($answer == 1 || $answer == 2) {
 
-            $application->result=$answer;
+            $application->result = $answer;
 
-        }else{
+        } else {
             return Redirect::to($backUrl)->with('error', Lang::get('application/messages.answer.errorRequest'));
         }
 
-        if($application->save()){
-            if($application->result==2){
+        if ($application->save()) {
+            if ($application->result == 2) {
 
-                $project=Project::where('id','=',$application->project_id)->first();
-                $volunteer=Volunteer::where('id','=',$application->volunteer_id)->first();
+                $project = Project::where('id', '=', $application->project_id)->first();
+                $volunteer = Volunteer::where('id', '=', $application->volunteer_id)->first();
 
                 $project->volunteers()->attach($volunteer);
             }
-            return Redirect::to('company/application/listInProject/'.$application->project_id.'/pending')->with('success', Lang::get('application/messages.answer.success'));
+            return Redirect::to('company/application/listInProject/' . $application->project_id . '/pending')->with('success', Lang::get('application/messages.answer.success'));
         }
 
         return Redirect::to($backUrl)->with('error', Lang::get('application/messages.answer.error'));

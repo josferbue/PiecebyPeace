@@ -9,5 +9,6 @@ return array(
         'errorNotHisProject'        => 'You can only send messages to cooperators of your CSR projects.',
         'errorHasNotVolunteers'     => 'You can not send messages related to this project due to it does not have cooperators.',
         'errorProjectHasFinished'   => 'You can not send messages related to this project due to it has already finished.',
+        'errorVolunteerNotInProject'   => 'The volunteer does not cooperate in this project.',
     )
 );

@@ -70,6 +70,10 @@ class NgoMessageController extends BaseController
             if (Input::get('type') == 'volunteer') {
                 $volunteerId = Input::get('volunteerId');
                 $recipientUserVolunteer = Volunteer::where('id', '=', $volunteerId)->first();
+                if(!$project->volunteers->contains($recipientUserVolunteer)){
+                    return Redirect::to(Session::get('backUrl'))->with('error', Lang::get('ngo/messages.createMessage.errorVolunteerNotInProject'));
+
+                }
                 $this->message->to = $recipientUserVolunteer->name.' '.$recipientUserVolunteer->surname;
 
             } else {

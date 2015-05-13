@@ -16,6 +16,8 @@ return array(
         'errorIsAnswered'           => 'Answered applications can not be deleted.',
         'error'                     => 'An error took place while deleting the application. Please, try it again.',
         'success'                   => 'The application has been successfully deleted.',
+        'errorNotYourApplication'    => 'You can only delete your applications.',
+
 
     ),
     'answer' => array(
@@ -24,6 +26,9 @@ return array(
         'errorNotHisProject'        => 'You can only answer applications involved in your projects.',
         'errorAnsweredYet'          => 'The application has been already answered.',
         'errorRequest'              => 'An error took place due to the URL was manipulated.',
-    )
+    ),
+    'view' => array(
+        'errorNotYourApplication'   => 'You can only view your applications.',
 
+    ),
 );

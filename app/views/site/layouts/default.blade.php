@@ -329,7 +329,14 @@
                                 <i class="general foundicon-mail icon"></i>
                                 <span class="field">{{{ Lang::get('site.email') }}}:</span>
                                 <br/>
-                                <a href="mailto:contact@piecebypeace.es" title="Email">contact@piecebypeace.es</a>
+                                <link href="{{URL::to('template/bootstrap/css/hiddenVisibleMobile.css')}}" rel="stylesheet" type="text/css">
+
+                                <div class="hidden-xs">
+                                    <a href="mailto:contact@piecebypeace.es" title="Email">contact@piecebypeace.es</a>
+                                </div>
+                                <div class="visible-xs">
+                                     contact@piecebypeace.es
+                                </div>
                             </li>
                             <li>
                                 <i class="general foundicon-home icon"></i>

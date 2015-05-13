@@ -103,7 +103,13 @@ class NgoApplicationController extends BaseController
     {
         $application = Application::where('id', '=', $id)->first();
 
+        $ngo = Ngo::where('user_id', '=', Auth::id())->first();
 
+        if ($ngo == null) {
+            return Redirect::to('/')->with('error', Lang::get('application/messages.view.errorNotYourApplication'));
+        } elseif ($application->project->ngo_id != $ngo->id) {
+            return Redirect::to('/')->with('error', Lang::get('application/messages.view.errorNotYourApplication'));
+        }
         if ($application->result == 0) {
             $backUrl = 'ngo/application/listInProject/' . $application->project->id . '/pending';
 
