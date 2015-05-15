@@ -71,18 +71,18 @@
             @endif
 
             <div class="pagination">
-                <input type="button" class="btn btn-info" onclick="window.location.href='{{{ URL::to('admin/message/sendMessage/'.$user->id) }}}'" value="{{{ Lang::get('admin/search.sendMessage') }}}">
+                <input type="button" class="btn btn-info" onclick="window.location.href='{{{ URL::to('admin/message/sendMessage/'.$user->userAccount->id) }}}'" value="{{{ Lang::get('admin/search.sendMessage') }}}">
 
                 @if(!$user->active && ($searchType == 'companies' || $searchType == 'NGOs'))
-                    <input type="button" class="btn btn-primary" onclick="window.location.href='{{{ URL::to('admin/user/activateAccount/'.$user->id) }}}'" value="{{{ Lang::get('admin/accountActivation.activate') }}}">
+                    <input type="button" class="btn btn-primary" onclick="window.location.href='{{{ URL::to('admin/user/activateAccount/'.$user->userAccount->id) }}}'" value="{{{ Lang::get('admin/accountActivation.activate') }}}">
                 @elseif($user->active && ($searchType == 'companies' || $searchType == 'NGOs'))
-                    <input type="button" class="btn btn-danger" onclick="window.location.href='{{{ URL::to('admin/user/deactivateAccount/'.$user->id) }}}'" value="{{{ Lang::get('admin/accountActivation.deactivate') }}}">
+                    <input type="button" class="btn btn-danger" onclick="window.location.href='{{{ URL::to('admin/user/deactivateAccount/'.$user->userAccount->id) }}}'" value="{{{ Lang::get('admin/accountActivation.deactivate') }}}">
                 @endif
 
                 @if(!$user->banned)
-                    <input type="button" class="btn btn-danger" onclick="window.location.href='{{{ URL::to('admin/user/ban/'.$user->id) }}}'" value="{{{ Lang::get('admin/ban.banUser') }}}">
+                    <input type="button" class="btn btn-danger" onclick="window.location.href='{{{ URL::to('admin/user/ban/'.$user->userAccount->id) }}}'" value="{{{ Lang::get('admin/ban.banUser') }}}">
                 @else
-                    <input type="button" class="btn btn-primary" onclick="window.location.href='{{{ URL::to('admin/user/unban/'.$user->id) }}}'" value="{{{ Lang::get('admin/ban.unbanUser') }}}">
+                    <input type="button" class="btn btn-primary" onclick="window.location.href='{{{ URL::to('admin/user/unban/'.$user->userAccount->id) }}}'" value="{{{ Lang::get('admin/ban.unbanUser') }}}">
                 @endif
 
             </div>

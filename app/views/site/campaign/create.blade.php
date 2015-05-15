@@ -42,14 +42,20 @@
                                value="<?php echo date("Y-m-d");?>">
                     </div>
 
+                    <LINK href="{{URL::to('template/bootstrap/css/uploadFile.css')}}" rel="stylesheet" type="text/css">
 
                     <div class="form-group  {{{ $errors->has('image') ? 'error' : '' }}}">
                         <label class="control-label" for="image">{{{ Lang::get('campaign/campaign.image') }}}</label>
+                        <div class="hidden-xs">
 
-                        <div class="btn btn-default btn-file">
-                            {{{ Lang::get('site.uploadFile') }}} <input type="file" name="image" id="image">
+                            <div class="btn btn-default btn-file">
+                                {{{ Lang::get('site.uploadFile') }}} <input type="file" name="image" id="image">
+                            </div>
+                            {{ $errors->first('image', '<span class="help-block">:message</span>') }}
                         </div>
-                        {{ $errors->first('image', '<span class="help-block">:message</span>') }}
+                        <div class="visible-xs">
+                            {{{ Lang::get('site.mobileNotUploadImage') }}}
+                        </div>
                     </div>
                 </div>
             </div>

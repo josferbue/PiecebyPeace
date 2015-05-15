@@ -101,13 +101,19 @@
                     {{ $errors->first('country', '<span class="help-block">:message</span>') }}
 
                 </div>
+                <LINK href="{{URL::to('template/bootstrap/css/uploadFile.css')}}" rel="stylesheet" type="text/css">
+
                 <div class="form-group  {{{ $errors->has('image') ? 'error' : '' }}}">
                     <label for="image">{{{ Lang::get('project/create.image') }}}</label>
-                    <div class="btn btn-default btn-file">
-                        {{{ Lang::get('site.uploadFile') }}} <input type="file" name="image" id="image">
+                    <div class="hidden-xs">
+                        <div class="btn btn-default btn-file">
+                            {{{ Lang::get('site.uploadFile') }}} <input type="file" name="image" id="image">
+                        </div>
+                        {{ $errors->first('image', '<span class="help-block">:message</span>') }}
                     </div>
-                    {{ $errors->first('image', '<span class="help-block">:message</span>') }}
-
+                    <div class="visible-xs">
+                        {{{ Lang::get('site.mobileNotUploadImage') }}}
+                    </div>
                 </div>
                 <div class="dropdown {{{ $errors->has('categories') ? 'error' : '' }}}">
                     <label for="image">{{{ Lang::get('project/create.categories') }}}</label>
