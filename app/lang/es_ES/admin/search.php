@@ -27,5 +27,6 @@ return array(
 	'back'					=> 'Volver',
 
 	'notFound'    			=> 'No se encontraron usuarios.',
+	'searchTitleNotActive'	=> 'Usuarios no activados'
 
 );

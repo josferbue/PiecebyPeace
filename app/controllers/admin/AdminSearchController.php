@@ -88,4 +88,32 @@ class AdminSearchController extends BaseController
         Return View::make('admin/users/search')->with($data);
     }
 
+    public function findNGOsNotActive()
+    {
+        $users = Ngo::where('active', '=',false)->paginate(3);
+
+        $data = array(
+            'users' => $users,
+            'searchAction' => 'admin/search/findNGOs',
+            'searchType' => 'NGOs',
+            'listNotActive' =>true,
+        );
+
+        Input::flash();
+        Return View::make('admin/users/search')->with($data);
+    }
+    public function findCompaniesNotActive()
+    {
+        $users = Company::where('active', '=',false)->paginate(3);
+
+        $data = array(
+            'users' => $users,
+            'searchAction' => 'admin/search/findCompanies',
+            'searchType' => 'companies',
+            'listNotActive' =>true,
+        );
+
+        Input::flash();
+        Return View::make('admin/users/search')->with($data);
+    }
 }
