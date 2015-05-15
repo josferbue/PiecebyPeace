@@ -332,7 +332,7 @@ class NgoCampaignController extends BaseController
                 'function' => 'sendMail',
                 'apiKey' => $result->data,
                 'subject' => $camp->ngo->name,
-                'html' => '<html><head><title>'.$camp->name.'</title></head><body><h1>'.$camp->name.'</h1>'.$camp->description.' <br> </p> <a herf='.$camp->link.' >Go to link</a></body></html>',
+                'html' => '<html><head><title>'.$camp->name.'</title></head><body><h1>'.$camp->name.'</h1>'.$camp->description.' <br> </p> </body></html>',
                 'mailboxFromId' => 1,
                 'mailboxReplyId' => 1,
                 'mailboxReportId' => 1,
