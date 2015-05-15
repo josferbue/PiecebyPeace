@@ -110,13 +110,20 @@
                                value="{{{ Input::old('phone', isset($company) ? $company->phone : null) }}}">
                         {{ $errors->first('phone', '<span class="help-block">:message</span>') }}
                     </div>
+                    <LINK href="{{URL::to('template/bootstrap/css/uploadFile.css')}}" rel="stylesheet" type="text/css">
+
                     <div class="form-group  {{{ $errors->has('logo') ? 'error' : '' }}}">
                         <label for="logo">{{{ Lang::get('company/company.logo') }}}</label>
+                        <div class="hidden-xs">
 
-                        <div class="btn btn-default btn-file">
-                            {{{ Lang::get('site.uploadFile') }}} <input type="file" name="logo" id="logo">
+                            <div class="btn btn-default btn-file">
+                                {{{ Lang::get('site.uploadFile') }}} <input type="file" name="logo" id="logo">
+                            </div>
+                            {{ $errors->first('logo', '<span class="help-block">:message</span>') }}
                         </div>
-                        {{ $errors->first('logo', '<span class="help-block">:message</span>') }}
+                        <div class="visible-xs">
+                            {{{ Lang::get('site.mobileNotUploadImage') }}}
+                        </div>
                     </div>
                 </div>
             </div>
