@@ -42,7 +42,7 @@
                                     @if( Input::old('city')==$city)
                                         <option selected="selected">{{ $city }}</option>
                                     @else
-                                        <option>{{ $city }}</option>
+                                        <option>{{{ $city }}}</option>
 
                                     @endif
                                 @endforeach
@@ -97,13 +97,13 @@
                         <div class="span9">
                             <div class="caption">
 
-                                <h3> {{ HTML::link('/project/view/'.$project->id , $project->name) }}  </h3>
+                                <h3> {{{ HTML::link('/project/view/'.$project->id , $project->name) }}}  </h3>
 
                                 {{Session::put('backUrl', Request::url())}}
 
-                                <p>{{ $project->description}}</p>
+                                <p>{{{ $project->description}}}</p>
 
-                                <p2> {{ $project->city}}, {{ $project->country}} </p2>
+                                <p2> {{{ $project->city}}}, {{{ $project->country}}} </p2>
                             </div>
                         </div>
                     </div>

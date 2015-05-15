@@ -30,11 +30,11 @@
                     <div class="span9">
                         <div class="caption">
 
-                            <h3> {{ HTML::link('/project/view/'.$application->project->id , $application->project->name) }}  </h3>
+                            <h3> {{{ HTML::link('/project/view/'.$application->project->id , $application->project->name) }}}  </h3>
 
-                            <p>{{ $application->project->description}}</p>
+                            <p>{{{ $application->project->description}}}</p>
 
-                            <p2> {{$application->project->city}}, {{$application->project->country}} </p2>
+                            <p2> {{{$application->project->city}}}, {{{$application->project->country}}} </p2>
                         </div>
                     </div>
                 </div>

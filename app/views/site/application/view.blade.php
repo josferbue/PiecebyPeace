@@ -20,11 +20,11 @@
 
                 <br>
                 <h7>  {{{ Lang::get('application/view.nameProject') }}} </h7>
-                <p>{{$application->project->name }}</p>
+                <p>{{{$application->project->name }}}</p>
                 <br>
 
                 <h7>  {{{ Lang::get('application/view.volunteer') }}} </h7>
-                <p>{{$application->volunteer->name.' '.$application->volunteer->surname }}</p>
+                <p>{{{$application->volunteer->name.' '.$application->volunteer->surname }}}</p>
                 <br>
                 <h7>  {{{ Lang::get('application/view.result') }}} </h7>
                 @if($application->result==0)
@@ -48,12 +48,12 @@
         </div>
 
         <h7>  {{{ Lang::get('project/view.description') }}} </h7>
-        <p>{{$application->project->description }}</p>
+        <p>{{{$application->project->description }}}</p>
         <br> <br>
 
         @if(!is_null($application->comments) && $application->comments!="")
             <h7>  {{{ Lang::get('application/view.comments') }}} </h7>
-            <p>{{$application->comments }}</p>
+            <p>{{{$application->comments }}}</p>
             <br> <br>
         @endif
 

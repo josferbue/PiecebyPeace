@@ -30,9 +30,9 @@
 
 {{-- Content --}}
 @section('content')
-<h3>{{ $post->title }}</h3>
+<h3>{{{ $post->title }}}</h3>
 
-<p>{{ $post->content() }}</p>
+<p>{{{ $post->content() }}}</p>
 
 <div>
 	<span class="badge badge-info">Posted {{{ $post->date() }}}</span>
@@ -41,7 +41,7 @@
 <hr />
 
 <a id="comments"></a>
-<h4>{{ $comments->count() }} {{ \Illuminate\Support\Pluralizer::plural('Comment', $comments->count()) }}</h4>
+<h4>{{{ $comments->count() }}} {{{ \Illuminate\Support\Pluralizer::plural('Comment', $comments->count()) }}}</h4>
 
 @if ($comments->count())
 @foreach ($comments as $comment)

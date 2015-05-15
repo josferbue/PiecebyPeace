@@ -44,9 +44,9 @@
             <div class="span9">
                 <div class="caption">
 
-                    <h3> {{ HTML::link('campaign/details/'.$campaign->id, $campaign->name) }} </h3>
+                    <h3> {{{ HTML::link('campaign/details/'.$campaign->id, $campaign->name)}}} </h3>
 
-                    <p> {{$campaign->description }} </p>
+                    <p> {{{$campaign->description }}} </p>
 
                 </div>
 
