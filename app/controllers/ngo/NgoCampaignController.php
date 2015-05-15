@@ -100,11 +100,11 @@ class NgoCampaignController extends BaseController
         $validator = Validator::make(Input::all(), $rules);
 
         // Check if the form validates with success
-        $this->campaign->name = Input::get( 'name' );
-        $this->campaign->description = Input::get( 'description' );
+        $this->campaign->name = filter_var(Input::get('name'), FILTER_SANITIZE_STRING);
+        $this->campaign->description = filter_var(Input::get('description'), FILTER_SANITIZE_STRING);
         $this->campaign->startDate = Input::get( 'startDate' );
         $this->campaign->finishDate = Input::get( 'finishDate' );
-        $this->campaign->link = Input::get( 'link' );
+        $this->campaign->link = filter_var(Input::get('link'), FILTER_SANITIZE_STRING);
         $this->campaign->maxVisits = Input::get( 'maxVisits' );
         $this->campaign->expirationDate = Input::get( 'expirationDate' );
         $this->campaign->ngo_id = Ngo::where('user_id','=',Auth::id())->first()->id;

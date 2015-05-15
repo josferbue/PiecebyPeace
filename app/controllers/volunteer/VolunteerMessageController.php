@@ -62,8 +62,8 @@ class VolunteerMessageController extends BaseController
 
         // Check if the form validates with success
         if ($validator->passes()) {
-            $this->message->subject = Input::get('subject');
-            $this->message->textBox = Input::get('textBox');
+            $this->message->subject = filter_var(Input::get('subject'), FILTER_SANITIZE_STRING);
+            $this->message->textBox = filter_var(Input::get('textBox'), FILTER_SANITIZE_STRING);
             $this->message->from = $volunteer->name . ' ' . $volunteer->surname;
             $this->message->volunteer_id = Volunteer::where('user_id', '=', Auth::id())->first()->id;
             $this->message->date = date("Y-m-d");

@@ -36,8 +36,8 @@ class AdminMessageController extends BaseController
 
         // Check if the form validates with success
         if ($validator->passes()) {
-            $this->message->subject = Input::get('subject');
-            $this->message->textBox = Input::get('textBox');
+            $this->message->subject = filter_var(Input::get('subject'), FILTER_SANITIZE_STRING);
+            $this->message->textBox = filter_var(Input::get('textBox'), FILTER_SANITIZE_STRING);
             $this->message->from = Lang::get('admin/message.adminFromField');
             $this->message->date = new DateTime('now');
             $this->message->administrator_id = Administrator::where('user_id', '=', Auth::id())->first()->id;
@@ -105,8 +105,8 @@ class AdminMessageController extends BaseController
 
         // Check if the form validates with success
         if ($validator->passes()) {
-            $this->message->subject = Input::get('subject');
-            $this->message->textBox = Input::get('textBox');
+            $this->message->subject = filter_var(Input::get('subject'), FILTER_SANITIZE_STRING);
+            $this->message->textBox = filter_var(Input::get('textBox'), FILTER_SANITIZE_STRING);
             $this->message->from = Lang::get('admin/message.adminFromField');
             $this->message->date = new DateTime('now');
             $this->message->administrator_id = Administrator::where('user_id', '=', Auth::id())->first()->id;

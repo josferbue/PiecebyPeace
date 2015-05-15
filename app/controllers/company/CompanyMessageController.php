@@ -59,8 +59,8 @@ class CompanyMessageController extends BaseController
 
             }
 
-            $this->message->subject = Input::get('subject');
-            $this->message->textBox = Input::get('textBox');
+            $this->message->subject = filter_var(Input::get('subject'), FILTER_SANITIZE_STRING);
+            $this->message->textBox = filter_var(Input::get('textBox'), FILTER_SANITIZE_STRING);
             $this->message->from = $company->name;
             $this->message->date = date("Y-m-d");
 

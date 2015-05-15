@@ -72,7 +72,7 @@ class ProjectController extends BaseController
 
         $startDate = Input::get('startDate');
         $finishDate = Input::get('finishDate');
-        $city = Input::get('city');
+        $city = filter_var(Input::get('city'), FILTER_SANITIZE_STRING);
 
         $projects = Project::whereNull('company_id')->where('city', '=', $city)->where('startDate', '>', $startDate)
             ->where('finishDate', '<', $finishDate)->whereHas('categories', function ($q) {
@@ -204,7 +204,7 @@ class ProjectController extends BaseController
 
         $startDate = Input::get('startDate');
         $finishDate = Input::get('finishDate');
-        $city = Input::get('city');
+        $city = filter_var(Input::get('city'), FILTER_SANITIZE_STRING);
 
         $projects = Project::whereNull('ngo_id')->where('city', '=', $city)->where('startDate', '>', $startDate)
             ->where('finishDate', '<', $finishDate)->whereHas('categories', function ($q) {

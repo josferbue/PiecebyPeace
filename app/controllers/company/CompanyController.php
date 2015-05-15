@@ -60,20 +60,20 @@ class CompanyController extends BaseController {
         // Check if the form validates with success
 
 
-        $this->user->username = Input::get( 'username' );
-        $this->user->email = Input::get( 'email' );
-        $this->company->name = Input::get("name");
-        $this->company->sector = Input::get("sector");
-        $this->company->description = Input::get("description");
-        $this->company->phone = Input::get("phone");
+        $this->user->username = filter_var(Input::get('username'), FILTER_SANITIZE_STRING);
+        $this->user->email = filter_var(Input::get('email'), FILTER_SANITIZE_STRING);
+        $this->company->name = filter_var(Input::get('name'), FILTER_SANITIZE_STRING);
+        $this->company->sector = filter_var(Input::get('sector'), FILTER_SANITIZE_STRING);
+        $this->company->description = filter_var(Input::get('description'), FILTER_SANITIZE_STRING);
+        $this->company->phone = filter_var(Input::get('phone'), FILTER_SANITIZE_STRING);
         $this->company->logo = Input::file("logo");
 
         $destinationPath = public_path().'/logos/'.$this->user->email;
 
         //Active y Banned no hace falta ponerlos, en la base de datos van por defecto a falso
 
-        $password = Input::get('password');
-        $passwordConfirmation = Input::get('password_confirmation');
+        $password = filter_var(Input::get('password'), FILTER_SANITIZE_STRING);
+        $passwordConfirmation = filter_var(Input::get('password_confirmation'), FILTER_SANITIZE_STRING);
 
         if(!empty($password)) {
             if($password === $passwordConfirmation) {
@@ -168,9 +168,9 @@ class CompanyController extends BaseController {
 
         if ($company != null) {
 
-            $oldPassword = Input::get('oldPassword');
-            $password = Input::get('password');
-            $passwordConfirmation = Input::get('password_confirmation');
+            $oldPassword = filter_var(Input::get('oldPassword'), FILTER_SANITIZE_STRING);
+            $password = filter_var(Input::get('password'), FILTER_SANITIZE_STRING);
+            $passwordConfirmation = filter_var(Input::get('password_confirmation'), FILTER_SANITIZE_STRING);
 
             if (!Hash::check($oldPassword, $company->userAccount->password)) {
                 return Redirect::to('userCompany/edit')
@@ -207,11 +207,11 @@ class CompanyController extends BaseController {
         if ($validator->passes()) {
 
 
-            if ($company->userAccount->email != Input::get('email')) {
+            if ($company->userAccount->email != filter_var(Input::get('email'), FILTER_SANITIZE_STRING)) {
                 $emailIsChanged=true;
 
                 //hacemos que vuelva a enviar email de confirmacion si este se cambia
-                $company->userAccount->email = Input::get('email');
+                $company->userAccount->email = filter_var(Input::get('email'), FILTER_SANITIZE_STRING);
 
                 $company->userAccount->confirmation_code = md5(uniqid(mt_rand(), true));
                 $company->userAccount->confirmed = 0;
@@ -225,11 +225,11 @@ class CompanyController extends BaseController {
             }
 
 
-            $company->userAccount->email = Input::get('email');
-            $company->name = Input::get("name");
-            $company->sector = Input::get("sector");
-            $company->description = Input::get("description");
-            $company->phone = Input::get("phone");
+            $company->userAccount->email = filter_var(Input::get('email'), FILTER_SANITIZE_STRING);
+            $company->name = filter_var(Input::get('name'), FILTER_SANITIZE_STRING);
+            $company->sector = filter_var(Input::get('sector'), FILTER_SANITIZE_STRING);
+            $company->description = filter_var(Input::get('description'), FILTER_SANITIZE_STRING);
+            $company->phone = filter_var(Input::get('phone'), FILTER_SANITIZE_STRING);
 
             $destinationPath = public_path() . '/logos/' . $company->userAccount->email;
 
@@ -306,10 +306,10 @@ class CompanyController extends BaseController {
     public function postLogin()
     {
         $input = array(
-            'email'    => Input::get( 'email' ), // May be the username too
-            'username' => Input::get( 'email' ), // May be the username too
-            'password' => Input::get( 'password' ),
-            'remember' => Input::get( 'remember' ),
+            'email'    => filter_var(Input::get('email'), FILTER_SANITIZE_STRING), // May be the username too
+            'username' => filter_var(Input::get('email'), FILTER_SANITIZE_STRING), // May be the username too
+            'password' => filter_var(Input::get('password'), FILTER_SANITIZE_STRING),
+            'remember' => Input::get('remember'),
         );
 
         // If you wish to only allow login from confirmed users, call logAttempt
@@ -371,7 +371,7 @@ class CompanyController extends BaseController {
      */
     public function postForgot()
     {
-        if( Confide::forgotPassword( Input::get( 'email' ) ) )
+        if( Confide::forgotPassword( filter_var(Input::get('email'), FILTER_SANITIZE_STRING) ) )
         {
             return Redirect::to('user/login')
                 ->with( 'notice', Lang::get('confide::confide.alerts.password_forgot') );
@@ -403,9 +403,9 @@ class CompanyController extends BaseController {
     public function postReset()
     {
         $input = array(
-            'token'=>Input::get( 'token' ),
-            'password'=>Input::get( 'password' ),
-            'password_confirmation'=>Input::get( 'password_confirmation' ),
+            'token'=>filter_var(Input::get('token'), FILTER_SANITIZE_STRING),
+            'password'=>filter_var(Input::get('password'), FILTER_SANITIZE_STRING),
+            'password_confirmation'=>filter_var(Input::get('password_confirmation'), FILTER_SANITIZE_STRING),
         );
 
         // By passing an array with the token, password and confirmation
