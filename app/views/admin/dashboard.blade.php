@@ -42,12 +42,12 @@
 
                 {{Session::put('backUrl', Request::url())}}
 
-                <p>{{ $project->description}}</p>
+                <p>{{{ $project->description}}}</p>
 
-                <p2> {{ $project->city}}, {{ $project->country}} </p2>
+                <p2> {{{ $project->city}}}, {{{ $project->country}}} </p2>
 
             </div>
-            <p> <strong>{{$projectMax->voluntarios}} {{ Lang::get('admin/dashboard.volunteers') }}</strong></p>
+            <p> <strong>{{{$projectMax->voluntarios}}} {{ Lang::get('admin/dashboard.volunteers') }}</strong></p>
 
         </div>
         @endif
@@ -66,13 +66,13 @@
 
                 {{Session::put('backUrl', Request::url())}}
 
-                <p>{{ $csr->description}}</p>
+                <p>{{{ $csr->description}}}</p>
 
-                <p2> {{ $csr->city}}, {{ $csr->country}} </p2>
+                <p2> {{{ $csr->city}}}, {{{ $csr->country}}} </p2>
 
 
             </div>
-            <p> <strong>{{$csrMax->voluntarios}} {{ Lang::get('admin/dashboard.volunteers') }}</strong></p>
+            <p> <strong>{{{$csrMax->voluntarios}}} {{ Lang::get('admin/dashboard.volunteers') }}</strong></p>
         </div>
                 @endif
     </div>
@@ -95,10 +95,10 @@
                 <hr style="margin:45px 0 35px" />
                 <h4> {{ HTML::link('campaign/details/'.$campaign->id, $campaign->name) }} </h4>
 
-                <p> {{$campaign->description }} </p>
+                <p> {{{$campaign->description }}} </p>
 
             </div>
-            <strong>{{$campaign->visits }} {{{ Lang::get('admin/dashboard.visits') }}} </strong>
+            <strong>{{{$campaign->visits }}} {{{ Lang::get('admin/dashboard.visits') }}} </strong>
         </div>
 
         <div class="span6" id="barChar" style="height:22em;"></div>
