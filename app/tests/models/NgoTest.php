@@ -12,7 +12,7 @@ class NgoTest extends TestCase
     public function testName()
     {
         $ngo = $this->ngo;
-        $this->assertEquals($ngo->name, 'NGO-1');
+        $this->assertEquals($ngo->name, 'Elephant Combs');
     }
 
     public function testNameIsAString()
@@ -36,7 +36,7 @@ class NgoTest extends TestCase
     public function testDescription()
     {
         $ngo = $this->ngo;
-        $this->assertEquals($ngo->description, 'NGO1 NGO1 NGO1 NGO1');
+        $this->assertEquals($ngo->description, 'Esta ONG se centra en la ayuda a animales en peligro de extinción.');
     }
 
     public function testDescriptionIsAString()
@@ -48,7 +48,7 @@ class NgoTest extends TestCase
     public function testPhone()
     {
         $ngo = $this->ngo;
-        $this->assertEquals($ngo->phone, '612345678');
+        $this->assertEquals($ngo->phone, '693235412');
     }
 
     public function testPhoneIsAString()

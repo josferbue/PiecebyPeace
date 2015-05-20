@@ -11,7 +11,7 @@ class CategoryTest extends TestCase {
 
     public function testName()
     {
-        $this->assertEquals( $this->category->name, 'Addictions' );
+        $this->assertEquals( $this->category->name, 'categories.Addictions' );
     }
 
     public function testNameIsAString()
@@ -21,7 +21,7 @@ class CategoryTest extends TestCase {
 
     public function testCategoryWithThatNameIsUnique()
     {
-        $categories = Category::where('name', '=', 'Addictions')->get();
+        $categories = Category::where('name', '=', 'categories.Addictions')->get();
         $this->assertEquals( count($categories), 1);
     }
 
