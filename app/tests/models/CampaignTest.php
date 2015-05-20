@@ -139,13 +139,12 @@ class CampaignTest extends TestCase {
     public function testHasNGOAssociated()
     {
         $campaign = $this->campaign;
-        $ngo = Ngo::where('id','=',$campaign->ngo);
+        $ngo = Ngo::where('id','=',$campaign->ngo_id);
         $this->assertNotNull( $ngo );
     }
 
     public function testCorrectNgo()
     {
-        $campaign = $this->campaign;
         $this->assertEquals( $this->ngo->name, 'NGO-1' );
     }
 
