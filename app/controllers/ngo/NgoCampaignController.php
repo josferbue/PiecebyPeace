@@ -109,6 +109,22 @@ class NgoCampaignController extends BaseController
         $this->campaign->expirationDate = Input::get( 'expirationDate' );
         $this->campaign->ngo_id = Ngo::where('user_id','=',Auth::id())->first()->id;
 
+        if(Input::get('startDate') <= Carbon::now()) {
+            return Redirect::to('ngo/campaign/create')->withInput(Input::all())->with('error', Lang::get('campaign/campaign.errorStartDateNotAfterNow'));
+        }
+
+        if(Input::get('finishDate') <= Carbon::now()) {
+            return Redirect::to('ngo/campaign/create')->withInput(Input::all())->with('error', Lang::get('campaign/campaign.errorFinishDateNotAfterNow'));
+        }
+
+        if(Input::get('startDate') >= Input::get('finishDate')) {
+            return Redirect::to('ngo/campaign/create')->withInput(Input::all())->with('error', Lang::get('campaign/campaign.errorStartDateNotBeforeFinishDate'));
+        }
+
+        if(Input::get('expirationDate') >= Input::get('finishDate')) {
+            return Redirect::to('ngo/campaign/create')->withInput(Input::all())->with('error', Lang::get('campaign/campaign.errorExpirationDateNotBeforeFinishDate'));
+        }
+
         $destinationPath = public_path().'/campaigns_images/'.$this->campaign->name;
 
         if ($validator->passes())

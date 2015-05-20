@@ -48,4 +48,9 @@ return array(
 	'zeroCredits'			=> 'No posee créditos actualmente. Por favor, compre los que necesite y vuelta a intentarlo.',
 	'campaignNoLongerAvailable' => 'Los detalles de la campaña especificada no pueden mostrarse debido a que ésta expiró',
 
+	'errorStartDateNotAfterNow'					=> 'La fecha de inicio de esta campaña debe ser posterior a la fecha actual.',
+	'errorFinishDateNotAfterNow'				=> 'La fecha de finalización de esta campaña debe ser posterior a la fecha actual.',
+	'errorStartDateNotBeforeFinishDate'			=> 'La fecha de inicio de esta campaña debe ser anterior a la fecha de finalización.',
+	'errorExpirationDateNotBeforeFinishDate'	=> 'La fecha de vencimiento de la promoción debe ser anterior a la fecha de finalización de la campaña.',
+
 );
