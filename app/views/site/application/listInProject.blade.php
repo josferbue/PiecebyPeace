@@ -29,7 +29,7 @@
                 </thead>
                 @foreach($applications as $application)
                     <tr>
-                        <td>{{$application->volunteer->name.' '.$application->volunteer->surname }}</td>
+                        <td>{{{$application->volunteer->name.' '.$application->volunteer->surname }}}</td>
 
                         <td>
                             @if (Auth::user()->hasRole('NonGovernmentalOrganization'))

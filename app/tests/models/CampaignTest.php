@@ -13,7 +13,7 @@ class CampaignTest extends TestCase {
     public function testName()
     {
         $campaign = $this->campaign;
-        $this->assertEquals( $campaign->name, 'Campaign 1' );
+        $this->assertEquals( $campaign->name, 'Contra el abuso infantil' );
     }
 
     public function testNameIsAString()
@@ -25,7 +25,7 @@ class CampaignTest extends TestCase {
     public function testDescription()
     {
         $campaign = $this->campaign;
-        $this->assertEquals( $campaign->description, 'Description campaign 1' );
+        $this->assertEquals( $campaign->description, 'Esta campaña de concienciación trata de combatir el abuso infantil, tanto físico como emocional.' );
     }
 
     public function testDescriptionIsAString()
@@ -43,7 +43,7 @@ class CampaignTest extends TestCase {
     public function testStartDate()
     {
         $campaign = $this->campaign;
-        $this->assertEquals( date('Y-m-d', strtotime($campaign->startDate)), date('Y-m-d', strtotime(\Carbon\Carbon::createFromDate(2015,7,23))));
+        $this->assertEquals( date('Y-m-d', strtotime($campaign->startDate)), date('Y-m-d', strtotime(\Carbon\Carbon::createFromDate(2015,8,23))));
     }
 
     public function testStartDateIsADate()
@@ -55,7 +55,7 @@ class CampaignTest extends TestCase {
     public function testFinishDate()
     {
         $campaign = $this->campaign;
-        $this->assertEquals( date('Y-m-d', strtotime($campaign->finishDate)), date('Y-m-d', strtotime(\Carbon\Carbon::createFromDate(2015,8,23))));
+        $this->assertEquals( date('Y-m-d', strtotime($campaign->finishDate)), date('Y-m-d', strtotime(\Carbon\Carbon::createFromDate(2015,9,23))));
     }
 
     public function testFinishDateIsADate()
@@ -85,7 +85,7 @@ class CampaignTest extends TestCase {
     public function testVisits()
     {
         $campaign = $this->campaign;
-        $this->assertEquals( $campaign->visits, 0);
+        $this->assertEquals( $campaign->visits, 180);
     }
 
     public function testVisitsIsAnInt()
@@ -97,13 +97,13 @@ class CampaignTest extends TestCase {
     public function testVisitsAreAlwaysPositive()
     {
         $campaign = $this->campaign;
-        $this->assertGreaterThanOrEqual( $campaign->visits, 0);
+        $this->assertGreaterThanOrEqual( 0, $campaign->visits);
     }
 
     public function testLink()
     {
         $campaign = $this->campaign;
-        $this->assertEquals( $campaign->link, 'http://www.blahblahblah.com');
+        $this->assertEquals( $campaign->link, 'http://www.humanium.org/es/abuso-infantil/');
     }
 
     public function testLinkIsAString()
@@ -121,7 +121,7 @@ class CampaignTest extends TestCase {
     public function testMaxVisits()
     {
         $campaign = $this->campaign;
-        $this->assertEquals( (int) $campaign->maxVisits, 100);
+        $this->assertEquals( (int) $campaign->maxVisits, 1000);
     }
 
     public function testMaxVisitsIsAnInt()
@@ -139,14 +139,13 @@ class CampaignTest extends TestCase {
     public function testHasNGOAssociated()
     {
         $campaign = $this->campaign;
-        $ngo = Ngo::where('id','=',$campaign->ngo);
+        $ngo = Ngo::where('id','=',$campaign->ngo_id);
         $this->assertNotNull( $ngo );
     }
 
     public function testCorrectNgo()
     {
-        $campaign = $this->campaign;
-        $this->assertEquals( $this->ngo->name, 'NGO-1' );
+        $this->assertEquals( $this->ngo->name, 'Steps' );
     }
 
 }

@@ -63,11 +63,11 @@ class NgoController extends BaseController
         // Check if the form validates with success
 
 
-        $this->user->username = Input::get('username');
-        $this->user->email = Input::get('email');
-        $this->ngo->name = Input::get("name");
-        $this->ngo->description = Input::get("description");
-        $this->ngo->phone = Input::get("phone");
+        $this->user->username = filter_var(Input::get('username'), FILTER_SANITIZE_STRING);
+        $this->user->email = filter_var(Input::get('email'), FILTER_SANITIZE_STRING);
+        $this->ngo->name = filter_var(Input::get('name'), FILTER_SANITIZE_STRING);
+        $this->ngo->description = filter_var(Input::get('description'), FILTER_SANITIZE_STRING);
+        $this->ngo->phone = filter_var(Input::get('phone'), FILTER_SANITIZE_STRING);
 
 
         $destinationPath = public_path() . '/logos/' . $this->user->email;
@@ -75,8 +75,8 @@ class NgoController extends BaseController
 
         //Active y Banned no hace falta ponerlos, en la base de datos van por defecto a falso
 
-        $password = Input::get('password');
-        $passwordConfirmation = Input::get('password_confirmation');
+        $password = filter_var(Input::get('password'), FILTER_SANITIZE_STRING);
+        $passwordConfirmation = filter_var(Input::get('password_confirmation'), FILTER_SANITIZE_STRING);
 
         if (!empty($password)) {
             if ($password === $passwordConfirmation) {
@@ -164,9 +164,9 @@ class NgoController extends BaseController
 
         if ($ngo != null) {
 
-            $oldPassword = Input::get('oldPassword');
-            $password = Input::get('password');
-            $passwordConfirmation = Input::get('password_confirmation');
+            $oldPassword = filter_var(Input::get('oldPassword'), FILTER_SANITIZE_STRING);
+            $password = filter_var(Input::get('password'), FILTER_SANITIZE_STRING);
+            $passwordConfirmation = filter_var(Input::get('password_confirmation'), FILTER_SANITIZE_STRING);
 
             if (!Hash::check($oldPassword, $ngo->userAccount->password)) {
                 return Redirect::to('userNgo/edit')
@@ -203,10 +203,10 @@ class NgoController extends BaseController
         if ($validator->passes()) {
 
 
-            if ($ngo->userAccount->email != Input::get('email')) {
+            if ($ngo->userAccount->email != filter_var(Input::get('email'), FILTER_SANITIZE_STRING)) {
                 $emailIsChanged=true;
                 //hacemos que vuelva a enviar email de confirmacion si este se cambia
-                $ngo->userAccount->email = Input::get('email');
+                $ngo->userAccount->email = filter_var(Input::get('email'), FILTER_SANITIZE_STRING);
 
                 $ngo->userAccount->confirmation_code = md5(uniqid(mt_rand(), true));
                 $ngo->userAccount->confirmed = 0;
@@ -220,10 +220,10 @@ class NgoController extends BaseController
             }
 
 
-            $ngo->userAccount->email = Input::get('email');
-            $ngo->name = Input::get("name");
-            $ngo->description = Input::get("description");
-            $ngo->phone = Input::get("phone");
+            $ngo->userAccount->email = filter_var(Input::get('email'), FILTER_SANITIZE_STRING);
+            $ngo->name = filter_var(Input::get('name'), FILTER_SANITIZE_STRING);
+            $ngo->description = filter_var(Input::get('description'), FILTER_SANITIZE_STRING);
+            $ngo->phone = filter_var(Input::get('phone'), FILTER_SANITIZE_STRING);
 
             $destinationPath = public_path() . '/logos/' . $ngo->userAccount->email;
 
@@ -300,9 +300,9 @@ class NgoController extends BaseController
     function postLogin()
     {
         $input = array(
-            'email' => Input::get('email'), // May be the username too
-            'username' => Input::get('email'), // May be the username too
-            'password' => Input::get('password'),
+            'email' => filter_var(Input::get('email'), FILTER_SANITIZE_STRING), // May be the username too
+            'username' => filter_var(Input::get('email'), FILTER_SANITIZE_STRING), // May be the username too
+            'password' => filter_var(Input::get('password'), FILTER_SANITIZE_STRING),
             'remember' => Input::get('remember'),
         );
 
@@ -362,7 +362,7 @@ class NgoController extends BaseController
     public
     function postForgot()
     {
-        if (Confide::forgotPassword(Input::get('email'))) {
+        if (Confide::forgotPassword(filter_var(Input::get('email'), FILTER_SANITIZE_STRING))) {
             return Redirect::to('user/login')
                 ->with('notice', Lang::get('confide::confide.alerts.password_forgot'));
         } else {
@@ -393,9 +393,9 @@ class NgoController extends BaseController
     function postReset()
     {
         $input = array(
-            'token' => Input::get('token'),
-            'password' => Input::get('password'),
-            'password_confirmation' => Input::get('password_confirmation'),
+            'token' => filter_var(Input::get('token'), FILTER_SANITIZE_STRING),
+            'password' => filter_var(Input::get('password'), FILTER_SANITIZE_STRING),
+            'password_confirmation' => filter_var(Input::get('password_confirmation'), FILTER_SANITIZE_STRING),
         );
 
         // By passing an array with the token, password and confirmation

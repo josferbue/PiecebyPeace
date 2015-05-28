@@ -91,8 +91,8 @@ class CompanyControllerTest extends BaseControllerTestCase {
 
         // Register as company3
         $companyData = array(
-            'username'                      => 'company1',
-            'email'                         => 'company3@gmail.com',
+            'username'                      => 'boliri',
+            'email'                         => 'boliri@gmail.com',
             'password'                      => 'company3',
             'password_confirmation'         => 'company3',
             'name'                          => 'Company 3',

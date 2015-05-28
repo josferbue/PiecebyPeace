@@ -43,7 +43,7 @@
                                     @if( Input::old('city')==$city)
                                         <option selected="selected">{{ $city }}</option>
                                     @else
-                                        <option>{{ $city }}</option>
+                                        <option>{{{ $city }}}</option>
 
                                     @endif
                                 @endforeach
@@ -102,9 +102,9 @@
 
                                 {{Session::put('backUrl', Request::url())}}
 
-                                <p>{{ $project->description}}</p>
+                                <p>{{{ $project->description}}}</p>
 
-                                <p2> {{ $project->city}}, {{ $project->country}} </p2>
+                                <p2> {{{ $project->city}}}, {{{ $project->country}}} </p2>
                             </div>
                         </div>
                     </div>

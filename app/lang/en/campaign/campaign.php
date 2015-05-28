@@ -48,4 +48,10 @@ return array(
 	'zeroCredits'			=> 'You do not have credits at this moment. Please, purchase the amount of credits you need and try it again.',
 	'campaignNoLongerAvailable' => 'The details of the specified campaign can not be displayed due to it has expired',
 
+	'errorStartDateNotAfterNow'					=> 'The start date of the campaign must take place after the current date.',
+	'errorFinishDateNotAfterNow'				=> 'The finish date of the campaign must take place after the current date.',
+	'errorStartDateNotBeforeFinishDate'			=> 'The start date of the campaign must take place before the finish date.',
+	'errorExpirationDateNotBeforeFinishDate'	=> 'The expiration date of this promotion must take place before the finish date of the campaign.',
+
+
 );

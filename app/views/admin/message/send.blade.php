@@ -2,7 +2,7 @@
 
 {{-- Web site Title --}}
 @section('title')
-{{{ Lang::get('campaign/campaign.create') }}} ::
+{{{ Lang::get('admin/message.sendMessage') }}} ::
 @parent
 @stop
 

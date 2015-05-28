@@ -8,16 +8,15 @@ class UserTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->user = User::where('username', '=', 'administrator1')->first();
-        $this->getUserByUsernameOK = $this->user->getUserByUsername('administrator1');
-        $this->getUserByUsernameFail = $this->user->getUserByUsername('administrator3');
+        $this->user = User::where('username', '=', 'admin')->first();
+        $this->getUserByUsernameOK = $this->user->getUserByUsername('admin');
         $this->admin1Roles = $this->user->currentRoleIds();
         $this->adminRole = Role::where('id', '=', $this->admin1Roles[0])->first()->name;
     }
 
     public function testUsername()
     {
-        $this->assertEquals($this->user->username, 'administrator1');
+        $this->assertEquals($this->user->username, 'admin');
     }
 
     public function testIsConfirmedByEmail()

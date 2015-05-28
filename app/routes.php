@@ -41,6 +41,8 @@ Route::pattern('token', '[0-9a-z]+');
  */
 Route::group(array('prefix' => 'admin', 'before' => 'auth'), function () {
     # Search users
+    Route::get('/search/findCompaniesNotActive', 'AdminSearchController@findCompaniesNotActive');
+    Route::get('/search/findNGOsNotActive', 'AdminSearchController@findNGOsNotActive');
     Route::get('/search/searchVolunteers', 'AdminSearchController@searchVolunteers');
     Route::get('/search/findVolunteers', 'AdminSearchController@findVolunteersWithSimilarUsername');
     Route::get('/search/searchCompanies', 'AdminSearchController@searchCompanies');

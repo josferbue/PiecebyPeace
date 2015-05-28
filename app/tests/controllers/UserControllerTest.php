@@ -12,7 +12,7 @@ class UserControllerTest extends BaseControllerTestCase {
     {
         $credentials = array(
             'email'=>'admin1@piecebypeace.com',
-            'password'=>'administrator1',
+            'password'=>'admin1',
             'csrf_token' => Session::getToken()
         );
 
@@ -57,7 +57,7 @@ class UserControllerTest extends BaseControllerTestCase {
     {
         $credentials = array(
             'email'=>'admin1@piecebypeace.com',
-            'password'=>'administrator1',
+            'password'=>'admin1',
             'csrf_token' => Session::getToken()
         );
 

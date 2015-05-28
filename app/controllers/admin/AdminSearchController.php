@@ -20,7 +20,7 @@ class AdminSearchController extends BaseController
 
     public function findVolunteersWithSimilarUsername()
     {
-        $this->name = Input::get('username');
+        $this->name = filter_var(Input::get('username'), FILTER_SANITIZE_STRING);
         $users = Volunteer::whereHas('userAccount', function ($q) {
             $q->where('username', '=', $this->name);
         })->get();
@@ -47,7 +47,7 @@ class AdminSearchController extends BaseController
 
     public function findCompaniesWithSimilarUsername()
     {
-        $this->name = Input::get('username');
+        $this->name = filter_var(Input::get('username'), FILTER_SANITIZE_STRING);
         $users = Company::whereHas('userAccount', function ($q) {
             $q->where('username', '=', $this->name);
         })->get();
@@ -73,7 +73,7 @@ class AdminSearchController extends BaseController
 
     public function findNGOsWithSimilarUsername()
     {
-        $this->name = Input::get('username');
+        $this->name = filter_var(Input::get('username'), FILTER_SANITIZE_STRING);
         $users = Ngo::whereHas('userAccount', function ($q) {
             $q->where('username', '=', $this->name);
         })->get();
@@ -88,4 +88,32 @@ class AdminSearchController extends BaseController
         Return View::make('admin/users/search')->with($data);
     }
 
+    public function findNGOsNotActive()
+    {
+        $users = Ngo::where('active', '=',false)->paginate(3);
+
+        $data = array(
+            'users' => $users,
+            'searchAction' => 'admin/search/findNGOs',
+            'searchType' => 'NGOs',
+            'listNotActive' =>true,
+        );
+
+        Input::flash();
+        Return View::make('admin/users/search')->with($data);
+    }
+    public function findCompaniesNotActive()
+    {
+        $users = Company::where('active', '=',false)->paginate(3);
+
+        $data = array(
+            'users' => $users,
+            'searchAction' => 'admin/search/findCompanies',
+            'searchType' => 'companies',
+            'listNotActive' =>true,
+        );
+
+        Input::flash();
+        Return View::make('admin/users/search')->with($data);
+    }
 }

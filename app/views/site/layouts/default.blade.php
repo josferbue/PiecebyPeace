@@ -184,6 +184,13 @@
                                                 <b class="caret"></b></a>
                                             <ul class="dropdown-menu">
                                                 <li class="dropdown"><a
+                                                            href="{{{ URL::to('admin/search/findNGOsNotActive') }}}">{{{ Lang::get('site.findNgosNotActive') }}}</a>
+                                                </li>
+                                                <li class="dropdown"><a
+                                                            href="{{{ URL::to('admin/search/findCompaniesNotActive') }}}">{{{ Lang::get('site.findCompaniesNotActive') }}}</a>
+                                                </li>
+
+                                                <li class="dropdown"><a
                                                             href="{{{ URL::to('admin/search/searchVolunteers') }}}">{{{ Lang::get('site.findVolunteers') }}}</a>
                                                 </li>
                                                 <li class="dropdown"><a

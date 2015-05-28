@@ -146,7 +146,7 @@ class VolunteerApplicationController extends BaseController
         // Check if the form validates with success
         if ($validator->passes()) {
             $this->application->moment = date("Y-m-d");
-            $this->application->comments = Input::get('comments');
+            $this->application->comments = filter_var(Input::get('comments'), FILTER_SANITIZE_STRING);
             $this->application->result = 0;
             $this->application->volunteer_id = $this->volunteer->id;
             $this->application->project_id = $id;

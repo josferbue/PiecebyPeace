@@ -16,15 +16,15 @@ class NgoCampaignControllerTest extends BaseControllerTestCase
 
         // Login in as ngo1
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'eat@gmail.com',
+            'password' => 'eat1',
             'csrf_token' => Session::getToken()
         );
 
         $this->withInput($credentials)
             ->requestAction('POST', 'UserController@postLogin');
 
-        $this->requestAction('GET', 'NgoCampaignController@findCampaignsByCurrentNGO');
+        $this->requestAction('GET', 'NgoCampaignController@findActiveCampaignsByCurrentNGO');
         $this->assertResponseOk();
     }
 
@@ -32,7 +32,7 @@ class NgoCampaignControllerTest extends BaseControllerTestCase
     {
         $this->flushSession();
 
-        $this->requestAction('GET', 'NgoCampaignController@findCampaignsByCurrentNGO');
+        $this->requestAction('GET', 'NgoCampaignController@findActiveCampaignsByCurrentNGO');
         $this->assertRedirectedTo('/');
     }
 
@@ -50,7 +50,7 @@ class NgoCampaignControllerTest extends BaseControllerTestCase
         $this->withInput($credentials)
             ->requestAction('POST', 'UserController@postLogin');
 
-        $this->requestAction('GET', 'NgoCampaignController@findCampaignsByCurrentNGO');
+        $this->requestAction('GET', 'NgoCampaignController@findActiveCampaignsByCurrentNGO');
         $this->assertRedirectedTo('/');
     }
 
@@ -60,15 +60,15 @@ class NgoCampaignControllerTest extends BaseControllerTestCase
 
         // Login in as ngo1
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'eat@gmail.com',
+            'password' => 'eat1',
             'csrf_token' => Session::getToken()
         );
 
         $this->withInput($credentials)
             ->requestAction('POST', 'UserController@postLogin');
 
-        $this->requestAction('GET', 'NgoCampaignController@findCampaignsByCurrentNGO');
+        $this->requestAction('GET', 'NgoCampaignController@findActiveCampaignsByCurrentNGO');
         $this->assertViewHas('campaigns');
     }
 
@@ -82,8 +82,8 @@ class NgoCampaignControllerTest extends BaseControllerTestCase
 
         // Login in as ngo1
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'eat@gmail.com',
+            'password' => 'eat1',
             'csrf_token' => Session::getToken()
         );
 
@@ -101,8 +101,8 @@ class NgoCampaignControllerTest extends BaseControllerTestCase
 
         // Login in as ngo1
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'eat@gmail.com',
+            'password' => 'eat1',
             'csrf_token' => Session::getToken()
         );
 
@@ -132,8 +132,8 @@ class NgoCampaignControllerTest extends BaseControllerTestCase
 
         // Login in as ngo1
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'eat@gmail.com',
+            'password' => 'eat1',
             'csrf_token' => Session::getToken()
         );
 
@@ -164,8 +164,8 @@ class NgoCampaignControllerTest extends BaseControllerTestCase
 
         // Login in as ngo1
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'eat@gmail.com',
+            'password' => 'eat1',
             'csrf_token' => Session::getToken()
         );
 
@@ -197,8 +197,8 @@ class NgoCampaignControllerTest extends BaseControllerTestCase
 
         // Login in as ngo1
         $credentials = array(
-            'email' => 'ngo1@ngo1.com',
-            'password' => 'ngo1',
+            'email' => 'eat@gmail.com',
+            'password' => 'eat1',
             'csrf_token' => Session::getToken()
         );
 

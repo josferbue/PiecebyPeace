@@ -8,8 +8,8 @@ class CampaignViewsTest extends BaseControllerTestCase {
     {
         // Login in as ngo1
         $credentials = array(
-            'email'=>'ngo1@ngo1.com',
-            'password'=>'ngo1',
+            'email'=>'greenone@gmail.com',
+            'password'=>'greenone1',
             'csrf_token' => Session::getToken()
         );
 
@@ -42,60 +42,42 @@ class CampaignViewsTest extends BaseControllerTestCase {
     {
         $crawler = $this->client->request('GET', URL::to('campaign/findActive'));
 
-        $this->assertCount(1, $crawler->filter('h3:contains("Campaign 1")'));
-    }
-
-    public function testCampaign2Name()
-    {
-        $crawler = $this->client->request('GET', URL::to('campaign/findActive'));
-
-        $this->assertCount(1, $crawler->filter('h3:contains("Campaign 2")'));
+        $this->assertCount(1, $crawler->filter('h3:contains("Campaña de recaudación de fondos")'));
     }
 
     public function testCampaign1NameLinkToDetails()
     {
         $crawler = $this->client->request('GET', URL::to('campaign/findActive'));
 
-        $link = $crawler->selectLink('Campaign 1')->link();
+        $link = $crawler->selectLink('Campaña de recaudación de fondos')->link();
 
         $url = $link->getUri();
 
-        $this->assertEqualsUrlPath($url, 'campaign/details/1');
-    }
-
-    public function testCampaign2NameLinkToDetails()
-    {
-        $crawler = $this->client->request('GET', URL::to('campaign/findActive'));
-
-        $link = $crawler->selectLink('Campaign 2')->link();
-
-        $url = $link->getUri();
-
-        $this->assertEqualsUrlPath($url, 'campaign/details/2');
+        $this->assertEqualsUrlPath($url, 'campaign/details/3');
     }
 
     // List campaigns logged in as ngo1
 
-    public function testListNGOCampaignsResponse()
+    public function testListNGOActiveCampaignsResponse()
     {
         // Login in as ngo1
         $credentials = array(
-            'email'=>'ngo1@ngo1.com',
-            'password'=>'ngo1',
+            'email'=>'greenone@gmail.com',
+            'password'=>'greenone1',
             'csrf_token' => Session::getToken()
         );
 
         $this->withInput( $credentials )
             ->requestAction('POST', 'UserController@postLogin');
 
-        $crawler = $this->client->request('GET', URL::to('ngo/myCampaigns'));
+        $crawler = $this->client->request('GET', URL::to('ngo/myActiveCampaigns'));
 
         $this->assertTrue($this->client->getResponse()->isOk());
     }
 
     public function testListNGOCampaignsResponseNotAuthenticated()
     {
-        $crawler = $this->client->request('GET', URL::to('ngo/myCampaigns'));
+        $crawler = $this->client->request('GET', URL::to('ngo/myActiveCampaigns'));
 
         $this->assertRedirection( URL::to('/') );
     }
@@ -104,68 +86,55 @@ class CampaignViewsTest extends BaseControllerTestCase {
     {
         // Login in as ngo1
         $credentials = array(
-            'email'=>'ngo1@ngo1.com',
-            'password'=>'ngo1',
+            'email'=>'greenone@gmail.com',
+            'password'=>'greenone1',
             'csrf_token' => Session::getToken()
         );
 
         $this->withInput( $credentials )
             ->requestAction('POST', 'UserController@postLogin');
 
-        $crawler = $this->client->request('GET', URL::to('ngo/myCampaigns'));
+        $crawler = $this->client->request('GET', URL::to('ngo/myActiveCampaigns'));
 
-        $this->assertCount(1, $crawler->filter('h3:contains("Campaign 1")'));
+        $this->assertCount(1, $crawler->filter('h3:contains("Campaña de recaudación de fondos")'));
     }
 
     public function testNGOCampaign1NameLinkToDetails()
     {
         // Login in as ngo1
         $credentials = array(
-            'email'=>'ngo1@ngo1.com',
-            'password'=>'ngo1',
+            'email'=>'greenone@gmail.com',
+            'password'=>'greenone1',
             'csrf_token' => Session::getToken()
         );
 
         $this->withInput( $credentials )
             ->requestAction('POST', 'UserController@postLogin');
 
-        $crawler = $this->client->request('GET', URL::to('ngo/myCampaigns'));
+        $crawler = $this->client->request('GET', URL::to('ngo/myActiveCampaigns'));
 
-        $link = $crawler->selectLink('Campaign 1')->link();
+        $link = $crawler->selectLink('Campaña de recaudación de fondos')->link();
 
         $url = $link->getUri();
 
-        $this->assertEqualsUrlPath($url, 'campaign/details/1');
+        $this->assertEqualsUrlPath($url, 'campaign/details/3');
     }
 
     // Details of campaigns
 
-    public function testDetailsCampaign1Response()
+    public function testDetailsCampaign3Response()
     {
-        $crawler = $this->client->request('GET', URL::to('/campaign/details/1'));
+        $crawler = $this->client->request('GET', URL::to('/campaign/details/3'));
 
         $this->assertTrue($this->client->getResponse()->isOk());
     }
 
-    public function testDetailsCampaign2Response()
+    public function testDetailsCampaign3Description()
     {
-        $crawler = $this->client->request('GET',URL::to( '/campaign/details/2'));
+        $crawler = $this->client->request('GET', URL::to('/campaign/details/3'));
 
-        $this->assertTrue($this->client->getResponse()->isOk());
+        $this->assertCount(1, $crawler->filter('p:contains("Esta campaña tiene como objetivo la recaudación de fondos para proyectos de voluntariado.")'));
     }
 
-    public function testDetailsCampaign1Description()
-    {
-        $crawler = $this->client->request('GET', URL::to('/campaign/details/1'));
-
-        $this->assertCount(1, $crawler->filter('p:contains("Description campaign 1")'));
-    }
-
-    public function testDetailsCampaign2Description()
-    {
-        $crawler = $this->client->request('GET', URL::to('/campaign/details/2'));
-
-        $this->assertCount(1, $crawler->filter('p:contains("Description campaign 2")'));
-    }
 
 }

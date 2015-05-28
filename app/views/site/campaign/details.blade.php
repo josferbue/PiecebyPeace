@@ -20,11 +20,11 @@
 
         <h3> {{{ Lang::get('campaign/campaign.name') }}} </h3>
 
-        <p>{{$campaign->name }}{{{ Lang::get('campaign/campaign.promotorMessage') }}}<b>{{$ngo->name }}</b>{{{ Lang::get('campaign/campaign.dot') }}}</p></a>
+        <p>{{{$campaign->name }}}{{{ Lang::get('campaign/campaign.promotorMessage') }}}<b>{{{$ngo->name }}}</b>{{{ Lang::get('campaign/campaign.dot') }}}</p></a>
 
         <h3> {{{ Lang::get('campaign/campaign.description') }}} </h3>
 
-        <p>{{$campaign->description }}</p>
+        <p>{{{$campaign->description }}}</p>
 
         <h3> {{{ Lang::get('campaign/campaign.period') }}}</h3>
 

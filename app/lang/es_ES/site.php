@@ -86,7 +86,9 @@ return array(
 	'footerCopyright'				=> 'Copyright © 2015 Piece by Peace. Todos los derechos reservados.',
 	'dashboard'						=> 'Panel de control',
 	'uploadFile'					=> 'Seleccione un archivo',
-	'mobileNotUploadImage'			=> 'Para subir imágenes utilice la versión de escritorio.'
+	'mobileNotUploadImage'			=> 'Para subir imágenes utilice la versión de escritorio.',
+	'findNgosNotActive'				=> 'Buscar ONGs no activadas',
+	'findCompaniesNotActive'		=> 'Buscar empresas no activadas'
 
 
 );

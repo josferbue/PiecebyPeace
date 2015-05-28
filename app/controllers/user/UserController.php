@@ -38,11 +38,11 @@ class UserController extends BaseController {
      */
     public function postIndex()
     {
-        $this->user->username = Input::get( 'username' );
-        $this->user->email = Input::get( 'email' );
+        $this->user->username = filter_var(Input::get('username'), FILTER_SANITIZE_STRING);
+        $this->user->email = filter_var(Input::get('email'), FILTER_SANITIZE_STRING);
 
-        $password = Input::get( 'password' );
-        $passwordConfirmation = Input::get( 'password_confirmation' );
+        $password = filter_var(Input::get('password'), FILTER_SANITIZE_STRING);
+        $passwordConfirmation = filter_var(Input::get('password_confirmation'), FILTER_SANITIZE_STRING);
 
         if(!empty($password)) {
             if($password === $passwordConfirmation) {
@@ -95,11 +95,11 @@ class UserController extends BaseController {
         if ($validator->passes())
         {
             $oldUser = clone $user;
-            $user->username = Input::get( 'username' );
-            $user->email = Input::get( 'email' );
+            $user->username = filter_var(Input::get('username'), FILTER_SANITIZE_STRING);
+            $user->email = filter_var(Input::get('email'), FILTER_SANITIZE_STRING);
 
-            $password = Input::get( 'password' );
-            $passwordConfirmation = Input::get( 'password_confirmation' );
+            $password = filter_var(Input::get('password'), FILTER_SANITIZE_STRING);
+            $passwordConfirmation = filter_var(Input::get('password_confirmation'), FILTER_SANITIZE_STRING);
 
             if(!empty($password)) {
                 if($password === $passwordConfirmation) {
@@ -167,9 +167,9 @@ class UserController extends BaseController {
     public function postLogin()
     {
         $input = array(
-            'email'    => Input::get( 'email' ), // May be the username too
-            'username' => Input::get( 'email' ), // May be the username too
-            'password' => Input::get( 'password' ),
+            'email'    => filter_var(Input::get('email'), FILTER_SANITIZE_STRING), // May be the username too
+            'username' => filter_var(Input::get('email'), FILTER_SANITIZE_STRING), // May be the username too
+            'password' => filter_var(Input::get('password'), FILTER_SANITIZE_STRING),
             'remember' => Input::get( 'remember' ),
         );
 
@@ -261,7 +261,7 @@ class UserController extends BaseController {
      */
     public function postForgot()
     {
-        if( Confide::forgotPassword( Input::get( 'email' ) ) )
+        if( Confide::forgotPassword( filter_var(Input::get('email'), FILTER_SANITIZE_STRING) ) )
         {
             return Redirect::to('user/login')
                 ->with( 'notice', Lang::get('confide::confide.alerts.password_forgot') );
@@ -293,9 +293,9 @@ class UserController extends BaseController {
     public function postReset()
     {
         $input = array(
-            'token'=>Input::get( 'token' ),
-            'password'=>Input::get( 'password' ),
-            'password_confirmation'=>Input::get( 'password_confirmation' ),
+            'token'=>filter_var(Input::get('token'), FILTER_SANITIZE_STRING),
+            'password'=>filter_var(Input::get('password'), FILTER_SANITIZE_STRING),
+            'password_confirmation'=> filter_var(Input::get('password_confirmation'), FILTER_SANITIZE_STRING),
         );
 
         // By passing an array with the token, password and confirmation

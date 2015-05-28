@@ -18,15 +18,15 @@
         <div class="row">
             <div class="span6">
                 <h7>  {{{ Lang::get('project/view.name') }}} </h7>
-                <p>{{$project->name }}</p>
+                <p>{{{$project->name }}}</p>
                 <br>
                 <br>
                 @if($project->ngo!=null)
                     <h7>  {{{ Lang::get('project/view.ngo') }}} </h7>
-                    <p>{{$project->ngo->name }}</p>
+                    <p>{{{$project->ngo->name }}}</p>
                 @elseif($project->company!=null)
                     <h7>  {{{ Lang::get('project/view.company') }}} </h7>
-                    <p>{{$project->company->name }}</p>
+                    <p>{{{$project->company->name }}}</p>
                 @endif
             </div>
 
@@ -38,7 +38,7 @@
         <br>
 
         <h7>  {{{ Lang::get('project/view.description') }}} </h7>
-        <p>{{$project->description }}</p>
+        <p>{{{$project->description }}}</p>
         <br> <br>
 
         <div class='hidden-xs'>
@@ -153,8 +153,6 @@
                 @else
                     window.location.href = '{{ URL::to('ngo/project/deleteVolunteerProject/'.$project->id) }}'
                 @endif
-
-
 
             }
         }

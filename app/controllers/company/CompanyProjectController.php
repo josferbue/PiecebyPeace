@@ -76,13 +76,13 @@ class CompanyProjectController extends BaseController
         if ($validator->passes()) {
 
             // Update the blog post data
-            $this->project->name = Input::get('name');
-            $this->project->description = Input::get('description');
-            $this->project->address = Input::get("address");
-            $this->project->city = Input::get("city");
+            $this->project->name = filter_var(Input::get('name'), FILTER_SANITIZE_STRING);
+            $this->project->description = filter_var(Input::get('description'), FILTER_SANITIZE_STRING);
+            $this->project->address = filter_var(Input::get('address'), FILTER_SANITIZE_STRING);
+            $this->project->city = filter_var(Input::get('city'), FILTER_SANITIZE_STRING);
             $this->project->zipCode = Input::get("zipCode");
             $this->project->maxVolunteers = Input::get("maxVolunteers");
-            $this->project->country = Input::get("country");
+            $this->project->country = filter_var(Input::get('country'), FILTER_SANITIZE_STRING);
             $this->project->startDate = Input::get("startDate");
             $this->project->finishDate = Input::get("finishDate");
             $this->project->created_at = date("Y-m-d");
@@ -272,13 +272,13 @@ class CompanyProjectController extends BaseController
         if ($validator->passes()) {
 
             // Update the blog post data
-            $projectOld->name = Input::get('name');
-            $projectOld->description = Input::get('description');
-            $projectOld->address = Input::get("address");
-            $projectOld->city = Input::get("city");
+            $projectOld->name = filter_var(Input::get('name'), FILTER_SANITIZE_STRING);
+            $projectOld->description = filter_var(Input::get('description'), FILTER_SANITIZE_STRING);
+            $projectOld->address = filter_var(Input::get('address'), FILTER_SANITIZE_STRING);
+            $projectOld->city = filter_var(Input::get('city'), FILTER_SANITIZE_STRING);
             $projectOld->zipCode = Input::get("zipCode");
             $projectOld->maxVolunteers = Input::get("maxVolunteers");
-            $projectOld->country = Input::get("country");
+            $projectOld->country = filter_var(Input::get('country'), FILTER_SANITIZE_STRING);
             $projectOld->startDate = Input::get("startDate");
             $projectOld->finishDate = Input::get("finishDate");
             $projectOld->updated_at = date("Y-m-d");

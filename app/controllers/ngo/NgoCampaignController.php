@@ -100,14 +100,30 @@ class NgoCampaignController extends BaseController
         $validator = Validator::make(Input::all(), $rules);
 
         // Check if the form validates with success
-        $this->campaign->name = Input::get( 'name' );
-        $this->campaign->description = Input::get( 'description' );
+        $this->campaign->name = filter_var(Input::get('name'), FILTER_SANITIZE_STRING);
+        $this->campaign->description = filter_var(Input::get('description'), FILTER_SANITIZE_STRING);
         $this->campaign->startDate = Input::get( 'startDate' );
         $this->campaign->finishDate = Input::get( 'finishDate' );
-        $this->campaign->link = Input::get( 'link' );
+        $this->campaign->link = filter_var(Input::get('link'), FILTER_SANITIZE_STRING);
         $this->campaign->maxVisits = Input::get( 'maxVisits' );
         $this->campaign->expirationDate = Input::get( 'expirationDate' );
         $this->campaign->ngo_id = Ngo::where('user_id','=',Auth::id())->first()->id;
+
+        if(Input::get('startDate') <= Carbon::now()) {
+            return Redirect::to('ngo/campaign/create')->withInput(Input::all())->with('error', Lang::get('campaign/campaign.errorStartDateNotAfterNow'));
+        }
+
+        if(Input::get('finishDate') <= Carbon::now()) {
+            return Redirect::to('ngo/campaign/create')->withInput(Input::all())->with('error', Lang::get('campaign/campaign.errorFinishDateNotAfterNow'));
+        }
+
+        if(Input::get('startDate') >= Input::get('finishDate')) {
+            return Redirect::to('ngo/campaign/create')->withInput(Input::all())->with('error', Lang::get('campaign/campaign.errorStartDateNotBeforeFinishDate'));
+        }
+
+        if(Input::get('expirationDate') >= Input::get('finishDate')) {
+            return Redirect::to('ngo/campaign/create')->withInput(Input::all())->with('error', Lang::get('campaign/campaign.errorExpirationDateNotBeforeFinishDate'));
+        }
 
         $destinationPath = public_path().'/campaigns_images/'.$this->campaign->name;
 

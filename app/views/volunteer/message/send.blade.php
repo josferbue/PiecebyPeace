@@ -27,7 +27,7 @@
 
                     <br>
                     <h7>  {{{ Lang::get('project/view.name') }}} </h7>
-                    <p>{{$project->name }}</p>
+                    <p>{{{$project->name }}}</p>
 
                 </div>
 
@@ -40,7 +40,7 @@
             </div>
 
             <h7>  {{{ Lang::get('project/view.description') }}} </h7>
-            <p>{{$project->description }}</p>
+            <p>{{{$project->description }}}</p>
             <br> <br>
 
 

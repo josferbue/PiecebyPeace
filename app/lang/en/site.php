@@ -84,5 +84,8 @@ return array(
 	'dashboard'						=> 'Dashboard',
 	'footerCopyright'				=> 'Copyright © 2015 Piece by Peace. All rights reserved.',
 	'uploadFile'					=> 'Select file',
-	'mobileNotUploadImage'			=> 'You must use the desktop version in order to upload images.'
+	'mobileNotUploadImage'			=> 'You must use the desktop version in order to upload images.',
+	'findNgosNotActive'				=> 'Search not active NGOs',
+	'findCompaniesNotActive'		=> 'Search not active companies',
+
 );

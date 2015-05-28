@@ -59,17 +59,17 @@ class VolunteerController extends BaseController {
         // Check if the form validates with success
 
 
-        $this->user->username = Input::get( 'username' );
-        $this->user->email = Input::get( 'email' );
-        $this->volunteer->name = Input::get("name");
-        $this->volunteer->surname = Input::get("surname");
-        $this->volunteer->address = Input::get("address");
-        $this->volunteer->city = Input::get("city");
+        $this->user->username = filter_var(Input::get('username'), FILTER_SANITIZE_STRING);
+        $this->user->email = filter_var(Input::get('email'), FILTER_SANITIZE_STRING);
+        $this->volunteer->name = filter_var(Input::get('name'), FILTER_SANITIZE_STRING);
+        $this->volunteer->surname = filter_var(Input::get('surname'), FILTER_SANITIZE_STRING);
+        $this->volunteer->address = filter_var(Input::get('address'), FILTER_SANITIZE_STRING);
+        $this->volunteer->city = filter_var(Input::get('city'), FILTER_SANITIZE_STRING);
         $this->volunteer->zipCode = Input::get("zipCode");
-        $this->volunteer->country = Input::get("country");
-        $this->volunteer->biography = Input::get("biography");
-        $password = Input::get( 'password' );
-        $passwordConfirmation = Input::get( 'password_confirmation' );
+        $this->volunteer->country = filter_var(Input::get('country'), FILTER_SANITIZE_STRING);
+        $this->volunteer->biography = filter_var(Input::get('biography'), FILTER_SANITIZE_STRING);
+        $password = filter_var(Input::get('password'), FILTER_SANITIZE_STRING);
+        $passwordConfirmation = filter_var(Input::get('password_confirmation'), FILTER_SANITIZE_STRING);
 
         if(!empty($password)) {
             if($password === $passwordConfirmation) {
@@ -150,9 +150,9 @@ class VolunteerController extends BaseController {
 
         if ($volunteer != null) {
 
-            $oldPassword = Input::get('oldPassword');
-            $password = Input::get('password');
-            $passwordConfirmation = Input::get('password_confirmation');
+            $oldPassword = filter_var(Input::get('oldPassword'), FILTER_SANITIZE_STRING);
+            $password = filter_var(Input::get('password'), FILTER_SANITIZE_STRING);
+            $passwordConfirmation = filter_var(Input::get('password_confirmation'), FILTER_SANITIZE_STRING);
 
             if (!Hash::check($oldPassword, $volunteer->userAccount->password)) {
                 return Redirect::to('userVolunteer/edit')
@@ -185,10 +185,10 @@ class VolunteerController extends BaseController {
 
         if ($validator->passes()) {
 
-            if ($volunteer->userAccount->email != Input::get('email')) {
+            if ($volunteer->userAccount->email != filter_var(Input::get('email'), FILTER_SANITIZE_STRING)) {
                 $emailIsChanged=true;
                 //hacemos que vuelva a enviar email de confirmacion si este se cambia
-                $volunteer->userAccount->email = Input::get('email');
+                $volunteer->userAccount->email = filter_var(Input::get('email'), FILTER_SANITIZE_STRING);
 
                 $volunteer->userAccount->confirmation_code = md5(uniqid(mt_rand(), true));
                 $volunteer->userAccount->confirmed = 0;
@@ -202,14 +202,14 @@ class VolunteerController extends BaseController {
             }
 
 
-            $volunteer->userAccount->email = Input::get('email');
-            $volunteer->name = Input::get("name");
-            $volunteer->surname = Input::get("surname");
-            $volunteer->address = Input::get("address");
-            $volunteer->city = Input::get("city");
+            $volunteer->userAccount->email = filter_var(Input::get('email'), FILTER_SANITIZE_STRING);
+            $volunteer->name = filter_var(Input::get('name'), FILTER_SANITIZE_STRING);
+            $volunteer->surname = filter_var(Input::get('surname'), FILTER_SANITIZE_STRING);
+            $volunteer->address = filter_var(Input::get('address'), FILTER_SANITIZE_STRING);
+            $volunteer->city = filter_var(Input::get('city'), FILTER_SANITIZE_STRING);
             $volunteer->zipCode = Input::get("zipCode");
-            $volunteer->country = Input::get("country");
-            $volunteer->biography = Input::get("biography");
+            $volunteer->country = filter_var(Input::get('country'), FILTER_SANITIZE_STRING);
+            $volunteer->biography = filter_var(Input::get('biography'), FILTER_SANITIZE_STRING);
 
 
 
