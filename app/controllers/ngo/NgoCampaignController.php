@@ -288,12 +288,12 @@ class NgoCampaignController extends BaseController
         if ($result->getState() == 'approved') { // payment made
 
 
-            $curl = curl_init('http://10code.ip-zone.com//ccm/admin/api/version/2/&type=json');
+            $curl = curl_init('http://piecebypeace.ip-zone.com/ccm/admin/api/version/2/&type=json');
 
             $postData = array(
                 'function' => 'doAuthentication',
-                'username' => '10code',
-                'password' => 'eef6bd5d',
+                'username' => 'piecebypeace',
+                'password' => '69ef31d4',
             );
 
             curl_setopt($curl, CURLOPT_POST, true);

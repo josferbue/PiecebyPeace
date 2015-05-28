@@ -187,6 +187,7 @@ class ProjectController extends BaseController
 
     Public function findCsrProjects()
     {
+
         $volunteer = Volunteer::where('user_id', '=', Auth::id())->first();
         $company = Company::where('user_id', '=', Auth::id())->first();
         //se usara para añadir boton de enviar mensajes
@@ -436,4 +437,59 @@ class ProjectController extends BaseController
 
         Return View::make('site/project/list')->with($data);
     }
+    Public function getProjectsMap()
+    {
+        $config = array();
+        $config['center'] = 'auto';
+        $config['onboundschanged'] = 'if (!centreGot) {
+            var mapCentre = map.getCenter();
+            marker_0.setOptions({
+                position: new google.maps.LatLng(mapCentre.lat(), mapCentre.lng())
+            });
+        }
+        centreGot = true;';
+
+        Gmaps::initialize($config);
+        $projects = Project::whereNull('company_id')->get();
+        foreach($projects as $project){
+            $lat_long = Gmaps::get_lat_long_from_address($project->zipCode.' '.$project->city.', '.$project->country);
+            $marker = array();
+            $marker['position'] = $lat_long[0].', '.$lat_long[1];
+            $marker['infowindow_content'] = '<a href=\"'.URL::to('project/view/'.$project->id).'\">'.$project->name.'</a>';
+            $marker['icon'] = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|9999FF|000000';
+            Gmaps::add_marker($marker);
+        }
+        $map = Gmaps::create_map();
+        $mapJs = $map['js'];
+        $mapHtml = $map['html'];
+        Return View::make('site/project/map' ,compact('mapHtml','mapJs'));
+    }
+    Public function getCSRProjectsMap()
+    {
+        $config = array();
+        $config['center'] = 'auto';
+        $config['onboundschanged'] = 'if (!centreGot) {
+            var mapCentre = map.getCenter();
+            marker_0.setOptions({
+                position: new google.maps.LatLng(mapCentre.lat(), mapCentre.lng())
+            });
+        }
+        centreGot = true;';
+
+        Gmaps::initialize($config);
+        $projects = Project::whereNull('ngo_id')->get();
+        foreach($projects as $project){
+            $lat_long = Gmaps::get_lat_long_from_address($project->zipCode.' '.$project->city.', '.$project->country);
+            $marker = array();
+            $marker['position'] = $lat_long[0].', '.$lat_long[1];
+            $marker['infowindow_content'] = '<a href=\"'.URL::to('project/view/'.$project->id).'\">'.$project->name.'</a>';
+            $marker['icon'] = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|9999FF|000000';
+            Gmaps::add_marker($marker);
+        }
+        $map = Gmaps::create_map();
+        $mapJs = $map['js'];
+        $mapHtml = $map['html'];
+        Return View::make('site/project/map' ,compact('mapHtml','mapJs'));
+    }
+
 }

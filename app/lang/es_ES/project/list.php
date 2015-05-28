@@ -26,7 +26,8 @@ return array(
 	'volunteerEmptyProject'     => 'Aún no participa en ningún proyecto de este tipo.',
 	'companyEmptyProject'   	=> 'Aún no tiene acciones de RSC.',
 	'sendMessage'    			=> 'Enviar un mensaje',
-	'back'   					=> 'Volver'
+	'back'   					=> 'Volver',
+	'findMap'					=> 'Buscar en el mapa',
 
 
 

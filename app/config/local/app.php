@@ -119,6 +119,9 @@ return array(
 		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider', // IDE Helpers
 		'Anouar\Paypalpayment\PaypalpaymentServiceProvider',
 
+		/*Gmap*/
+		'Appitventures\Phpgmaps\PhpgmapsServiceProvider',
+
     ),
 
     /*
@@ -193,6 +196,7 @@ return array(
         'Carbon'          => 'Carbon\Carbon', // Carbon
         'Datatables'      => 'Bllim\Datatables\Datatables', // DataTables
 		'Paypalpayment'   => 'Anouar\Paypalpayment\Facades\PaypalPayment',
+		'Gmaps' 		  => 'Appitventures\Phpgmaps\Facades\Phpgmaps',
 		'Javascript'  	  => 'Laracasts\Utilities\JavaScript\Facades\JavaScript',
 
     ),

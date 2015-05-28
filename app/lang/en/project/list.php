@@ -26,7 +26,8 @@ return array(
 	'companyEmptyProject'   		=> 'No CSR projects were found.',
 	'volunteerEmptyProject'    		=> 'You are not cooperating in any project, yet.',
 	'sendMessage'    				=> 'Send message',
-	'back'   						=> 'Back'
+	'back'   						=> 'Back',
+	'findMap'						=> 'Find in map',
 
 
 

@@ -52,6 +52,7 @@ class CampaignController extends BaseController
 
     public function payToClick($id)
     {
+
         $userIP = Request::ip();
         $user = Auth::user();
         $this->campaign = Campaign::find($id);

@@ -10,6 +10,7 @@
 @section('content')
     <div class="page-header">
         <h1>{{{ Lang::get('project/list.titleVolunteer') }}}</h1>
+
     </div>
 
     @if(!isset($viewNgoMyProjects))
@@ -144,6 +145,9 @@
         <input type="button" class="btn btn-primary"
                onclick="window.location.href='{{ URL::to('/') }}'"
                value="{{ Lang::get('project/list.back') }}">
-    @endif
 
+    @endif
+    <input type="button" class="btn btn-primary"
+           onclick="window.location.href='{{URL::to('project/map')}}'"
+           value="{{{ Lang::get('project/list.findMap') }}}">
 @stop

@@ -135,7 +135,9 @@
             </div>
         @endif
     @endif
-
+    <input type="button" class="btn btn-primary"
+           onclick="window.location.href='{{URL::to('projectCSR/map')}}'"
+           value="{{{ Lang::get('project/list.findMap') }}}">
     @if(isset($viewCsrMyProjects))
         <div class="pagination">
 

@@ -216,7 +216,8 @@ Route::get('project/futureCSRProjects', 'ProjectController@getFutureCSRProjects'
 Route::get('campaign/findActive', 'CampaignController@findAllActiveCampaigns');
 Route::get('campaign/details/{id}', 'CampaignController@campaignDetails');
 Route::get('campaign/payToClick/{id}', 'CampaignController@payToClick');
-
+Route::get('project/map','ProjectController@getProjectsMap');
+Route::get('projectCSR/map','ProjectController@getCSRProjectsMap');
 //:: Application Routes ::
 
 # Filter for detect language
