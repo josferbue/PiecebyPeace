@@ -20,10 +20,10 @@ class ProjectController extends BaseController
 
     Public function getVolunteerProjects()
     {
-        $projects = Project::whereNull('company_id')->paginate(4);
+        $projects = Project::whereNull('company_id')->get();
         $categories = Category::all();
 
-        //esto es un mapa que tendra como clave los county y valores las ciudades sin repeticion
+        //esto es un mapa que tendra como clave los country y valores las ciudades sin repeticion
         $locationVolunteerProjects = array();
 
         foreach ($projects as $project) {
@@ -40,9 +40,6 @@ class ProjectController extends BaseController
             }
         }
 
-        Session::put('categories', $categories);
-        Session::put('locations', $locationVolunteerProjects);
-
 
         $data = array(
             'categories' => $categories,
@@ -56,6 +53,27 @@ class ProjectController extends BaseController
 
     Public function findVolunteerProjects()
     {
+
+        $projectsAux = Project::whereNull('company_id')->get();
+        $categories = Category::all();
+
+        //esto es un mapa que tendra como clave los country y valores las ciudades sin repeticion
+        $locationVolunteerProjects = array();
+
+        foreach ($projectsAux as $project) {
+            $countryActual = $project->country;
+            if (array_key_exists($countryActual, $locationVolunteerProjects)) {
+                //si ya existe la ciudad no la volvemos a poner
+                if (!in_array($project->city, $locationVolunteerProjects[$countryActual])) {
+                    //con esto no pisamos el value lo añadimos al final
+                    $locationVolunteerProjects[$countryActual][] = $project->city;
+                }
+            } else {
+                $locationVolunteerProjects[$countryActual] [] = $project->city;
+
+            }
+        }
+
 
         $volunteer = Volunteer::where('user_id', '=', Auth::id())->first();
         $ngo = Ngo::where('user_id', '=', Auth::id())->first();
@@ -86,8 +104,8 @@ class ProjectController extends BaseController
         }
         //Transformamos el array en un paginator
         $data = array(
-            'categories' => Session::get('categories'),
-            'locations' => Session::get('locations'),
+            'categories' => $categories,
+            'locations' => $locationVolunteerProjects,
             'projects' => $projects,
             'emptyProjects' => $emptyProjects,
             'projectsOfVolunteer' => $projectsOfVolunteer,
@@ -151,7 +169,7 @@ class ProjectController extends BaseController
 
     Public function getCsrProjects()
     {
-        $projects = Project::whereNull('ngo_id')->paginate(4);
+        $projects = Project::whereNull('ngo_id')->get();
         $categories = Category::all();
 
         //esto es un mapa que tendra como clave los county y valores las ciudades sin repeticion
@@ -171,10 +189,6 @@ class ProjectController extends BaseController
             }
         }
 
-        Session::put('categories', $categories);
-        Session::put('locations', $locationCsrProjects);
-
-
         $data = array(
             'categories' => $categories,
             'locations' => $locationCsrProjects,
@@ -187,6 +201,26 @@ class ProjectController extends BaseController
 
     Public function findCsrProjects()
     {
+        $projectsAux = Project::whereNull('ngo_id')->get();
+        $categories = Category::all();
+
+        //esto es un mapa que tendra como clave los county y valores las ciudades sin repeticion
+        $locationCsrProjects = array();
+
+        foreach ($projectsAux as $project) {
+            $countryActual = $project->country;
+            if (array_key_exists($countryActual, $locationCsrProjects)) {
+                //si ya existe la ciudad no la volvemos a poner
+                if (!in_array($project->city, $locationCsrProjects[$countryActual])) {
+                    //con esto no pisamos el value lo añadimos al final
+                    $locationCsrProjects[$countryActual][] = $project->city;
+                }
+            } else {
+                $locationCsrProjects[$countryActual] [] = $project->city;
+
+            }
+        }
+
 
         $volunteer = Volunteer::where('user_id', '=', Auth::id())->first();
         $company = Company::where('user_id', '=', Auth::id())->first();
@@ -219,8 +253,8 @@ class ProjectController extends BaseController
         }
         //Transformamos el array en un paginator
         $data = array(
-            'categories' => Session::get('categories'),
-            'locations' => Session::get('locations'),
+            'categories' => $categories,
+            'locations' => $locationCsrProjects,
             'projects' => $projects,
             'emptyProjects' => $emptyProjects,
             'projectsOfVolunteer' => $projectsOfVolunteer,
