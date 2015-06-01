@@ -28,6 +28,7 @@ return array(
 	'sendMessage'    			=> 'Enviar un mensaje',
 	'back'   					=> 'Volver',
 	'findMap'					=> 'Buscar en el mapa',
+	'titleMap'					=> 'Proyectos en el mundo',
 
 
 

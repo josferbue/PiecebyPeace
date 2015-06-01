@@ -28,6 +28,7 @@ return array(
 	'sendMessage'    				=> 'Send message',
 	'back'   						=> 'Back',
 	'findMap'						=> 'Find in map',
+	'titleMap'						=> 'Project in the world',
 
 
 

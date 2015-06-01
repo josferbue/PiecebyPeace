@@ -440,7 +440,7 @@ class ProjectController extends BaseController
     Public function getProjectsMap()
     {
         $config = array();
-        $config['center'] = 'auto';
+        $config['center'] = '40,416775400000000000 -3,703790199999957600';
         $config['onboundschanged'] = 'if (!centreGot) {
             var mapCentre = map.getCenter();
             marker_0.setOptions({
@@ -456,7 +456,9 @@ class ProjectController extends BaseController
             $marker = array();
             $marker['position'] = $lat_long[0].', '.$lat_long[1];
             $marker['infowindow_content'] = '<a href=\"'.URL::to('project/view/'.$project->id).'\">'.$project->name.'</a>';
-            $marker['icon'] = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|9999FF|000000';
+
+            $marker['icon'] = ''.URL::to($project->image);
+            $marker['icon_scaledSize'] = '100,70';
             Gmaps::add_marker($marker);
         }
         $map = Gmaps::create_map();
@@ -467,7 +469,7 @@ class ProjectController extends BaseController
     Public function getCSRProjectsMap()
     {
         $config = array();
-        $config['center'] = 'auto';
+        $config['center'] = '40,416775400000000000 -3,703790199999957600';;
         $config['onboundschanged'] = 'if (!centreGot) {
             var mapCentre = map.getCenter();
             marker_0.setOptions({
@@ -483,7 +485,8 @@ class ProjectController extends BaseController
             $marker = array();
             $marker['position'] = $lat_long[0].', '.$lat_long[1];
             $marker['infowindow_content'] = '<a href=\"'.URL::to('project/view/'.$project->id).'\">'.$project->name.'</a>';
-            $marker['icon'] = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|9999FF|000000';
+            $marker['icon'] = $marker['icon'] = ''.URL::to($project->image);
+            $marker['icon_scaledSize'] = '100,70';
             Gmaps::add_marker($marker);
         }
         $map = Gmaps::create_map();

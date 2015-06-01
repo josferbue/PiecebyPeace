@@ -8,7 +8,7 @@
 
 {{-- Content --}}
 @section('content')
-    <div class="page-header"></div>
+    <div class="page-header"><h2>{{{ Lang::get('project/list.titleMap') }}}</h2></div>
 {{$mapHtml}}
 @stop
 @section('js')
