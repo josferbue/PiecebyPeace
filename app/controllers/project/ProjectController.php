@@ -489,10 +489,7 @@ class ProjectController extends BaseController
             $lat_long = Gmaps::get_lat_long_from_address($project->zipCode.' '.$project->city.', '.$project->country);
             $marker = array();
             $marker['position'] = $lat_long[0].', '.$lat_long[1];
-            $marker['infowindow_content'] = '<a href=\"'.URL::to('project/view/'.$project->id).'\">'.$project->name.'</a>';
-
-            $marker['icon'] = ''.URL::to($project->image);
-            $marker['icon_scaledSize'] = '100,70';
+            $marker['infowindow_content'] = '<a href=\"'.URL::to('project/view/'.$project->id).'\">'.$project->name.'<hr><img src=\"'.URL::to($project->image).'\" style=\"max-height: 15em\"/></a>';
             Gmaps::add_marker($marker);
         }
         $map = Gmaps::create_map();
@@ -518,9 +515,7 @@ class ProjectController extends BaseController
             $lat_long = Gmaps::get_lat_long_from_address($project->zipCode.' '.$project->city.', '.$project->country);
             $marker = array();
             $marker['position'] = $lat_long[0].', '.$lat_long[1];
-            $marker['infowindow_content'] = '<a href=\"'.URL::to('project/view/'.$project->id).'\">'.$project->name.'</a>';
-            $marker['icon'] = $marker['icon'] = ''.URL::to($project->image);
-            $marker['icon_scaledSize'] = '100,70';
+            $marker['infowindow_content'] = '<a href=\"'.URL::to('project/view/'.$project->id).'\">'.$project->name.'<hr><img src=\"'.URL::to($project->image).'\" style=\"max-height: 15em\"/></a>';
             Gmaps::add_marker($marker);
         }
         $map = Gmaps::create_map();
