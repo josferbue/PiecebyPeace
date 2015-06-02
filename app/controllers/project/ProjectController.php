@@ -475,6 +475,7 @@ class ProjectController extends BaseController
     {
         $config = array();
         $config['center'] = '40,416775400000000000 -3,703790199999957600';
+        $config['zoom'] = 3;
         $config['onboundschanged'] = 'if (!centreGot) {
             var mapCentre = map.getCenter();
             marker_0.setOptions({
@@ -500,7 +501,8 @@ class ProjectController extends BaseController
     Public function getCSRProjectsMap()
     {
         $config = array();
-        $config['center'] = '40,416775400000000000 -3,703790199999957600';;
+        $config['center'] = '40,416775400000000000 -3,703790199999957600';
+        $config['zoom'] = 3;
         $config['onboundschanged'] = 'if (!centreGot) {
             var mapCentre = map.getCenter();
             marker_0.setOptions({
